@@ -10,7 +10,10 @@ class Champions():
                 self.championById[champion["id"]] = champion["name"]
 
     def getChampionById(self, id):
-        return self.championById[id]
+        try:
+            return self.championById[id]
+        except:
+            return None
 
 class Skins():
     def __init__(self, path):
@@ -52,7 +55,7 @@ def getCurrencies(lootJson, account):
         elif loot["lootId"] == "CURRENCY_RP":
             account["rp"] = loot["count"]
 
-def getSkins(leagueConnection ,loot, skins, account):
+def getSkins(leagueConnection, loot, skins, account):
     skinShardsRental = loot.getShardIdsByPattern("CHAMPION_SKIN_RENTAL_(\d+)")
     account["skinShardsRental"]= ", ".join(skins.getSkinById(id) for id in skinShardsRental if skins.getSkinById(id) is not None)
     account["skinShardsRentalCount"] = len(skinShardsRental)
@@ -63,9 +66,26 @@ def getSkins(leagueConnection ,loot, skins, account):
 
     ownedSkins = leagueConnection.get("/lol-inventory/v2/inventory/CHAMPION_SKIN").json()
     account["ownedSkins"] = ", ".join(skins.getSkinById(skin["itemId"]) for skin in ownedSkins if skins.getSkinById(skin["itemId"]) is not None and skin["ownershipType"] == "OWNED")
-    account["ownedSkinsCount"] = account["ownedSkins"].count(", ") + 1
-        
-def getData(leagueConnection, account, loot):
+    seperatorCount = account["ownedSkins"].count(", ")
+    if seperatorCount > 0:
+        account["ownedSkinsCount"] = seperatorCount + 1
+    elif account["ownedSkins"]:
+        account["ownedSkinsCount"] = 1
+    else:
+        account["ownedSkinsCount"] = 0
+
+def getChampions(leagueConnection, champions, account):
+    ownedChampions = leagueConnection.get("/lol-champions/v1/owned-champions-minimal").json()
+    account["ownedChampions"] = ", ".join(champions.getChampionById(champion["id"]) for champion in ownedChampions if champions.getChampionById(champion["id"]) is not None and champion["ownership"]["owned"])
+    seperatorCount = account["ownedChampions"].count(", ")
+    if seperatorCount > 0:
+        account["ownedChampionsCount"] = seperatorCount + 1
+    elif account["ownedChampions"]:
+        account["ownedChampionsCount"] = 1
+    else:
+        account["ownedChampionsCount"] = 0
+
+def getFullRegion(account):
     regionFull = {
         "NA": "North America",
         "EUW": "Europe West",
@@ -78,14 +98,53 @@ def getData(leagueConnection, account, loot):
         "LA1": "Latin America North",
     }
 
+    account["regionFull"] = regionFull[account["region"]]
+
+def getRank(leagueConnection, account):
     romanNumbers = {
         "IV": 4,
         "III": 3,
         "II": 2,
         "I": 1,
-    }
+    }   
 
-    account["regionFull"] = regionFull[account["region"]]
+    rankedStats = leagueConnection.get("/lol-ranked/v1/current-ranked-stats").json()
+
+    soloTier = ((rankedStats["queueMap"]["RANKED_SOLO_5x5"]["tier"]).lower()).capitalize()
+    if soloTier == "None":
+        account["soloTier"] = "Unranked"
+        account["soloDivision"] = ""
+        account["soloLP"] = ""
+        account["soloWins"] = ""
+        account["soloLosses"] = ""
+        account["soloWinrate"] = ""
+    else:
+        account["soloTier"] = soloTier
+        account["soloDivision"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["division"]
+        account["soloLP"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["leaguePoints"]
+        account["soloWins"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["wins"]
+        account["soloLosses"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["losses"]
+        account["soloWinrate"] = round(account["soloWins"] / (account["soloWins"] + account["soloLosses"]) * 100)
+
+    flexTier = ((rankedStats["queueMap"]["RANKED_FLEX_SR"]["tier"]).lower()).capitalize()
+    if flexTier == "None":
+        account["flexTier"] = "Unranked"
+        account["flexDivision"] = ""
+        account["flexLP"] = ""
+        account["flexWins"] = ""
+        account["flexLosses"] = ""
+        account["flexWinrate"] = ""
+    else:
+        account["flexTier"] = flexTier
+        account["flexDivision"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["division"]
+        account["flexLP"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["leaguePoints"]
+        account["flexWins"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["wins"]
+        account["flexLosses"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["losses"]
+        account["flexWinrate"] = round(account["flexWins"] / (account["flexWins"] + account["flexLosses"]) * 100)
+
+
+def getData(leagueConnection, account, loot):
+    getFullRegion(account)
 
     loot.refreshLoot()
     lootJson = loot.getLoot()
@@ -95,6 +154,9 @@ def getData(leagueConnection, account, loot):
     getEmailVerification(leagueConnection, account)
 
     champions = Champions("champions.json")
-    
+    getChampions(leagueConnection, champions, account)
+
     skins = Skins("skins.json")
     getSkins(leagueConnection, loot, skins, account)
+
+    getRank(leagueConnection, account)
