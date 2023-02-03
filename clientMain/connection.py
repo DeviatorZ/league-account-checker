@@ -17,9 +17,9 @@ class Connection(Session):
         self.authToken = getAuthToken()
         Session.__init__(self)
         retry = urllib3.util.retry.Retry(
-            total = 5,
+            total = 8,
             respect_retry_after_header = True,
-            status_forcelist = [429],
+            status_forcelist = [429, 404],
             backoff_factor = 1
         )
 
