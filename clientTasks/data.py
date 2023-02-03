@@ -1,4 +1,5 @@
 import json
+from time import sleep
 
 class Champions():
     def __init__(self, path):
@@ -142,6 +143,28 @@ def getRank(leagueConnection, account):
         account["flexLosses"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["losses"]
         account["flexWinrate"] = round(account["flexWins"] / (account["flexWins"] + account["flexLosses"]) * 100)
 
+def getLowPriorityQueue(leagueConnection, account):
+    queueArgs = {
+        "queueId": 430,
+    }
+    queueArgs = json.dumps(queueArgs, indent = 4)
+    
+    leagueConnection.post("/lol-lobby/v2/lobby", queueArgs)
+    sleep(1)
+
+    leagueConnection.post("/lol-lobby/v2/lobby/matchmaking/search")
+    sleep(2)
+
+    queueState = leagueConnection.get("/lol-lobby/v2/lobby/matchmaking/search-state").json()
+
+    account["lowPriorityQueue"] = "Error"
+
+    if queueState["lowPriorityData"]["reason"] == "LEAVER_BUSTED":
+        account["lowPriorityQueue"] = str(int(queueState["lowPriorityData"]["penaltyTime"] / 60)) + " minutes"
+    elif queueState["searchState"] == "Found" or queueState["searchState"] == "Searching":
+        account["lowPriorityQueue"] = "None"
+
+    leagueConnection.delete("/lol-lobby/v2/lobby/matchmaking/search")
 
 def getData(leagueConnection, account, loot):
     getFullRegion(account)
@@ -160,3 +183,4 @@ def getData(leagueConnection, account, loot):
     getSkins(leagueConnection, loot, skins, account)
 
     getRank(leagueConnection, account)
+    getLowPriorityQueue(leagueConnection, account)
