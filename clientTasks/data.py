@@ -18,7 +18,10 @@ class Skins():
             self.skinById = json.load(filePointer)
 
     def getSkinById(self, id):
-        return self.skinById[str(id)]["name"]
+        try:
+            return self.skinById[str(id)]["name"]
+        except:
+            return None
 
 def getSummoner(leagueConnection, account):
     summoner = leagueConnection.get("/lol-summoner/v1/current-summoner")
@@ -48,6 +51,19 @@ def getCurrencies(lootJson, account):
             account["oe"] = loot["count"]
         elif loot["lootId"] == "CURRENCY_RP":
             account["rp"] = loot["count"]
+
+def getSkins(leagueConnection ,loot, skins, account):
+    skinShardsRental = loot.getShardIdsByPattern("CHAMPION_SKIN_RENTAL_(\d+)")
+    account["skinShardsRental"]= ", ".join(skins.getSkinById(id) for id in skinShardsRental if skins.getSkinById(id) is not None)
+    account["skinShardsRentalCount"] = len(skinShardsRental)
+
+    skinShardsPermanent = loot.getShardIdsByPattern("CHAMPION_SKIN_(\d+)")
+    account["skinShardsPermanent"]= ", ".join(skins.getSkinById(id) for id in skinShardsPermanent if skins.getSkinById(id) is not None)
+    account["skinShardsPermanentCount"] = len(skinShardsPermanent)
+
+    ownedSkins = leagueConnection.get("/lol-inventory/v2/inventory/CHAMPION_SKIN").json()
+    account["ownedSkins"] = ", ".join(skins.getSkinById(skin["itemId"]) for skin in ownedSkins if skins.getSkinById(skin["itemId"]) is not None and skin["ownershipType"] == "OWNED")
+    account["ownedSkinsCount"] = account["ownedSkins"].count(", ") + 1
         
 def getData(leagueConnection, account, loot):
     regionFull = {
@@ -75,8 +91,10 @@ def getData(leagueConnection, account, loot):
     lootJson = loot.getLoot()
     getCurrencies(lootJson, account)
 
-    champions = Champions("champions.json")
-    skins = Skins("skins.json")
-
     getSummoner(leagueConnection, account)
     getEmailVerification(leagueConnection, account)
+
+    champions = Champions("champions.json")
+    
+    skins = Skins("skins.json")
+    getSkins(leagueConnection, loot, skins, account)
