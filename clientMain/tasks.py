@@ -122,8 +122,7 @@ def executeAllAccounts(settings, lock, logger, progressBar):
     pool = ThreadPool(processes=int(settings["threadCount"]))
     args = [[account, settings, lock, logger, progress] for account in accounts]
 
-    with pool:
-        pool.starmap(execute, args)
+    pool.starmap(execute, args)
 
     logger.info("Exporting accounts")
     exportAccounts(accounts, settings["bannedTemplate"], settings["errorTemplate"])
