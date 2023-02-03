@@ -2,10 +2,10 @@ from threading import Thread
 from threading import Lock
 from clientMain.tasks import executeAllAccounts
 from clientTasks.export import eraseFiles
+from update import update
+from time import sleep
 import subprocess
 import copy
-import time
-import json
 import PySimpleGUI as sg
 import logging
 import os
@@ -29,6 +29,16 @@ def execute(values, lock, logger, mainWindow):
     thread.join()
     mainWindow["start"].update(disabled=False)
     mainWindow["eraseExports"].update(disabled=False)
+
+def updateInformation(mainWindow):
+    thread = Thread(target=update, args=())
+    thread.start()
+    mainWindow["updateStatus"].update("Updating...")
+    thread.join()
+    mainWindow["updateStatus"].update("Updated!")
+    sleep(10)
+    mainWindow["updateInformation"].update(disabled=False)
+    mainWindow["updateStatus"].update("")
 
 def saveSettings(values):
     sg.user_settings_set_entry("riotClient", values["riotClient"])
@@ -84,6 +94,8 @@ def main():
         [sg.Text("Standard export type"), sg.Radio("Minimal", "export", default=sg.user_settings_get_entry("exportMin", False), key="exportMin"), 
         sg.Radio("Full", "export", default=not sg.user_settings_get_entry("exportMin", False))],
         [sg.Button("Save", key="saveExport")],
+        [sg.VPush()],
+        [sg.Button("Update skin and champion information", key="updateInformation"), sg.Text("", key="updateStatus")],
     ]
 
     layout = [
@@ -130,13 +142,15 @@ def main():
             eraseFiles("export\\all")
             logger.info("Exports erased!")
         elif event == "openExports":
-
             try:
                 os.startfile(f"{cwd}\\export")
             except:
                 subprocess.Popen(["xdg-open", f"{cwd}\\export"])
         elif event == "saveExport":
             saveExport(values)
+        elif "updateInformation":
+            mainWindow["updateInformation"].update(disabled=True)
+            Thread(target=updateInformation, args=[mainWindow]).start()
 
     mainWindow.close()
 
