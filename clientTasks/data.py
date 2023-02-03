@@ -1,13 +1,34 @@
+import json
+
+class Champions():
+    def __init__(self, path):
+        with open(path, "r", encoding="utf8") as filePointer:
+            self.championData = json.load(filePointer)
+
+            self.championById = {}
+            for champion in self.championData:
+                self.championById[champion["id"]] = champion["name"]
+
+    def getChampionById(self, id):
+        return self.championById[id]
+
+class Skins():
+    def __init__(self, path):
+        with open(path, "r", encoding="utf8") as filePointer:
+            self.skinById = json.load(filePointer)
+
+    def getSkinById(self, id):
+        return self.skinById[str(id)]["name"]
 
 def getSummoner(leagueConnection, account):
-    summoner = leagueConnection.get('/lol-summoner/v1/current-summoner')
+    summoner = leagueConnection.get("/lol-summoner/v1/current-summoner")
     summoner = summoner.json()
 
     account["summonerLevel"] = summoner["summonerLevel"]
     account["ign"] = summoner["displayName"]
 
 def getEmailVerification(leagueConnection, account):
-    email = leagueConnection.get('/lol-email-verification/v1/email')
+    email = leagueConnection.get("/lol-email-verification/v1/email")
     email = email.json()
 
     if email["emailVerified"]:
@@ -15,12 +36,11 @@ def getEmailVerification(leagueConnection, account):
     else:
         account["emailVerified"] = "Unverified"
 
-
 def getCurrencies(lootJson, account):
     account["be"] = 0
     account["oe"] = 0
     account["rp"] = 0
-    
+
     for loot in lootJson:
         if loot["lootId"] == "CURRENCY_champion":
             account["be"] = loot["count"]
@@ -54,6 +74,9 @@ def getData(leagueConnection, account, loot):
     loot.refreshLoot()
     lootJson = loot.getLoot()
     getCurrencies(lootJson, account)
+
+    champions = Champions("champions.json")
+    skins = Skins("skins.json")
 
     getSummoner(leagueConnection, account)
     getEmailVerification(leagueConnection, account)
