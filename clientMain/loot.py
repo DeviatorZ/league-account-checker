@@ -1,17 +1,28 @@
 from time import time
 from time import sleep
+import re
 
 class Loot():
     def __init__(self, leagueConnection, refreshCooldown=5):
         self.leagueConnection = leagueConnection
         self.lastRefresh = 0
         self.refreshCooldown = refreshCooldown
+        self.allLoot = self.leagueConnection.get("/lol-loot/v1/player-loot").json()
 
     def getLoot(self):
-        return self.leagueConnection.get("/lol-loot/v1/player-loot").json()
+        return self.allLoot
 
     def getLootById(self, lootId):
-        return self.leagueConnection.get(f"/lol-loot/v1/player-loot/{lootId}").json()
+        return self.allLoot[str(lootId)]
+
+    def getShardIdsByPattern(self, pattern):
+        ids = []
+        for loot in self.allLoot:
+            match = re.match(pattern, loot["lootId"])
+            if match is not None:
+                ids.append(int(match.group(1)))
+
+        return ids
 
     def refreshLoot(self):
         try:
@@ -19,7 +30,8 @@ class Loot():
         except Exception:
             pass
 
-        self.leagueConnection.post("/lol-loot/v1/refresh")     
+        self.leagueConnection.post("/lol-loot/v1/refresh")
+        self.allLoot = self.leagueConnection.get("/lol-loot/v1/player-loot").json()     
         self.lastRefresh = time()
 
 
