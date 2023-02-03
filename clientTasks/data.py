@@ -17,8 +17,10 @@ def getEmailVerification(leagueConnection, account):
 
 
 def getCurrencies(lootJson, account):
+    account["be"] = 0
+    account["oe"] = 0
     account["rp"] = 0
-
+    
     for loot in lootJson:
         if loot["lootId"] == "CURRENCY_champion":
             account["be"] = loot["count"]
