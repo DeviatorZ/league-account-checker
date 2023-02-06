@@ -1,0 +1,2 @@
+pysimplegui==4.60.4
+requests==2.28.1
