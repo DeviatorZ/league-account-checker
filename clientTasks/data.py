@@ -34,6 +34,10 @@ def getSummoner(leagueConnection, account):
     account["summonerLevel"] = summoner["summonerLevel"]
     account["ign"] = summoner["displayName"]
 
+def getHonorLevel(leagueConnection, account):
+    honor = leagueConnection.get("/lol-honor-v2/v1/profile").json()
+    account["honorLevel"] = honor["honorLevel"]
+
 def getEmailVerification(leagueConnection, account):
     email = leagueConnection.get("/lol-email-verification/v1/email")
     email = email.json()
@@ -172,7 +176,8 @@ def getData(leagueConnection, account, loot):
     loot.refreshLoot()
     lootJson = loot.getLoot()
     getCurrencies(lootJson, account)
-
+    
+    getHonorLevel(leagueConnection, account)
     getSummoner(leagueConnection, account)
     getEmailVerification(leagueConnection, account)
 
