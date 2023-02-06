@@ -23,8 +23,8 @@ class Handler(logging.StreamHandler):
         self.window['log'].update(value=self.buffer)
 
 
-def execute(values, lock, logger, mainWindow):
-    thread = Thread(target=executeAllAccounts, args=(values, lock, logger, mainWindow["progress"]))
+def execute(values, lock, mainWindow):
+    thread = Thread(target=executeAllAccounts, args=(values, lock, mainWindow["progress"]))
     thread.start()
     thread.join()
     mainWindow["start"].update(disabled=False)
@@ -129,7 +129,7 @@ def main():
         elif event == "start":
             mainWindow["start"].update(disabled=True)
             mainWindow["eraseExports"].update(disabled=True)
-            Thread(target=execute, args=(copy.deepcopy(values), lock, logger, mainWindow)).start()
+            Thread(target=execute, args=(copy.deepcopy(values), lock, mainWindow)).start()
         elif event == "saveSettings":
             saveSettings(values)
         elif event == "saveTasks":
