@@ -3,15 +3,25 @@ import os
 import copy
 
 def eraseFiles(path):
-    for file in os.listdir(path):
-        filePath = os.path.join(path, file)
-        try:
-            shutil.rmtree(filePath)
-        except OSError:
-            os.remove(filePath)
+    try:
+        for file in os.listdir(path):
+            filePath = os.path.join(path, file)
+            try:
+                shutil.rmtree(filePath)
+            except OSError:
+                os.remove(filePath)
+    except:
+        pass
 
 class Export():
     def __init__(self, singleTemplatesPath, singleExportPath, allTemplatesPath, allExportPath, bannedTemplate, errorTemplate):
+        try:
+            os.mkdir("export")
+            os.mkdir("export\\single")
+            os.mkdir("export\\all")
+        except:
+            pass
+
         self.singleTemplatesPath = singleTemplatesPath
         self.singleExportPath = singleExportPath
         self.singleTemplates = []

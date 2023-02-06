@@ -142,7 +142,10 @@ def main():
             try:
                 os.startfile(f"{cwd}\\export")
             except:
-                subprocess.Popen(["xdg-open", f"{cwd}\\export"])
+                try:
+                    subprocess.Popen(["xdg-open", f"{cwd}\\export"])
+                except:
+                    pass
         elif event == "saveExport":
             saveExport(values)
         elif "updateInformation":
