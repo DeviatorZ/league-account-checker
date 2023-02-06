@@ -4,6 +4,7 @@ from clientMain.connection import RiotConnection
 from clientMain.connection import LeagueConnection
 from clientMain.auth import login
 from clientMain.auth import waitForSession
+from clientMain.auth import waitForLaunch
 from exceptions import *
 from clientTasks.export import exportAccounts
 from clientTasks.data import getData
@@ -45,8 +46,6 @@ def execute(account, settings, lock, logger, progress):
         logger.error(f"{account['username']} connection exception. Retrying...")
         execute(account, settings, lock, logger, progress)
         
-
-
 def executeAccount(account, settings, lock, logger):
     logger.info("Executing tasks on account: " + account["username"])
     
@@ -60,10 +59,9 @@ def executeAccount(account, settings, lock, logger):
     region = riotConnection.get("/riotclient/region-locale")
     region = region.json()
     account["region"] = region["region"]
-
-    leagueConnection = LeagueConnection(settings["leagueClient"], riotConnection, account["region"], lock)
-
     try:
+        waitForLaunch(riotConnection)
+        leagueConnection = LeagueConnection(settings["leagueClient"], riotConnection, account["region"], lock)
         waitForSession(leagueConnection)
     except SessionException as exception:
         logger.error(f"{account['username']} session exception: {exception.message}. Retrying...")

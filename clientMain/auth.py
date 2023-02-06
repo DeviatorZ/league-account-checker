@@ -30,6 +30,18 @@ def login(username, password, riotClientPath, lock):
 
     return riotConnection
 
+def waitForLaunch(riotConnection, timeout=30):
+    startTime = time.time()
+
+    while True:
+        phase = riotConnection.get('/rnet-lifecycle/v1/product-context-phase').json()
+
+        if phase == "WaitForLaunch":
+            return
+        
+        if time.time() - startTime >= timeout:
+            raise SessionException("Launch timed out", riotConnection)
+        time.sleep(1)
 
 def waitForSession(leagueConnection, timeout=60):
     startTime = time.time()
