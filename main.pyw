@@ -31,14 +31,11 @@ def execute(values, lock, logger, mainWindow):
     mainWindow["eraseExports"].update(disabled=False)
 
 def updateInformation(mainWindow):
-    thread = Thread(target=update, args=())
+    mainWindow["updateInformation"].update(disabled=True)
+    thread = Thread(target=update, args=[mainWindow])
     thread.start()
-    mainWindow["updateStatus"].update("Updating...")
     thread.join()
-    mainWindow["updateStatus"].update("Updated!")
-    sleep(10)
     mainWindow["updateInformation"].update(disabled=False)
-    mainWindow["updateStatus"].update("")
 
 def saveSettings(values):
     sg.user_settings_set_entry("riotClient", values["riotClient"])
@@ -149,7 +146,6 @@ def main():
         elif event == "saveExport":
             saveExport(values)
         elif "updateInformation":
-            mainWindow["updateInformation"].update(disabled=True)
             Thread(target=updateInformation, args=[mainWindow]).start()
 
     mainWindow.close()
