@@ -13,7 +13,9 @@ class Loot():
         return self.allLoot
 
     def getLootById(self, lootId):
-        return self.allLoot[str(lootId)]
+        for loot in self.allLoot:
+            if loot["lootId"] == lootId:
+                return loot
 
     def getShardIdsByPattern(self, pattern):
         ids = []

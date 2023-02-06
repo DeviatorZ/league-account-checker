@@ -8,6 +8,7 @@ from clientMain.auth import waitForLaunch
 from exceptions import *
 from clientTasks.export import exportAccounts
 from clientTasks.data import getData
+from clientTasks.craftKeys import craftKeys
 from clientMain.loot import Loot
 import time
 import os
@@ -81,7 +82,19 @@ def executeAccount(account, settings, lock):
         return 
 
     loot = Loot(leagueConnection)
+
+    tasks = {
+        "craftKeys" : 
+        {
+            "function" : craftKeys,
+            "args" : [leagueConnection, loot],
+        }
+    }
     
+    for taskName, task in tasks.items():
+        if settings[taskName]:
+            task["function"](*task["args"])
+
     if not settings["exportMin"]:
         getData(leagueConnection, account, loot)
 
