@@ -75,8 +75,8 @@ def main():
         [sg.Input(sg.user_settings_get_entry("leagueClient", "C:\\Riot Games\\League of Legends\\LeagueClient.exe"), key="leagueClient"), sg.FileBrowse()],
         [sg.Text("Account file location")],
         [sg.Input(sg.user_settings_get_entry("accountsFile", cwd + "\\accounts.csv"), key="accountsFile"), sg.FileBrowse()],
-        [sg.Text('Account file delimiter'), sg.InputCombo((",",":",";"), default_value=sg.user_settings_get_entry("accountsDelimiter", ":"), key="accountsDelimiter")],
-        [sg.Text('Thread count'), sg.Combo([x for x in range(1,10)], default_value=sg.user_settings_get_entry("threadCount", "2"), key="threadCount")],
+        [sg.Text("Account file delimiter"), sg.InputCombo((",",":",";"), default_value=sg.user_settings_get_entry("accountsDelimiter", ":"), key="accountsDelimiter")],
+        [sg.Text("Thread count"), sg.Combo([x for x in range(1,11)], default_value=sg.user_settings_get_entry("threadCount", "2"), key="threadCount")],
         [sg.Button("Save", key="saveSettings")],
     ]
 
@@ -127,7 +127,7 @@ def main():
 
     while True:
         event, values = mainWindow.read()
-        if event == sg.WIN_CLOSED: # if user closes window or clicks cancel
+        if event == sg.WIN_CLOSED: # if user closes window
             break
         elif event == "start":
             mainWindow["start"].update(disabled=True)
