@@ -1,25 +1,34 @@
 # DeviatorZ Account Checker
-### League of Legends account checker
-
+League of Legends account checker <br />
+Tested and working on Windows 7 (Python 3.8), Windows 10 (Python 3.10).
 ## Features
 - Process multiple accounts at once
 - Checks for bans and invalid credentials
 - Tasks (WIP)
-- Template system to export in any format
+- Export account information
+- Template system to export in custom format
 
 ## How to install
+- Have League of Legends installed and updated on your device.
+- Download and install [Python](https://www.python.org/downloads/)
+    - For next step to work select "Add python to path" and "pip" package manager(included in default installation) <br /> ![PythonExample](https://i.imgur.com/y1k3rmd.png)
+- Download and extract the checker <br /> ![Download](https://i.imgur.com/jafvk8i.png)
+- Install required packages using "pip":
+    - Enter command line (on windows - press Windows key, type in "cmd" and press Enter)
+    - Use command "cd pathToChecker" e.g. "cd C:\Users\Administrator\Desktop\league-account-checker"
+    - Use command "pip install -r requirements.txt"
+    - Once install is finished you'll be ready to go!
+- Launch the GUI by opening "main.pyw"
 ## Main
 ![MainTab](https://i.imgur.com/uSg2ucV.png)
 
-Here you can see the console and track the progress. "Start" button will start checking accounts if settings are properly configured. If there's an issue an error will be shown in the console.
+Here you can see the console and track the progress. "Start" button will start checking accounts if settings are properly configured ("Save" button in each tab is only to save for next launch, "Start" will use current settings regardless whether they are saved or not). If there's an issue - an error will be shown in the console.
 
 ## Settings
 ![SettingsTab](https://i.imgur.com/OXvyGit.png)
 - "RiotClientServices.exe" location" - path to RiotClientServices.exe on your device. No need to change if using default install location
 - "LeagueClient.exe location" - path to LeagueClient.exe on your device. No need to change if using default install location
-- "Account file location" - path to your account file. Account file should contain one account per line with username, delimiter and a password. e.g. with "," as delimiter: 
-
-![ExampleAccountFile](https://i.imgur.com/k9A8R4H.png)
+- "Account file location" - path to your account file. Account file should contain one account per line with username, delimiter and a password. e.g. with "," as delimiter: <br /> ![ExampleAccountFile](https://i.imgur.com/k9A8R4H.png)
 - "Account file delimiter" - select the delimiter that you're using in your account file
 - "Thread count" - amount of accounts to check at once. 
 
