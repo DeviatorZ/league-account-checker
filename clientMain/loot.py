@@ -16,6 +16,16 @@ class Loot():
         for loot in self.allLoot:
             if loot["lootId"] == lootId:
                 return loot
+        
+        return None
+
+    def getLootCountById(self, lootId):
+        lootCount = 0
+        for loot in self.allLoot:
+            if loot["lootId"] == lootId:
+                lootCount += loot["count"]
+        
+        return lootCount
 
     def getShardIdsByPattern(self, pattern):
         ids = []
@@ -33,7 +43,7 @@ class Loot():
             pass
 
         self.leagueConnection.post("/lol-loot/v1/refresh")
-        self.allLoot = self.leagueConnection.get("/lol-loot/v1/player-loot").json()     
+        self.allLoot = self.leagueConnection.get("/lol-loot/v1/player-loot").json()
         self.lastRefresh = time()
 
 
