@@ -129,7 +129,7 @@ def main():
         elif event == "start":
             mainWindow["start"].update(disabled=True)
             mainWindow["eraseExports"].update(disabled=True)
-            Thread(target=execute, args=(copy.deepcopy(values), lock, mainWindow)).start()
+            Thread(target=execute, args=(copy.deepcopy(values), lock, mainWindow), daemon=True).start()
         elif event == "saveSettings":
             saveSettings(values)
         elif event == "saveTasks":
