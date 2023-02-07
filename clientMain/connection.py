@@ -6,8 +6,6 @@ from time import sleep
 from clientMain.credentials import getFreePort
 from clientMain.credentials import getAuthToken
 from exceptions import ConnectionException
-from threading import Thread
-import logging
 # Send requests to Riot and League clients, requires auth token and port
 
 class Connection(Session):
@@ -94,13 +92,6 @@ class LeagueConnection(Connection):
             self.getClient()
             self.waitForConnection()
 
-    launchesLeft = 5
-    launchCooldown = 60
-
-    def waitForLaunchCooldown():
-        sleep(LeagueConnection.launchCooldown)
-        LeagueConnection.launchesLeft += 1
-
     def getClient(self):
         processArgs = [
             self.path,
@@ -114,10 +105,7 @@ class LeagueConnection(Connection):
             "--region=" + self.region,
             "--headless"
         ]
-        while LeagueConnection.launchesLeft == 0:
-            sleep(1)
-        LeagueConnection.launchesLeft -= 1
-        Thread(target=LeagueConnection.waitForLaunchCooldown, args=[]).start()
+
         Connection.getClient(self, processArgs)
 
     def waitForConnection(self):
