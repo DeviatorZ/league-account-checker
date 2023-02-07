@@ -44,6 +44,3 @@ def update(window):
     window["updateStatus"].update("Updated!")
     sleep(5)
     window["updateStatus"].update("")
-
-if __name__ == "__main__":
-    update()

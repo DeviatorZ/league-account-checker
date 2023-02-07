@@ -1,4 +1,0 @@
-
-
-def craftKeys(connection):
-    pass
