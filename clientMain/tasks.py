@@ -8,7 +8,7 @@ from clientMain.auth import waitForLaunch
 from exceptions import *
 from clientTasks.export import exportAccounts
 from clientTasks.data import getData
-from clientTasks.craftKeys import craftKeys
+from clientTasks.lootTasks import craftKeys
 from clientMain.loot import Loot
 import time
 import os
