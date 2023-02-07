@@ -3,11 +3,11 @@ from requests import adapters
 import urllib3
 import subprocess
 from time import sleep
-from time import time
 from clientMain.credentials import getFreePort
 from clientMain.credentials import getAuthToken
 from exceptions import ConnectionException
-
+from threading import Thread
+import logging
 # Send requests to Riot and League clients, requires auth token and port
 
 class Connection(Session):
@@ -17,10 +17,10 @@ class Connection(Session):
         self.authToken = getAuthToken()
         Session.__init__(self)
         retry = urllib3.util.retry.Retry(
-            total = 8,
+            total = 5,
             respect_retry_after_header = True,
             status_forcelist = [429, 404],
-            backoff_factor = 1
+            backoff_factor = 2
         )
 
         adapter = adapters.HTTPAdapter(max_retries=retry)
@@ -39,14 +39,13 @@ class Connection(Session):
             raise Exception
         except Exception:
             raise ConnectionException(self)
-        
     
     def getClient(self, processArgs):
         while True:
             try:
                 self.process = subprocess.Popen(processArgs)
                 return
-            except subprocess.SubprocessError:
+            except:
                 sleep(1)
     
     def __del__(self):
@@ -95,6 +94,13 @@ class LeagueConnection(Connection):
             self.getClient()
             self.waitForConnection()
 
+    launchesLeft = 5
+    launchCooldown = 60
+
+    def waitForLaunchCooldown():
+        sleep(LeagueConnection.launchCooldown)
+        LeagueConnection.launchesLeft += 1
+
     def getClient(self):
         processArgs = [
             self.path,
@@ -108,7 +114,10 @@ class LeagueConnection(Connection):
             "--region=" + self.region,
             "--headless"
         ]
-
+        while LeagueConnection.launchesLeft == 0:
+            sleep(1)
+        LeagueConnection.launchesLeft -= 1
+        Thread(target=LeagueConnection.waitForLaunchCooldown, args=[]).start()
         Connection.getClient(self, processArgs)
 
     def waitForConnection(self):
