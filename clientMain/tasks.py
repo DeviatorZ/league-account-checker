@@ -9,6 +9,7 @@ from exceptions import *
 from clientTasks.export import exportAccounts
 from clientTasks.data import getData
 from clientTasks.lootTasks import craftKeys
+from clientTasks.lootTasks import openChests
 from clientMain.loot import Loot
 import time
 import os
@@ -87,6 +88,11 @@ def executeAccount(account, settings, lock):
         "craftKeys" : 
         {
             "function" : craftKeys,
+            "args" : [leagueConnection, loot],
+        },
+        "openChests" :
+        {
+            "function" : openChests,
             "args" : [leagueConnection, loot],
         }
     }
