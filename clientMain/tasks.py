@@ -44,8 +44,8 @@ def execute(account, settings, lock, progress):
     try:
         executeAccount(account, settings, lock)
         progress.add()
-    except ConnectionException:
-        logging.error(f"{account['username']} connection exception. Retrying...")
+    except ConnectionException as exception:
+        logging.error(f"{account['username']} {exception.connectionName} exception. Retrying...")
         execute(account, settings, lock, progress)
         
 def executeAccount(account, settings, lock):

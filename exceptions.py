@@ -1,5 +1,6 @@
 class ConnectionException(Exception):
     def __init__(self, connection):
+        self.connectionName = connection.__class__.__name__
         connection.__del__()
         Exception.__init__(self)
 
