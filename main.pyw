@@ -10,6 +10,7 @@ import PySimpleGUI as sg
 import logging
 import os
 
+# handles for logging console
 class Handler(logging.StreamHandler):
     def __init__(self, window):
         logging.StreamHandler.__init__(self)
@@ -22,7 +23,7 @@ class Handler(logging.StreamHandler):
         self.buffer = f'{self.buffer}\n{record}'.strip()
         self.window['log'].update(value=self.buffer)
 
-
+# launches tasks on accounts, reenables "start" and "erase exports" buttons once tasks are finished
 def execute(values, lock, mainWindow):
     thread = Thread(target=executeAllAccounts, args=(values, lock, mainWindow["progress"]))
     thread.start()
@@ -30,6 +31,7 @@ def execute(values, lock, mainWindow):
     mainWindow["start"].update(disabled=False)
     mainWindow["eraseExports"].update(disabled=False)
 
+# launches skin and champion file update task
 def updateInformation(mainWindow):
     mainWindow["updateInformation"].update(disabled=True)
     thread = Thread(target=update, args=[mainWindow])
@@ -37,6 +39,7 @@ def updateInformation(mainWindow):
     thread.join()
     mainWindow["updateInformation"].update(disabled=False)
 
+# saves options in settings tab
 def saveSettings(values):
     sg.user_settings_set_entry("riotClient", values["riotClient"])
     sg.user_settings_set_entry("leagueClient", values["leagueClient"])
@@ -44,20 +47,23 @@ def saveSettings(values):
     sg.user_settings_set_entry("accountsDelimiter", values["accountsDelimiter"])
     sg.user_settings_set_entry("threadCount", values["threadCount"])
 
+# saves options in tasks tab
 def saveTasks(values):
     sg.user_settings_set_entry("craftKeys", values["craftKeys"])
     sg.user_settings_set_entry("openChests", values["openChests"])
 
+# save options in export tab
 def saveExport(values):
     sg.user_settings_set_entry("bannedTemplate", values["bannedTemplate"])
     sg.user_settings_set_entry("errorTemplate", values["errorTemplate"])
     sg.user_settings_set_entry("exportMin", values["exportMin"])
 
 
+# setups the gui, console logging and handles main loop
 def main():
     lock = Lock()
     cwd = os.getcwd()
-    sg.theme('Black')
+    sg.theme("Black")
     sg.user_settings_filename("settings.json", path=cwd)
 
     mainLayout = [
@@ -104,10 +110,10 @@ def main():
                     ]])],
         ]
 
-    # Create the Window
-    mainWindow = sg.Window("DeviatorZ Account Checker", layout, font=("Helvetica", 15), finalize=True)
-    mainWindow["log"].update(disabled=True)
+    mainWindow = sg.Window("DeviatorZ Account Checker", layout, font=("Helvetica", 15), finalize=True) # create the window
+    mainWindow["log"].update(disabled=True) # disable typing in logging console
 
+    # setup console logging
     logging.getLogger("urllib3").setLevel(logging.ERROR)
     logging.basicConfig(
         level=logging.DEBUG,
@@ -120,8 +126,7 @@ def main():
     logger = logging.getLogger("")
     logger.addHandler(handler)
 
-    # Event Loop to process "events" and get the "values" of the inputs
-
+    # event loop to process "events" and get the "values" of the inputs
     while True:
         event, values = mainWindow.read()
         if event == sg.WIN_CLOSED: # if user closes window

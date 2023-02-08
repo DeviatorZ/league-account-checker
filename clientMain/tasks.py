@@ -17,6 +17,7 @@ import csv
 import json
 import logging
 
+# class for tracking checking progress
 class Progress():
     def __init__(self, total, progressBar):
         self.total = total
@@ -31,6 +32,7 @@ class Progress():
     def update(self):
         self.progressBar.update(f"Completed {self.counter}/{self.total} accounts")  
 
+# make sure user input files exist
 def checkForFileErrors(settings):
     if not os.path.exists(settings["riotClient"]):
         raise InvalidPathException("RiotClientServices.exe path doesn't exist!")
@@ -41,6 +43,7 @@ def checkForFileErrors(settings):
     if not os.path.exists(settings["accountsFile"]):
         raise InvalidPathException("Account file path doesn't exist!")
 
+# tries executing tasks on a given account and adjusts progress bar if it's successful, retries otherwise
 def execute(account, settings, lock, progress):
     try:
         executeAccount(account, settings, lock)
@@ -48,10 +51,12 @@ def execute(account, settings, lock, progress):
     except ConnectionException as exception:
         logging.error(f"{account['username']} {exception.connectionName} exception. Retrying...")
         execute(account, settings, lock, progress)
-        
+
+# performs tasks on a given account
 def executeAccount(account, settings, lock):
     logging.info("Executing tasks on account: " + account["username"])
     
+    # launch and login to riot client, handle authentication exception
     try:
         riotConnection = login(account["username"], account["password"], settings["riotClient"], lock)
     except AuthenticationException as exception:
@@ -59,9 +64,12 @@ def executeAccount(account, settings, lock):
         account["state"] = exception.message
         return 
 
+    # get account region from riot client (required for league client)
     region = riotConnection.get("/riotclient/region-locale")
     region = region.json()
     account["region"] = region["region"]
+
+    # launch league client and wait session, handle session and account ban exceptions
     try:
         waitForLaunch(riotConnection)
         leagueConnection = LeagueConnection(settings["leagueClient"], riotConnection, account["region"], lock)
@@ -70,7 +78,8 @@ def executeAccount(account, settings, lock):
         logging.error(f"{account['username']} session exception: {exception.message}. Retrying...")
         return executeAccount(account, settings, lock)
     except AccountBannedException as ban:
-        banDescription = json.loads(ban.message['description'])
+        # add ban information to the account for export
+        banDescription = json.loads(ban.message["description"])
         account["state"] = "BANNED"
         account["banReason"] = banDescription["restrictions"][0]["reason"]
         if banDescription["restrictions"][0]["type"] != "PERMANENT_BAN":
@@ -82,7 +91,7 @@ def executeAccount(account, settings, lock):
         logging.error(f"{account['username']} banned exception: Reason:{account['banReason']}, Expiration:{account['banExpiration']}")
         return 
 
-    loot = Loot(leagueConnection)
+    loot = Loot(leagueConnection) # create loot object to use for all tasks on the account
 
     tasks = {
         "craftKeys" : 
@@ -97,26 +106,29 @@ def executeAccount(account, settings, lock):
         }
     }
     
+    # run tasks on the account
     for taskName, task in tasks.items():
         if settings[taskName]:
             task["function"](*task["args"])
 
+    # obtain extra account information if it's not set to minimal type
     if not settings["exportMin"]:
         getData(leagueConnection, account, loot)
 
-    leagueConnection.__del__()
+    leagueConnection.__del__() # tasks finished, terminate league and riot clients
     account["state"] = "OK"
-    return 
 
+# launches tasks on accounts
 def executeAllAccounts(settings, lock, progressBar):
     try:
-        checkForFileErrors(settings)
+        checkForFileErrors(settings) # make sure user input files exist
     except InvalidPathException as exception:
         logging.error(exception.message)
         return
 
     accounts = []
 
+    # read account file
     try:
         with open(settings["accountsFile"]) as csvfile:
             reader = csv.reader(csvfile, delimiter=settings["accountsDelimiter"])
@@ -136,12 +148,12 @@ def executeAllAccounts(settings, lock, progressBar):
         logging.error(error.msg)
         return
 
-    progress = Progress(len(accounts), progressBar)
+    progress = Progress(len(accounts), progressBar) # create progress handler
     pool = ThreadPool(processes=int(settings["threadCount"]))
-    args = [[account, settings, lock, progress] for account in accounts]
+    args = [[account, settings, lock, progress] for account in accounts] # create function args for every account
 
-    pool.starmap(execute, args)
+    pool.starmap(execute, args) # execute tasks concurrently
 
     logging.info("Exporting accounts")
-    exportAccounts(accounts, settings["bannedTemplate"], settings["errorTemplate"])
+    exportAccounts(accounts, settings["bannedTemplate"], settings["errorTemplate"]) # export all accounts after tasks are finished
     logging.info("All tasks completed!")

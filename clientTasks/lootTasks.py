@@ -6,6 +6,7 @@ def craftKeys(leagueConection, loot):
     loot.refreshLoot()
     keyFragmentCount = loot.getLootCountById("MATERIAL_key_fragment")
 
+    # 3 fragments required per key
     if keyFragmentCount >= 3:
         craftableKeyCount = keyFragmentCount // 3
         postRecipe(leagueConection, "MATERIAL_key_fragment_forge", ["MATERIAL_key_fragment"], repeat=craftableKeyCount)
@@ -17,6 +18,7 @@ def openChests(leagueConection, loot):
     masteryChestCount = loot.getLootCountById("CHEST_champion_mastery")
     keyCount = loot.getLootCountById("MATERIAL_key")
 
+    # open masterwork chests first because they are better
     craftableChestCount = min(keyCount, masterworkChestCount)
     if craftableChestCount > 0:
         postRecipe(leagueConection, "CHEST_224_OPEN", ["CHEST_224", "MATERIAL_key"], repeat=craftableChestCount)

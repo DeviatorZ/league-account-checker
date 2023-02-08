@@ -2,6 +2,7 @@ from time import time
 from time import sleep
 import re
 
+# handles player loot
 class Loot():
     def __init__(self, leagueConnection, refreshCooldown=5):
         self.leagueConnection = leagueConnection
@@ -12,6 +13,7 @@ class Loot():
     def getLoot(self):
         return self.allLoot
 
+    # returns loot that has a given id, none if it doesn't exist
     def getLootById(self, lootId):
         for loot in self.allLoot:
             if loot["lootId"] == lootId:
@@ -19,6 +21,7 @@ class Loot():
         
         return None
 
+    # returns loot count of given id, 0 if there's no such loot
     def getLootCountById(self, lootId):
         lootCount = 0
         for loot in self.allLoot:
@@ -27,6 +30,7 @@ class Loot():
         
         return lootCount
 
+    # returns shards ids that match a given regex pattern (pattern must have the id in a 2nd regex group)
     def getShardIdsByPattern(self, pattern):
         ids = []
         for loot in self.allLoot:
@@ -36,6 +40,7 @@ class Loot():
 
         return ids
 
+    # refreshes loot (used after performing a task with loot)
     def refreshLoot(self):
         try:
             sleep(self.refreshCooldown - time() + self.lastRefresh)

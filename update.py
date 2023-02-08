@@ -5,6 +5,7 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
 
+# handles skin and champion json file updating, uses community links as they usually update sooner than riot
 def update(window):
     session = requests.Session()
     retry = Retry(total=5, backoff_factor=1)

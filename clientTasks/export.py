@@ -14,6 +14,7 @@ def eraseFiles(path):
         pass
 
 class Export():
+    # sets up export by creating missing folders and reading the templates
     def __init__(self, singleTemplatesPath, singleExportPath, allTemplatesPath, allExportPath, bannedTemplate, errorTemplate):
         try:
             os.mkdir("export")
@@ -46,6 +47,7 @@ class Export():
         self.bannedTemplate = bannedTemplate
         self.errorTemplate = errorTemplate
 
+    # "single" type export for all templates (all accounts in one file)
     def exportSingle(self, accounts):
         for template in self.singleTemplates:
             with open(f"{self.singleTemplatesPath}\{template}", "r", encoding="utf-8", newline="") as filePointer:
@@ -64,6 +66,7 @@ class Export():
 
                         exportPointer.write(data + "\n")
 
+    # "all" type export for all templates (separate file for each account)
     def exportAll(self, accounts):
         for template in self.allTemplates:
             with open(f"{self.allTemplatesPath}\{template}", "r", encoding="utf-8", newline="") as filePointer:
@@ -82,6 +85,7 @@ class Export():
                         with open(f"{self.allExportPath}\{str(template).split('.')[0]}\{account['username']}.txt", "w", encoding="utf-8", newline="") as exportPointer:
                             exportPointer.write(data + "\n")
 
+# handles account exporting
 def exportAccounts(accounts, bannedTemplate, errorTemplate):
     export = Export("templates\\single", "export\\single", "templates\\all", "export\\all", bannedTemplate, errorTemplate)
     export.exportSingle(accounts)
