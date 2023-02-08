@@ -1,6 +1,7 @@
 import json
 from time import sleep
 
+# handles champion file for id to name conversion
 class Champions():
     def __init__(self, path):
         with open(path, "r", encoding="utf8") as filePointer:
@@ -16,6 +17,7 @@ class Champions():
         except:
             return None
 
+# handles skin file for id to name conversion
 class Skins():
     def __init__(self, path):
         with open(path, "r", encoding="utf8") as filePointer:
@@ -27,6 +29,7 @@ class Skins():
         except:
             return None
 
+# obtains account's in-game name and level
 def getSummoner(leagueConnection, account):
     summoner = leagueConnection.get("/lol-summoner/v1/current-summoner")
     summoner = summoner.json()
@@ -34,10 +37,12 @@ def getSummoner(leagueConnection, account):
     account["summonerLevel"] = summoner["summonerLevel"]
     account["ign"] = summoner["displayName"]
 
+# obtains account's honor level
 def getHonorLevel(leagueConnection, account):
     honor = leagueConnection.get("/lol-honor-v2/v1/profile").json()
     account["honorLevel"] = honor["honorLevel"]
 
+# checks if account email is verified 
 def getEmailVerification(leagueConnection, account):
     email = leagueConnection.get("/lol-email-verification/v1/email")
     email = email.json()
@@ -47,6 +52,7 @@ def getEmailVerification(leagueConnection, account):
     else:
         account["emailVerified"] = "Unverified"
 
+# obtains data on account's blue essence, orange essence and riot points
 def getCurrencies(lootJson, account):
     account["be"] = 0
     account["oe"] = 0
@@ -60,6 +66,7 @@ def getCurrencies(lootJson, account):
         elif loot["lootId"] == "CURRENCY_RP":
             account["rp"] = loot["count"]
 
+# obtains account's information on rental, permanent and owned skins
 def getSkins(leagueConnection, loot, skins, account):
     skinShardsRental = loot.getShardIdsByPattern("CHAMPION_SKIN_RENTAL_(\d+)")
     account["skinShardsRental"]= ", ".join(skins.getSkinById(id) for id in skinShardsRental if skins.getSkinById(id) is not None)
@@ -71,7 +78,8 @@ def getSkins(leagueConnection, loot, skins, account):
 
     ownedSkins = leagueConnection.get("/lol-inventory/v2/inventory/CHAMPION_SKIN").json()
     account["ownedSkins"] = ", ".join(skins.getSkinById(skin["itemId"]) for skin in ownedSkins if skins.getSkinById(skin["itemId"]) is not None and skin["ownershipType"] == "OWNED")
-    seperatorCount = account["ownedSkins"].count(", ")
+    # some skins in ownedSkins json might be rented so count owned skins manually
+    seperatorCount = account["ownedSkins"].count(", ") 
     if seperatorCount > 0:
         account["ownedSkinsCount"] = seperatorCount + 1
     elif account["ownedSkins"]:
@@ -79,9 +87,11 @@ def getSkins(leagueConnection, loot, skins, account):
     else:
         account["ownedSkinsCount"] = 0
 
+# obtains account's information on owned skins
 def getChampions(leagueConnection, champions, account):
     ownedChampions = leagueConnection.get("/lol-champions/v1/owned-champions-minimal").json()
     account["ownedChampions"] = ", ".join(champions.getChampionById(champion["id"]) for champion in ownedChampions if champions.getChampionById(champion["id"]) is not None and champion["ownership"]["owned"])
+    # owned champions endpoint includes free rotation champions so count owned champions manually
     seperatorCount = account["ownedChampions"].count(", ")
     if seperatorCount > 0:
         account["ownedChampionsCount"] = seperatorCount + 1
@@ -90,6 +100,7 @@ def getChampions(leagueConnection, champions, account):
     else:
         account["ownedChampionsCount"] = 0
 
+# convert account's region to full name
 def getFullRegion(account):
     regionFull = {
         "NA": "North America",
@@ -105,6 +116,7 @@ def getFullRegion(account):
 
     account["regionFull"] = regionFull[account["region"]]
 
+# obtain account's ranked stats on soloq and flexq modes
 def getRank(leagueConnection, account):
     romanNumbers = {
         "IV": 4,
@@ -147,6 +159,7 @@ def getRank(leagueConnection, account):
         account["flexLosses"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["losses"]
         account["flexWinrate"] = round(account["flexWins"] / (account["flexWins"] + account["flexLosses"]) * 100)
 
+# try to queue up and check if there's a low priority queue penalty
 def getLowPriorityQueue(leagueConnection, account):
     queueArgs = {
         "queueId": 430,
@@ -161,15 +174,16 @@ def getLowPriorityQueue(leagueConnection, account):
 
     queueState = leagueConnection.get("/lol-lobby/v2/lobby/matchmaking/search-state").json()
 
-    account["lowPriorityQueue"] = "Error"
+    account["lowPriorityQueue"] = "Error" # unable to check low priority if the account has a dodge penalty
 
     if queueState["lowPriorityData"]["reason"] == "LEAVER_BUSTED":
         account["lowPriorityQueue"] = str(int(queueState["lowPriorityData"]["penaltyTime"] / 60)) + " minutes"
-    elif queueState["searchState"] == "Found" or queueState["searchState"] == "Searching":
+    elif queueState["searchState"] == "Found" or queueState["searchState"] == "Searching": # searching for game or found one (no penalties)
         account["lowPriorityQueue"] = "None"
 
     leagueConnection.delete("/lol-lobby/v2/lobby/matchmaking/search")
 
+# uses all data functions to get information about the account
 def getData(leagueConnection, account, loot):
     getFullRegion(account)
 
