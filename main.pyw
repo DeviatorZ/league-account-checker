@@ -51,6 +51,9 @@ def saveSettings(values):
 def saveTasks(values):
     sg.user_settings_set_entry("craftKeys", values["craftKeys"])
     sg.user_settings_set_entry("openChests", values["openChests"])
+    sg.user_settings_set_entry("claimEventRewards", values["claimEventRewards"])
+    sg.user_settings_set_entry("buyChampionShardsWithTokens", values["buyChampionShardsWithTokens"])
+    sg.user_settings_set_entry("buyBlueEssenceWithTokens", values["buyBlueEssenceWithTokens"])
 
 # save options in export tab
 def saveExport(values):
@@ -83,9 +86,46 @@ def main():
         [sg.Button("Save", key="saveSettings")],
     ]
 
+    tasks = {
+        "Event" : {
+            "claimEventRewards" :
+            {
+                "text" : "Claim event tokens",
+            },
+            "buyChampionShardsWithTokens" :
+            {
+                "text" : "Buy champion shards",
+            },
+            "buyBlueEssenceWithTokens" :
+            {
+                "text" : "Buy BE",
+            },
+        },
+        "Crafting" : { 
+            "craftKeys" : 
+            {
+                "text" : "Craft hextech keys",
+            },
+            "openChests" :
+            {
+                "text" : "Open hextech chests",
+            },
+            "comingSoonC" :
+            {
+                "text" : "More coming soon!",
+            },
+        },           
+        "Disenchanting" : {
+            "comingSoonD" :
+            {
+                "text" : "Coming soon!",
+            },
+        },
+    }
+
     tasksLayout = [
-        [sg.Checkbox("Craft hextech keys", default=sg.user_settings_get_entry("craftKeys", True), key="craftKeys"),
-        sg.Checkbox("Open hextech chests", default=sg.user_settings_get_entry("openChests", True), key="openChests")],
+        [sg.Column([[sg.Text(taskGroupName, size=(20,1), font=("Helvetica", 9))]], pad=(0, None), expand_x=True) for taskGroupName in tasks],
+        [sg.Column([[sg.Checkbox(task["text"], default=sg.user_settings_get_entry(taskName, True), key=taskName, size=(20,1), font=("Helvetica", 9))] for taskName, task in taskGroup.items()], pad=(0, None), expand_x=True, expand_y=True) for taskGroupName, taskGroup in tasks.items()],
         [sg.Button("Save", key="saveTasks")],
     ]
 

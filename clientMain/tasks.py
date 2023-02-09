@@ -1,6 +1,5 @@
 from multiprocessing.pool import ThreadPool
 from datetime import datetime
-from clientMain.connection import RiotConnection
 from clientMain.connection import LeagueConnection
 from clientMain.auth import login
 from clientMain.auth import waitForSession
@@ -8,10 +7,12 @@ from clientMain.auth import waitForLaunch
 from exceptions import *
 from clientTasks.export import exportAccounts
 from clientTasks.data import getData
-from clientTasks.lootTasks import craftKeys
-from clientTasks.lootTasks import openChests
+from clientTasks.loot import craftKeys
+from clientTasks.loot import openChests
+from clientTasks.event import claimEventRewards
+from clientTasks.event import buyChampionShardsWithTokens
+from clientTasks.event import buyBlueEssenceWithTokens
 from clientMain.loot import Loot
-import time
 import os
 import csv
 import json
@@ -94,6 +95,21 @@ def executeAccount(account, settings, lock):
     loot = Loot(leagueConnection) # create loot object to use for all tasks on the account
 
     tasks = {
+        "claimEventRewards" :
+        {
+            "function" : claimEventRewards,
+            "args" : [leagueConnection],
+        },
+        "buyChampionShardsWithTokens" :
+        {
+            "function" : buyChampionShardsWithTokens,
+            "args" : [leagueConnection],
+        },
+        "buyBlueEssenceWithTokens" :
+        {
+            "function" : buyBlueEssenceWithTokens,
+            "args" : [leagueConnection],
+        },
         "craftKeys" : 
         {
             "function" : craftKeys,
@@ -103,7 +119,7 @@ def executeAccount(account, settings, lock):
         {
             "function" : openChests,
             "args" : [leagueConnection, loot],
-        }
+        },
     }
     
     # run tasks on the account
