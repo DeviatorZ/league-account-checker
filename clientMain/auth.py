@@ -63,7 +63,7 @@ def waitForSession(leagueConnection, timeout=60):
             if session["error"]["messageId"] == "FAILED_TO_COMMUNICATE_WITH_LOGIN_QUEUE": # something went wrong while loading the session (possibly rate limited?)
                 raise SessionException("Failed to communicate with login queue", leagueConnection)
         elif session["state"] == "SUCCEEDED": # successfully loaded the session
-            time.sleep(1)
+            time.sleep(2)
             return
         
         if time.time() - startTime >= timeout: # session took too long to load
