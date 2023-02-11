@@ -1,4 +1,5 @@
-
+import re
+from time import sleep
 def postRecipe(leagueConnection, recipeName, materials, repeat=1):
     leagueConnection.post(f"/lol-loot/v1/recipes/{recipeName}/craft?repeat={repeat}", json=materials)
 
@@ -38,3 +39,15 @@ def openChests(leagueConnection, loot):
 
     # open again just in case more chests dropped from chests
     openChests(leagueConnection, loot)
+
+def openLoot(leagueConnection, loot):
+    loot.refreshLoot()
+    notHextechChest = "CHEST_((?!(224|generic|champion_mastery)).)*"
+    allLoot = loot.getLoot()
+
+    lootToOpen = [currentLoot for currentLoot in allLoot if re.fullmatch(notHextechChest, currentLoot["lootId"])]
+
+    for currentLoot in lootToOpen:
+        name, count = currentLoot["lootName"], currentLoot["count"]
+        postRecipe(leagueConnection, f"{name}_OPEN", [name], repeat=count)
+        sleep(1)
