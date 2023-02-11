@@ -7,11 +7,14 @@ from clientMain.auth import waitForLaunch
 from exceptions import *
 from clientTasks.export import exportAccounts
 from clientTasks.data import getData
-from clientTasks.loot import craftKeys
-from clientTasks.loot import openChests
 from clientTasks.event import claimEventRewards
 from clientTasks.event import buyChampionShardsWithTokens
 from clientTasks.event import buyBlueEssenceWithTokens
+from clientTasks.crafting import craftKeys
+from clientTasks.crafting import openChests
+from clientTasks.crafting import openLoot
+from clientTasks.disenchanting import disenchantChampionShards
+from clientTasks.disenchanting import disenchantEternalsShards
 from clientMain.loot import Loot
 import os
 import csv
@@ -118,6 +121,21 @@ def executeAccount(account, settings, lock):
         "openChests" :
         {
             "function" : openChests,
+            "args" : [leagueConnection, loot],
+        },
+        "openLoot" :
+        {
+            "function" : openLoot,
+            "args" : [leagueConnection, loot],
+        },
+        "disenchantChampionShards" :
+        {
+            "function" : disenchantChampionShards,
+            "args" : [leagueConnection, loot],
+        },
+        "disenchantEternalsShards" :
+        {
+            "function" : disenchantEternalsShards,
             "args" : [leagueConnection, loot],
         },
     }

@@ -49,11 +49,14 @@ def saveSettings(values):
 
 # saves options in tasks tab
 def saveTasks(values):
-    sg.user_settings_set_entry("craftKeys", values["craftKeys"])
-    sg.user_settings_set_entry("openChests", values["openChests"])
     sg.user_settings_set_entry("claimEventRewards", values["claimEventRewards"])
     sg.user_settings_set_entry("buyChampionShardsWithTokens", values["buyChampionShardsWithTokens"])
     sg.user_settings_set_entry("buyBlueEssenceWithTokens", values["buyBlueEssenceWithTokens"])
+    sg.user_settings_set_entry("craftKeys", values["craftKeys"])
+    sg.user_settings_set_entry("openChests", values["openChests"])
+    sg.user_settings_set_entry("openLoot", values["openLoot"])
+    sg.user_settings_set_entry("disenchantChampionShards", values["disenchantChampionShards"])
+    sg.user_settings_set_entry("disenchantEternalsShards", values["disenchantEternalsShards"])
 
 # save options in export tab
 def saveExport(values):
@@ -105,22 +108,26 @@ def getTasksLayout():
             {
                 "text" : "Open hextech chests",
             },
-            "comingSoonC" :
+            "openLoot" :
             {
-                "text" : "More coming soon!",
+                "text" : "Open capsules, orbs, random shards",
             },
         },           
         "Disenchanting" : {
-            "comingSoonD" :
+            "disenchantChampionShards" :
             {
-                "text" : "Coming soon!",
+                "text" : "Champion shards",
+            },
+            "disenchantEternalsShards" :
+            {
+                "text" : "Eternals shards",
             },
         },
     }
 
     return [
-        [sg.Column([[sg.Text(taskGroupName, size=(20,1), font=("Helvetica", 9))]], pad=(0, None), expand_x=True) for taskGroupName in tasks],
-        [sg.Column([[sg.Checkbox(task["text"], default=sg.user_settings_get_entry(taskName, True), key=taskName, size=(20,1), font=("Helvetica", 9))] for taskName, task in taskGroup.items()], pad=(0, None), expand_x=True, expand_y=True) for taskGroupName, taskGroup in tasks.items()],
+        [sg.Column([[sg.Text(taskGroupName, size=(30,1), font=("Helvetica", 8))]], pad=(0, None), expand_x=True) for taskGroupName in tasks],
+        [sg.Column([[sg.Checkbox(task["text"], default=sg.user_settings_get_entry(taskName, True), key=taskName, size=(30,1), font=("Helvetica", 8))] for taskName, task in taskGroup.items()], pad=(0, None), expand_x=True, expand_y=True) for taskGroupName, taskGroup in tasks.items()],
         [sg.Button("Save", key="saveTasks")],
     ]
 
