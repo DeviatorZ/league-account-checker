@@ -39,6 +39,9 @@ class Loot():
                 ids.append(int(match.group(1)))
 
         return ids
+    
+    def getLootByDisplayCategory(self, category):
+        return [loot for loot in self.allLoot if loot["displayCategories"] == category]
 
     # refreshes loot (used after performing a task with loot)
     def refreshLoot(self):

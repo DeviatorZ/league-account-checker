@@ -1,4 +1,5 @@
-
+import re
+from time import sleep
 def postRecipe(leagueConnection, recipeName, materials, repeat=1):
     leagueConnection.post(f"/lol-loot/v1/recipes/{recipeName}/craft?repeat={repeat}", json=materials)
 
@@ -18,6 +19,9 @@ def openChests(leagueConnection, loot):
     masteryChestCount = loot.getLootCountById("CHEST_champion_mastery")
     keyCount = loot.getLootCountById("MATERIAL_key")
 
+    if masterworkChestCount + standardChestCount + masteryChestCount == 0 or keyCount == 0:
+        return
+
     # open masterwork chests first because they are better
     craftableChestCount = min(keyCount, masterworkChestCount)
     if craftableChestCount > 0:
@@ -32,3 +36,18 @@ def openChests(leagueConnection, loot):
     craftableChestCount = min(keyCount, masteryChestCount)
     if craftableChestCount > 0:
         postRecipe(leagueConnection, "CHEST_champion_mastery_OPEN", ["CHEST_champion_mastery", "MATERIAL_key"], repeat=craftableChestCount)
+
+    # open again just in case more chests dropped from chests
+    openChests(leagueConnection, loot)
+
+def openLoot(leagueConnection, loot):
+    loot.refreshLoot()
+    notHextechChest = "CHEST_((?!(224|generic|champion_mastery)).)*"
+    allLoot = loot.getLoot()
+
+    lootToOpen = [currentLoot for currentLoot in allLoot if re.fullmatch(notHextechChest, currentLoot["lootId"])]
+
+    for currentLoot in lootToOpen:
+        name, count = currentLoot["lootName"], currentLoot["count"]
+        postRecipe(leagueConnection, f"{name}_OPEN", [name], repeat=count)
+        sleep(1)

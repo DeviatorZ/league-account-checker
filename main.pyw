@@ -10,7 +10,7 @@ import PySimpleGUI as sg
 import logging
 import os
 
-# handles for logging console
+# handles console logging
 class Handler(logging.StreamHandler):
     def __init__(self, window):
         logging.StreamHandler.__init__(self)
@@ -19,9 +19,9 @@ class Handler(logging.StreamHandler):
 
     def emit(self, record):
         self.format(record)
-        record = f'{record.asctime} [{record.levelname}] {record.message}'
-        self.buffer = f'{self.buffer}\n{record}'.strip()
-        self.window['log'].update(value=self.buffer)
+        record = f"{record.asctime} [{record.levelname}] {record.message}"
+        self.buffer = f"{self.buffer}\n{record}".strip()
+        self.window["log"].update(value=self.buffer)
 
 # launches tasks on accounts, reenables "start" and "erase exports" buttons once tasks are finished
 def execute(values, lock, mainWindow):
@@ -49,11 +49,14 @@ def saveSettings(values):
 
 # saves options in tasks tab
 def saveTasks(values):
-    sg.user_settings_set_entry("craftKeys", values["craftKeys"])
-    sg.user_settings_set_entry("openChests", values["openChests"])
     sg.user_settings_set_entry("claimEventRewards", values["claimEventRewards"])
     sg.user_settings_set_entry("buyChampionShardsWithTokens", values["buyChampionShardsWithTokens"])
     sg.user_settings_set_entry("buyBlueEssenceWithTokens", values["buyBlueEssenceWithTokens"])
+    sg.user_settings_set_entry("craftKeys", values["craftKeys"])
+    sg.user_settings_set_entry("openChests", values["openChests"])
+    sg.user_settings_set_entry("openLoot", values["openLoot"])
+    sg.user_settings_set_entry("disenchantChampionShards", values["disenchantChampionShards"])
+    sg.user_settings_set_entry("disenchantEternalsShards", values["disenchantEternalsShards"])
 
 # save options in export tab
 def saveExport(values):
@@ -61,20 +64,14 @@ def saveExport(values):
     sg.user_settings_set_entry("errorTemplate", values["errorTemplate"])
     sg.user_settings_set_entry("exportMin", values["exportMin"])
 
-
-# setups the gui, console logging and handles main loop
-def main():
-    lock = Lock()
-    cwd = os.getcwd()
-    sg.theme("Black")
-    sg.user_settings_filename("settings.json", path=cwd)
-
-    mainLayout = [
+def getMainLayout():
+    return [
         [sg.Output(size=(110, 25), key="log", font=("Helvetica", 8))],
         [sg.Button("Start", key="start"), sg.Button("Open exports folder", key="openExports"), sg.Button("Erase exports", key="eraseExports"), sg.Text("", key="progress")] 
-    ]
+    ]  
 
-    settingsLayout = [
+def getSettingsLayout(cwd):
+    return [
         [sg.Text("RiotClientServices.exe location")],
         [sg.Input(sg.user_settings_get_entry("riotClient", "C:\\Riot Games\\Riot Client\\RiotClientServices.exe"), key="riotClient"), sg.FileBrowse()],
         [sg.Text("LeagueClient.exe location")],
@@ -86,8 +83,9 @@ def main():
         [sg.Button("Save", key="saveSettings")],
     ]
 
+def getTasksLayout():
     tasks = {
-        "Event" : {
+        "Event shop" : {
             "claimEventRewards" :
             {
                 "text" : "Claim event tokens",
@@ -110,26 +108,31 @@ def main():
             {
                 "text" : "Open hextech chests",
             },
-            "comingSoonC" :
+            "openLoot" :
             {
-                "text" : "More coming soon!",
+                "text" : "Open capsules, orbs, random shards",
             },
         },           
         "Disenchanting" : {
-            "comingSoonD" :
+            "disenchantChampionShards" :
             {
-                "text" : "Coming soon!",
+                "text" : "Champion shards",
+            },
+            "disenchantEternalsShards" :
+            {
+                "text" : "Eternals shards",
             },
         },
     }
 
-    tasksLayout = [
-        [sg.Column([[sg.Text(taskGroupName, size=(20,1), font=("Helvetica", 9))]], pad=(0, None), expand_x=True) for taskGroupName in tasks],
-        [sg.Column([[sg.Checkbox(task["text"], default=sg.user_settings_get_entry(taskName, True), key=taskName, size=(20,1), font=("Helvetica", 9))] for taskName, task in taskGroup.items()], pad=(0, None), expand_x=True, expand_y=True) for taskGroupName, taskGroup in tasks.items()],
+    return [
+        [sg.Column([[sg.Text(taskGroupName, size=(30,1), font=("Helvetica", 8))]], pad=(0, None), expand_x=True) for taskGroupName in tasks],
+        [sg.Column([[sg.Checkbox(task["text"], default=sg.user_settings_get_entry(taskName, True), key=taskName, size=(30,1), font=("Helvetica", 8))] for taskName, task in taskGroup.items()], pad=(0, None), expand_x=True, expand_y=True) for taskGroupName, taskGroup in tasks.items()],
         [sg.Button("Save", key="saveTasks")],
     ]
 
-    exportLayout = [
+def getExportLayout():
+    return [
         [sg.Text("Banned account template")],
         [sg.Input(sg.user_settings_get_entry("bannedTemplate", "{username};{password};{region};{banReason} {banExpiration}"), key="bannedTemplate", size=60)],
         [sg.Text("Error account template")],
@@ -141,22 +144,10 @@ def main():
         [sg.Button("Update skin and champion information", key="updateInformation"), sg.Text("", key="updateStatus")],
     ]
 
-    layout = [
-        [sg.TabGroup([[
-            sg.Tab("Main", mainLayout), 
-            sg.Tab("Settings", settingsLayout),
-            sg.Tab("Tasks", tasksLayout),
-            sg.Tab("Export", exportLayout),
-                    ]])],
-        ]
-
-    mainWindow = sg.Window("DeviatorZ Account Checker", layout, font=("Helvetica", 15), finalize=True) # create the window
-    mainWindow["log"].update(disabled=True) # disable typing in logging console
-
-    # setup console logging
+def setupConsoleLogging(mainWindow):
     logging.getLogger("urllib3").setLevel(logging.ERROR)
     logging.basicConfig(
-        level=logging.DEBUG,
+        level=logging.INFO,
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S",
         filename="log.txt",
@@ -165,6 +156,27 @@ def main():
     handler = Handler(mainWindow)
     logger = logging.getLogger("")
     logger.addHandler(handler)
+
+# setups the gui, console logging and handles main loop
+def main():
+    lock = Lock()
+    cwd = os.getcwd()
+    sg.theme("Black")
+    sg.user_settings_filename("settings.json", path=cwd)
+
+    layout = [
+        [sg.TabGroup([[
+            sg.Tab("Main", getMainLayout()), 
+            sg.Tab("Settings", getSettingsLayout(cwd)),
+            sg.Tab("Tasks", getTasksLayout()),
+            sg.Tab("Export", getExportLayout()),
+        ]])],
+    ]
+
+    mainWindow = sg.Window("DeviatorZ Account Checker", layout, font=("Helvetica", 15), finalize=True) # create the window
+    mainWindow["log"].update(disabled=True) # disable typing in logging console
+
+    setupConsoleLogging(mainWindow)
 
     # event loop to process "events" and get the "values" of the inputs
     while True:
@@ -182,7 +194,7 @@ def main():
         elif event == "eraseExports":
             eraseFiles("export\\single")
             eraseFiles("export\\all")
-            logger.info("Exports erased!")
+            logging.info("Exports erased!")
         elif event == "openExports":
             try:
                 os.startfile(f"{cwd}\\export")
