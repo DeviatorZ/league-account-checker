@@ -88,7 +88,7 @@ def getTasksLayout():
         "Event shop" : {
             "claimEventRewards" :
             {
-                "text" : "Claim event tokens",
+                "text" : "Claim event rewards",
             },
             "buyChampionShardsWithTokens" :
             {

@@ -64,7 +64,8 @@ class Export():
                         for key, value in account.items():
                             data = data.replace(f"{{{key}}}", str(value))
 
-                        exportPointer.write(data + "\n")
+                        if data:
+                            exportPointer.write(data + "\n")
 
     # "all" type export for all templates (separate file for each account)
     def exportAll(self, accounts):
@@ -82,8 +83,9 @@ class Export():
                         for key, value in account.items():
                             data = data.replace(f"{{{key}}}", str(value))
 
-                        with open(f"{self.allExportPath}\{str(template).split('.')[0]}\{account['username']}.txt", "w", encoding="utf-8", newline="") as exportPointer:
-                            exportPointer.write(data + "\n")
+                        if data:
+                            with open(f"{self.allExportPath}\{str(template).split('.')[0]}\{account['username']}.txt", "w", encoding="utf-8", newline="") as exportPointer:
+                                exportPointer.write(data + "\n")
 
 # handles account exporting
 def exportAccounts(accounts, bannedTemplate, errorTemplate):

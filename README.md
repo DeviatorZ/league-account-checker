@@ -3,14 +3,16 @@ League of Legends account checker <br />
 Tested and working on Windows 7 (Python 3.8), Windows 10 (Python 3.10).
 ## Features
 - Process multiple accounts at once
-- Checks for bans and invalid credentials
-- Tasks (WIP)
-- Export account information
+- Checks for bans, invalid credentials
+- Claims event rewards and spends event tokens
+- Opens and disenchants loot
+- Exports account information
 - Template system to export in custom format
 
 ## How to install
+- Only windows 7 or higher supported
 - Have League of Legends installed and updated on your device.
-- Download and install [Python](https://www.python.org/downloads/)
+- Download and install [Python 3.7 or higher](https://www.python.org/downloads/)
     - For next step to work select "Add python to path" and "pip" package manager(included in default installation) <br /> ![PythonExample](https://i.imgur.com/y1k3rmd.png)
 - Download and extract the checker <br /> ![Download](https://i.imgur.com/jafvk8i.png)
 - Install required packages using "pip":
@@ -33,9 +35,10 @@ Here you can see the console and track the progress. "Start" button will start c
 - "Thread count" - amount of accounts to check at once. 
 
 ## Tasks
-WIP
+![TasksTab](https://i.imgur.com/FrOF7XK.png)
 
-## Templates
+## Export
+### Templates
 Templates are a way for the user to export account information in a desired format. There are 2 types of templates:
 - all - use a separate file for each account.
 - single - export all accounts in a single file.
@@ -49,12 +52,13 @@ Example templates can be found in the "templates" folder. General guidelines:
     - "single" type exports will be in "export\single" folder with file name being "NameOfTheTemplate.txt". 
     - "all" type exports can be found in "export\all" folder with each "all" type template having it's own folder. Inside each folder all accounts will be exported in separate files with filenames using usernames of the accounts
 - If an account is banned or has invalid credentials it will still be included in every export file using "banned" and "error" templates respectively. These templates can be specified in [export tab](#export)
-
-## Export
+### Export tab
 ![ExportTab](https://i.imgur.com/lPpW6TD.png)
 - "Banned account template" - export template replacement for banned accounts
-- "Error account template" - export template replacement for accounts that couldn't be checked. Currently only applies to accounts with invalid credentials
-- "Standard export":
+- "Error account template" - export template replacement for accounts that couldn't be checked. <br /> 
+state "AUTH_FAILURE" if credentials are invalid, state "VngAccountRequired" if account needs updating (email and phone number need to be added)
+- Leave Banned/Error template empty in order to skip exporting such accounts
+- "Standard export type":
     - Minimal - export only username, password and region, useful for quick ban and credential checking.
     - Full - export using all available variables
 - "Update skin and champion information" - tries to update champion and skin information. Skins come out nearly every patch and it might take multiple days until data files are updatable. Ids unrecognized by the checker won't get exported so make sure to stay updated!
