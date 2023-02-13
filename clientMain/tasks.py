@@ -97,7 +97,16 @@ def executeAccount(account, settings, lock):
         return 
 
     loot = Loot(leagueConnection) # create loot object to use for all tasks on the account
+    performTasks(leagueConnection, settings, loot)
 
+    # obtain extra account information if it's not set to minimal type
+    if not settings["exportMin"]:
+        getData(leagueConnection, account, loot)
+
+    leagueConnection.__del__() # tasks finished, terminate league and riot clients
+    account["state"] = "OK"
+
+def performTasks(leagueConnection, settings, loot):
     tasks = {
         "claimEventRewards" :
         {
@@ -141,18 +150,11 @@ def executeAccount(account, settings, lock):
         },
     }
     
-    # run tasks on the account
+    # run tasks
     for taskName, task in tasks.items():
         if settings[taskName]:
             task["function"](*task["args"])
             sleep(1)
-
-    # obtain extra account information if it's not set to minimal type
-    if not settings["exportMin"]:
-        getData(leagueConnection, account, loot)
-
-    leagueConnection.__del__() # tasks finished, terminate league and riot clients
-    account["state"] = "OK"
 
 # launches tasks on accounts
 def executeAllAccounts(settings, lock, progressBar):
