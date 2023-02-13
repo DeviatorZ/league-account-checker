@@ -16,6 +16,7 @@ from clientTasks.crafting import openLoot
 from clientTasks.disenchanting import disenchantChampionShards
 from clientTasks.disenchanting import disenchantEternalsShards
 from clientMain.loot import Loot
+from time import sleep
 import os
 import csv
 import json
@@ -144,6 +145,7 @@ def executeAccount(account, settings, lock):
     for taskName, task in tasks.items():
         if settings[taskName]:
             task["function"](*task["args"])
+            sleep(1)
 
     # obtain extra account information if it's not set to minimal type
     if not settings["exportMin"]:
