@@ -1,6 +1,6 @@
 # DeviatorZ Account Checker
 League of Legends account checker <br />
-Tested and working on Windows 7 (Python 3.8), Windows 10 (Python 3.10).
+Tested and working on Windows 7 (Python 3.8), Windows Server 2019 (Python 3.10).
 ## Features
 - Process multiple accounts at once
 - Checks for bans, invalid credentials
