@@ -40,8 +40,10 @@ def waitForLaunch(riotConnection, timeout=30):
 
     while True:
         phase = riotConnection.get('/rnet-lifecycle/v1/product-context-phase').json()
-
+        if phase == "VngAccountRequired":
+            raise AuthenticationException(phase, riotConnection)
         if phase == "WaitForLaunch": # league client is ready for launch
+            time.sleep(1)
             return
         
         if time.time() - startTime >= timeout: # took too long for launching to be ready
