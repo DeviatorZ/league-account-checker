@@ -55,7 +55,6 @@ class Connection(Session):
     # terminates client process 
     def __del__(self):
         self.process.terminate()
-        self.process.wait()
 
 # handles riot client and it's api
 class RiotConnection(Connection):

@@ -64,10 +64,15 @@ def executeAccount(account, settings, lock):
     # launch and login to riot client, handle authentication exception
     try:
         riotConnection = login(account["username"], account["password"], settings["riotClient"], lock)
+        region = riotConnection.get("/riotclient/region-locale").json()
+        account["region"] = region["region"]
+        waitForLaunch(riotConnection)
     except AuthenticationException as exception:
         logging.error(f"{account['username']} login exception: {exception.message}")
         account["state"] = exception.message
-        return 
+        return
+    except SessionException as exception:
+        logging.error(f"{account['username']} session exception: {exception.message}. Retrying...")
 
     # get account region from riot client (required for league client)
     region = riotConnection.get("/riotclient/region-locale")

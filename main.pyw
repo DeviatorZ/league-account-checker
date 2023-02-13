@@ -205,7 +205,7 @@ def main():
                     pass
         elif event == "saveExport":
             saveExport(values)
-        elif "updateInformation":
+        elif event == "updateInformation":
             Thread(target=updateInformation, args=[mainWindow]).start()
 
     mainWindow.close()
