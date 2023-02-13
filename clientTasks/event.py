@@ -15,11 +15,10 @@ def buyOfferByPriceAndId(leagueConnection, price, id):
 
     for offerCategory in tokenShop:
         if "category" in offerCategory:
-            if offerCategory["category"] == "Loot":
-                for offer in offerCategory["offers"]: 
-                    if offer["price"] == price and offer["items"][0]["itemId"] == id:
-                        offerId = offer["id"]
-                        break
+            for offer in offerCategory["offers"]: 
+                if offer["price"] == price and offer["items"][0]["itemId"] == id:
+                    offerId = offer["id"]
+                    break
 
     if offerId:
         balance = leagueConnection.get("/lol-event-shop/v1/token-balance").json()

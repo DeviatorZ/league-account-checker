@@ -24235,6 +24235,170 @@
         ],
         "description": "Eternally young due to his bond with the Rat Relic, Amumu's innocence belies centuries of existence. He's been lonely in ages past, but no more: Lux is like his big sister, and Kindred is his\u2026 Kindred? Companionship hasn't stopped his occasional tantrums, of course, but at least now there's someone to shine his porcelain eyes after a nice cathartic cry."
     },
+    "32044": {
+        "id": 32044,
+        "isBase": false,
+        "name": "Heartache Amumu",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/32/32044.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/32/32044.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/32/32044.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Amumu/Skins/Skin44/AmumuLoadScreen_44.PIE_C_13_3.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/32/32044.png",
+        "chromas": [
+            {
+                "id": 32045,
+                "name": "Heartache Amumu",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/32/32045.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 2
+                    },
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 32046,
+                "name": "Heartache Amumu",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/32/32046.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 2
+                    }
+                ]
+            },
+            {
+                "id": 32047,
+                "name": "Heartache Amumu",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/32/32047.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 32048,
+                "name": "Heartache Amumu",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/32/32048.png",
+                "colors": [
+                    "#9C68D7",
+                    "#9C68D7"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 32049,
+                "name": "Heartache Amumu",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/32/32049.png",
+                "colors": [
+                    "#FFEE59",
+                    "#FFEE59"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 32050,
+                "name": "Heartache Amumu",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/32/32050.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 32051,
+                "name": "Heartache Amumu",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/32/32051.png",
+                "colors": [
+                    "#ECF9F8",
+                    "#ECF9F8"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 32052,
+                "name": "Heartache Amumu",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/32/32052.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 189
+            }
+        ],
+        "description": "Dear Amumu, I see you around the halls, and at the battle of the bands. I'm afraid I'm just too shy to ask you to hold hands, I think you're really cool and I'd love to be your friend. I can't wait to finally meet you! Love, Your Secret Friend-mirer 'Til the End"
+    },
     "33000": {
         "id": 33000,
         "isBase": true,
@@ -34189,7 +34353,7 @@
                 "id": 25
             }
         ],
-        "description": "Caitlyn, designated resistance sniper, has never forgiven herself for letting Viktor's rise go unchecked for so long. Determined to fire the round that ends the war for good, she has personally gunned down hundreds of Battlecast machines in her bloody search for absolution."
+        "description": "Caitlyn has never forgiven herself for letting Viktor's rise to power go unchecked for so long. Determined to fire the shot that ends the war for good, she has personally gunned down hundreds of Battlecast machines in her bloody search for absolution."
     },
     "51002": {
         "id": 51002,
@@ -34264,7 +34428,7 @@
                 "id": 63
             }
         ],
-        "description": "Very few snipers can cut it on the Arctic front. The snow is too cold, the winds are too hard... and of course, Caitlyn usually kills all hostile snipers before they can fire a single shot."
+        "description": "Very few snipers can cut it on the Arctic front. The cold is unforgiving, the winds are harsh, and any who dare brave the tundra find themselves at the mercy of Caitlyn, a sniper with deadly aim and a killer instinct."
     },
     "51005": {
         "id": 51005,
@@ -34528,7 +34692,7 @@
                 "id": 10
             }
         ],
-        "description": "Acclaimed hero of the \u201cSniper Cop\u201d rail shooter series, Caitlyn enforced the laws of Arcadia prior  to the Battle Boss uprising. She brings her sharp eye and eager trigger finger to the fight to save her world, only stopping briefly to turn her gun away from the screen for a reload."
+        "description": "Acclaimed hero of the \u201cSniper Cop\u201d rail shooter series, Caitlyn enforced the laws of Arcadia prior to the Battle Boss uprising. She brings her sharp eye and eager trigger finger to the fight to save her world, only stopping long enough to flick her gun off-screen for a reload."
     },
     "51020": {
         "id": 51020,
@@ -34832,6 +34996,170 @@
             }
         ],
         "description": "A tool of chilling acuity, Caitlyn is the Snow Moon's most elite sniper. It was her craving for a calculating nature, stripped of the moorings of sympathy, that drew her to serve. There was once warmth in her heart; in dreams, she sees a figure, wild and untamed, in a world not meant for her."
+    },
+    "51039": {
+        "id": 51039,
+        "isBase": false,
+        "name": "Heartthrob Caitlyn",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/51/51039.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/51/51039.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/51/51039.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Caitlyn/Skins/Skin39/CaitlynLoadScreen_39.PIE_C_13_3.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/51/51039.png",
+        "chromas": [
+            {
+                "id": 51040,
+                "name": "Heartthrob Caitlyn",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/51/51040.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 2
+                    },
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 51041,
+                "name": "Heartthrob Caitlyn",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/51/51041.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 51042,
+                "name": "Heartthrob Caitlyn",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/51/51042.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 51043,
+                "name": "Heartthrob Caitlyn",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/51/51043.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 2
+                    }
+                ]
+            },
+            {
+                "id": 51044,
+                "name": "Heartthrob Caitlyn",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/51/51044.png",
+                "colors": [
+                    "#B6E084",
+                    "#B6E084"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 51045,
+                "name": "Heartthrob Caitlyn",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/51/51045.png",
+                "colors": [
+                    "#DED6B0",
+                    "#DED6B0"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 51046,
+                "name": "Heartthrob Caitlyn",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/51/51046.png",
+                "colors": [
+                    "#9C68D7",
+                    "#9C68D7"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 51047,
+                "name": "Heartthrob Caitlyn",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/51/51047.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 189
+            }
+        ],
+        "description": "I hate the way you walk around, like you're Princess Caitlyn of the mall, and I'm just some gutter rat. I hate the way you look at me when there's no one else around, but wouldn't be caught dead with me in town. Maybe our whole thing was just a huge mistake. So if you want me to go, I'm gone. But ask, and I will stay. -Vi"
     },
     "53000": {
         "id": 53000,
@@ -47969,8 +48297,18 @@
                     "#2DA130",
                     "#2DA130"
                 ],
-                "descriptions": [],
-                "rarities": []
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "Obtained through Influencer audience giveaways."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
             },
             {
                 "id": 79024,
@@ -50749,8 +51087,18 @@
                     "#2DA130",
                     "#2DA130"
                 ],
-                "descriptions": [],
-                "rarities": []
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "Obtained through Influencer audience giveaways."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
             },
             {
                 "id": 83036,
@@ -59992,7 +60340,7 @@
         "splashPath": "/lol-game-data/assets/v1/champion-splashes/103/103000.jpg",
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/103/103000.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/103/103000.jpg",
-        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Base/AhriLoadScreen.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Base/AhriLoadscreen_0.SKINS_Ahri_ASU_PrePro.jpg",
         "skinType": "",
         "rarity": "kNoRarity",
         "isLegacy": false,
@@ -60013,7 +60361,7 @@
         "splashPath": "/lol-game-data/assets/v1/champion-splashes/103/103001.jpg",
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/103/103001.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/103/103001.jpg",
-        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin01/AhriLoadScreen_1.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin01/AhriLoadscreen_1.SKINS_Ahri_ASU_PrePro.jpg",
         "skinType": "",
         "rarity": "kNoRarity",
         "isLegacy": false,
@@ -60052,7 +60400,7 @@
                 "id": 99
             }
         ],
-        "description": "Ahri's dynasty is one of stylish traditional fashion, and wrecking opponents with deadly spirit magic. Why have one when you can have both?"
+        "description": "Though Ahri's royal blood is obvious in her fashion and poise, she much prefers running across rooftops and causing general mischief to being locked up in a castle. Life's more fun with laughter, don't you think?"
     },
     "103002": {
         "id": 103002,
@@ -60061,7 +60409,7 @@
         "splashPath": "/lol-game-data/assets/v1/champion-splashes/103/103002.jpg",
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/103/103002.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/103/103002.jpg",
-        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin02/AhriLoadScreen_2.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin02/AhriLoadscreen_2.SKINS_Ahri_ASU_PrePro.jpg",
         "skinType": "",
         "rarity": "kNoRarity",
         "isLegacy": false,
@@ -60100,7 +60448,7 @@
                 "id": 167
             }
         ],
-        "description": null
+        "description": "Deep in the snowy forests bordering the kingdom, villagers tell tales of a mysterious icefox who, under the light of the midnight moon, becomes human. What they don't know is that this fox, Ahri, was once a princess. Cursed to live a life as wild as her heart, she runs through the forests during the day, hoping to find someone to break her eternal curse."
     },
     "103003": {
         "id": 103003,
@@ -60109,7 +60457,7 @@
         "splashPath": "/lol-game-data/assets/v1/champion-splashes/103/103003.jpg",
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/103/103003.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/103/103003.jpg",
-        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin03/AhriLoadScreen_3.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin03/AhriLoadscreen_3.SKINS_Ahri_ASU_PrePro.jpg",
         "skinType": "",
         "rarity": "kNoRarity",
         "isLegacy": false,
@@ -60138,6 +60486,27 @@
                         "rarity": 1
                     }
                 ]
+            },
+            {
+                "id": 103075,
+                "name": "Foxfire Ahri",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/103/103075.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "Obtained through Influencer audience giveaways."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
             }
         ],
         "emblems": null,
@@ -60157,7 +60526,7 @@
         "splashPath": "/lol-game-data/assets/v1/champion-splashes/103/103004.jpg",
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/103/103004.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/103/103004.jpg",
-        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin04/AhriLoadScreen_4.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin04/AhriLoadscreen_4.SKINS_Ahri_ASU_PrePro.jpg",
         "skinType": "",
         "rarity": "kNoRarity",
         "isLegacy": false,
@@ -60316,7 +60685,7 @@
                 "id": 174
             }
         ],
-        "description": null
+        "description": "Discovered by her record label when she was still a teen, Ahri took the music world by storm when her first five singles hit the Top 100, winning Most Talented New K-pop Artist at the 2013 Pop Shine Awards. She's been stealing hearts and sweeping awards ever since. However, underneath that perfect exterior, Ahri is feeling trapped by increasing demands..."
     },
     "103005": {
         "id": 103005,
@@ -60325,8 +60694,8 @@
         "splashPath": "/lol-game-data/assets/v1/champion-splashes/103/103005.jpg",
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/103/103005.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/103/103005.jpg",
-        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin05/AhriLoadScreen_5.jpg",
-        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin05/AhriLoadscreen_5_LE.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin05/AhriLoadscreen_5.SKINS_Ahri_ASU_PrePro.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin05/AhriLoadscreen_5_LE.SKINS_Ahri_ASU_PrePro.jpg",
         "skinType": "",
         "rarity": "kNoRarity",
         "isLegacy": true,
@@ -60386,7 +60755,7 @@
                 "id": 9
             }
         ],
-        "description": null
+        "description": "Commemorating the 2015 Season 5 start."
     },
     "103006": {
         "id": 103006,
@@ -60395,7 +60764,7 @@
         "splashPath": "/lol-game-data/assets/v1/champion-splashes/103/103006.jpg",
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/103/103006.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/103/103006.jpg",
-        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin06/AhriLoadScreen_6.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin06/AhriLoadscreen_6.SKINS_Ahri_ASU_PrePro.jpg",
         "skinType": "",
         "rarity": "kNoRarity",
         "isLegacy": false,
@@ -60434,7 +60803,7 @@
                 "id": 22
             }
         ],
-        "description": "NOTICE FROM THE DEAN: Ahri is henceforth suspended from Academy grounds for behavior including (but not limited to) use of her phone during class, use of phone during disciplinary hearings about her phone, magically charming staff members in disciplinary hearings, and escaping disciplinary hearings with her phone."
+        "description": "NOTICE FROM THE DEAN: Ahri is henceforth suspended from Academy grounds for behavior including (but not limited to): use of her phone during class, use of her phone during disciplinary hearings about her phone, and escaping disciplinary hearings about her phone."
     },
     "103007": {
         "id": 103007,
@@ -60443,7 +60812,7 @@
         "splashPath": "/lol-game-data/assets/v1/champion-splashes/103/103007.jpg",
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/103/103007.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/103/103007.jpg",
-        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin07/AhriLoadscreen_7.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin07/AhriLoadscreen_7.SKINS_Ahri_ASU_PrePro.jpg",
         "skinType": "",
         "rarity": "kEpic",
         "isLegacy": false,
@@ -60482,7 +60851,7 @@
                 "id": 10
             }
         ],
-        "description": "Owner of the mysterious six-million-point high score in the infamously difficult beat-em-up Demacia Vice, Ahri is a force of nature on the retro battlefields of Arcade World. Dashing between bosses before ripping them apart with her 8-bit magic, she's already earned the nickname \u201cQueen of the Arcade.\u201d"
+        "description": "Owner of the mysterious six-million-point high score in the infamously difficult beat-em-up Demacia Vice, Ahri is a force of nature on the retro battlefields of Arcadia. Dashing between bosses before ripping them apart with her 8-bit magic, she's already earned the nickname \u201cQueen of the Arcade.\u201d"
     },
     "103014": {
         "id": 103014,
@@ -60540,7 +60909,7 @@
         "splashPath": "/lol-game-data/assets/v1/champion-splashes/103/103015.jpg",
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/103/103015.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/103/103015.jpg",
-        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin15/AhriLoadScreen_15.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin15/AhriLoadscreen_15.SKINS_Ahri_ASU_PrePro.jpg",
         "skinType": "",
         "rarity": "kEpic",
         "isLegacy": false,
@@ -60588,7 +60957,8 @@
         "splashPath": "/lol-game-data/assets/v1/champion-splashes/103/103016.jpg",
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/103/103016.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/103/103016.jpg",
-        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin16/AhriLoadscreen_16.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin16/AhriLoadscreen_16.SKINS_Ahri_ASU_PrePro.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin16/AhriLoadscreen_16_LE.SKINS_Ahri_ASU_PrePro.jpg",
         "skinType": "",
         "rarity": "kMythic",
         "isLegacy": false,
@@ -60604,7 +60974,7 @@
                 "id": 91
             }
         ],
-        "description": "Decked out to dazzle, K/DA Ahri charms her audience in a glittering, golden ensemble specially made for her band's Pop Shine Awards performance. Her Prestige Edition outfit celebrates the golden success of POP/STARS. Can you feel the rush now?"
+        "description": "Decked out to dazzle, K/DA Ahri charms her audience in a glittering, golden ensemble specially made for her band's 2019 Pop Shine Awards performance. Her Prestige Edition outfit celebrates the golden success of POP/STARS. Can you feel the rush now?"
     },
     "103017": {
         "id": 103017,
@@ -60613,8 +60983,8 @@
         "splashPath": "/lol-game-data/assets/v1/champion-splashes/103/103017.jpg",
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/103/103017.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/103/103017.jpg",
-        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin17/AhriLoadScreen_17.jpg",
-        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin17/AhriLoadscreen_17_LE.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin17/AhriLoadscreen_17.SKINS_Ahri_ASU_PrePro.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin17/AhriLoadscreen_17_LE.SKINS_Ahri_ASU_PrePro.jpg",
         "skinType": "",
         "rarity": "kEpic",
         "isLegacy": false,
@@ -60756,7 +61126,7 @@
                 "id": 58
             }
         ],
-        "description": "Fables of the trickster spirit Ahri have been part of mankind's history for countless generations. Fair-skinned and eternally youthful, she is portrayed as a curious, quizzical member of the Elderwood's feyfolk\u2026 though in recent years her heart has hardened, as she fights a growing corruption within her ancestral home."
+        "description": "Fables of the trickster spirit Ahri have been part of mankind's history for countless generations. Radiant and eternally youthful, she is portrayed as a curious, quizzical member of the Elderwood's feyfolk\u2026 though in recent years her heart has hardened, as she fights a growing corruption within her ancestral home."
     },
     "103027": {
         "id": 103027,
@@ -61046,7 +61416,7 @@
                 "id": 91
             }
         ],
-        "description": "When Ahri steps onto the stage to perform with K/DA, she knows she's surrounded by the best of the best\u2014different girls with different personalities, all at the top of their craft. As their leader and as their friend, Ahri is poised to guide these divas to even greater heights and leave their audiences breathless for more."
+        "description": "When Ahri steps onto the stage to perform with K/DA, she knows she's surrounded by the best of the best\u2014different women with different personalities, all at the top of their craft. As their leader and as their friend, Ahri is poised to guide these divas to even greater heights and leave their audiences breathless for more."
     },
     "103042": {
         "id": 103042,
@@ -61055,8 +61425,8 @@
         "splashPath": "/lol-game-data/assets/v1/champion-splashes/103/103042.jpg",
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/103/103042.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/103/103042.jpg",
-        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin42/AhriLoadScreen_42.jpg",
-        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin42/AhriLoadscreen_42_LE.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin42/AhriLoadscreen_42.SKINS_Ahri_ASU_PrePro.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin42/AhriLoadscreen_42_LE.SKINS_Ahri_ASU_PrePro.jpg",
         "skinType": "",
         "rarity": "kEpic",
         "isLegacy": false,
@@ -61229,6 +61599,7 @@
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/103/103065.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/103/103065.jpg",
         "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin65/AhriLoadScreen_65.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin16/AhriLoadscreen_16_LE.SKINS_Ahri_ASU_PrePro.jpg",
         "skinType": "",
         "rarity": "kMythic",
         "isLegacy": true,
@@ -61244,7 +61615,7 @@
                 "id": 91
             }
         ],
-        "description": "Decked out to dazzle, K/DA Ahri charms her audience in a glittering, golden ensemble specially made for her band's Pop Shine Awards performance. Her Prestige Edition outfit celebrates the golden success of POP/STARS. Can you feel the rush now?"
+        "description": "Decked out to dazzle, K/DA Ahri charms her audience in a glittering, golden ensemble specially made for her band's 2019 Pop Shine Awards performance. Her Prestige Edition outfit celebrates the golden success of POP/STARS. Can you feel the rush now?"
     },
     "103066": {
         "id": 103066,
@@ -61253,7 +61624,7 @@
         "splashPath": "/lol-game-data/assets/v1/champion-splashes/103/103066.jpg",
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/103/103066.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/103/103066.jpg",
-        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin66/AhriLoadScreen_66.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin66/AhriLoadscreen_66.SKINS_Ahri_ASU_PrePro.jpg",
         "skinType": "",
         "rarity": "kEpic",
         "isLegacy": false,
@@ -91431,6 +91802,170 @@
             }
         ],
         "description": "Celebrating the RiotX Arcane event."
+    },
+    "254030": {
+        "id": 254030,
+        "isBase": false,
+        "name": "Heartache Vi",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/254/254030.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/254/254030.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/254/254030.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Vi/Skins/Skin30/ViLoadScreen_30.PIE_C_13_3.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/254/254030.png",
+        "chromas": [
+            {
+                "id": 254031,
+                "name": "Heartache Vi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/254/254031.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 2
+                    },
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 254032,
+                "name": "Heartache Vi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/254/254032.png",
+                "colors": [
+                    "#FFEE59",
+                    "#FFEE59"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 254033,
+                "name": "Heartache Vi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/254/254033.png",
+                "colors": [
+                    "#B6E084",
+                    "#B6E084"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 254034,
+                "name": "Heartache Vi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/254/254034.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 254035,
+                "name": "Heartache Vi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/254/254035.png",
+                "colors": [
+                    "#6ABBEE",
+                    "#6ABBEE"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 254036,
+                "name": "Heartache Vi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/254/254036.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 2
+                    }
+                ]
+            },
+            {
+                "id": 254037,
+                "name": "Heartache Vi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/254/254037.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 254038,
+                "name": "Heartache Vi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/254/254038.png",
+                "colors": [
+                    "#ECF9F8",
+                    "#ECF9F8"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 189
+            }
+        ],
+        "description": "Shall I compare you to a rose? Your spikes like thorns against my side.<br>Like a vine, you've coiled through my dreams, trellising my mind.<br> Wild like the violets that thrive beyond the garden's bounds;<br>Life's simply better now that you're around.<br>Will you go to the dance with me?<br>XOXO,<br>Caitlyn"
     },
     "266000": {
         "id": 266000,

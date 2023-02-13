@@ -45,12 +45,8 @@ class Loot():
 
     # refreshes loot (used after performing a task with loot)
     def refreshLoot(self):
-        try:
-            sleep(self.refreshCooldown - time() + self.lastRefresh)
-        except Exception:
-            pass
-
         self.leagueConnection.post("/lol-loot/v1/refresh")
+        sleep(1)
         self.allLoot = self.leagueConnection.get("/lol-loot/v1/player-loot").json()
         self.lastRefresh = time()
 
