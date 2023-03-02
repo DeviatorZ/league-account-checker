@@ -4,10 +4,8 @@ import re
 
 # handles player loot
 class Loot():
-    def __init__(self, leagueConnection, refreshCooldown=5):
+    def __init__(self, leagueConnection):
         self.leagueConnection = leagueConnection
-        self.lastRefresh = 0
-        self.refreshCooldown = refreshCooldown
         self.allLoot = self.leagueConnection.get("/lol-loot/v1/player-loot").json()
 
     def getLoot(self):
