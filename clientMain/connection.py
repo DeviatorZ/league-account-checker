@@ -39,6 +39,9 @@ class Connection(Session):
             response = Session.request(self, method, url, *args, **kwargs)
             if response.ok:
                 return response
+
+            if url == f"https://127.0.0.1:{self.port}/lol-event-shop/v1/lazy-load-data" and response.status_code == 404:
+                return None
             raise Exception
         except Exception:
             raise ConnectionException(self)
