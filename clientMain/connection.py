@@ -40,6 +40,7 @@ class Connection(Session):
             if response.ok:
                 return response
 
+            # no token event is currently running
             if url == f"https://127.0.0.1:{self.port}/lol-event-shop/v1/lazy-load-data" and response.status_code == 404:
                 return None
             raise Exception
