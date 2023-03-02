@@ -16,6 +16,7 @@ from clientTasks.crafting import openLoot
 from clientTasks.disenchanting import disenchantChampionShards
 from clientTasks.disenchanting import disenchantEternalsShards
 from clientMain.loot import Loot
+from TaskList import TaskList
 from time import sleep
 import os
 import csv
@@ -112,48 +113,7 @@ def executeAccount(account, settings, lock):
     account["state"] = "OK"
 
 def performTasks(leagueConnection, settings, loot):
-    tasks = {
-        "claimEventRewards" :
-        {
-            "function" : claimEventRewards,
-            "args" : [leagueConnection],
-        },
-        "buyChampionShardsWithTokens" :
-        {
-            "function" : buyChampionShardsWithTokens,
-            "args" : [leagueConnection],
-        },
-        "buyBlueEssenceWithTokens" :
-        {
-            "function" : buyBlueEssenceWithTokens,
-            "args" : [leagueConnection],
-        },
-        "craftKeys" : 
-        {
-            "function" : craftKeys,
-            "args" : [leagueConnection, loot],
-        },
-        "openChests" :
-        {
-            "function" : openChests,
-            "args" : [leagueConnection, loot],
-        },
-        "openLoot" :
-        {
-            "function" : openLoot,
-            "args" : [leagueConnection, loot],
-        },
-        "disenchantChampionShards" :
-        {
-            "function" : disenchantChampionShards,
-            "args" : [leagueConnection, loot],
-        },
-        "disenchantEternalsShards" :
-        {
-            "function" : disenchantEternalsShards,
-            "args" : [leagueConnection, loot],
-        },
-    }
+    tasks = TaskList.getTasks(leagueConnection, loot)
     
     # run tasks
     for taskName, task in tasks.items():

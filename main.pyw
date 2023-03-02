@@ -3,7 +3,7 @@ from threading import Lock
 from clientMain.tasks import executeAllAccounts
 from clientTasks.export import eraseFiles
 from update import update
-from time import sleep
+from TaskList import TaskList
 import subprocess
 import copy
 import PySimpleGUI as sg
@@ -84,46 +84,7 @@ def getSettingsLayout(cwd):
     ]
 
 def getTasksLayout():
-    tasks = {
-        "Event shop" : {
-            "claimEventRewards" :
-            {
-                "text" : "Claim event rewards",
-            },
-            "buyChampionShardsWithTokens" :
-            {
-                "text" : "Buy champion shards",
-            },
-            "buyBlueEssenceWithTokens" :
-            {
-                "text" : "Buy BE",
-            },
-        },
-        "Crafting" : { 
-            "craftKeys" : 
-            {
-                "text" : "Craft hextech keys",
-            },
-            "openChests" :
-            {
-                "text" : "Open hextech chests",
-            },
-            "openLoot" :
-            {
-                "text" : "Open capsules, orbs, random shards",
-            },
-        },           
-        "Disenchanting" : {
-            "disenchantChampionShards" :
-            {
-                "text" : "Champion shards",
-            },
-            "disenchantEternalsShards" :
-            {
-                "text" : "Eternals shards",
-            },
-        },
-    }
+    tasks = TaskList.getTaskDisplay()
 
     return [
         [sg.Column([[sg.Text(taskGroupName, size=(30,1), font=("Helvetica", 8))]], pad=(0, None), expand_x=True) for taskGroupName in tasks],
