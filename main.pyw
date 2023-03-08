@@ -1,10 +1,10 @@
 from threading import Thread
 from threading import Lock
+from threading import Event
 from clientMain.tasks import executeAllAccounts
 from clientTasks.export import eraseFiles
 from update import update
 from TaskList import TaskList
-import subprocess
 import copy
 import PySimpleGUI as sg
 import logging
@@ -21,15 +21,28 @@ class Handler(logging.StreamHandler):
         self.format(record)
         record = f"{record.asctime} [{record.levelname}] {record.message}"
         self.buffer = f"{self.buffer}\n{record}".strip()
-        self.window["log"].update(value=self.buffer)
+        try:
+            self.window["log"].update(value=self.buffer)
+        except: # GUI closed while running tasks
+            pass
 
 # launches tasks on accounts, reenables "start" and "erase exports" buttons once tasks are finished
-def execute(values, lock, mainWindow):
-    thread = Thread(target=executeAllAccounts, args=(values, lock, mainWindow["progress"]))
+def execute(values, lock, mainWindow, exitEvent):
+    try:
+        mainWindow["start"].update(disabled=True)
+        mainWindow["eraseExports"].update(disabled=True)
+    except: # GUI closed while running tasks
+        return
+    
+    thread = Thread(target=executeAllAccounts, args=(values, lock, mainWindow["progress"], exitEvent))
     thread.start()
     thread.join()
-    mainWindow["start"].update(disabled=False)
-    mainWindow["eraseExports"].update(disabled=False)
+    
+    try:
+        mainWindow["start"].update(disabled=False)
+        mainWindow["eraseExports"].update(disabled=False)
+    except: # GUI closed while running tasks
+        pass
 
 # launches skin and champion file update task
 def updateInformation(mainWindow):
@@ -67,7 +80,7 @@ def saveExport(values):
 def getMainLayout():
     return [
         [sg.Output(size=(110, 25), key="log", font=("Helvetica", 8))],
-        [sg.Button("Start", key="start"), sg.Button("Open exports folder", key="openExports"), sg.Button("Erase exports", key="eraseExports"), sg.Text("", key="progress")] 
+        [sg.Button("Start", key="start"), sg.Button("Stop", key="stop"), sg.Button("Exports folder", key="openExports"), sg.Button("Erase exports", key="eraseExports"), sg.Text("", key="progress")] 
     ]  
 
 def getSettingsLayout(cwd):
@@ -139,15 +152,20 @@ def main():
 
     setupConsoleLogging(mainWindow)
 
+    exitEvent = Event()
+    #executionThread = Thread(target=execute, args=(copy.deepcopy(values), lock, mainWindow, exitEvent)).start()
+
     # event loop to process "events" and get the "values" of the inputs
     while True:
         event, values = mainWindow.read()
         if event == sg.WIN_CLOSED: # if user closes window
+            exitEvent.set() # set event to gracefully exit all checker threads
             break
         elif event == "start":
-            mainWindow["start"].update(disabled=True)
-            mainWindow["eraseExports"].update(disabled=True)
-            Thread(target=execute, args=(copy.deepcopy(values), lock, mainWindow), daemon=True).start()
+            exitEvent.clear()
+            Thread(target=execute, args=(copy.deepcopy(values), lock, mainWindow, exitEvent)).start()
+        elif event == "stop":
+            exitEvent.set()
         elif event == "saveSettings":
             saveSettings(values)
         elif event == "saveTasks":
@@ -160,10 +178,7 @@ def main():
             try:
                 os.startfile(f"{cwd}\\export")
             except:
-                try:
-                    subprocess.Popen(["xdg-open", f"{cwd}\\export"])
-                except:
-                    pass
+                pass
         elif event == "saveExport":
             saveExport(values)
         elif event == "updateInformation":
