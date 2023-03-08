@@ -1,5 +1,7 @@
 from multiprocessing.pool import ThreadPool
+from multiprocessing import Manager 
 from datetime import datetime
+from clientMain.connection import RiotConnection
 from clientMain.connection import LeagueConnection
 from clientMain.auth import login
 from clientMain.auth import waitForSession
@@ -50,21 +52,27 @@ def checkForFileErrors(settings):
         raise InvalidPathException("Account file path doesn't exist!")
 
 # tries executing tasks on a given account and adjusts progress bar if it's successful, retries otherwise
-def execute(account, settings, lock, progress):
+def execute(account, settings, lock, progress, exitFlag): 
+    if exitFlag.is_set():
+        return
+    
     try:
-        executeAccount(account, settings, lock)
-        progress.add()
+        executeAccount(account, settings, lock, exitFlag)
+        if not exitFlag.is_set():
+            progress.add()
     except ConnectionException as exception:
         logging.error(f"{account['username']} {exception.connectionName} exception. Retrying...")
         execute(account, settings, lock, progress)
 
 # performs tasks on a given account
-def executeAccount(account, settings, lock):
+def executeAccount(account, settings, lock, exitFlag):
     logging.info("Executing tasks on account: " + account["username"])
-    
-    # launch and login to riot client, handle authentication exception
+
+    riotConnection = RiotConnection(settings["riotClient"], lock)
+
+    # login to riot client, handle authentication exception
     try:
-        riotConnection = login(account["username"], account["password"], settings["riotClient"], lock)
+        login(account["username"], account["password"], riotConnection)
         region = riotConnection.get("/riotclient/region-locale").json()
         account["region"] = region["region"]
         waitForLaunch(riotConnection)
@@ -74,6 +82,10 @@ def executeAccount(account, settings, lock):
         return
     except SessionException as exception:
         logging.error(f"{account['username']} session exception: {exception.message}. Retrying...")
+
+    if exitFlag.is_set():
+        riotConnection.__del__()
+        return
 
     # get account region from riot client (required for league client)
     region = riotConnection.get("/riotclient/region-locale")
@@ -100,7 +112,11 @@ def executeAccount(account, settings, lock):
             account["banExpiration"] = "PERMANENT"
 
         logging.error(f"{account['username']} banned exception: Reason:{account['banReason']}, Expiration:{account['banExpiration']}")
-        return 
+        return
+    
+    if exitFlag.is_set():
+        leagueConnection.__del__()
+        return
 
     loot = Loot(leagueConnection) # create loot object to use for all tasks on the account
     performTasks(leagueConnection, settings, loot)
@@ -122,7 +138,7 @@ def performTasks(leagueConnection, settings, loot):
             sleep(1)
 
 # launches tasks on accounts
-def executeAllAccounts(settings, lock, progressBar):
+def executeAllAccounts(settings, lock, progressBar, exitEvent):
     try:
         checkForFileErrors(settings) # make sure user input files exist
     except InvalidPathException as exception:
@@ -151,12 +167,23 @@ def executeAllAccounts(settings, lock, progressBar):
         logging.error(error.msg)
         return
 
-    progress = Progress(len(accounts), progressBar) # create progress handler
-    pool = ThreadPool(processes=int(settings["threadCount"]))
-    args = [[account, settings, lock, progress] for account in accounts] # create function args for every account
+    with Manager() as manager:
+        progress = Progress(len(accounts), progressBar) # create progress handler
+        exitFlag = manager.Event()
+        args = [(account, settings, lock, progress, exitFlag) for account in accounts] # create function args for every account
 
-    pool.starmap(execute, args) # execute tasks concurrently
-
+        with ThreadPool(processes=int(settings["threadCount"])) as pool:
+            results = pool.starmap_async(execute, args)
+            while not results.ready():
+                if exitEvent.is_set():
+                    logging.info("Stopping execution...")
+                    exitFlag.set()
+                    pool.close()
+                    pool.join()
+                    logging.info("Execution stopped!")
+                    return
+                sleep(1)
+        
     logging.info("Exporting accounts")
     exportAccounts(accounts, settings["bannedTemplate"], settings["errorTemplate"]) # export all accounts after tasks are finished
     logging.info("All tasks completed!")
