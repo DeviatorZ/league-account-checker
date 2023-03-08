@@ -22,9 +22,13 @@ Tested and working on Windows 7 (Python 3.8), Windows Server 2019 (Python 3.10).
     - Once install is finished you'll be ready to go!
 - Launch the GUI by opening "main.pyw"
 ## Main
-![MainTab](https://i.imgur.com/uSg2ucV.png)
+![MainTab](https://i.imgur.com/BkJELsk.png)
 
-Here you can see the console and track the progress. "Start" button will start checking accounts if settings are properly configured ("Save" button in each tab is only to save for next launch, "Start" will use current settings regardless whether they are saved or not). If there's an issue - an error will be shown in the console.
+Here you can see the console and track the progress. 
+- "Start" - starts checking accounts if settings are properly configured ("Save" button in each tab is only to save for next launch, "Start" will use current settings regardless whether they are saved or not). If there's an issue - an error will be shown in the console.
+- "Stop" - gracefully stops all running checker threads (exporting will be skipped)
+- "Exports folder" - opens export directory if it exists
+- "Erase exports" - erases all export files in the export directory
 
 ## Settings
 ![SettingsTab](https://i.imgur.com/OXvyGit.png)
