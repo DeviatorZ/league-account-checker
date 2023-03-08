@@ -22,16 +22,12 @@ def authenticate(riotConnection, username, password):
 
 # launches riot client, tries to authenticate, handles authentication errors, accepts eula
 # returns riot client object
-def login(username, password, riotClientPath, lock):
-    riotConnection = RiotConnection(riotClientPath, lock)
-
+def login(username, password, riotConnection):
     authSuccess = authenticate(riotConnection, username, password)
     if not authSuccess == "OK": # something went wrong during login
         raise AuthenticationException(authSuccess["error"].upper(), riotConnection)
 
     acceptEULA(riotConnection)
-
-    return riotConnection
 
 # waits until riot client is ready to launch league client
 # raises an exception if it takes too long
