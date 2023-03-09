@@ -6,6 +6,7 @@ from time import sleep
 from clientMain.credentials import getFreePort
 from clientMain.credentials import getAuthToken
 from exceptions import ConnectionException
+import logging
 # Send requests to Riot and League clients, requires auth token and port
 
 # inherited class for riot and league clients
@@ -17,10 +18,10 @@ class Connection(Session):
         self.authToken = getAuthToken()
         Session.__init__(self)
         retry = urllib3.util.retry.Retry(
-            total = 10,
+            total = 7,
             respect_retry_after_header = True,
             status_forcelist = [429, 404],
-            backoff_factor = 2
+            backoff_factor = 1
         )
 
         adapter = adapters.HTTPAdapter(max_retries=retry)
@@ -43,6 +44,8 @@ class Connection(Session):
             # no token event is currently running
             if url == f"https://127.0.0.1:{self.port}/lol-event-shop/v1/lazy-load-data" and response.status_code == 404:
                 return None
+
+            logging.error(f"Request exception: {method} : {url}")
             raise Exception
         except Exception:
             raise ConnectionException(self)
