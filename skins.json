@@ -6090,6 +6090,132 @@
         ],
         "description": "Vladimir spent years searching for the elixir of life\u2014only to discover that it is, in fact, tea. Since then he has steeped himself in the art of the perfect cup. Though he pretends to frequent the cafe solely to advance his Tasseomancy, Vladimir has grown fond of the ragtag group that allowed him to take up residence among their ranks."
     },
+    "8039": {
+        "id": 8039,
+        "isBase": false,
+        "name": "Broken Covenant Vladimir",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/8/8039.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/8/8039.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/8/8039.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Vladimir/Skins/Skin39/VladimirLoadScreen_39.PIE_C_13_5.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Vladimir/Skins/Skin39/VladimirLoadscreen_39_LE.PIE_C_13_5.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/8/8039.png",
+        "chromas": [
+            {
+                "id": 8040,
+                "name": "Broken Covenant Vladimir",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/8/8040.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 8041,
+                "name": "Broken Covenant Vladimir",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/8/8041.png",
+                "colors": [
+                    "#FFEE59",
+                    "#FFEE59"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 8042,
+                "name": "Broken Covenant Vladimir",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/8/8042.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 8043,
+                "name": "Broken Covenant Vladimir",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/8/8043.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 8044,
+                "name": "Broken Covenant Vladimir",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/8/8044.png",
+                "colors": [
+                    "#54209B",
+                    "#54209B"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 8045,
+                "name": "Broken Covenant Vladimir",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/8/8045.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 8046,
+                "name": "Broken Covenant Vladimir",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/8/8046.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 8047,
+                "name": "Broken Covenant Vladimir",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/8/8047.png",
+                "colors": [
+                    "#ECF9F8",
+                    "#ECF9F8"
+                ],
+                "descriptions": [],
+                "rarities": []
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 190
+            }
+        ],
+        "description": "The ultimate Neverghaast, at least to himself, Vladimir cares only about feeding himself and his ego. Though he is not above helping someone for the right price, like that \"idiot\" Rakan, he has no stake in the war beyond finding the fabled well of Aspira within the congregation. Such power, he smugly reasons, would surely be better in his hands."
+    },
     "9000": {
         "id": 9000,
         "isBase": true,
@@ -16921,6 +17047,163 @@
         ],
         "description": "Having wrestled control of the lion's share of sweets from ghastly spirits and unruly children alike, Miss Fortune now rules over the night. Her reign is one filled with revelry and mischief."
     },
+    "21040": {
+        "id": 21040,
+        "isBase": false,
+        "name": "Broken Covenant Miss Fortune",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/21/21040.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/21/21040.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/21/21040.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/MissFortune/Skins/Skin40/MissFortuneLoadScreen_40.PIE_C_13_5.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/MissFortune/Skins/Skin40/MissFortuneLoadscreen_40_LE.PIE_C_13_5.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/21/21040.png",
+        "chromas": [
+            {
+                "id": 21042,
+                "name": "Broken Covenant Miss Fortune",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/21/21042.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 21043,
+                "name": "Broken Covenant Miss Fortune",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/21/21043.png",
+                "colors": [
+                    "#DF9117",
+                    "#DF9117"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 21044,
+                "name": "Broken Covenant Miss Fortune",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/21/21044.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 21045,
+                "name": "Broken Covenant Miss Fortune",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/21/21045.png",
+                "colors": [
+                    "#54209B",
+                    "#54209B"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 21046,
+                "name": "Broken Covenant Miss Fortune",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/21/21046.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 21047,
+                "name": "Broken Covenant Miss Fortune",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/21/21047.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 21048,
+                "name": "Broken Covenant Miss Fortune",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/21/21048.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 21049,
+                "name": "Broken Covenant Miss Fortune",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/21/21049.png",
+                "colors": [
+                    "#ECF9F8",
+                    "#ECF9F8"
+                ],
+                "descriptions": [],
+                "rarities": []
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 190
+            }
+        ],
+        "description": "A devout Aspirant, Miss Fortune is the public face of the congregation. She has a single-minded focus on revenge against the Neverghaast, not just for murdering her parents, but for also corrupting Riven. Sarah can't believe her best friend helped the enemy and doesn't regret shooting her, because as long as the Neverghaast live, evil will fester."
+    },
+    "21041": {
+        "id": 21041,
+        "isBase": false,
+        "name": "Prestige Broken Covenant Miss Fortune",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/21/21041.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/21/21041.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/21/21041.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/MissFortune/Skins/Skin41/MissFortuneLoadScreen_41.PIE_C_13_5.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/MissFortune/Skins/Skin41/MissFortuneLoadscreen_41_LE.PIE_C_13_5.jpg",
+        "skinType": "",
+        "rarity": "kMythic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": null,
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 190
+            }
+        ],
+        "description": "Every year, thousands make the pilgrimage to the Gala, hoping to catch a glimpse of Miss Fortune's latest look. Never keen on shunning her faithful, she always treats each devotee as if they were a fellow family member. Even so, her rivals know to not cross her, lest they feel her wrath."
+    },
     "22000": {
         "id": 22000,
         "isBase": true,
@@ -23609,6 +23892,137 @@
             }
         ],
         "description": "A mythical, titanic beast painted within the mysterious Shan Hai Scrolls, whose gluttony resulted in eternal karmic punishment, Cho'gath has seized upon the Scrolls' connection to the multiverse and plans to devour both his own world and then all others."
+    },
+    "31023": {
+        "id": 31023,
+        "isBase": false,
+        "name": "Broken Covenant Cho'Gath",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/31/31023.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/31/31023.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/31/31023.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Chogath/skins/Skin23/ChogathLoadScreen_23.PIE_C_13_5.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Chogath/skins/Skin23/ChogathLoadscreen_23_LE.PIE_C_13_5.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/31/31023.png",
+        "chromas": [
+            {
+                "id": 31024,
+                "name": "Broken Covenant Cho'Gath",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/31/31024.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 31025,
+                "name": "Broken Covenant Cho'Gath",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/31/31025.png",
+                "colors": [
+                    "#FFEE59",
+                    "#FFEE59"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 31026,
+                "name": "Broken Covenant Cho'Gath",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/31/31026.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 31027,
+                "name": "Broken Covenant Cho'Gath",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/31/31027.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 31028,
+                "name": "Broken Covenant Cho'Gath",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/31/31028.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 31029,
+                "name": "Broken Covenant Cho'Gath",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/31/31029.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 31030,
+                "name": "Broken Covenant Cho'Gath",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/31/31030.png",
+                "colors": [
+                    "#54209B",
+                    "#54209B"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 31031,
+                "name": "Broken Covenant Cho'Gath",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/31/31031.png",
+                "colors": [
+                    "#ECF9F8",
+                    "#ECF9F8"
+                ],
+                "descriptions": [],
+                "rarities": []
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 190
+            }
+        ],
+        "description": "A living weapon of Nocturne's design, Cho'Gath is meant to cleanse the world of the Neverghaast. Empowered by sacred artifacts from the congregation's crypts, it has remained dormant while Nocturne feeds it prisoners to build its power. Despite its maker's intentions, nothing will be able to sate the monster's hunger once it fully awakens."
     },
     "32000": {
         "id": 32000,
@@ -38407,6 +38821,137 @@
         ],
         "description": "Not every part of the Hextech renaissance led to bright innovations. A clandestine experiment to fuse Hextech with demonic energies wrought a living nightmare, a predator rumored to stalk the streets and back alleyways of the city. Authorities report that any such creation would have been terminated along with any such project, and that any missing persons reports are, of course, completely unrelated."
     },
+    "56017": {
+        "id": 56017,
+        "isBase": false,
+        "name": "Broken Covenant Nocturne",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/56/56017.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/56/56017.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/56/56017.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Nocturne/Skins/Skin17/NocturneLoadScreen_17.PIE_C_13_5.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Nocturne/Skins/Skin17/NocturneLoadscreen_17_LE.PIE_C_13_5.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/56/56017.png",
+        "chromas": [
+            {
+                "id": 56018,
+                "name": "Broken Covenant Nocturne",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/56/56018.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 56019,
+                "name": "Broken Covenant Nocturne",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/56/56019.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 56020,
+                "name": "Broken Covenant Nocturne",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/56/56020.png",
+                "colors": [
+                    "#54209B",
+                    "#54209B"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 56021,
+                "name": "Broken Covenant Nocturne",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/56/56021.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 56022,
+                "name": "Broken Covenant Nocturne",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/56/56022.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 56023,
+                "name": "Broken Covenant Nocturne",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/56/56023.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 56024,
+                "name": "Broken Covenant Nocturne",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/56/56024.png",
+                "colors": [
+                    "#ECF9F8",
+                    "#ECF9F8"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 56025,
+                "name": "Broken Covenant Nocturne",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/56/56025.png",
+                "colors": [
+                    "#DF9117",
+                    "#DF9117"
+                ],
+                "descriptions": [],
+                "rarities": []
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 190
+            }
+        ],
+        "description": "As the oldest member of the Aspirants, Nocturne is content to lead from the shadows, having long ago exchanged their physical form for pure Aspira. Within the catacombs, they jealously guard the vast well of Aspira the congregation has filled over the centuries, toiling away at the unholy weapon that will destroy the Neverghaast once and for all."
+    },
     "57000": {
         "id": 57000,
         "isBase": true,
@@ -46550,7 +47095,7 @@
                 "id": 48
             }
         ],
-        "description": "A fierce warrior who makes her home in the winter forest, Nidalee isn't content with simple Snowdown parties. She plays the role of Santa for cheery woodland creatures, driving off intruders and protecting her furry friends from harm."
+        "description": "A fierce warrior who makes her home in the winter forest, Nidalee has little interest in Snowdown parties. Instead, she prefers to spend her time protecting cheerful woodland creatures from trappers and intruders, giving her furry friends a reason for the season."
     },
     "76002": {
         "id": 76002,
@@ -46575,7 +47120,7 @@
                 "id": 167
             }
         ],
-        "description": null
+        "description": "Nidalee roams the tall grasses and bubbling tar pits of her home, a prehistoric savannah teeming with natural magic. She protects her leap of leopards by taking the appearance of their hunters, deceiving and disarming human threats with her wild skill."
     },
     "76003": {
         "id": 76003,
@@ -46600,7 +47145,7 @@
                 "id": 100
             }
         ],
-        "description": null
+        "description": "Armed with a diverting maid outfit, a sunny disposition, and a vast knowledge of cleaning techniques, Nidalee catburgles her wealthy customers without them being any the wiser. She does it all for her kitties, who have grown used to some very high quality scratching posts."
     },
     "76004": {
         "id": 76004,
@@ -46625,7 +47170,7 @@
                 "id": 67
             }
         ],
-        "description": "At the height of her power, Nidalee was worshipped as a god-queen of the Great Desert. After her city's fall, she gathered her remaining armies and marched west, to conquer and rule anew."
+        "description": "Worshiped as a god-queen of the Great Desert, Nidalee is the avatar of the glorious cat-god, Sypakaa. As war tears through the land, Nidalee will do whatever it takes to protect her city and her temple from those who would dare threaten them."
     },
     "76005": {
         "id": 76005,
@@ -46676,7 +47221,7 @@
                 "id": 30
             }
         ],
-        "description": "It's one thing to be hunted by a human; it's another to be chased down by an animal. Nidalee's alien biology allows her both\u2014a rare gift among the Headhunters."
+        "description": "There are those who still ask: between man and beast, who is the better hunter? With her alien biology allowing her to embody both, Nidalee of the Headhunters answers that question with, \u201cI am.\u201d "
     },
     "76007": {
         "id": 76007,
@@ -46701,7 +47246,7 @@
                 "id": 53
             }
         ],
-        "description": "A wild, untamed fighter steeped in myth, it is difficult to know what is true of Nidalee and what is legend. Some say she fights with the ferocity of a white tiger, while others of the Warring Kingdoms believe she can become the creature itself."
+        "description": "Of the legends surrounding Nidalee, it is difficult to know what is true and what is mere myth. Some within the Warring Kingdoms say she fights with the wild ferocity of a white tiger, that the tiger's spirit dwells within her heart. Others believe she is the white tiger, that she can become the beast itself."
     },
     "76008": {
         "id": 76008,
@@ -46750,7 +47295,7 @@
                 "id": 9
             }
         ],
-        "description": null
+        "description": "Commemorating the 2016 season start."
     },
     "76009": {
         "id": 76009,
@@ -46775,7 +47320,7 @@
                 "id": 21
             }
         ],
-        "description": "Nidalee shows the most promise of the new class of Super Galaxy cadets, a knack for throwing projectiles through zero-gravity being her signature talent. The team will need her cunning tactics, as well as her keen hunting instincts, if it is to defeat the Spider Queen."
+        "description": "Of the new class of Super Galaxy cadets, Nidalee\u2014with her exceptional skill for throwing projectiles through zero-gravity\u2014shows the most promise. As the Spider Queen continues her reign of terror, the team will need Nidalee's cunning tactics and keen hunting instincts if they want to save the galaxy."
     },
     "76011": {
         "id": 76011,
@@ -46894,7 +47439,7 @@
                 "id": 124
             }
         ],
-        "description": "Nidalee rules over the restorative calm of the natural world, guarding the land's remaining peaceful places. She fights to protect the land and living things, bringing light and order to the mortal creatures under her care\u2014even taking the form of a celestial beast."
+        "description": "Both a celestial beast and a dawn-walking primordial, Nidalee rules over the restorative calm of the natural world. She guards the land's remaining peaceful places, bringing light and order to the mortal creatures under her care."
     },
     "76018": {
         "id": 76018,
@@ -47024,7 +47569,7 @@
                 "id": 43
             }
         ],
-        "description": "A cosmic tracker and ferocious warrior, she is tasked to find newborn stars and defend them from the ever-hungry Dark Star corruptants. Darting from galaxy to galaxy in an eternal hunt, she is forever shifting her shape like the wandering stars in the sky."
+        "description": "A cosmic tracker and ferocious hunter, Nidalee travels the galaxy in an eternal hunt, shifting her shape to hide among the sky's wandering stars. Tasked with finding and caring for newborn stars, she is dedicated to defending them from the ever hungry Dark Star corruptants."
     },
     "76027": {
         "id": 76027,
@@ -57266,6 +57811,110 @@
             }
         ],
         "description": "Riven's destiny is greater than she knows. One day she will determine the fate of the heavens, land, and sea, and awaken the slumbering power of the dragon within her."
+    },
+    "92055": {
+        "id": 92055,
+        "isBase": false,
+        "name": "Broken Covenant Riven",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/92/92055.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/92/92055.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/92/92055.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Riven/Skins/Skin55/RivenLoadScreen_55.PIE_C_13_5.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Riven/Skins/Skin55/RivenLoadscreen_55_LE.PIE_C_13_5.jpg",
+        "skinType": "",
+        "rarity": "kLegendary",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/92/92055.png",
+        "chromas": [
+            {
+                "id": 92057,
+                "name": "Broken Covenant Riven",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/92/92057.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 92058,
+                "name": "Broken Covenant Riven",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/92/92058.png",
+                "colors": [
+                    "#54209B",
+                    "#54209B"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 92059,
+                "name": "Broken Covenant Riven",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/92/92059.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 92060,
+                "name": "Broken Covenant Riven",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/92/92060.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 92061,
+                "name": "Broken Covenant Riven",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/92/92061.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 92062,
+                "name": "Broken Covenant Riven",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/92/92062.png",
+                "colors": [
+                    "#6ABBEE",
+                    "#6ABBEE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 190
+            }
+        ],
+        "description": "Born an Aspirant, Riven had no doubts about the congregation's evils until she discovered Nocturne torturing and feeding Neverghaast to Cho'Gath. Despite being mortally wounded, she escaped with a prisoner, who turned her into a Neverghaast to save her life. Now an exile with an endless hunger, Riven fights to redeem herself and her corrupted family."
     },
     "96000": {
         "id": 96000,
@@ -98791,6 +99440,132 @@
         ],
         "description": "One half of a perpetually incomplete whole, Rakan's fated love was not in the Lower World, but among the Higher Arcana far above. As the two rush to meet betwixt the lands of their birth, fate bubbles and boils over\u2014a roiling sea from which a new order may emerge."
     },
+    "497027": {
+        "id": 497027,
+        "isBase": false,
+        "name": "Broken Covenant Rakan",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/497/497027.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/497/497027.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/497/497027.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Rakan/Skins/Skin27/RakanLoadScreen_27.PIE_C_13_5.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Rakan/Skins/Skin27/RakanLoadscreen_27_LE.PIE_C_13_5.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/497/497027.png",
+        "chromas": [
+            {
+                "id": 497028,
+                "name": "Broken Covenant Rakan",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/497/497028.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 497029,
+                "name": "Broken Covenant Rakan",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/497/497029.png",
+                "colors": [
+                    "#DF9117",
+                    "#DF9117"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 497030,
+                "name": "Broken Covenant Rakan",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/497/497030.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 497031,
+                "name": "Broken Covenant Rakan",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/497/497031.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 497032,
+                "name": "Broken Covenant Rakan",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/497/497032.png",
+                "colors": [
+                    "#54209B",
+                    "#54209B"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 497033,
+                "name": "Broken Covenant Rakan",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/497/497033.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 497034,
+                "name": "Broken Covenant Rakan",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/497/497034.png",
+                "colors": [
+                    "#ECF9F8",
+                    "#ECF9F8"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 497035,
+                "name": "Broken Covenant Rakan",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/497/497035.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": []
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 190
+            }
+        ],
+        "description": "Rakan's mouth always got him into trouble, and after getting caught stealing from Vladimir and nearly killed, he awoke to find himself a newly turned Neverghaast, thanks to his beloved Xayah. In the time they've been separated while she repays his debt, Rakan can feel his thirsts grow and dreads showing his partner the monster he fears he's becoming."
+    },
     "498000": {
         "id": 498000,
         "isBase": true,
@@ -99444,6 +100219,137 @@
             }
         ],
         "description": "One half of a perpetually incomplete whole, Xayah has found her love not in the world of the Higher Arcana, but the Lower. As she strains to meet the fated Rakan and pull him upwards towards herself, their tension frays and forms discordant knots\u2014setting the stage for something new."
+    },
+    "498037": {
+        "id": 498037,
+        "isBase": false,
+        "name": "Broken Covenant Xayah",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/498/498037.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/498/498037.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/498/498037.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Xayah/Skins/Skin37/XayahLoadScreen_37.PIE_C_13_5.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Xayah/Skins/Skin37/XayahLoadscreen_37_LE.PIE_C_13_5.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/498/498037.png",
+        "chromas": [
+            {
+                "id": 498039,
+                "name": "Broken Covenant Xayah",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/498/498039.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 498040,
+                "name": "Broken Covenant Xayah",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/498/498040.png",
+                "colors": [
+                    "#6ABBEE",
+                    "#6ABBEE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 498041,
+                "name": "Broken Covenant Xayah",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/498/498041.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 498042,
+                "name": "Broken Covenant Xayah",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/498/498042.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 498043,
+                "name": "Broken Covenant Xayah",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/498/498043.png",
+                "colors": [
+                    "#54209B",
+                    "#54209B"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 498044,
+                "name": "Broken Covenant Xayah",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/498/498044.png",
+                "colors": [
+                    "#B6E084",
+                    "#B6E084"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 498045,
+                "name": "Broken Covenant Xayah",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/498/498045.png",
+                "colors": [
+                    "#DF9117",
+                    "#DF9117"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 498046,
+                "name": "Broken Covenant Xayah",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/498/498046.png",
+                "colors": [
+                    "#ECF9F8",
+                    "#ECF9F8"
+                ],
+                "descriptions": [],
+                "rarities": []
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 190
+            }
+        ],
+        "description": "Thieves until the end, Xayah and Rakan only cared about each other and shunned the war raging around them. When Rakan ran afoul of the Neverghaast and was almost killed, Xayah agreed to spy on the Aspirants if Vladimir made her partner a Neverghaast. As she reports back from within the congregation, she prays she can find a cure for her lover's curse."
     },
     "516000": {
         "id": 516000,
