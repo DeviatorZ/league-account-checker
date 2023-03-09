@@ -1584,5 +1584,14 @@
             "tank",
             "fighter"
         ]
+    },
+    {
+        "id": 902,
+        "name": "Milio",
+        "alias": "Milio",
+        "squarePortraitPath": "/lol-game-data/assets/v1/champion-icons/902.png",
+        "roles": [
+            "support"
+        ]
     }
 ]
