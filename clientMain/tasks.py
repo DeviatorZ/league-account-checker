@@ -62,7 +62,7 @@ def execute(account, settings, lock, progress, exitFlag):
             progress.add()
     except ConnectionException as exception:
         logging.error(f"{account['username']} {exception.connectionName} exception. Retrying...")
-        execute(account, settings, lock, progress)
+        execute(account, settings, lock, progress, exitFlag)
 
 # performs tasks on a given account
 def executeAccount(account, settings, lock, exitFlag):
@@ -77,11 +77,17 @@ def executeAccount(account, settings, lock, exitFlag):
         account["region"] = region["region"]
         waitForLaunch(riotConnection)
     except AuthenticationException as exception:
-        logging.error(f"{account['username']} login exception: {exception.message}")
-        account["state"] = exception.message
-        return
+        if exception.message == "RATE_LIMITED":
+            logging.error(f"{account['username']} login exception: {exception.message}. Waiting before retrying...")
+            sleep(300)
+            return executeAccount(account, settings, lock, exitFlag)
+        else:
+            logging.error(f"{account['username']} login exception: {exception.message}")
+            account["state"] = exception.message
+            return
     except SessionException as exception:
         logging.error(f"{account['username']} session exception: {exception.message}. Retrying...")
+        return executeAccount(account, settings, lock, exitFlag)
 
     if exitFlag.is_set():
         riotConnection.__del__()
@@ -99,7 +105,7 @@ def executeAccount(account, settings, lock, exitFlag):
         waitForSession(leagueConnection)
     except SessionException as exception:
         logging.error(f"{account['username']} session exception: {exception.message}. Retrying...")
-        return executeAccount(account, settings, lock)
+        return executeAccount(account, settings, lock, exitFlag)
     except AccountBannedException as ban:
         # add ban information to the account for export
         banDescription = json.loads(ban.message["description"])
