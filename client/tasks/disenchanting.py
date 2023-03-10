@@ -1,6 +1,9 @@
-from clientTasks.crafting import postRecipe
+from client.tasks.crafting import postRecipe
 from time import sleep
 
+# disenchant recipes are case sensitive. Append "_disenchant" for champion shards, "_DISENCHANT" for eternals shards
+
+# disenchants all champions shards
 def disenchantChampionShards(leagueConnection, loot):
     loot.refreshLoot()
     shardsToDisenchant = loot.getLootByDisplayCategory("CHAMPION")
@@ -10,6 +13,7 @@ def disenchantChampionShards(leagueConnection, loot):
         postRecipe(leagueConnection, f"{shardType}_disenchant", shardData, shardCount)
         sleep(1) 
 
+# disenchants all eternals shards
 def disenchantEternalsShards(leagueConnection, loot):
     loot.refreshLoot()
     shardsToDisenchant = loot.getLootByDisplayCategory("ETERNALS")

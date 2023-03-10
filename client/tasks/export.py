@@ -2,6 +2,8 @@ import shutil
 import os
 import copy
 
+
+# erases all files in a given folder
 def eraseFiles(path):
     try:
         for file in os.listdir(path):
@@ -18,7 +20,15 @@ class Export():
     def __init__(self, singleTemplatesPath, singleExportPath, allTemplatesPath, allExportPath, bannedTemplate, errorTemplate):
         try:
             os.mkdir("export")
+        except:
+            pass
+
+        try:
             os.mkdir("export\\single")
+        except:
+            pass
+
+        try:
             os.mkdir("export\\all")
         except:
             pass
