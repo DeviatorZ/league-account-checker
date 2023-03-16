@@ -47,6 +47,8 @@ def execute(account, settings, lock, progress, exitFlag):
             if failCount >= 5:
                 logging.error(f"Too many failed attempts on account: {account['username']}. Skipping...")
                 account["state"] = "RETRY_LIMIT_EXCEEDED"
+                if not checkForGracefulExit(exitFlag): # if graceful exit is triggered, no longer need to track progress
+                    progress.add()
                 return
 
 # performs tasks on a given account, check for graceful exit flag between tasks
