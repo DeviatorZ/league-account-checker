@@ -2,7 +2,6 @@
     "username": "{username}",
     "password": "{password}",
     "region": "{region}",
-    "regionFull": "{regionFull}",
     "honorLevel": "{honorLevel}",
     "be": {be},
     "oe": {oe},
