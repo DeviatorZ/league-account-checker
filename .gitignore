@@ -4,3 +4,4 @@ accounts.csv
 log.txt
 .vscode
 cache
+__pycache__

@@ -162,7 +162,7 @@ def getRank(leagueConnection, account):
 # try to queue up and check if there's a low priority queue penalty
 def getLowPriorityQueue(leagueConnection, account):
     queueArgs = {
-        "queueId": 830, # Co-op vs. AI Intro Bot game
+        "queueId": 430, # Blind pick
     }
     queueArgs = json.dumps(queueArgs, indent = 4)
     
@@ -170,11 +170,11 @@ def getLowPriorityQueue(leagueConnection, account):
     sleep(1)
 
     leagueConnection.post("/lol-lobby/v2/lobby/matchmaking/search")
-    sleep(2)
+    sleep(1)
 
-    queueState = leagueConnection.get("/lol-lobby/v2/lobby/matchmaking/search-state").json()
+    queueState = leagueConnection.get("/lol-matchmaking/v1/search").json()
 
-    account["lowPriorityQueue"] = "Error" # unable to check low priority if the account has a dodge penalty or queue lockout
+    account["lowPriorityQueue"] = "OtherPenalty"
 
     if queueState["lowPriorityData"]["reason"] == "LEAVER_BUSTED":
         account["lowPriorityQueue"] = str(int(queueState["lowPriorityData"]["penaltyTime"] / 60)) + " minutes"
