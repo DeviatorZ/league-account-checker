@@ -1,9 +1,15 @@
-import requests
-from time import sleep
-import json
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
+from time import sleep
+import json
+import requests
 
+
+# launches skin and champion file update task
+def updateInformation(mainWindow):
+    mainWindow["updateInformation"].update(disabled=True)
+    update(mainWindow)
+    mainWindow["updateInformation"].update(disabled=False)
 
 # handles skin and champion json file updating, uses community links as they usually update sooner than riot
 def update(window):
@@ -18,7 +24,7 @@ def update(window):
     try:
         response = session.get("https://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/default/v1/champion-summary.json")
         if response.status_code == 200:
-            with open("champions.json", "w") as fp:
+            with open("data\\champions.json", "w") as fp:
                 fp.write(json.dumps(response.json(), indent=4))
         else:
             raise Exception
@@ -32,7 +38,7 @@ def update(window):
     try:
         response = session.get("https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/skins.json")
         if response.status_code == 200:
-            with open("skins.json", "w") as fp:
+            with open("data\\skins.json", "w") as fp:
                 fp.write(json.dumps(response.json(), indent=4))
         else:
             raise Exception

@@ -162,7 +162,7 @@ def getRank(leagueConnection, account):
 # try to queue up and check if there's a low priority queue penalty
 def getLowPriorityQueue(leagueConnection, account):
     queueArgs = {
-        "queueId": 430,
+        "queueId": 830, # Co-op vs. AI Intro Bot game
     }
     queueArgs = json.dumps(queueArgs, indent = 4)
     
@@ -174,14 +174,12 @@ def getLowPriorityQueue(leagueConnection, account):
 
     queueState = leagueConnection.get("/lol-lobby/v2/lobby/matchmaking/search-state").json()
 
-    account["lowPriorityQueue"] = "Error" # unable to check low priority if the account has a dodge penalty
+    account["lowPriorityQueue"] = "Error" # unable to check low priority if the account has a dodge penalty or queue lockout
 
     if queueState["lowPriorityData"]["reason"] == "LEAVER_BUSTED":
         account["lowPriorityQueue"] = str(int(queueState["lowPriorityData"]["penaltyTime"] / 60)) + " minutes"
     elif queueState["searchState"] == "Found" or queueState["searchState"] == "Searching": # searching for game or found one (no penalties)
         account["lowPriorityQueue"] = "None"
-
-    leagueConnection.delete("/lol-lobby/v2/lobby/matchmaking/search")
 
 # uses all data functions to get information about the account
 def getData(leagueConnection, account, loot):
@@ -195,10 +193,10 @@ def getData(leagueConnection, account, loot):
     getSummoner(leagueConnection, account)
     getEmailVerification(leagueConnection, account)
 
-    champions = Champions("champions.json")
+    champions = Champions("data\\champions.json")
     getChampions(leagueConnection, champions, account)
 
-    skins = Skins("skins.json")
+    skins = Skins("data\\skins.json")
     getSkins(leagueConnection, loot, skins, account)
 
     getRank(leagueConnection, account)

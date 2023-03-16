@@ -1,13 +1,13 @@
-from clientTasks.event import claimEventRewards
-from clientTasks.event import buyChampionShardsWithTokens
-from clientTasks.event import buyBlueEssenceWithTokens
-from clientTasks.crafting import craftKeys
-from clientTasks.crafting import openChests
-from clientTasks.crafting import openLoot
-from clientTasks.disenchanting import disenchantChampionShards
-from clientTasks.disenchanting import disenchantEternalsShards
+from client.tasks.event import claimEventRewards
+from client.tasks.event import buyChampionShardsWithTokens
+from client.tasks.event import buyBlueEssenceWithTokens
+from client.tasks.crafting import craftKeys
+from client.tasks.crafting import openChests
+from client.tasks.crafting import openLoot
+from client.tasks.disenchanting import disenchantChampionShards
+from client.tasks.disenchanting import disenchantEternalsShards
 
-
+# class for storing all tasks
 class TaskList():
     _eventTasks = {
         "claimEventRewards" :
@@ -68,6 +68,7 @@ class TaskList():
 
     _allTasks = {**_eventTasks, **_craftingTasks, **_disenchantingTasks}
 
+    # builds and returns task dictionary for gui display
     @staticmethod
     def getTaskDisplay():
         eventTasks = {key: {"text" : value["text"]} for (key, value) in TaskList._eventTasks.items()}
@@ -79,6 +80,7 @@ class TaskList():
             "Disenchanting" : disenchantingTasks,
         }
 
+    # builds and returns a task dictionary for a given client
     @staticmethod
     def getTasks(leagueConnection, loot):
         tasks = {}
