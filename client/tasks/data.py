@@ -100,22 +100,6 @@ def getChampions(leagueConnection, champions, account):
     else:
         account["ownedChampionsCount"] = 0
 
-# convert account's region to full name
-def getFullRegion(account):
-    regionFull = {
-        "NA": "North America",
-        "EUW": "Europe West",
-        "RU": "Russia",
-        "BR": "Brazil",
-        "TR": "Turkey",
-        "EUNE": "EU Nordic & East",
-        "OC1": "Oceania",
-        "LA2": "Latin America South",
-        "LA1": "Latin America North",
-    }
-
-    account["regionFull"] = regionFull[account["region"]]
-
 # obtain account's ranked stats on soloq and flexq modes
 def getRank(leagueConnection, account):
     romanNumbers = {
@@ -183,8 +167,6 @@ def getLowPriorityQueue(leagueConnection, account):
 
 # uses all data functions to get information about the account
 def getData(leagueConnection, account, loot):
-    getFullRegion(account)
-
     loot.refreshLoot()
     lootJson = loot.getLoot()
     getCurrencies(lootJson, account)
