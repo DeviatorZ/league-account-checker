@@ -11,7 +11,7 @@ Tested and working on Windows 7 (Python 3.8), Windows Server 2019 (Python 3.10).
 
 ## How to install
 - Only windows 7 or higher supported
-- Have League of Legends installed and updated on your device.
+- Download and install League of Legends - make sure that the client is up to date for each server that your accounts are on
 - Download and install [Python 3.7 or higher](https://www.python.org/downloads/)
     - For next step to work select "Add python to path" and "pip" package manager(included in default installation) <br /> ![PythonExample](https://i.imgur.com/y1k3rmd.png)
 - Download and extract the checker <br /> ![Download](https://i.imgur.com/jafvk8i.png)
@@ -60,7 +60,9 @@ Example templates can be found in the "templates" folder. General guidelines:
 ![ExportTab](https://i.imgur.com/lPpW6TD.png)
 - "Banned account template" - export template replacement for banned accounts
 - "Error account template" - export template replacement for accounts that couldn't be checked. <br /> 
-state "AUTH_FAILURE" if credentials are invalid, state "VngAccountRequired" if account needs updating (email and phone number need to be added)
+    - state "AUTH_FAILURE" if credentials are invalid 
+    - state "VngAccountRequired" if account needs updating (email and phone number need to be added)
+    - state "RETRY_LIMIT_EXCEEDED" if there have been too many failed attempts at performing tasks on the account. Most likely the server is down or the client is outdated for that server - make sure to update manually
 - Leave Banned/Error template empty in order to skip exporting such accounts
 - "Standard export type":
     - Minimal - export only username, password and region, useful for quick ban and credential checking.
