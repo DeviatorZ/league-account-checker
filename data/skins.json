@@ -32635,6 +32635,120 @@
         ],
         "description": "As Brand's corruption spread, Karma sought the power to restore peace. When her desperate search throughout the land failed, Karma was left with nowhere left to look but within. After months of quiet contemplation, the fabled Tranquility Dragon greeted her in a vision. She awoke with the dragon's gift, the power to bring tranquil peace to face Brand's raging violence."
     },
+    "43054": {
+        "id": 43054,
+        "isBase": false,
+        "name": "Faerie Queen Karma",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/43/43054.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/43/43054.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/43/43054.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Karma/Skins/Skin54/KarmaLoadScreen_54.PIE_C_13_6.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Karma/Skins/Skin54/KarmaLoadscreen_54_LE.PIE_C_13_6.jpg",
+        "skinType": "",
+        "rarity": "kLegendary",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/43/43054.png",
+        "chromas": [
+            {
+                "id": 43055,
+                "name": "Faerie Queen Karma",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/43/43055.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 43056,
+                "name": "Faerie Queen Karma",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/43/43056.png",
+                "colors": [
+                    "#FFEE59",
+                    "#FFEE59"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 43057,
+                "name": "Faerie Queen Karma",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/43/43057.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 43058,
+                "name": "Faerie Queen Karma",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/43/43058.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 43059,
+                "name": "Faerie Queen Karma",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/43/43059.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 43060,
+                "name": "Faerie Queen Karma",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/43/43060.png",
+                "colors": [
+                    "#866EFF",
+                    "#8AE1E8"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a Loot exclusive in the 2023 Faerie Court event."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 191
+            }
+        ],
+        "description": "All hail Her Majesty, Karma, Queen of the Seelie Court of Light and Beauty! Though her selection and subsequent rise to the throne was a surprise to everyone (nobles, laymen, even Karma herself), she is a beacon of poise and power, overseeing the turning of seasons and keeping the balance between the ever-bickering seasonal sub-courts. Long live the Queen!"
+    },
     "44000": {
         "id": 44000,
         "isBase": true,
@@ -38488,6 +38602,184 @@
             }
         ],
         "description": "\u201cMy people got swindled. I aim to collect what we're owed,\u201d the Outsider says, pinning her dagger in a wanted poster of the Mechanical Devil. Her eyes burn like stoked coal as she fixes each dusty traveler in her gaze, \u201cAnd I hear y'all plan on jumpin' the Sulfur Rail, Harbingers. If you're gonna take this devil down, I want in.\u201d "
+    },
+    "55047": {
+        "id": 55047,
+        "isBase": false,
+        "name": "Faerie Court Katarina",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/55/55047.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/55/55047.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/55/55047.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Katarina/Skins/Skin47/KatarinaLoadScreen_47.PIE_C_13_6.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Katarina/Skins/Skin47/KatarinaLoadscreen_47_LE.PIE_C_13_6.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/55/55047.png",
+        "chromas": [
+            {
+                "id": 55049,
+                "name": "Faerie Court Katarina",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/55/55049.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 55050,
+                "name": "Faerie Court Katarina",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/55/55050.png",
+                "colors": [
+                    "#DF9117",
+                    "#DF9117"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 55051,
+                "name": "Faerie Court Katarina",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/55/55051.png",
+                "colors": [
+                    "#6ABBEE",
+                    "#6ABBEE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 55052,
+                "name": "Faerie Court Katarina",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/55/55052.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 55053,
+                "name": "Faerie Court Katarina",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/55/55053.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 55054,
+                "name": "Faerie Court Katarina",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/55/55054.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 55055,
+                "name": "Faerie Court Katarina",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/55/55055.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 55056,
+                "name": "Faerie Court Katarina",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/55/55056.png",
+                "colors": [
+                    "#54209B",
+                    "#54209B"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 55057,
+                "name": "Faerie Court Katarina",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/55/55057.png",
+                "colors": [
+                    "#866EFF",
+                    "#8AE1E8"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a Loot exclusive in the 2023 Faerie Court event."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 191
+            }
+        ],
+        "description": "Though Katarina is an official diplomatic envoy hailing from the Unseelie Court of Truth and Shadow, you wouldn't know it from all the side-eyed glances and disapproving frowns she receives from closed-minded courtiers. No matter: with daggers in hand and a mystery afoot, Katarina has her own agenda."
+    },
+    "55048": {
+        "id": 55048,
+        "isBase": false,
+        "name": "Prestige Faerie Court Katarina",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/55/55048.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/55/55048.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/55/55048.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Katarina/Skins/Skin48/KatarinaLoadScreen_48.PIE_C_13_6.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Katarina/Skins/Skin48/KatarinaLoadscreen_48_LE.PIE_C_13_6.jpg",
+        "skinType": "",
+        "rarity": "kMythic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": null,
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 191
+            }
+        ],
+        "description": "Don't let the butterflies fool you: otherworldly elegance may be Katarina's game, but that gala-ready look is sharper than her knives. Fashion is a metamorphosis, after all. Try to keep up."
     },
     "56000": {
         "id": 56000,
@@ -50477,6 +50769,158 @@
         ],
         "description": "After accidentally unleashing an ancient evil sorceress while doing research in the university archive, Ezreal narrowly escaped certain death when Lux and the spirit of the Tiger Relic stepped in to save him. Though he is new to the world of magic, Ezreal has joined the Protectors\u2014 determined to help solve the problem he (inadvertently) caused."
     },
+    "81033": {
+        "id": 81033,
+        "isBase": false,
+        "name": "Faerie Court Ezreal",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/81/81033.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/81/81033.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/81/81033.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ezreal/Skins/Skin33/EzrealLoadScreen_33.PIE_C_13_6.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Ezreal/Skins/Skin33/EzrealLoadscreen_33_LE.PIE_C_13_6.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/81/81033.png",
+        "chromas": [
+            {
+                "id": 81034,
+                "name": "Faerie Court Ezreal",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/81/81034.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 81035,
+                "name": "Faerie Court Ezreal",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/81/81035.png",
+                "colors": [
+                    "#FFEE59",
+                    "#FFEE59"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 81036,
+                "name": "Faerie Court Ezreal",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/81/81036.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 81037,
+                "name": "Faerie Court Ezreal",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/81/81037.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 81038,
+                "name": "Faerie Court Ezreal",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/81/81038.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 81039,
+                "name": "Faerie Court Ezreal",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/81/81039.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 81040,
+                "name": "Faerie Court Ezreal",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/81/81040.png",
+                "colors": [
+                    "#54209B",
+                    "#54209B"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 81041,
+                "name": "Faerie Court Ezreal",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/81/81041.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 81042,
+                "name": "Faerie Court Ezreal",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/81/81042.png",
+                "colors": [
+                    "#866EFF",
+                    "#8AE1E8"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a Loot exclusive in the 2023 Faerie Court event."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 191
+            }
+        ],
+        "description": "Though he is a lord of the Summer Court, Ezreal would much rather be investigating ancient magical history than putting up with all the political drama. When his research reveals something curious about the Faerie queen's line of succession, however, Ezreal discovers that someone may have placed Karma upon the throne for their own purposes\u2026"
+    },
     "82000": {
         "id": 82000,
         "isBase": true,
@@ -59600,6 +60044,50 @@
             }
         ],
         "description": "Once half of an elite operative duo for the Shockblade order, Shen stepped away from combat after he made a mistake that nearly cost the life of his partner, Zed. Now Shen mentors young shinobi training to join their ranks \u2013 but his new charge may inspire him to take up his sword and join the fight once more."
+    },
+    "98049": {
+        "id": 98049,
+        "isBase": false,
+        "name": "Ashen Guardian Shen",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/98/98049.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/98/98049.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/98/98049.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Shen/Skins/Skin49/ShenLoadScreen_49.PIE_C_13_6.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Shen/Skins/Skin49/ShenLoadscreen_49_LE.PIE_C_13_6.jpg",
+        "skinType": "",
+        "rarity": "kMythic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/98/98049.png",
+        "chromas": [
+            {
+                "id": 98050,
+                "name": "Ashen Guardian Shen",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/98/98050.png",
+                "colors": [
+                    "#9D0606",
+                    "#2B263F"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 4
+                    }
+                ]
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 157
+            }
+        ],
+        "description": "A devotee of the principles of his now slain leader, Shen still walks the castle grounds, wielding his master's blade alongside his own. Perhaps some small part of him recognizes, with each blow to his armor from travelers seeking ancient riches, that his guard is senseless. But life must have meaning. Even life as endless as this."
     },
     "99000": {
         "id": 99000,
@@ -69087,6 +69575,158 @@
             }
         ],
         "description": "Fiora is tired of Nami crashing the party every year. She's determined that apple bobbing takes a back seat to tests of true skill\u2014like seeing who can eat the most candy."
+    },
+    "114069": {
+        "id": 114069,
+        "isBase": false,
+        "name": "Faerie Court Fiora",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/114/114069.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/114/114069.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/114/114069.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Fiora/Skins/Skin69/FioraLoadScreen_69.PIE_C_13_6.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Fiora/Skins/Skin69/FioraLoadscreen_69_LE.PIE_C_13_6.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/114/114069.png",
+        "chromas": [
+            {
+                "id": 114070,
+                "name": "Faerie Court Fiora",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/114/114070.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 114071,
+                "name": "Faerie Court Fiora",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/114/114071.png",
+                "colors": [
+                    "#FFEE59",
+                    "#FFEE59"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 114072,
+                "name": "Faerie Court Fiora",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/114/114072.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 114073,
+                "name": "Faerie Court Fiora",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/114/114073.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 114074,
+                "name": "Faerie Court Fiora",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/114/114074.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 114075,
+                "name": "Faerie Court Fiora",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/114/114075.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 114076,
+                "name": "Faerie Court Fiora",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/114/114076.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 114077,
+                "name": "Faerie Court Fiora",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/114/114077.png",
+                "colors": [
+                    "#B6E084",
+                    "#B6E084"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 114078,
+                "name": "Faerie Court Fiora",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/114/114078.png",
+                "colors": [
+                    "#866EFF",
+                    "#8AE1E8"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a Loot exclusive in the 2023 Faerie Court event."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 191
+            }
+        ],
+        "description": "As ambassador of the Spring Court, Fiora has a deep love for her people\u2026 even if that love often leads her to resolve conflict via impassioned duels rather than words. The last faerie queen was Fiora's mother, and she believes her mother's untimely death was no mistake. She wants answers, and she will administer justice at the tip of her sword."
     },
     "115000": {
         "id": 115000,
@@ -80710,6 +81350,158 @@
             }
         ],
         "description": "Never content to swim with the tide, Seraphine's making waves with her new sea breeze look. Whether it's on the runway or the concert stage, beach season's open, and the water's warm."
+    },
+    "147024": {
+        "id": 147024,
+        "isBase": false,
+        "name": "Faerie Court Seraphine",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/147/147024.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/147/147024.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/147/147024.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Seraphine/Skins/Skin24/SeraphineLoadScreen_24.PIE_C_13_6.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Seraphine/Skins/Skin24/SeraphineLoadscreen_24_LE.PIE_C_13_6.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/147/147024.png",
+        "chromas": [
+            {
+                "id": 147025,
+                "name": "Faerie Court Seraphine",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/147/147025.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 147026,
+                "name": "Faerie Court Seraphine",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/147/147026.png",
+                "colors": [
+                    "#FFEE59",
+                    "#FFEE59"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 147027,
+                "name": "Faerie Court Seraphine",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/147/147027.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 147028,
+                "name": "Faerie Court Seraphine",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/147/147028.png",
+                "colors": [
+                    "#6ABBEE",
+                    "#6ABBEE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 147029,
+                "name": "Faerie Court Seraphine",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/147/147029.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 147030,
+                "name": "Faerie Court Seraphine",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/147/147030.png",
+                "colors": [
+                    "#54209B",
+                    "#54209B"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 147031,
+                "name": "Faerie Court Seraphine",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/147/147031.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 147032,
+                "name": "Faerie Court Seraphine",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/147/147032.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 147033,
+                "name": "Faerie Court Seraphine",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/147/147033.png",
+                "colors": [
+                    "#866EFF",
+                    "#8AE1E8"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a Loot exclusive in the 2023 Faerie Court event."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 191
+            }
+        ],
+        "description": "A sunny siren of the Summer Court, it was Lady Seraphine's skillful makeover talents that helped get Karma and Kalista ready to face the nobility with style. She is a master of courtly manners and was more than happy to teach her new friends everything that really counts about being fabulous!"
     },
     "150000": {
         "id": 150000,
@@ -98514,6 +99306,158 @@
         ],
         "description": "The Magelords\u2026 furious, brutal, and glorious in their conquest\u2014a sect of warriors long lost to the sands of time. Until now. Resurrected by the current Marauder leaders, Kalista's desire for vengeance has only festered over the millenia. Now she returns, more powerful than ever, to eradicate the Wardens and everything they've built."
     },
+    "429014": {
+        "id": 429014,
+        "isBase": false,
+        "name": "Faerie Court Kalista",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/429/429014.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/429/429014.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/429/429014.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Kalista/Skins/Skin14/KalistaLoadScreen_14.PIE_C_13_6.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Kalista/Skins/Skin14/KalistaLoadscreen_14_LE.PIE_C_13_6.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/429/429014.png",
+        "chromas": [
+            {
+                "id": 429015,
+                "name": "Faerie Court Kalista",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/429/429015.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 429016,
+                "name": "Faerie Court Kalista",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/429/429016.png",
+                "colors": [
+                    "#FFEE59",
+                    "#FFEE59"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 429017,
+                "name": "Faerie Court Kalista",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/429/429017.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 429018,
+                "name": "Faerie Court Kalista",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/429/429018.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 429019,
+                "name": "Faerie Court Kalista",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/429/429019.png",
+                "colors": [
+                    "#9C68D7",
+                    "#9C68D7"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 429020,
+                "name": "Faerie Court Kalista",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/429/429020.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 429021,
+                "name": "Faerie Court Kalista",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/429/429021.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 429022,
+                "name": "Faerie Court Kalista",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/429/429022.png",
+                "colors": [
+                    "#ECF9F8",
+                    "#ECF9F8"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 429023,
+                "name": "Faerie Court Kalista",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/429/429023.png",
+                "colors": [
+                    "#866EFF",
+                    "#8AE1E8"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a Loot exclusive in the 2023 Faerie Court event."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 191
+            }
+        ],
+        "description": "As captain of Her Majesty's royal guard, Kalista is dedicated to keeping her queen safe above all else. Though some grumble that Kalista was only elevated to her station because she is Karma's dearest friend, she has proven time and time again that her title is well earned. Anyone who thinks otherwise is welcome to duel her and learn firsthand."
+    },
     "432000": {
         "id": 432000,
         "isBase": true,
@@ -106310,5 +107254,178 @@
             }
         ],
         "description": "K'Sante's always been a trailblazer on the fashion circuit, and this year he definitely wants to make the audience sweat. With his crystal-laden drip and flawless makeup, he's about to light a fire under this Gala."
+    },
+    "902000": {
+        "id": 902000,
+        "isBase": true,
+        "name": "Milio",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/902/902000.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/902/902000.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/902/902000.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Milio/Skins/Base/MilioLoadscreen_0.Milio.jpg",
+        "skinType": "",
+        "rarity": "kNoRarity",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": null,
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": null,
+        "description": null
+    },
+    "902001": {
+        "id": 902001,
+        "isBase": false,
+        "name": "Faerie Court Milio",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/902/902001.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/902/902001.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/902/902001.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Milio/Skins/Skin01/MilioLoadScreen_1.Milio.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Milio/Skins/Skin01/MilioLoadscreen_1_LE.Milio.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/902/902001.png",
+        "chromas": [
+            {
+                "id": 902002,
+                "name": "Faerie Court Milio",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/902/902002.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 902003,
+                "name": "Faerie Court Milio",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/902/902003.png",
+                "colors": [
+                    "#FFEE59",
+                    "#FFEE59"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 902004,
+                "name": "Faerie Court Milio",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/902/902004.png",
+                "colors": [
+                    "#6ABBEE",
+                    "#6ABBEE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 902005,
+                "name": "Faerie Court Milio",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/902/902005.png",
+                "colors": [
+                    "#B6E084",
+                    "#B6E084"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 902006,
+                "name": "Faerie Court Milio",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/902/902006.png",
+                "colors": [
+                    "#ECF9F8",
+                    "#ECF9F8"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 902007,
+                "name": "Faerie Court Milio",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/902/902007.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 902008,
+                "name": "Faerie Court Milio",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/902/902008.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 902009,
+                "name": "Faerie Court Milio",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/902/902009.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 902010,
+                "name": "Faerie Court Milio",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/902/902010.png",
+                "colors": [
+                    "#866EFF",
+                    "#8AE1E8"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a Loot exclusive in the 2023 Faerie Court event."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 191
+            }
+        ],
+        "description": "An archmagus of the court wreathed in firefly familiars, Milio knows just about everything that happens within the palace walls. He may seem like a child, but fae are long-lived, and Milio has been a child far longer than others have been adults. Still, he is a friendly face who uses his power to safeguard the Queendom however he can."
     }
 }
