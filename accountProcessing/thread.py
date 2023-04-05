@@ -35,11 +35,11 @@ def execute(account, settings, lock, progress, exitFlag):
                 progress.add()
 
             return
-        except GracefulExit:
-            return
         except RateLimitedException as exception: # rate limited, wait before trying again
             logging.error(f"{account['username']} {exception.message}. Waiting before retrying...")
-            sleep(300)
+            for _ in range(30):
+                sleep(10)
+                checkForGracefulExit(exitFlag)
         except (ConnectionException, SessionException) as exception: # something went wrong with api
             logging.error(f"{account['username']} {exception.message}. Retrying...")
 
@@ -50,6 +50,8 @@ def execute(account, settings, lock, progress, exitFlag):
                 if not checkForGracefulExit(exitFlag): # if graceful exit is triggered, no longer need to track progress
                     progress.add()
                 return
+        except GracefulExit:
+            return
 
 # performs tasks on a given account, check for graceful exit flag between tasks
 def executeAccount(account, settings, lock, exitFlag):
