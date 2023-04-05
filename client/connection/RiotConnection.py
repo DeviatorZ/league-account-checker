@@ -4,16 +4,21 @@ from client.connection.exceptions import RequestException
 from client.connection.exceptions import AuthenticationException
 from client.connection.exceptions import SessionException
 import time
+import logging
 
 # handles riot client and it's api
 class RiotConnection(Connection):
-    def __init__(self, path, lock):
+    def __init__(self, path, lock, allowPatching):
         # start a riot client and wait for connection to avoid port conflicts and api rate limits
+        self.__allowPatching = allowPatching
+        self.__path = path
+        
         with lock:
             Connection.__init__(self)
-            self.__path = path
             self.__getClient()
             self.__waitForConnection()
+
+        time.sleep(1)
 
     # launch riot client with our own command line arguments
     def __getClient(self):
@@ -24,11 +29,13 @@ class RiotConnection(Connection):
             "--remoting-auth-token=" + self._authToken,
             "--launch-product=league_of_legends",
             "--launch-patchline=live",
-            "--allow-multiple-clients",
             "--locale=en_GB",
             "--disable-auto-launch", # disables automatic launch after logging in so we can launch league client with our own arguments
             "--headless",
         ]
+
+        if not self.__allowPatching:
+            processArgs.append("--allow-multiple-clients")
 
         Connection.getClient(self, processArgs)
 
@@ -80,12 +87,22 @@ class RiotConnection(Connection):
 
         while True:
             phase = self.get('/rnet-lifecycle/v1/product-context-phase').json()
-            if phase == "VngAccountRequired":
+            if phase == "Eula" or phase == "WaitingForEula":
+                self.__acceptEULA()
+            elif phase == "VngAccountRequired":
                 raise AuthenticationException(self, phase)
-            if phase == "WaitForLaunch": # league client is ready for launch
+            elif phase == "WaitForLaunch": # league client is ready for launch
                 time.sleep(1)
                 return
-            
+            elif phase == "PatchStatus": # updating
+                logging.info("Waiting for RiotClient to update...")
+                for _ in range(7200): # 2 hours
+                    time.sleep(1)
+                    phase = self.get('/rnet-lifecycle/v1/product-context-phase').json()
+                    if phase != "PatchStatus":
+                        startTime = time.time()
+                        logging.info("Update finished!")
+                        break
             if time.time() - startTime >= timeout: # took too long for launching to be ready
                 raise SessionException(self, "League client launch timed out")
             time.sleep(1)
@@ -97,7 +114,5 @@ class RiotConnection(Connection):
         authSuccess = self.__authenticate(username, password)
         if not authSuccess == "OK": # something went wrong during login
             raise AuthenticationException(self, authSuccess["error"].upper())
-
-        self.__acceptEULA()
 
         self.__waitForLaunch()

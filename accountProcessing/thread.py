@@ -22,14 +22,14 @@ def checkForGracefulExit(exitFlag, connection=None):
         return False
 
 # handles task execution on a given account
-def execute(account, settings, lock, progress, exitFlag):   
+def execute(account, settings, lock, progress, exitFlag, allowPatching):   
     failCount = 0
 
     while True:
         try:
             checkForGracefulExit(exitFlag)
 
-            executeAccount(account, settings, lock, exitFlag)
+            executeAccount(account, settings, lock, exitFlag, allowPatching)
 
             if not checkForGracefulExit(exitFlag): # if graceful exit is triggered, no longer need to track progress
                 progress.add()
@@ -54,17 +54,17 @@ def execute(account, settings, lock, progress, exitFlag):
             return
 
 # performs tasks on a given account, check for graceful exit flag between tasks
-def executeAccount(account, settings, lock, exitFlag):
+def executeAccount(account, settings, lock, exitFlag, allowPatching):
     logging.info("Executing tasks on account: " + account["username"])
 
-    riotConnection = handleRiotClient(account, settings, lock)
+    riotConnection = handleRiotClient(account, settings, lock, allowPatching)
 
     if riotConnection is None:
         return
     
     checkForGracefulExit(exitFlag, riotConnection)
     
-    leagueConnection = handleLeagueClient(account, settings, lock, riotConnection)
+    leagueConnection = handleLeagueClient(account, settings, lock, riotConnection, allowPatching)
 
     if leagueConnection is None:
         return
@@ -83,8 +83,8 @@ def executeAccount(account, settings, lock, exitFlag):
     leagueConnection.__del__() # tasks finished, terminate clients
     account["state"] = "OK"
 
-def handleRiotClient(account, settings, lock):
-    riotConnection = RiotConnection(settings["riotClient"], lock)
+def handleRiotClient(account, settings, lock, allowPatching):
+    riotConnection = RiotConnection(settings["riotClient"], lock, allowPatching)
 
     try:
         riotConnection.login(account["username"], account["password"])
@@ -101,9 +101,9 @@ def handleRiotClient(account, settings, lock):
         
     return riotConnection
 
-def handleLeagueClient(account, settings, lock, riotConnection):
+def handleLeagueClient(account, settings, lock, riotConnection, allowPatching):
     try:
-        leagueConnection = LeagueConnection(settings["leagueClient"], riotConnection, account["region"], lock)
+        leagueConnection = LeagueConnection(settings["leagueClient"], riotConnection, account["region"], lock, allowPatching)
         leagueConnection.waitForSession()
     except AccountBannedException as ban:
         # add ban information to the account for export
