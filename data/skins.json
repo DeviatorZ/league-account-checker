@@ -48042,6 +48042,136 @@
         ],
         "description": "The Ocean Song Festival is lucky to have Nidalee as its performer stylist, with her fashion guides selling almost as much as her albums, but in reality she's here as a featured part of Yone's show. She was the first person he showed his lyrics to, and it's her honor to lend them her voice."
     },
+    "76039": {
+        "id": 76039,
+        "isBase": false,
+        "name": "Kittalee",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/76/76039.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/76/76039.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/76/76039.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Nidalee/Skins/Skin39/NidaleeLoadScreen_39.PIE_C_13_7.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/76/76039.png",
+        "chromas": [
+            {
+                "id": 76040,
+                "name": "Kittalee",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/76/76040.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 76041,
+                "name": "Kittalee",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/76/76041.png",
+                "colors": [
+                    "#DF9117",
+                    "#DF9117"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 76042,
+                "name": "Kittalee",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/76/76042.png",
+                "colors": [
+                    "#6ABBEE",
+                    "#6ABBEE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 76043,
+                "name": "Kittalee",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/76/76043.png",
+                "colors": [
+                    "#B6E084",
+                    "#B6E084"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 76044,
+                "name": "Kittalee",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/76/76044.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 76045,
+                "name": "Kittalee",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/76/76045.png",
+                "colors": [
+                    "#9C68D7",
+                    "#9C68D7"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 76046,
+                "name": "Kittalee",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/76/76046.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 76047,
+                "name": "Kittalee",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/76/76047.png",
+                "colors": [
+                    "#ECF9F8",
+                    "#ECF9F8"
+                ],
+                "descriptions": [],
+                "rarities": []
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 98
+            }
+        ],
+        "description": "Adorable squeaky toy or deadly weapon? In Nidalee's claws, a Friendly Fish (TM) can be both!"
+    },
     "77000": {
         "id": 77000,
         "isBase": true,
@@ -71932,7 +72062,7 @@
         "splashPath": "/lol-game-data/assets/v1/champion-splashes/120/120000.jpg",
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/120/120000.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/120/120000.jpg",
-        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Hecarim/Skins/Base/HecarimLoadScreen.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Hecarim/Skins/Base/HecarimLoadscreen_0.PIE_C_13_6.jpg",
         "skinType": "",
         "rarity": "kNoRarity",
         "isLegacy": false,
@@ -86666,6 +86796,136 @@
         ],
         "description": "Once a skilled hunter and her fierce hound, the two were so bonded that their souls remained together when they were preserved inside the Dog Zodiac Relic. Now they are two halves of a whole, mentoring generations of Protectors like Lux and Amumu and standing guard eternally over the ancient magic that keeps them alive."
     },
+    "203022": {
+        "id": 203022,
+        "isBase": false,
+        "name": "Woof and Lamb Kindred",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/203/203022.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/203/203022.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/203/203022.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Kindred/skins/Skin22/KindredLoadScreen_22.PIE_C_13_7.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/203/203022.png",
+        "chromas": [
+            {
+                "id": 203024,
+                "name": "Woof and Lamb Kindred",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/203/203024.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 203025,
+                "name": "Woof and Lamb Kindred",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/203/203025.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 203026,
+                "name": "Woof and Lamb Kindred",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/203/203026.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 203027,
+                "name": "Woof and Lamb Kindred",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/203/203027.png",
+                "colors": [
+                    "#DF9117",
+                    "#DF9117"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 203028,
+                "name": "Woof and Lamb Kindred",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/203/203028.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 203029,
+                "name": "Woof and Lamb Kindred",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/203/203029.png",
+                "colors": [
+                    "#FFEE59",
+                    "#FFEE59"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 203030,
+                "name": "Woof and Lamb Kindred",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/203/203030.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 203031,
+                "name": "Woof and Lamb Kindred",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/203/203031.png",
+                "colors": [
+                    "#85827F",
+                    "#85827F"
+                ],
+                "descriptions": [],
+                "rarities": []
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 98
+            }
+        ],
+        "description": "Who said dogs and cats can't be best friends? Cat ladies and golden retriever boyfriends pitting the two against each other for centuries? Eh, forget all that! Woof and Lamb are living proof that canines and felines CAN get along... though the judges are not actually sure either of them are \"alive\"."
+    },
     "221000": {
         "id": 221000,
         "isBase": true,
@@ -91608,6 +91868,146 @@
         ],
         "description": "Throughout history, the Marauders have balanced on the knife's edge between brutality and cunning. General Kled, one half of the pair that currently leads the regime, is truly the incarnation of their historic brutality\u2026 and little more. If it weren't for Xin Zhao, Kled would bet everything on a final, bloody, battle."
     },
+    "240018": {
+        "id": 240018,
+        "isBase": false,
+        "name": "Kibble-Head Kled",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/240/240018.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/240/240018.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/240/240018.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Kled/Skins/Skin18/KledLoadScreen_18.PIE_C_13_7.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/240/240018.png",
+        "chromas": [
+            {
+                "id": 240019,
+                "name": "Kibble-Head Kled",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/240/240019.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 240020,
+                "name": "Kibble-Head Kled",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/240/240020.png",
+                "colors": [
+                    "#FFEE59",
+                    "#FFEE59"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 240021,
+                "name": "Kibble-Head Kled",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/240/240021.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 240022,
+                "name": "Kibble-Head Kled",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/240/240022.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "Obtained through Influencer audience giveaways."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 240023,
+                "name": "Kibble-Head Kled",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/240/240023.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 240024,
+                "name": "Kibble-Head Kled",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/240/240024.png",
+                "colors": [
+                    "#9C68D7",
+                    "#9C68D7"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 240025,
+                "name": "Kibble-Head Kled",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/240/240025.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 240026,
+                "name": "Kibble-Head Kled",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/240/240026.png",
+                "colors": [
+                    "#ECF9F8",
+                    "#ECF9F8"
+                ],
+                "descriptions": [],
+                "rarities": []
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 98
+            }
+        ],
+        "description": "He's just a lil' guy wearing a bowl of Poro-Pup Chow as a hat, riding the bestest beagle into battle. The get-up won Kled and Skaarl a blue ribbon at Beagle's Bridge, so if ain't broke, don't fix it. Here's hoping that the more \"refined\" judges at this year's Summoner Sweetie's Pet Show agree."
+    },
     "245000": {
         "id": 245000,
         "isBase": true,
@@ -96406,6 +96806,136 @@
             }
         ],
         "description": "Honoring Meiko's winning performance as Yuumi during the 2021 World Championship."
+    },
+    "350039": {
+        "id": 350039,
+        "isBase": false,
+        "name": "Shiba Yuumi",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/350/350039.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/350/350039.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/350/350039.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Yuumi/Skins/Skin39/YuumiLoadScreen_39.PIE_C_13_7.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/350/350039.png",
+        "chromas": [
+            {
+                "id": 350040,
+                "name": "Shiba Yuumi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/350/350040.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 350041,
+                "name": "Shiba Yuumi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/350/350041.png",
+                "colors": [
+                    "#6ABBEE",
+                    "#6ABBEE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 350042,
+                "name": "Shiba Yuumi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/350/350042.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 350043,
+                "name": "Shiba Yuumi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/350/350043.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 350044,
+                "name": "Shiba Yuumi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/350/350044.png",
+                "colors": [
+                    "#9C68D7",
+                    "#9C68D7"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 350045,
+                "name": "Shiba Yuumi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/350/350045.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 350046,
+                "name": "Shiba Yuumi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/350/350046.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 350047,
+                "name": "Shiba Yuumi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/350/350047.png",
+                "colors": [
+                    "#ECF9F8",
+                    "#ECF9F8"
+                ],
+                "descriptions": [],
+                "rarities": []
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 98
+            }
+        ],
+        "description": "Something about this smol, dainty dog doesn't feel right... Wait, did it just hiss at the audience?"
     },
     "360000": {
         "id": 360000,
