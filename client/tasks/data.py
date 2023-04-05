@@ -145,6 +145,8 @@ def getRank(leagueConnection, account):
 
 # try to queue up and check if there's a low priority queue penalty
 def getLowPriorityQueue(leagueConnection, account):
+    leagueConnection.waitForUpdate()
+    
     queueArgs = {
         "queueId": 430, # Blind pick
     }

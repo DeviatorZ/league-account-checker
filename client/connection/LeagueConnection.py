@@ -4,17 +4,21 @@ from client.connection.exceptions import RequestException
 from client.connection.exceptions import SessionException
 from client.connection.exceptions import AccountBannedException
 import time
+import logging
+import math
 
-# handles league client and it's api
+# handles league client and it"s api
 class LeagueConnection(Connection):
-    def __init__(self, path, riotConnection, region, lock):
+    def __init__(self, path, riotConnection, region, lock, allowPatching):
         # start a league client and wait for connection to avoid port conflicts and api rate limits
+        self.__allowPatching = allowPatching
+        self.__path = path
+        self.__riotConnection = riotConnection
+        self.__riotCredentials = self.__riotConnection.getCredentials()
+        self.__region = region
+
         with lock:
             Connection.__init__(self)
-            self.__path = path
-            self.__riotConnection = riotConnection
-            self.__riotCredentials = self.__riotConnection.getCredentials()
-            self.__region = region
             self.__getClient()
             self.__waitForConnection()
 
@@ -28,12 +32,14 @@ class LeagueConnection(Connection):
             # specify our own port and token for league client so we can connect to api
             "--app-port=" + self._port,
             "--remoting-auth-token=" + self._authToken,
-            "--allow-multiple-clients", 
             "--locale=en_GB",
-            "--disable-self-update",
             "--region=" + self.__region, # region of the account logged in on riot client (league client session fails without this)
             "--headless"
         ]
+
+        if not self.__allowPatching:
+            processArgs.append("--allow-multiple-clients")
+            processArgs.append("--disable-self-update")
 
         Connection.getClient(self, processArgs)
 
@@ -44,7 +50,7 @@ class LeagueConnection(Connection):
     # handles api requests to the client
     # raises ConnectionException if the request fails
     def request(self, method, url, *args, **kwargs):
-        # handle api request, make sure the request is successful - raise a ConnectionException if it isn't
+        # handle api request, make sure the request is successful - raise a ConnectionException if it isn"t
         try:
             response = Connection.request(self, method, url, *args, **kwargs)
             if response.ok:
@@ -64,7 +70,7 @@ class LeagueConnection(Connection):
         except Exception:
             raise ConnectionException(self)
         
-    # waits until league client finishes loading a session (lcu api can't be used until it's done)
+    # waits until league client finishes loading a session (lcu api can"t be used until it"s done)
     # raises AccountBannedException if the account is banned
     # raises SessionException if it took too long or if login failed
     def waitForSession(self, timeout=60):
@@ -85,6 +91,39 @@ class LeagueConnection(Connection):
             
             if time.time() - startTime >= timeout: # session took too long to load
                 raise SessionException(self, "Session timed out")
+            time.sleep(1)
+
+    # waits for league client to finish patching
+    # raises SessionException if it took too long
+    def waitForUpdate(self, timeout=7200):
+        if not self.__allowPatching:
+            return
+    
+        startTime = time.time()
+        currentAction = "Unknown"
+        currentProgressPercent = -1
+
+        while True:
+            clientState = self.get("/lol-patch/v1/products/league_of_legends/state").json()
+
+            action = clientState.get("action", "Unknown")
+            if action == "Idle":
+                if currentAction != "Unknown":
+                    logging.info("Update finished!")
+                return
+            elif action != currentAction: # avoid repetition in logs
+                currentAction = action
+                logging.info(f"{currentAction} LeagueClient...")
+
+            progress = clientState["components"][0]["progress"]["total"]
+            progressPercent = math.floor(progress["bytesComplete"] / progress["bytesRequired"] * 100)
+
+            if progressPercent != currentProgressPercent: # avoid repetition in logs
+                currentProgressPercent = progressPercent
+                logging.info(f"{currentProgressPercent}% completed.")
+
+            if time.time() - startTime >= timeout: # update took too long
+                raise SessionException(self, "Update timed out")
             time.sleep(1)
 
     # terminates league client and then riot client
