@@ -54,6 +54,11 @@ class RiotConnection(Connection):
         # handle api request, make sure the request is successful - raise a ConnectionException if it isn't
         try:
             response = Connection.request(self, method, url, *args, **kwargs)
+            
+            # RSO session failure
+            if url == "/rso-auth/v1/session/credentials" and response.status_code == 400:
+                return None
+            
             if response.ok:
                 return response
 
@@ -72,7 +77,10 @@ class RiotConnection(Connection):
     def __authenticate(self, username, password):
         data = {"username": username, "password": password, 'persistLogin': False}
         response = self.put("/rso-auth/v1/session/credentials", json=data)
-        
+
+        if response is None:
+            raise AuthenticationException(self, "CREDENTIALS_400")
+
         responseJson = response.json()
             
         if responseJson["error"]: # something went wrong during login
