@@ -17,7 +17,7 @@ class Connection(Session):
         retry = urllib3.util.retry.Retry(
             total = 5,
             respect_retry_after_header = True,
-            status_forcelist = [429, 404, 500, 400],
+            status_forcelist = [429, 404, 500],
             backoff_factor = 1
         )
 
