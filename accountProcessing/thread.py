@@ -20,10 +20,17 @@ def checkForGracefulExit(exitFlag, connection=None):
         raise GracefulExit(connection)
     else:
         return False
+    
+def handleFailure(account, progress, exitFlag):
+    logging.error(f"Too many failed attempts on account: {account['username']}. Skipping...")
+    account["state"] = "RETRY_LIMIT_EXCEEDED"
+    if not checkForGracefulExit(exitFlag): # if graceful exit is triggered, no longer need to track progress
+        progress.add()
 
 # handles task execution on a given account
 def execute(account, settings, lock, progress, exitFlag, allowPatching):   
     failCount = 0
+    rateLimitCount = 0
 
     while True:
         try:
@@ -36,20 +43,24 @@ def execute(account, settings, lock, progress, exitFlag, allowPatching):
 
             return
         except RateLimitedException as exception: # rate limited, wait before trying again
+            rateLimitCount += 1
+            if rateLimitCount >= 5:
+                handleFailure(account, progress, exitFlag)
+                return
+            
             logging.error(f"{account['username']} {exception.message}. Waiting before retrying...")
-            for _ in range(30):
-                sleep(10)
+            for _ in range(150 * 2**rateLimitCount): # 5min, 10min, 20min, 40min
+                sleep(1)
                 checkForGracefulExit(exitFlag)
         except (ConnectionException, SessionException) as exception: # something went wrong with api
             logging.error(f"{account['username']} {exception.message}. Retrying...")
 
             failCount += 1
             if failCount >= 5:
-                logging.error(f"Too many failed attempts on account: {account['username']}. Skipping...")
-                account["state"] = "RETRY_LIMIT_EXCEEDED"
-                if not checkForGracefulExit(exitFlag): # if graceful exit is triggered, no longer need to track progress
-                    progress.add()
+                handleFailure(account, progress, exitFlag)
                 return
+            
+            sleep(1)
         except GracefulExit:
             return
 
@@ -93,10 +104,11 @@ def handleRiotClient(account, settings, lock, allowPatching):
     except AuthenticationException as exception:
         if exception.error == "RATE_LIMITED": # rate limited due too many accounts with incorrect credentials
             raise RateLimitedException(riotConnection, "Too many login attempts")
+        elif exception.error == "CREDENTIALS_400":
+            raise RateLimitedException(riotConnection, "Too many login attempts or 'Stay signed in' is enabled")
         else: # wrong credentials / account needs updating
             logging.error(f"{account['username']} AuthenticationException: {exception.error}")
             account["state"] = exception.error
-            riotConnection.__del__()
             return None
         
     return riotConnection
