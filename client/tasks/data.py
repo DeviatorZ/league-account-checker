@@ -69,11 +69,11 @@ def getCurrencies(lootJson, account):
 # obtains account's information on rental, permanent and owned skins
 def getSkins(leagueConnection, loot, skins, account):
     skinShardsRental = loot.getShardIdsByPattern("CHAMPION_SKIN_RENTAL_(\d+)")
-    account["skinShardsRental"]= ", ".join(skins.getSkinById(id) for id in skinShardsRental if skins.getSkinById(id) is not None)
+    account["skinShardsRental"] = ", ".join(skins.getSkinById(id) for id in skinShardsRental if skins.getSkinById(id) is not None)
     account["skinShardsRentalCount"] = len(skinShardsRental)
 
     skinShardsPermanent = loot.getShardIdsByPattern("CHAMPION_SKIN_(\d+)")
-    account["skinShardsPermanent"]= ", ".join(skins.getSkinById(id) for id in skinShardsPermanent if skins.getSkinById(id) is not None)
+    account["skinShardsPermanent"] = ", ".join(skins.getSkinById(id) for id in skinShardsPermanent if skins.getSkinById(id) is not None)
     account["skinShardsPermanentCount"] = len(skinShardsPermanent)
 
     ownedSkins = leagueConnection.get("/lol-inventory/v2/inventory/CHAMPION_SKIN").json()
@@ -86,8 +86,14 @@ def getSkins(leagueConnection, loot, skins, account):
         account["ownedSkinsCount"] = 1
     else:
         account["ownedSkinsCount"] = 0
+    
+    account["skinShardsAll"] = ', '.join(filter(None, (account["skinShardsRental"], account["skinShardsPermanent"])))
+    account["skinShardsAllCount"] = account["skinShardsRentalCount"] + account["skinShardsPermanentCount"]
 
-# obtains account's information on owned skins
+    account["allSkins"] = ', '.join(filter(None, (account["skinShardsAll"], account["ownedSkins"])))
+    account["allSkinsCount"] = account["skinShardsAllCount"] + account["ownedSkinsCount"]
+
+# obtains account's information on owned champions
 def getChampions(leagueConnection, champions, account):
     ownedChampions = leagueConnection.get("/lol-champions/v1/owned-champions-minimal").json()
     account["ownedChampions"] = ", ".join(champions.getChampionById(champion["id"]) for champion in ownedChampions if champions.getChampionById(champion["id"]) is not None and champion["ownership"]["owned"])
@@ -114,14 +120,18 @@ def getRank(leagueConnection, account):
     soloTier = ((rankedStats["queueMap"]["RANKED_SOLO_5x5"]["tier"]).lower()).capitalize()
     if soloTier == "None":
         account["soloTier"] = "Unranked"
+        account["soloTierStart"] = "U"
         account["soloDivision"] = ""
+        account["soloDivisionDigit"] = ""
         account["soloLP"] = ""
         account["soloWins"] = ""
         account["soloLosses"] = ""
         account["soloWinrate"] = ""
     else:
         account["soloTier"] = soloTier
+        account["soloTierStart"] = soloTier[0]
         account["soloDivision"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["division"]
+        account["soloDivisionDigit"] = romanNumbers[account["soloDivision"]]
         account["soloLP"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["leaguePoints"]
         account["soloWins"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["wins"]
         account["soloLosses"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["losses"]
@@ -130,14 +140,18 @@ def getRank(leagueConnection, account):
     flexTier = ((rankedStats["queueMap"]["RANKED_FLEX_SR"]["tier"]).lower()).capitalize()
     if flexTier == "None":
         account["flexTier"] = "Unranked"
+        account["flexTierStart"] = "U"
         account["flexDivision"] = ""
+        account["flexDivisionDigit"] = ""
         account["flexLP"] = ""
         account["flexWins"] = ""
         account["flexLosses"] = ""
         account["flexWinrate"] = ""
     else:
         account["flexTier"] = flexTier
+        account["flexTierStart"] = flexTier[0]
         account["flexDivision"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["division"]
+        account["flexDivisionDigit"] = romanNumbers[account["flexDivision"]]
         account["flexLP"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["leaguePoints"]
         account["flexWins"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["wins"]
         account["flexLosses"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["losses"]
