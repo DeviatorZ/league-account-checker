@@ -1,11 +1,7 @@
 from time import sleep
-
+import logging
 # claims event rewards
 def claimEventRewards(leagueConnection):
-    eventAvailable = leagueConnection.post("/lol-event-shop/v1/lazy-load-data")
-    if eventAvailable is None:
-        return
-        
     leagueConnection.post("/lol-event-shop/v1/claim-select-all")
 
 # buys an event shop offer by offer id
@@ -14,12 +10,10 @@ def buyOffer(leagueConnection, offerId):
 
 # finds an offer that matches the price and id and spends as many tokens as possible on the offer
 def buyOfferByPriceAndId(leagueConnection, price, id):
-    eventAvailable = leagueConnection.post("/lol-event-shop/v1/lazy-load-data")
-    if eventAvailable is None:
-        return
-
     tokenShop = leagueConnection.get("/lol-event-shop/v1/categories-offers").json()
-
+    if tokenShop is None:
+        return
+    
     offerId = ""
 
     for offerCategory in tokenShop:
