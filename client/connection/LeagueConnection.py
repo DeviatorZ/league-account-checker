@@ -57,7 +57,7 @@ class LeagueConnection(Connection):
                 return response
 
             # no token event is currently running
-            if url == "/lol-event-shop/v1/lazy-load-data" and response.status_code == 404:
+            if (url == "/lol-event-shop/v1/claim-select-all" or url == "/lol-event-shop/v1/categories-offers") and not response.ok:
                 return None
             
             # got a queue penalty
