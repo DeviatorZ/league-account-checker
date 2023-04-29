@@ -18,7 +18,7 @@ def getAccounts(settings):
     accounts = []
 
     # read account file
-    with open(settings["accountsFile"]) as csvfile:
+    with open(settings["accountsFile"], encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile, delimiter=settings["accountsDelimiter"])
         for index, row in enumerate(reader, start=1):
             if row[0] == "":
