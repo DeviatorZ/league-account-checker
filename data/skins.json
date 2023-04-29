@@ -5824,7 +5824,7 @@
         "rarityGemPath": null,
         "skinLines": [
             {
-                "id": 125
+                "id": 193
             }
         ],
         "description": "The chaotic king of the night, Vladimir exists as the personification of uncertainty and revelry. He thrives in the unknown shadows, feeding on the life essence and darkness found in mortal hearts."
@@ -12273,7 +12273,7 @@
         "rarityGemPath": null,
         "skinLines": [
             {
-                "id": 124
+                "id": 193
             }
         ],
         "description": "A child of the gods born when chaos slew order, Soraka contains within her the powers of both Riven and Yasuo. To end the conflict of the gods, she has embraced the light to pierce the darkness, drawing on the powers of dawn to bring order to the chaotic world."
@@ -12299,7 +12299,7 @@
         "rarityGemPath": null,
         "skinLines": [
             {
-                "id": 125
+                "id": 193
             }
         ],
         "description": "A child of the gods born when chaos slew order, Soraka contains within her the powers of both Riven and Yasuo. To end the conflict of the gods, she has embraced the darkness to soothe the blinding light, drawing on the powers of night to create chaos and change in a too-static world."
@@ -18795,7 +18795,7 @@
         "rarityGemPath": null,
         "skinLines": [
             {
-                "id": 125
+                "id": 193
             }
         ],
         "description": "A fiendish god of rage and battle, Tryndamere embodies the moment when war descends into bloodied frenzy. Peace is anathema, but perhaps Yone's crusade presents an opportunity\u2026 After all, to Tryndamere, chaos is best when it is born of order's decay."
@@ -20282,7 +20282,7 @@
         "rarityGemPath": null,
         "skinLines": [
             {
-                "id": 124
+                "id": 193
             }
         ],
         "description": "Determined to see order triumph over chaos, Morgana has sacrificed much to tip the scales in favor of light. If dawn emerges victorious, she is certain that they can avoid the gods' destruction and usher in a new age, one free from the corruption of chaos\u2026 Perhaps then Yone will see balance for the delusion that it is."
@@ -32186,7 +32186,7 @@
         "rarityGemPath": null,
         "skinLines": [
             {
-                "id": 124
+                "id": 193
             }
         ],
         "description": "Charged with governing the cosmic cycles of death and rebirth, Karma fights to protect the wellspring of souls as they journey to reincarnation. More so than the other cosmic beings, she cares for the mortal souls she shepherds, striving to create a more structured world."
@@ -40455,6 +40455,136 @@
         ],
         "description": "A hybridized warrior taking inspiration from extinct fauna, Renekton is the perfected version of PROJECT's crossbreed superweapon project. Released to aid the City in its fight against the Program virus, Renekton's seemingly endless rage is useful for now\u2026 though his belief that he can \u201csee beyond the soul\u201d is increasingly disconcerting."
     },
+    "58033": {
+        "id": 58033,
+        "isBase": false,
+        "name": "Dawnbringer Renekton",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/58/58033.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/58/58033.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/58/58033.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Renekton/Skins/Skin33/RenektonLoadScreen_33.PIE_C_13_8.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/58/58033.png",
+        "chromas": [
+            {
+                "id": 58034,
+                "name": "Dawnbringer Renekton",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/58/58034.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 58035,
+                "name": "Dawnbringer Renekton",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/58/58035.png",
+                "colors": [
+                    "#DF9117",
+                    "#DF9117"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 58036,
+                "name": "Dawnbringer Renekton",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/58/58036.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 58037,
+                "name": "Dawnbringer Renekton",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/58/58037.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 58038,
+                "name": "Dawnbringer Renekton",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/58/58038.png",
+                "colors": [
+                    "#54209B",
+                    "#54209B"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 58039,
+                "name": "Dawnbringer Renekton",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/58/58039.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 58040,
+                "name": "Dawnbringer Renekton",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/58/58040.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 58041,
+                "name": "Dawnbringer Renekton",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/58/58041.png",
+                "colors": [
+                    "#ECF9F8",
+                    "#ECF9F8"
+                ],
+                "descriptions": [],
+                "rarities": []
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 193
+            }
+        ],
+        "description": "In the aftermath of chaos slaying order, two brothers were born: the embodiments of cause, Renekton, and effect, Nasus. As executioner for the Dawnbringers, Renekton has become more frenzied from battling his kin, but he still holds to his view that everything must have a purpose. For what function does chaos serve, if not to cause more chaos?"
+    },
     "59000": {
         "id": 59000,
         "isBase": true,
@@ -41143,6 +41273,170 @@
             }
         ],
         "description": "Celebrating Worlds 2021 in Reykjav\u00edk."
+    },
+    "59035": {
+        "id": 59035,
+        "isBase": false,
+        "name": "Nightbringer Jarvan IV",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/59/59035.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/59/59035.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/59/59035.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/JarvanIV/Skins/Skin35/JarvanIVLoadScreen_35.PIE_C_13_8.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/59/59035.png",
+        "chromas": [
+            {
+                "id": 59036,
+                "name": "Nightbringer Jarvan IV",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/59/59036.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 2
+                    },
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 59037,
+                "name": "Nightbringer Jarvan IV",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/59/59037.png",
+                "colors": [
+                    "#DF9117",
+                    "#DF9117"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 59038,
+                "name": "Nightbringer Jarvan IV",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/59/59038.png",
+                "colors": [
+                    "#9C68D7",
+                    "#9C68D7"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 59039,
+                "name": "Nightbringer Jarvan IV",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/59/59039.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 59040,
+                "name": "Nightbringer Jarvan IV",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/59/59040.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 2
+                    }
+                ]
+            },
+            {
+                "id": 59041,
+                "name": "Nightbringer Jarvan IV",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/59/59041.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 59042,
+                "name": "Nightbringer Jarvan IV",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/59/59042.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 59043,
+                "name": "Nightbringer Jarvan IV",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/59/59043.png",
+                "colors": [
+                    "#ECF9F8",
+                    "#ECF9F8"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 193
+            }
+        ],
+        "description": "Jarvan is the magnetism of chaos made real. Like the eye of a hurricane, his destruction inevitably sweeps up anyone and anything in his path. To him, chaos is the forge from which true gods are made, and only those that survive the war will be worthy to live in the new age of creation that follows."
     },
     "60000": {
         "id": 60000,
@@ -43590,7 +43884,7 @@
         "rarityGemPath": null,
         "skinLines": [
             {
-                "id": 125
+                "id": 193
             }
         ],
         "description": "Lee Sin thrives in the heat of combat. An embodiment of passion and fury, he rules over the raw, chaotic emotions of the heart. While his siblings fight for various ideals, Lee Sin fights for the thrill of battle itself, striking with power and unpredictability."
@@ -43616,7 +43910,7 @@
         "rarityGemPath": null,
         "skinLines": [
             {
-                "id": 125
+                "id": 193
             }
         ],
         "description": "Fully consumed by chaos and his blind devotion to the thrill of battle, Lee Sin has become night incarnate, gilded by his divinity."
@@ -43841,7 +44135,7 @@
         "rarityGemPath": null,
         "skinLines": [
             {
-                "id": 125
+                "id": 193
             }
         ],
         "description": "Fully consumed by chaos and his blind devotion to the thrill of battle, Lee Sin has become night incarnate, gilded by his divinity."
@@ -44812,6 +45106,170 @@
             }
         ],
         "description": "Vayne has donned her even finer Lunar Revel garb, noting the growing anxiety around her explosive-shooting metal wrist-pig. Fashion upgrades solve all problems."
+    },
+    "67044": {
+        "id": 67044,
+        "isBase": false,
+        "name": "Dawnbringer Vayne",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/67/67044.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/67/67044.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/67/67044.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Vayne/Skins/Skin44/VayneLoadScreen_44.PIE_C_13_8.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/67/67044.png",
+        "chromas": [
+            {
+                "id": 67045,
+                "name": "Dawnbringer Vayne",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/67/67045.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 2
+                    },
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 67046,
+                "name": "Dawnbringer Vayne",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/67/67046.png",
+                "colors": [
+                    "#54209B",
+                    "#54209B"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 67047,
+                "name": "Dawnbringer Vayne",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/67/67047.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 2
+                    }
+                ]
+            },
+            {
+                "id": 67048,
+                "name": "Dawnbringer Vayne",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/67/67048.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 67049,
+                "name": "Dawnbringer Vayne",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/67/67049.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 67050,
+                "name": "Dawnbringer Vayne",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/67/67050.png",
+                "colors": [
+                    "#DF9117",
+                    "#DF9117"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 67051,
+                "name": "Dawnbringer Vayne",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/67/67051.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 67052,
+                "name": "Dawnbringer Vayne",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/67/67052.png",
+                "colors": [
+                    "#C1F2FF",
+                    "#C1F2FF"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 193
+            }
+        ],
+        "description": "An overconfident god keen to show her potential to the Dawnbringers, Vayne ruthlessly hunts the Nightbringers out of her deep fear of the gods' foretold destruction. So violent are her actions that she undermines herself by leaving even more chaos in her wake. Still, she hopes killing Jarvan will be enough to cement her standing within the light."
     },
     "68000": {
         "id": 68000,
@@ -47342,6 +47800,136 @@
         ],
         "description": "Nasus is Strike Team Hyperion's intelligence officer. His exosuit, the S02-Anubis, is a new model of power armor that offers increased durability, energy-siphoning power cells, and access to in-depth analysis tech for processing mission-critical information. He will see Hyperion succeed; if they don't, there's no telling what destruction rogue exo-pilots may wreak."
     },
+    "75045": {
+        "id": 75045,
+        "isBase": false,
+        "name": "Nightbringer Nasus",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/75/75045.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/75/75045.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/75/75045.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Nasus/Skins/Skin45/NasusLoadScreen_45.PIE_C_13_8.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/75/75045.png",
+        "chromas": [
+            {
+                "id": 75046,
+                "name": "Nightbringer Nasus",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/75/75046.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 75047,
+                "name": "Nightbringer Nasus",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/75/75047.png",
+                "colors": [
+                    "#DF9117",
+                    "#DF9117"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 75048,
+                "name": "Nightbringer Nasus",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/75/75048.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 75049,
+                "name": "Nightbringer Nasus",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/75/75049.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 75050,
+                "name": "Nightbringer Nasus",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/75/75050.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 75051,
+                "name": "Nightbringer Nasus",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/75/75051.png",
+                "colors": [
+                    "#54209B",
+                    "#54209B"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 75052,
+                "name": "Nightbringer Nasus",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/75/75052.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 75053,
+                "name": "Nightbringer Nasus",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/75/75053.png",
+                "colors": [
+                    "#C1F2FF",
+                    "#C1F2FF"
+                ],
+                "descriptions": [],
+                "rarities": []
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 193
+            }
+        ],
+        "description": "Nasus is forever linked with his causal brother, Renekton, not just through the scars left on each other from their battles, but also through the insight he's gained. Before, he was content to act without reason in pursuit of chaos, but now, he enjoys finding weaknesses and dismantling them for total havoc. Cause for maximum effect."
+    },
     "76000": {
         "id": 76000,
         "isBase": true,
@@ -47728,7 +48316,7 @@
         "rarityGemPath": null,
         "skinLines": [
             {
-                "id": 124
+                "id": 193
             }
         ],
         "description": "Both a celestial beast and a dawn-walking primordial, Nidalee rules over the restorative calm of the natural world. She guards the land's remaining peaceful places, bringing light and order to the mortal creatures under her care."
@@ -48317,6 +48905,31 @@
             }
         ],
         "description": "Every dragon that dies leaves behind a blazing spirit. Through Udyr, a mystic who doubted the old tales, these dragon spirits have the chance to touch life once again. He believes that dragons are only as evil as those who command them and, in channeling the spirits and their flames, seeks to prove it to the slayers."
+    },
+    "77006": {
+        "id": 77006,
+        "isBase": false,
+        "name": "Inkshadow Udyr",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/77/77006.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/77/77006.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/77/77006.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Udyr/Skins/Skin06/UdyrLoadScreen_6.PIE_C_13_8.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": null,
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 192
+            }
+        ],
+        "description": "Udyr has given up much as tattoo artist for the Inkshadow Warriors, sacrificing pieces of himself to multiple spirits and covering his body in their arcane contracts to enhance his natural second sight. He sees the souls of his canvases, knows the price they must pay, and connects them to the spirits who will give them the power to do what must be done."
     },
     "78000": {
         "id": 78000,
@@ -57804,6 +58417,22 @@
                         "rarity": 1
                     }
                 ]
+            },
+            {
+                "id": 92056,
+                "name": "Dawnbringer Riven",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/92/92056.png",
+                "colors": [
+                    "#8C1517",
+                    "#2E2630"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 4
+                    }
+                ]
             }
         ],
         "emblems": null,
@@ -57811,7 +58440,7 @@
         "rarityGemPath": null,
         "skinLines": [
             {
-                "id": 124
+                "id": 193
             }
         ],
         "description": "Born from swirling energies at the dawn of creation, Riven is the living embodiment of order in the cosmos. Fated to clash against the Nightbringer for all time, she awaits a day when her light will finally break his darkness."
@@ -78560,6 +79189,31 @@
         ],
         "description": "The dragon Aurelion Sol, known to seven generations of worshippers as Ao Shin, has long awaited the ascent of a warrior worthy of receiving the power of the storm. Now, with Lee Sin's transformation into the Dragonmancer, Ao Shin has directed his impossible power towards purging the world of evil."
     },
+    "136021": {
+        "id": 136021,
+        "isBase": false,
+        "name": "Inkshadow Aurelion Sol",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/136/136021.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/136/136021.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/136/136021.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/AurelionSol/Skins/Skin21/AurelionSolLoadScreen_21.PIE_C_13_8.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": null,
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 192
+            }
+        ],
+        "description": "An ancient spirit that has been making contracts with mortals through tattoos for centuries, Aurelion Sol grants inhuman power in exchange for the life force of his pawns, letting them slowly waste away until they inevitably succumb to his appetite. There is always another conflict, another war\u2014so he has grown powerful on their deals, ever feeding."
+    },
     "141000": {
         "id": 141000,
         "isBase": true,
@@ -78807,7 +79461,7 @@
         "rarityGemPath": null,
         "skinLines": [
             {
-                "id": 125
+                "id": 193
             }
         ],
         "description": "Rhaast was once an archon of light, a beacon of order\u2026 and now he is little more than a weapon in the hands of Kayn, an ambitious demi-god of dusk seeking true godhood. The two war within Kayn's own body, each determined to overthrow the other and lay claim to true divinity."
@@ -78833,7 +79487,7 @@
         "rarityGemPath": null,
         "skinLines": [
             {
-                "id": 125
+                "id": 193
             }
         ],
         "description": "Kayn and Rhaast are forged anew in the crucible of their clash. No longer are they a mere weapon, a mere demigod\u2014 they are forces of nature, warping each other and the raw energy around them, each hurtling towards a victory sure to shake the firmament itself."
@@ -81028,6 +81682,31 @@
         ],
         "description": "A born leader with a head for tactics, Kai'Sa takes her job as captain extremely seriously... perhaps too much for her own good. Still, her squad respects her command and will follow her into even the most dangerous missions, where she'll snipe priority targets and spray the rest with payloads of starlight-powered missiles."
     },
+    "145048": {
+        "id": 145048,
+        "isBase": false,
+        "name": "Inkshadow Kai'Sa",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/145/145048.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/145/145048.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/145/145048.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Kaisa/Skins/Skin48/KaisaLoadScreen_48.PIE_C_13_8.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": null,
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 192
+            }
+        ],
+        "description": "A young survivor who lost her father to the Cabal, Kai'Sa fled the city and joined the Uprising. Refusing to allow others to fight a battle on her behalf, she sacrificed her independence for the chance to fight back, receiving a magical, symbiotic tattoo she needs in order to live. Kai'Sa finally has the tools to get revenge. She will see justice done."
+    },
     "147000": {
         "id": 147000,
         "isBase": true,
@@ -82817,7 +83496,7 @@
         "rarityGemPath": null,
         "skinLines": [
             {
-                "id": 125
+                "id": 193
             }
         ],
         "description": "Born from festering echoes at the dawn of creation, Yasuo is the hellish embodiment of chaos in the cosmos. Fated to clash against the Dawnbringer for all time, he awaits a day when his darkness will finally cleave away her light."
@@ -83540,6 +84219,31 @@
             }
         ],
         "description": "The song of steel grew silent, and Yasuo was the last living soul on the battlefield\u2014though he imagined he could hear the thankful murmurs of the villagers he'd protected. Wounded and dying, Yasuo produced his flute to play a last haunting elegy. The Dragon of Dreams descended from its mountaintop, moved by Yasuo's song, and offered him its power..."
+    },
+    "157056": {
+        "id": 157056,
+        "isBase": false,
+        "name": "Inkshadow Yasuo",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/157/157056.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/157/157056.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/157/157056.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Yasuo/Skins/Skin56/YasuoLoadScreen_56.PIE_C_13_8.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": null,
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 192
+            }
+        ],
+        "description": "Displaced from his home alongside Master Yi, Yasuo now uses his Inkshadow tattoos to ride the wind between Rabadon City and the outskirts, protecting civilians seeking asylum with help from the mysterious Man of Masks. Though he gave up his freedom in exchange for power, he sees the price as penance for being unable to help those who needed it most."
     },
     "161000": {
         "id": 161000,
@@ -102300,6 +103004,7 @@
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/517/517008.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/517/517008.jpg",
         "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Sylas/Skins/Skin08/SylasLoadScreen_8.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Sylas/Skins/Skin08/SylasLoadscreen_8_LE.PIE_C_13_8.jpg",
         "skinType": "",
         "rarity": "kEpic",
         "isLegacy": false,
@@ -103417,7 +104122,7 @@
         "rarityGemPath": null,
         "skinLines": [
             {
-                "id": 125
+                "id": 193
             }
         ],
         "description": "Separated at primordial birth, Aphelios, a fiend of chaos, and Alune, an archoness of order, were created as enemies. Yet, drawn each night to wander by shared visions of the moon, they found each other. Abandoning their natures, they struggle to show creation that darkness can shine, even as other divinities endlessly war\u2026"
@@ -105113,7 +105818,7 @@
         "rarityGemPath": null,
         "skinLines": [
             {
-                "id": 124
+                "id": 193
             }
         ],
         "description": "Vex finds order in the day's descent to darkness, and spends her evenings watching her shadow chase the sun below the horizon. A preternaturally sour and unenthusiastic god, she finds the whole chaos and order 'thing' very blas\u00e9."
@@ -105672,7 +106377,7 @@
         "rarityGemPath": null,
         "skinLines": [
             {
-                "id": 124
+                "id": 193
             }
         ],
         "description": "Prophecy dictates that the gods will destroy each other, ushering in the end of creation itself\u2014 but Yone is determined to defy fate. A half-mortal, half-god born of the clash between chaos and order, Yone wields the power of both night and dawn. He must rally his brethren, bring peace to the gods\u2026 or they will all perish."
@@ -105806,6 +106511,31 @@
             }
         ],
         "description": "Yone is nervous. As a DJ he's calm, focused, and improvisational, but Ocean Song is his first concert as a DJ and lyricist. After finding his secret stash of lyrics, his friend Nidalee volunteered to belt them out herself when he refused. He may not be ready to sing, but they'll still hear his voice."
+    },
+    "777035": {
+        "id": 777035,
+        "isBase": false,
+        "name": "Inkshadow Yone",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/777/777035.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/777/777035.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/777/777035.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Yone/Skins/Skin35/YoneLoadScreen_35.PIE_C_13_8.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": null,
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 192
+            }
+        ],
+        "description": "Two brothers lost their home and became Inkshadow Warriors. One gave up his freedom, and the other his identity. Yone paid a steep price for his tattoo: no one remembers that he existed. Now known only as a faceless stranger called the \u201cMan of Masks,\u201d he shields refugees from the Cabal until they can be delivered into Yasuo's protection."
     },
     "875000": {
         "id": 875000,
@@ -106851,7 +107581,7 @@
         "rarityGemPath": null,
         "skinLines": [
             {
-                "id": 125
+                "id": 193
             }
         ],
         "description": "Steward of nightmares, demon of dreams, Lillia revels in twisted fantasias that mortify mortal minds. Though she dallies in the war between order and chaos, she rarely joins the fray herself; she has a garden to tend to, after all, sowing seeds of terror and watching them bloom."
