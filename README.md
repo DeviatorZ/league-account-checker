@@ -57,7 +57,7 @@ Example templates can be found in the "templates" folder. General guidelines:
     - "all" type exports can be found in "export\all" folder with each "all" type template having it's own folder. Inside each folder all accounts will be exported in separate files with filenames using usernames of the accounts
 - If an account is banned or has invalid credentials it will still be included in every export file using "banned" and "error" templates respectively. These templates can be specified in [export tab](#export)
 ### Export tab
-![ExportTab](https://i.imgur.com/lPpW6TD.png)
+![ExportTab](https://i.imgur.com/umM0JRK.png)
 - "Banned account template" - export template replacement for banned accounts
 - "Error account template" - export template replacement for accounts that couldn't be checked. <br /> 
     - state "AUTH_FAILURE" if credentials are invalid 
@@ -67,4 +67,6 @@ Example templates can be found in the "templates" folder. General guidelines:
 - "Standard export type":
     - Minimal - export only username, password and region, useful for quick ban and credential checking.
     - Full - export using all available variables
+- "Delete raw data" - deletes raw export data. Raw data - all data of an account that's exported whenever an account is finished. This will delete raw data of all accounts.
+- "Export now" - exports raw data using templates.
 - "Update skin and champion information" - tries to update champion and skin information. Skins come out nearly every patch and it might take multiple days until data files are updatable. Ids unrecognized by the checker won't get exported so make sure to stay updated!
