@@ -1,8 +1,8 @@
 import shutil
 import os
 import copy
-
-
+import json
+import logging
 # erases all files in a given folder
 def eraseFiles(path):
     try:
@@ -14,6 +14,11 @@ def eraseFiles(path):
                 os.remove(filePath)
     except:
         pass
+
+def exportRaw(account):
+    # riot usernames must be globaly unique
+    with open(f"data\\raw\\{account['username']}", "w") as fp:
+        fp.write(json.dumps(account, indent=4))
 
 class Export():
     # sets up export by creating missing folders and reading the templates
@@ -33,6 +38,8 @@ class Export():
         except:
             pass
 
+        eraseFiles("export\\single")
+        eraseFiles("export\\all")
         self.singleTemplatesPath = singleTemplatesPath
         self.singleExportPath = singleExportPath
         self.singleTemplates = []
@@ -97,9 +104,29 @@ class Export():
                             with open(f"{self.allExportPath}\{str(template).split('.')[0]}\{account['username']}.txt", "w", encoding="utf-8", newline="") as exportPointer:
                                 exportPointer.write(data + "\n")
 
+def readRawExports(folderPath):
+    fileList = os.listdir(folderPath)
+    accounts = []
+
+    for filename in fileList:
+        with open(os.path.join(folderPath, filename), "r") as fp:
+            accounts.append(json.load(fp))
+
+    return accounts
+
+def exportUnfinished(accounts, delimiter):
+    with open(f"uncheckedAccounts.txt", "w", encoding="utf-8", newline="") as exportPointer:
+        for account in accounts:
+            if account.get("state") is None:
+                exportPointer.write(f"{account['username']}{delimiter}{account['password']}\n")
+
 # handles account exporting
-def exportAccounts(accounts, bannedTemplate, errorTemplate):
+def exportAccounts(bannedTemplate, errorTemplate):
+    logging.info("Exporting...")
     export = Export("templates\\single", "export\\single", "templates\\all", "export\\all", bannedTemplate, errorTemplate)
+
+    accounts = readRawExports("data\\raw")
     export.exportSingle(accounts)
     export.exportAll(accounts)
+    logging.info("Exported!")
 

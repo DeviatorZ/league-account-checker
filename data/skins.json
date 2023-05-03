@@ -8837,6 +8837,125 @@
         ],
         "description": "Yi arrives at the Spirit Blossom Fashion Festival, donning tinted shades and the finest fabrics. While others prefer to celebrate with close family and friends, Yi revels in the attention his outfit brings, intent to cement his style \"legacy\"."
     },
+    "11089": {
+        "id": 11089,
+        "isBase": false,
+        "name": "Inkshadow Master Yi",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/11/11089.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/11/11089.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/11/11089.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/MasterYi/Skins/Skin89/MasterYiLoadScreen_89.PIE_C_13_9.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/MasterYi/Skins/Skin89/MasterYiLoadScreen_89_LE.PIE_C_13_9.jpg",
+        "skinType": "",
+        "rarity": "kLegendary",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/11/11089.png",
+        "chromas": [
+            {
+                "id": 11090,
+                "name": "Inkshadow Master Yi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/11/11090.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 11091,
+                "name": "Inkshadow Master Yi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/11/11091.png",
+                "colors": [
+                    "#FFEE59",
+                    "#FFEE59"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 11092,
+                "name": "Inkshadow Master Yi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/11/11092.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 11093,
+                "name": "Inkshadow Master Yi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/11/11093.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 11094,
+                "name": "Inkshadow Master Yi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/11/11094.png",
+                "colors": [
+                    "#54209B",
+                    "#54209B"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 11095,
+                "name": "Inkshadow Master Yi",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/11/11095.png",
+                "colors": [
+                    "#B5CED6",
+                    "#33D889"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a Loot exclusive in the 2023 Inkshadow event."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 192
+            }
+        ],
+        "description": "Master Yi's family refused Cabal control, fleeing Rabadon City\u2014only to be snuffed out. To fight back, he became one of the first Inkshadow Warriors, sacrificing his lifespan for a magical tattoo that grants him the power to raise his sword against the Cabal. He doesn't know how long he has left to live; still, he will save his city\u2026 and get his revenge."
+    },
     "12000": {
         "id": 12000,
         "isBase": true,
@@ -10791,7 +10910,7 @@
         "splashPath": "/lol-game-data/assets/v1/champion-splashes/15/15000.jpg",
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/15/15000.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/15/15000.jpg",
-        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Sivir/Skins/Base/SivirLoadScreen.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Sivir/Skins/Base/SivirLoadscreen_0.jpg",
         "skinType": "",
         "rarity": "kNoRarity",
         "isLegacy": false,
@@ -41307,7 +41426,7 @@
                 "rarities": [
                     {
                         "region": "TENCENT",
-                        "rarity": 2
+                        "rarity": 1
                     },
                     {
                         "region": "riot",
@@ -41324,12 +41443,7 @@
                     "#DF9117"
                 ],
                 "descriptions": [],
-                "rarities": [
-                    {
-                        "region": "TENCENT",
-                        "rarity": 1
-                    }
-                ]
+                "rarities": []
             },
             {
                 "id": 59038,
@@ -41340,12 +41454,7 @@
                     "#9C68D7"
                 ],
                 "descriptions": [],
-                "rarities": [
-                    {
-                        "region": "TENCENT",
-                        "rarity": 1
-                    }
-                ]
+                "rarities": []
             },
             {
                 "id": 59039,
@@ -41356,12 +41465,7 @@
                     "#2756CE"
                 ],
                 "descriptions": [],
-                "rarities": [
-                    {
-                        "region": "TENCENT",
-                        "rarity": 1
-                    }
-                ]
+                "rarities": []
             },
             {
                 "id": 59040,
@@ -41375,7 +41479,7 @@
                 "rarities": [
                     {
                         "region": "TENCENT",
-                        "rarity": 2
+                        "rarity": 1
                     }
                 ]
             },
@@ -41387,10 +41491,15 @@
                     "#2DA130",
                     "#2DA130"
                 ],
-                "descriptions": [],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "Obtained through Influencer audience giveaways."
+                    }
+                ],
                 "rarities": [
                     {
-                        "region": "TENCENT",
+                        "region": "riot",
                         "rarity": 1
                     }
                 ]
@@ -41404,12 +41513,7 @@
                     "#27211C"
                 ],
                 "descriptions": [],
-                "rarities": [
-                    {
-                        "region": "TENCENT",
-                        "rarity": 1
-                    }
-                ]
+                "rarities": []
             },
             {
                 "id": 59043,
@@ -41420,12 +41524,7 @@
                     "#ECF9F8"
                 ],
                 "descriptions": [],
-                "rarities": [
-                    {
-                        "region": "TENCENT",
-                        "rarity": 1
-                    }
-                ]
+                "rarities": []
             }
         ],
         "emblems": null,
@@ -48913,14 +49012,97 @@
         "splashPath": "/lol-game-data/assets/v1/champion-splashes/77/77006.jpg",
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/77/77006.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/77/77006.jpg",
-        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Udyr/Skins/Skin06/UdyrLoadScreen_6.PIE_C_13_8.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Udyr/Skins/Skin06/UdyrLoadScreen_6.PIE_C_13_9.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Udyr/Skins/Skin06/UdyrLoadScreen_6_LE.PIE_C_13_9.jpg",
         "skinType": "",
         "rarity": "kEpic",
         "isLegacy": false,
         "splashVideoPath": null,
         "collectionSplashVideoPath": null,
         "featuresText": null,
-        "chromaPath": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/77/77006.png",
+        "chromas": [
+            {
+                "id": 77007,
+                "name": "Inkshadow Udyr",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/77/77007.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 77008,
+                "name": "Inkshadow Udyr",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/77/77008.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 77009,
+                "name": "Inkshadow Udyr",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/77/77009.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 77010,
+                "name": "Inkshadow Udyr",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/77/77010.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 77011,
+                "name": "Inkshadow Udyr",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/77/77011.png",
+                "colors": [
+                    "#B5CED6",
+                    "#33D889"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a Loot exclusive in the 2023 Inkshadow event."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            }
+        ],
         "emblems": null,
         "regionRarityId": 0,
         "rarityGemPath": null,
@@ -49967,7 +50149,7 @@
                 "id": 50
             }
         ],
-        "description": "The Wardens are a sect of those who choose to don the armor of the Protectorate. Wardens hale from all corners of the world; so long as one holds fast to one's pledge, then one is a Warden. Gragas found purpose in this calling, and found camaraderie in his fellow Wardens, who welcomed him\u2014all of him\u2014with open arms."
+        "description": "The Wardens are a sect of those who choose to don the armor of the Protectorate. Wardens hail from all corners of the world; so long as one holds fast to one's pledge, then one is a Warden. Gragas found purpose in this calling, and found camaraderie in his fellow Wardens, who welcomed him\u2014all of him\u2014with open arms."
     },
     "79020": {
         "id": 79020,
@@ -65875,6 +66057,158 @@
         ],
         "description": "Volibear stands poised between the two drives of his core self\u2014rage and mercy, impulse and restraint, neither overwhelming the other. Balance is an active struggle; each day the predator and protector clash, and each day Volibear's will grows stronger by the grace of the dragon's gift."
     },
+    "106019": {
+        "id": 106019,
+        "isBase": false,
+        "name": "Inkshadow Volibear",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/106/106019.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/106/106019.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/106/106019.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Volibear/Skins/Skin19/VolibearLoadScreen_19.PIE_C_13_9.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Volibear/Skins/Skin19/VolibearLoadScreen_19_LE.PIE_C_13_9.jpg",
+        "skinType": "",
+        "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/106/106019.png",
+        "chromas": [
+            {
+                "id": 106020,
+                "name": "Inkshadow Volibear",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/106/106020.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 106021,
+                "name": "Inkshadow Volibear",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/106/106021.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 106022,
+                "name": "Inkshadow Volibear",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/106/106022.png",
+                "colors": [
+                    "#54209B",
+                    "#54209B"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 106023,
+                "name": "Inkshadow Volibear",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/106/106023.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 106024,
+                "name": "Inkshadow Volibear",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/106/106024.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 106025,
+                "name": "Inkshadow Volibear",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/106/106025.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 106026,
+                "name": "Inkshadow Volibear",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/106/106026.png",
+                "colors": [
+                    "#ECF9F8",
+                    "#ECF9F8"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 106027,
+                "name": "Inkshadow Volibear",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/106/106027.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 106028,
+                "name": "Inkshadow Volibear",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/106/106028.png",
+                "colors": [
+                    "#B5CED6",
+                    "#33D889"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a Loot exclusive in the 2023 Inkshadow event."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 192
+            }
+        ],
+        "description": "A spirit of fury and war, many vengeful souls have made contracts with the Volibear, and only Udyr has survived for longer than a year. Whether his charges succeed in taking revenge or meet violent ends, each one who dies gives him more power. More power means more wayward mortals seek him out for contracts\u2014and thus the bear will never go hungry."
+    },
     "107000": {
         "id": 107000,
         "isBase": true,
@@ -79196,14 +79530,141 @@
         "splashPath": "/lol-game-data/assets/v1/champion-splashes/136/136021.jpg",
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/136/136021.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/136/136021.jpg",
-        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/AurelionSol/Skins/Skin21/AurelionSolLoadScreen_21.PIE_C_13_8.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/AurelionSol/Skins/Skin21/AurelionSolLoadScreen_21.PIE_C_13_9.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/AurelionSol/Skins/Skin21/AurelionSolLoadScreen_21_LE.PIE_C_13_9.jpg",
         "skinType": "",
         "rarity": "kEpic",
         "isLegacy": false,
         "splashVideoPath": null,
         "collectionSplashVideoPath": null,
         "featuresText": null,
-        "chromaPath": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/136/136021.png",
+        "chromas": [
+            {
+                "id": 136022,
+                "name": "Inkshadow Aurelion Sol",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/136/136022.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 136023,
+                "name": "Inkshadow Aurelion Sol",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/136/136023.png",
+                "colors": [
+                    "#DF9117",
+                    "#DF9117"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 136024,
+                "name": "Inkshadow Aurelion Sol",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/136/136024.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 136025,
+                "name": "Inkshadow Aurelion Sol",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/136/136025.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 136026,
+                "name": "Inkshadow Aurelion Sol",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/136/136026.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 136027,
+                "name": "Inkshadow Aurelion Sol",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/136/136027.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 136028,
+                "name": "Inkshadow Aurelion Sol",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/136/136028.png",
+                "colors": [
+                    "#54209B",
+                    "#54209B"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 136029,
+                "name": "Inkshadow Aurelion Sol",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/136/136029.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 136030,
+                "name": "Inkshadow Aurelion Sol",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/136/136030.png",
+                "colors": [
+                    "#B5CED6",
+                    "#33D889"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a Loot exclusive in the 2023 Inkshadow event."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            }
+        ],
         "emblems": null,
         "regionRarityId": 0,
         "rarityGemPath": null,
@@ -81689,14 +82150,141 @@
         "splashPath": "/lol-game-data/assets/v1/champion-splashes/145/145048.jpg",
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/145/145048.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/145/145048.jpg",
-        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Kaisa/Skins/Skin48/KaisaLoadScreen_48.PIE_C_13_8.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Kaisa/Skins/Skin48/KaisaLoadScreen_48.PIE_C_13_9.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Kaisa/Skins/Skin48/KaisaLoadScreen_48_LE.PIE_C_13_9.jpg",
         "skinType": "",
         "rarity": "kEpic",
         "isLegacy": false,
         "splashVideoPath": null,
         "collectionSplashVideoPath": null,
         "featuresText": null,
-        "chromaPath": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/145/145048.png",
+        "chromas": [
+            {
+                "id": 145049,
+                "name": "Inkshadow Kai'Sa",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/145/145049.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 145050,
+                "name": "Inkshadow Kai'Sa",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/145/145050.png",
+                "colors": [
+                    "#FFEE59",
+                    "#FFEE59"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 145051,
+                "name": "Inkshadow Kai'Sa",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/145/145051.png",
+                "colors": [
+                    "#9F4A25",
+                    "#9F4A25"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 145052,
+                "name": "Inkshadow Kai'Sa",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/145/145052.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 145053,
+                "name": "Inkshadow Kai'Sa",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/145/145053.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 145054,
+                "name": "Inkshadow Kai'Sa",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/145/145054.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 145055,
+                "name": "Inkshadow Kai'Sa",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/145/145055.png",
+                "colors": [
+                    "#9C68D7",
+                    "#9C68D7"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 145056,
+                "name": "Inkshadow Kai'Sa",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/145/145056.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 145057,
+                "name": "Inkshadow Kai'Sa",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/145/145057.png",
+                "colors": [
+                    "#B5CED6",
+                    "#33D889"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a Loot exclusive in the 2023 Inkshadow event."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            }
+        ],
         "emblems": null,
         "regionRarityId": 0,
         "rarityGemPath": null,
@@ -84227,9 +84815,183 @@
         "splashPath": "/lol-game-data/assets/v1/champion-splashes/157/157056.jpg",
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/157/157056.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/157/157056.jpg",
-        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Yasuo/Skins/Skin56/YasuoLoadScreen_56.PIE_C_13_8.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Yasuo/Skins/Skin56/YasuoLoadScreen_56.PIE_C_13_9.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Yasuo/Skins/Skin56/YasuoLoadScreen_56_LE.PIE_C_13_9.jpg",
         "skinType": "",
         "rarity": "kEpic",
+        "isLegacy": false,
+        "splashVideoPath": null,
+        "collectionSplashVideoPath": null,
+        "featuresText": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/157/157056.png",
+        "chromas": [
+            {
+                "id": 157058,
+                "name": "Inkshadow Yasuo",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/157/157058.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 157059,
+                "name": "Inkshadow Yasuo",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/157/157059.png",
+                "colors": [
+                    "#FFEE59",
+                    "#FFEE59"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 157060,
+                "name": "Inkshadow Yasuo",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/157/157060.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 157061,
+                "name": "Inkshadow Yasuo",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/157/157061.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 157062,
+                "name": "Inkshadow Yasuo",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/157/157062.png",
+                "colors": [
+                    "#54209B",
+                    "#54209B"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 157063,
+                "name": "Inkshadow Yasuo",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/157/157063.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 157064,
+                "name": "Inkshadow Yasuo",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/157/157064.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 157065,
+                "name": "Inkshadow Yasuo",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/157/157065.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 157066,
+                "name": "Inkshadow Yasuo",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/157/157066.png",
+                "colors": [
+                    "#B5CED6",
+                    "#33D889"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a Loot exclusive in the 2023 Inkshadow event."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 157067,
+                "name": "Inkshadow Yasuo",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/157/157067.png",
+                "colors": [
+                    "#B4CECD",
+                    "#D55049"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released to celebrate MSI 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            }
+        ],
+        "emblems": null,
+        "regionRarityId": 0,
+        "rarityGemPath": null,
+        "skinLines": [
+            {
+                "id": 192
+            }
+        ],
+        "description": "Displaced from his home alongside Master Yi, Yasuo now uses his Inkshadow tattoos to ride the wind between Rabadon City and the outskirts, protecting civilians seeking asylum with help from the mysterious Man of Masks. Though he gave up his freedom in exchange for power, he sees the price as penance for being unable to help those who needed it most."
+    },
+    "157057": {
+        "id": 157057,
+        "isBase": false,
+        "name": "Prestige Inkshadow Yasuo",
+        "splashPath": "/lol-game-data/assets/v1/champion-splashes/157/157057.jpg",
+        "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/157/157057.jpg",
+        "tilePath": "/lol-game-data/assets/v1/champion-tiles/157/157057.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Yasuo/Skins/Skin57/YasuoLoadScreen_57.PIE_C_13_9.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Yasuo/Skins/Skin57/YasuoLoadScreen_57_LE.PIE_C_13_9.jpg",
+        "skinType": "",
+        "rarity": "kMythic",
         "isLegacy": false,
         "splashVideoPath": null,
         "collectionSplashVideoPath": null,
@@ -84243,7 +85005,7 @@
                 "id": 192
             }
         ],
-        "description": "Displaced from his home alongside Master Yi, Yasuo now uses his Inkshadow tattoos to ride the wind between Rabadon City and the outskirts, protecting civilians seeking asylum with help from the mysterious Man of Masks. Though he gave up his freedom in exchange for power, he sees the price as penance for being unable to help those who needed it most."
+        "description": "Sporting an elevated take on traditional Ionian menswear coupled with a fearlessly bare set of stunning blackout tattoos, Yasuo's gala look celebrates elegant rebellion, sartorial subversion, and an uprising of unprecedented design."
     },
     "161000": {
         "id": 161000,
@@ -106519,14 +107281,141 @@
         "splashPath": "/lol-game-data/assets/v1/champion-splashes/777/777035.jpg",
         "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/777/777035.jpg",
         "tilePath": "/lol-game-data/assets/v1/champion-tiles/777/777035.jpg",
-        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Yone/Skins/Skin35/YoneLoadScreen_35.PIE_C_13_8.jpg",
+        "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Yone/Skins/Skin35/YoneLoadScreen_35.PIE_C_13_9.jpg",
+        "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Yone/Skins/Skin35/YoneLoadScreen_35_LE.PIE_C_13_9.jpg",
         "skinType": "",
         "rarity": "kEpic",
         "isLegacy": false,
         "splashVideoPath": null,
         "collectionSplashVideoPath": null,
         "featuresText": null,
-        "chromaPath": null,
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/777/777035.png",
+        "chromas": [
+            {
+                "id": 777036,
+                "name": "Inkshadow Yone",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/777/777036.png",
+                "colors": [
+                    "#D33528",
+                    "#D33528"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a bundle exclusive in 2023."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 777037,
+                "name": "Inkshadow Yone",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/777/777037.png",
+                "colors": [
+                    "#DF9117",
+                    "#DF9117"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 777038,
+                "name": "Inkshadow Yone",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/777/777038.png",
+                "colors": [
+                    "#2756CE",
+                    "#2756CE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 777039,
+                "name": "Inkshadow Yone",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/777/777039.png",
+                "colors": [
+                    "#2DA130",
+                    "#2DA130"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 777040,
+                "name": "Inkshadow Yone",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/777/777040.png",
+                "colors": [
+                    "#54209B",
+                    "#54209B"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 777041,
+                "name": "Inkshadow Yone",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/777/777041.png",
+                "colors": [
+                    "#E58BA5",
+                    "#E58BA5"
+                ],
+                "descriptions": [],
+                "rarities": [
+                    {
+                        "region": "TENCENT",
+                        "rarity": 1
+                    }
+                ]
+            },
+            {
+                "id": 777042,
+                "name": "Inkshadow Yone",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/777/777042.png",
+                "colors": [
+                    "#73BFBE",
+                    "#73BFBE"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 777043,
+                "name": "Inkshadow Yone",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/777/777043.png",
+                "colors": [
+                    "#27211C",
+                    "#27211C"
+                ],
+                "descriptions": [],
+                "rarities": []
+            },
+            {
+                "id": 777044,
+                "name": "Inkshadow Yone",
+                "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/777/777044.png",
+                "colors": [
+                    "#B5CED6",
+                    "#33D889"
+                ],
+                "descriptions": [
+                    {
+                        "region": "riot",
+                        "description": "This chroma was released as a Loot exclusive in the 2023 Inkshadow event."
+                    }
+                ],
+                "rarities": [
+                    {
+                        "region": "riot",
+                        "rarity": 1
+                    }
+                ]
+            }
+        ],
         "emblems": null,
         "regionRarityId": 0,
         "rarityGemPath": null,
