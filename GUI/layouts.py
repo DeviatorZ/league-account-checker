@@ -4,7 +4,7 @@ import PySimpleGUI as sg
 def getMainLayout():
     return [
         [sg.Output(size=(110, 25), key="log", font=("Helvetica", 8))],
-        [sg.Button("Start", key="start"), sg.Button("Stop", key="stop"), sg.Button("Exports folder", key="openExports"), sg.Button("Erase exports", key="eraseExports"), sg.Text("", key="progress")] 
+        [sg.Button("Start", key="start"), sg.Button("Stop", key="stop"), sg.Button("Exports folder", key="openExports"), sg.Text("", key="progress")] 
     ]  
 
 def getSettingsLayout(cwd):
@@ -37,6 +37,10 @@ def getExportLayout():
         [sg.Input(sg.user_settings_get_entry("errorTemplate", "{username};{password};{state}"), key="errorTemplate", size=60)],
         [sg.Text("Standard export type"), sg.Radio("Minimal", "export", default=sg.user_settings_get_entry("exportMin", False), key="exportMin"), 
         sg.Radio("Full", "export", default=not sg.user_settings_get_entry("exportMin", False))],
+        [sg.Button("Delete raw data", key="deleteRaw")],
+        [sg.Checkbox("Automatically delete raw data at the start of the checking process", default=sg.user_settings_get_entry("autoDeleteRaw", False), key="autoDeleteRaw", size=(70,1), font=("Helvetica", 9))],
+        [sg.Button("Export now", key="exportNow")],
+        [sg.Checkbox("Automatically export raw data at the end of the checking process", default=sg.user_settings_get_entry("autoExport", True), key="autoExport", size=(70,1), font=("Helvetica", 9))],
         [sg.Button("Save", key="saveExport")],
         [sg.VPush()],
         [sg.Button("Update skin and champion information", key="updateInformation"), sg.Text("", key="updateStatus")],

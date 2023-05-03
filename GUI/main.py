@@ -2,6 +2,7 @@ from threading import Thread
 from threading import Event
 from accountProcessing.threadHandler import executeAllAccounts
 from client.tasks.export import eraseFiles
+from client.tasks.export import exportAccounts
 from GUI.layouts import *
 from GUI.logging import setupConsoleLogging
 from GUI.saving import *
@@ -32,7 +33,7 @@ def execute(settings, lock, mainWindow, exitEvent):
 
     try:
         mainWindow["start"].update(disabled=True)
-        mainWindow["eraseExports"].update(disabled=True)
+        mainWindow["deleteRaw"].update(disabled=True)
     except: # GUI closed while running tasks
         return
     
@@ -40,7 +41,7 @@ def execute(settings, lock, mainWindow, exitEvent):
     
     try:
         mainWindow["start"].update(disabled=False)
-        mainWindow["eraseExports"].update(disabled=False)
+        mainWindow["deleteRaw"].update(disabled=False)
     except: # GUI closed while running tasks
         pass
 
@@ -82,10 +83,11 @@ def runGUI(mainWindow, cwd, lock):
             saveSettings(values)
         elif event == "saveTasks":
             saveTasks(values)
-        elif event == "eraseExports":
-            eraseFiles("export\\single")
-            eraseFiles("export\\all")
-            logging.info("Exports erased!")
+        elif event == "deleteRaw":
+            eraseFiles("data\\raw")
+            logging.info("Raw exports erased!")
+        elif event == "exportNow":
+            exportAccounts(values["bannedTemplate"], values["errorTemplate"])
         elif event == "openExports":
             try:
                 os.startfile(f"{cwd}\\export")
