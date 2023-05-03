@@ -114,6 +114,12 @@ def readRawExports(folderPath):
 
     return accounts
 
+def exportUnfinished(accounts, delimiter):
+    with open(f"uncheckedAccounts.txt", "w", encoding="utf-8", newline="") as exportPointer:
+        for account in accounts:
+            if account.get("state") is None:
+                exportPointer.write(f"{account['username']}{delimiter}{account['password']}\n")
+
 # handles account exporting
 def exportAccounts(bannedTemplate, errorTemplate):
     logging.info("Exporting...")

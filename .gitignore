@@ -5,3 +5,6 @@ log.txt
 .vscode
 cache
 __pycache__
+raw
+uncheckedAccounts.txt
+export

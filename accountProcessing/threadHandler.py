@@ -2,6 +2,7 @@ from multiprocessing.pool import ThreadPool
 from multiprocessing import Manager
 from client.tasks.export import exportAccounts
 from client.tasks.export import eraseFiles
+from client.tasks.export import exportUnfinished
 from accountProcessing.thread import execute
 from time import sleep
 import logging
@@ -41,7 +42,8 @@ def executeAllAccounts(settings, accounts, lock, progressBar, exitEvent):
                         exitFlag.set()
                         pool.close()
                         pool.join()
-                        logging.info("Execution stopped!")
+                        exportUnfinished(accounts, settings["accountsDelimiter"])
+                        logging.info("Execution stopped! Export manually if needed, unchecked accounts in 'uncheckedAccounts.txt'")
                         return
                     sleep(1)
     else:
