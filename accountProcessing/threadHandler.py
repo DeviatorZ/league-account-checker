@@ -1,6 +1,7 @@
 from multiprocessing.pool import ThreadPool
 from multiprocessing import Manager
 from client.tasks.export import exportAccounts
+from client.tasks.export import eraseFiles
 from accountProcessing.thread import execute
 from time import sleep
 import logging
@@ -22,6 +23,8 @@ class Progress():
 
 # handles checking threads
 def executeAllAccounts(settings, accounts, lock, progressBar, exitEvent):
+    if settings["autoDeleteRaw"]:
+            eraseFiles("data\\raw")
 
     progress = Progress(len(accounts), progressBar) # create progress handler
 
@@ -47,7 +50,7 @@ def executeAllAccounts(settings, accounts, lock, progressBar, exitEvent):
             if exitEvent.is_set():
                 logging.info("Execution stopped!")
                 return
-        
-    logging.info("Exporting accounts")
-    exportAccounts(accounts, settings["bannedTemplate"], settings["errorTemplate"]) # export all accounts after tasks are finished
+    
+    if settings["autoExport"]:
+        exportAccounts(settings["bannedTemplate"], settings["errorTemplate"]) # export all accounts after tasks are finished
     logging.info("All tasks completed!")
