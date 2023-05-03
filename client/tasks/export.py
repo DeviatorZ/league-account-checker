@@ -16,6 +16,10 @@ def eraseFiles(path):
         pass
 
 def exportRaw(account):
+    try:
+        os.mkdir("data\\raw")
+    except:
+        pass
     # riot usernames must be globaly unique
     with open(f"data\\raw\\{account['username']}", "w") as fp:
         fp.write(json.dumps(account, indent=4))
@@ -105,6 +109,11 @@ class Export():
                                 exportPointer.write(data + "\n")
 
 def readRawExports(folderPath):
+    try:
+        os.mkdir(folderPath)
+    except:
+        pass
+
     fileList = os.listdir(folderPath)
     accounts = []
 
