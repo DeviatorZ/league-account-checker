@@ -7,6 +7,7 @@ from client.connection.exceptions import AccountBannedException
 from client.loot import Loot
 from data.TaskList import TaskList
 from client.tasks.data import getData
+from client.tasks.export import exportRaw
 from accountProcessing.exceptions import RateLimitedException
 from accountProcessing.exceptions import GracefulExit
 from time import sleep
@@ -24,6 +25,7 @@ def checkForGracefulExit(exitFlag, connection=None):
 def handleFailure(account, progress, exitFlag):
     logging.error(f"Too many failed attempts on account: {account['username']}. Skipping...")
     account["state"] = "RETRY_LIMIT_EXCEEDED"
+    exportRaw(account)
     if not checkForGracefulExit(exitFlag): # if graceful exit is triggered, no longer need to track progress
         progress.add()
 
@@ -40,7 +42,7 @@ def execute(account, settings, lock, progress, exitFlag, allowPatching):
 
             if not checkForGracefulExit(exitFlag): # if graceful exit is triggered, no longer need to track progress
                 progress.add()
-
+            exportRaw(account)
             return
         except RateLimitedException as exception: # rate limited, wait before trying again
             rateLimitCount += 1
