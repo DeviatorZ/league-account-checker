@@ -1,146 +1,217 @@
-from client.connection.RiotConnection import RiotConnection
-from client.connection.LeagueConnection import LeagueConnection
 from client.connection.exceptions import ConnectionException
-from client.connection.exceptions import AuthenticationException
 from client.connection.exceptions import SessionException
-from client.connection.exceptions import AccountBannedException
-from client.loot import Loot
-from data.TaskList import TaskList
-from client.tasks.data import getData
 from client.tasks.export import exportRaw
 from accountProcessing.exceptions import RateLimitedException
 from accountProcessing.exceptions import GracefulExit
-from time import sleep
-from datetime import datetime
+from client.connection.exceptions import LaunchFailedException
+from accountProcessing.LeagueOfLegendsWorker import LeagueOfLegendsWorker
+from multiprocessing import Queue, Value, Event, Lock
+from typing import Dict, Any
+from accountProcessing.Progress import Progress
+import time
 import logging
-import json
+import config
 
-# check if exit flag has been set and quit early
-def checkForGracefulExit(exitFlag, connection=None):
-    if exitFlag.is_set():
-        raise GracefulExit(connection)
-    else:
-        return False
+class Worker:
+    def __init__(self, account: Dict[str, Any], settings: Dict[str, Any], progress: Progress, exitFlag: Event, allowPatching: bool, portQueue: Queue, nextRiotLaunch: Value, riotLock: Lock, nextLeagueLaunch: Value, leagueLock: Lock) -> None:
+        """
+        Initializes a Worker instance.
+
+        :param account: Account information.
+        :param setting: Worker settings.
+        :param progress: Progress object for tracking completed tasks.
+        :param exitFlag: Event flag for graceful exit.
+        :param allowPatching: Flag indicating whether patching is allowed.
+        :param portQueue: Queue for managing ports.
+        :param nextRiotLaunch: Shared value for tracking next Riot client launch time.
+        :param riotLock: Lock for accessing/modifying nextRiotLaunch.
+        :param nextLeagueLaunch: Shared value for tracking next League client launch time.
+        :param leagueLock: Lock for accessing/modifying nextLeagueLaunch.
+        """
+        self.__account = account
+        self.__settings = settings
+        self.__progress = progress
+        self.__exitFlag = exitFlag
+        self.__allowPatching = allowPatching
+        self.__portQueue = portQueue
+        self.__nextRiotLaunch = nextRiotLaunch
+        self.__riotLock = riotLock
+        self.__nextLeagueLaunch = nextLeagueLaunch
+        self.__leagueLock = leagueLock
+        self.__riotPort = self.__portQueue.get()
+        self.__leaguePort = self.__portQueue.get()
+
+    def __earlyExitCheck(self) -> None:
+        """
+        Checks if the exit flag is set and exits if necessary.
+        """
+        if self.__exitFlag.is_set():
+            self.__exit(False)
+
+    def __sleep(self, duration: float) -> None:
+        """
+        Sleeps for the specified duration while checking for early exit.
+
+        :param duration: The duration in seconds to sleep.
+        """
+        while duration > 0:
+            time.sleep(0.1)
+            duration -= 0.1
+            self.__earlyExitCheck()
     
-def handleFailure(account, progress, exitFlag):
-    logging.error(f"Too many failed attempts on account: {account['username']}. Skipping...")
-    account["state"] = "RETRY_LIMIT_EXCEEDED"
-    exportRaw(account)
-    if not checkForGracefulExit(exitFlag): # if graceful exit is triggered, no longer need to track progress
-        progress.add()
+    def __getNewPorts(self) -> None:
+        """
+        Replaces riot and league ports with new ones.
+        """
+        self.__portQueue.put(self.__riotPort)
+        self.__portQueue.put(self.__leaguePort)
+        self.__riotPort = self.__portQueue.get()
+        self.__leaguePort = self.__portQueue.get()
 
-# handles task execution on a given account
-def execute(account, settings, lock, progress, exitFlag, allowPatching):   
-    failCount = 0
-    rateLimitCount = 0
+    def run(self) -> None:
+        """
+        Executes tasks on a given account.
+        """
+        self.__earlyExitCheck()   
+        failCount = 0
+        rateLimitCount = 0
 
-    while True:
-        try:
-            checkForGracefulExit(exitFlag)
+        logging.info("Executing tasks on account: " + self.__account["username"])
+        while True:
+            try:
+                self.__earlyExitCheck()
+                self.__getNewPorts()
+                with LeagueOfLegendsWorker(self.__account, self.__settings, self.__allowPatching, self.__riotPort, self.__leaguePort) as leagueWorker:
+                    self.__obtainRiotClientPermission()
+                    status = leagueWorker.handleRiotClient()
+                    if status != "OK":
+                        if status == "AUTH_FAILURE":
+                            self.__authFailure()
+                        self.__exit(True)
+                    self.__earlyExitCheck()
 
-            executeAccount(account, settings, lock, exitFlag, allowPatching)
+                    self.__obtainLeagueClientPermission()
+                    status = leagueWorker.handleLeagueClient()
+                    if status != "OK":
+                        self.__exit(True)
+                    self.__earlyExitCheck()
 
-            if not checkForGracefulExit(exitFlag): # if graceful exit is triggered, no longer need to track progress
-                progress.add()
-            exportRaw(account)
-            return
-        except RateLimitedException as exception: # rate limited, wait before trying again
-            rateLimitCount += 1
-            if rateLimitCount >= 5:
-                handleFailure(account, progress, exitFlag)
-                return
-            
-            logging.error(f"{account['username']} {exception.message}. Waiting before retrying...")
-            for _ in range(150 * 2**rateLimitCount): # 5min, 10min, 20min, 40min
-                sleep(1)
-                checkForGracefulExit(exitFlag)
-        except (ConnectionException, SessionException) as exception: # something went wrong with api
-            logging.error(f"{account['username']} {exception.message}. Retrying...")
+                    leagueWorker.performTasks()
 
-            failCount += 1
-            if failCount >= 5:
-                handleFailure(account, progress, exitFlag)
-                return
-            
-            sleep(1)
-        except GracefulExit:
-            return
+                self.__account["state"] = "OK"
+                self.__exit(True)
+            except RateLimitedException as exception: # rate limited, wait before trying again
+                rateLimitCount += 1
+                if rateLimitCount >= config.MAX_RATE_LIMITED_ATTEMPTS:
+                    self.__handleFailure()
+                
+                logging.error(f"{self.__account['username']} {exception.message}. Waiting before retrying...")
+                self.__rateLimited(rateLimitCount)
+            except (ConnectionException, SessionException) as exception: # something went wrong with api
+                logging.error(f"{self.__account['username']} {exception.message}. Retrying...")
 
-# performs tasks on a given account, check for graceful exit flag between tasks
-def executeAccount(account, settings, lock, exitFlag, allowPatching):
-    logging.info("Executing tasks on account: " + account["username"])
+                failCount += 1
+                if failCount >= config.MAX_FAILED_ATTEMPTS:
+                    self.__handleFailure()
+                
+                self.__sleep(1)
+            except GracefulExit:
+                self.__exit(False)
+            except LaunchFailedException as exception:
+                logging.error(f"Failed to launch {exception.className}. Make sure the path is correct.")
+                logging.error(exception.error)
+                self.__sleep(1)
+            except Exception as exception:
+                logging.error("Unhandled exception. Contact developer! Retrying...")
+                logging.error(exception)
+                self.__sleep(5)
 
-    riotConnection = handleRiotClient(account, settings, lock, allowPatching)
+    def __obtainRiotClientPermission(self) -> None:
+        """
+        Obtains permission to launch the Riot client.
 
-    if riotConnection is None:
-        return
-    
-    checkForGracefulExit(exitFlag, riotConnection)
-    
-    leagueConnection = handleLeagueClient(account, settings, lock, riotConnection, allowPatching)
+        This method checks the next Riot client launch time stored in 'nextRiotLaunch' and sleeps if necessary until the launch cooldown is over.
+        Once the cooldown is over, it updates the next launch time and returns.
+        """
+        while True:
+            sleepTime = 0
 
-    if leagueConnection is None:
-        return
-    
-    checkForGracefulExit(exitFlag, leagueConnection)
+            with self.__riotLock:
+                currentTime = time.time()
+                sleepTime = self.__nextRiotLaunch.value - currentTime
 
-    loot = Loot(leagueConnection) # create loot object to use for all tasks on the account
-    performTasks(leagueConnection, settings, loot)
+                if sleepTime <= 0:
+                    self.__nextRiotLaunch.value = time.time() + config.RIOT_CLIENT_LAUNCH_COOLDOWN
+                    return
+                
+            self.__sleep(sleepTime)
 
-    checkForGracefulExit(exitFlag, leagueConnection)
+    def __obtainLeagueClientPermission(self) -> None:
+        """
+        Obtains permission to launch the League client.
 
-    # obtain extra account information if it's not set to minimal type
-    if not settings["exportMin"]:
-        getData(leagueConnection, account, loot)
+        This method checks the next League client launch time stored in 'nextLeagueLaunch' and sleeps if necessary until the launch cooldown is over.
+        Once the cooldown is over, it updates the next launch time and returns.
+        """
+        while True:
+            sleepTime = 0
 
-    leagueConnection.__del__() # tasks finished, terminate clients
-    account["state"] = "OK"
+            with self.__leagueLock:
+                currentTime = time.time()
+                sleepTime = self.__nextLeagueLaunch.value - currentTime
 
-def handleRiotClient(account, settings, lock, allowPatching):
-    riotConnection = RiotConnection(settings["riotClient"], lock, allowPatching)
+                if sleepTime <= 0:
+                    self.__nextLeagueLaunch.value = time.time() + config.LEAGUE_CLIENT_LAUNCH_COOLDOWN
+                    return
+                
+            self.__sleep(sleepTime)
 
+    def __rateLimited(self, rateLimitCount) -> None:
+        """
+        Handles getting rate limited.
+
+        This method updates the nextRiotLaunch based on the launch cooldown specified for rate limited in the configuration.
+        """
+        with self.__riotLock:
+            self.__nextRiotLaunch.value = time.time() + config.RATE_LIMITED_COOLDOWN * rateLimitCount
+
+    def __authFailure(self) -> None:
+        """
+        Handles the authentication failure.
+
+        This method updates the nextRiotLaunch based on the launch cooldown specified for invalid credentials in the configuration.
+        """
+        with self.__riotLock:
+            self.__nextRiotLaunch.value = time.time() + config.LAUNCH_COOLDOWN_ON_INVALID_CREDENTIALS
+
+    def __handleFailure(self) -> None:
+        """
+        Handles failure when too many attempts have been made.
+        """
+        logging.error(f"Too many failed attempts on account: {self.__account['username']}. Skipping...")
+        self.__account["state"] = "RETRY_LIMIT_EXCEEDED"
+        self.__exit(True)
+
+    def __exit(self, finished: bool) -> None:
+        """
+        Exit the worker.
+
+        :param finished: Indicates whether the execution has finished.
+        """
+        self.__portQueue.put(self.__riotPort)
+        self.__portQueue.put(self.__leaguePort)
+        if finished:
+            exportRaw(self.__account)
+            self.__progress.add()
+        raise GracefulExit
+
+def runWorker(account: Dict[str, Any], settings: Dict[str, Any], progress: Progress, exitFlag: Event, allowPatching: bool, portQueue: Queue, nextRiotLaunch: Value, riotLock: Lock, nextLeagueLaunch: Value, leagueLock: Lock) -> None:
+    """
+    Initializes a Worker instance and runs it.
+    """
     try:
-        riotConnection.login(account["username"], account["password"])
-        region = riotConnection.get("/riotclient/region-locale").json()
-        account["region"] = region["region"] # region needed for league client
-    except AuthenticationException as exception:
-        if exception.error == "RATE_LIMITED": # rate limited due too many accounts with incorrect credentials
-            raise RateLimitedException(riotConnection, "Too many login attempts")
-        elif exception.error == "CREDENTIALS_400":
-            raise RateLimitedException(riotConnection, "Too many login attempts or 'Stay signed in' is enabled")
-        else: # wrong credentials / account needs updating
-            logging.error(f"{account['username']} AuthenticationException: {exception.error}")
-            account["state"] = exception.error
-            return None
-        
-    return riotConnection
-
-def handleLeagueClient(account, settings, lock, riotConnection, allowPatching):
-    try:
-        leagueConnection = LeagueConnection(settings["leagueClient"], riotConnection, account["region"], lock, allowPatching)
-        leagueConnection.waitForSession()
-    except AccountBannedException as ban:
-        # add ban information to the account for export
-        banDescription = json.loads(ban.error["description"])
-        account["state"] = "BANNED"
-        account["banReason"] = banDescription["restrictions"][0]["reason"]
-
-        if banDescription["restrictions"][0]["type"] != "PERMANENT_BAN":
-            banExpiration = banDescription["restrictions"][0]["dat"]["expirationMillis"]
-            account["banExpiration"] = datetime.utcfromtimestamp(banExpiration / 1000).strftime('%Y-%m-%d %Hh%Mm%Ss') # banExpiration is unix timestamp in miliseconds
-        else:
-            account["banExpiration"] = "PERMANENT"
-
-        logging.error(f"{account['username']} AccountBannedException - Reason:{account['banReason']}, Expiration:{account['banExpiration']}")
-        return None
-    
-    return leagueConnection
-
-def performTasks(leagueConnection, settings, loot):
-    tasks = TaskList.getTasks(leagueConnection, loot)
-    
-    # run tasks
-    for taskName, task in tasks.items():
-        if settings[taskName]:
-            task["function"](*task["args"])
-            sleep(1) # allow loot to update between tasks
+        worker = Worker(account, settings, progress, exitFlag, allowPatching, portQueue, nextRiotLaunch, riotLock, nextLeagueLaunch, leagueLock)
+        worker.run()
+    except GracefulExit:
+        return
+ 
