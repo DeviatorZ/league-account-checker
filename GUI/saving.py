@@ -34,6 +34,7 @@ def saveExport(values):
     allExports = [
         "bannedTemplate",
         "errorTemplate",
+        "failedSeparately",
         "exportMin",
         "autoDeleteRaw",
         "autoExport",
