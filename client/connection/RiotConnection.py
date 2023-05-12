@@ -5,23 +5,34 @@ from client.connection.exceptions import AuthenticationException
 from client.connection.exceptions import SessionException
 import time
 import logging
+from typing import Optional, Dict
+import requests
 
-# handles riot client and it's api
 class RiotConnection(Connection):
-    def __init__(self, path, lock, allowPatching):
-        # start a riot client and wait for connection to avoid port conflicts and api rate limits
+    def __init__(self, path: str, port: int, allowPatching: bool) -> None:
+        """
+        Initializes a RiotConnection instance.
+
+        :param path: The path to the Riot client executable.
+        :param port: The port number to use for the Riot client connection.
+        :param allowPatching: Flag indicating whether to allow patching or not.
+        """
         self.__allowPatching = allowPatching
         self.__path = path
         
-        with lock:
-            Connection.__init__(self)
-            self.__getClient()
-            self.__waitForConnection()
+        Connection.__init__(self, port)
+        self.__getClient()
+        self.__waitForConnection()
 
         time.sleep(1)
 
-    # launch riot client with our own command line arguments
-    def __getClient(self):
+    def __getClient(self) -> None:
+        """
+        Launches the Riot client.
+
+        Raises:
+            LaunchFailedException: If launching the client application process fails.
+        """
         processArgs = [
             self.__path,
             # specify our own port and token so we can connect to api
@@ -39,19 +50,36 @@ class RiotConnection(Connection):
 
         Connection.getClient(self, processArgs)
 
-    # returns riot port and auth token (needed for league client)
-    def getCredentials(self):
+    def getCredentials(self) -> Dict[str, str]:
+        """
+        Returns Riot client credentials.
+
+        :return: A dictionary containing the Riot client port and authentication token.
+        """
         return {"riotPort" : self._port, "riotAuthToken" : self._authToken}
 
-    # used to wait for response before removing lock and API authentication
-    def __waitForConnection(self):
+    def __waitForConnection(self) -> None:
+        """
+        Used to authorize and wait for a connection.
+        """
         data = {"clientId": "riot-client", "trustLevels": ["always_trusted"]}
         self.post("/rso-auth/v2/authorizations", json=data)
 
-    # handles api requests to the client
-    # raises ConnectionException if the request fails
-    def request(self, method, url, *args, **kwargs):
-        # handle api request, make sure the request is successful - raise a ConnectionException if it isn't
+    
+    def request(self, method: str, url: str, *args, **kwargs) -> Optional[requests.Response]:
+        """
+        Sends an API request to the client.
+
+        :param method: The HTTP method of the request.
+        :param url: The API endpoint URL.
+        :param *args: Variable length argument list.
+        :param **kwargs: Arbitrary keyword arguments.
+
+        Raises:
+            ConnectionException: If the request fails.
+
+        :return: The response object if the request is successful, None otherwise.
+        """
         try:
             response = Connection.request(self, method, url, *args, **kwargs)
             
@@ -64,22 +92,33 @@ class RiotConnection(Connection):
 
             raise RequestException(f"{method} : {url} : {response.status_code}")
         except RequestException as e:
-            raise ConnectionException(self, e.message)
+            raise ConnectionException(self.__class__.__name__, e.message)
         except Exception:
-            raise ConnectionException(self)
+            raise ConnectionException(self.__class__.__name__)
         
-    # accepts eula, needed on new accounts or when eula gets changed
-    def __acceptEULA(self):
+    def __acceptEULA(self) -> None:
+        """
+        Accepts the End User License Agreement (EULA).
+        """
         self.put("/eula/v1/agreement/acceptance")
 
-    # tries to login
-    # returns "OK" if auth succeeded, error otherwise
-    def __authenticate(self, username, password):
+    def __authenticate(self, username: str, password: str) -> str:
+        """
+        Authenticates with the client.
+
+        :param username: The username to authenticate with.
+        :param password: The password to authenticate with.
+
+        Raises:
+            AuthenticationException: If there is an issue with the authentication request.
+
+        :return: "OK" if authentication succeeded, otherwise an error message.
+        """
         data = {"username": username, "password": password, 'persistLogin': False}
         response = self.put("/rso-auth/v1/session/credentials", json=data)
 
         if response is None:
-            raise AuthenticationException(self, "CREDENTIALS_400")
+            raise AuthenticationException("CREDENTIALS_400")
 
         responseJson = response.json()
             
@@ -87,18 +126,24 @@ class RiotConnection(Connection):
             return responseJson
         return "OK"
     
-    # waits until riot client is ready to launch league client
-    # raises AuthenticationException if the account requires email/phone number update
-    # raises SessionException if it takes too long
-    def __waitForLaunch(self, timeout=30):
+    def __waitForLaunch(self, timeout: int = 30) -> None:
+        """
+        Waits until the client is ready to launch the League client.
+
+        :param timeout: The maximum time in seconds to wait for the launch.
+
+        Raises:
+            AuthenticationException: If the account requires email/phone number update.
+            SessionException: If the launch preparation takes too long.
+        """
         startTime = time.time()
 
         while True:
-            phase = self.get('/rnet-lifecycle/v1/product-context-phase').json()
+            phase = self.get("/rnet-lifecycle/v1/product-context-phase").json()
             if phase == "Eula" or phase == "WaitingForEula":
                 self.__acceptEULA()
             elif phase == "VngAccountRequired":
-                raise AuthenticationException(self, phase)
+                raise AuthenticationException(phase)
             elif phase == "WaitForLaunch": # league client is ready for launch
                 time.sleep(1)
                 return
@@ -106,21 +151,26 @@ class RiotConnection(Connection):
                 logging.info("Waiting for RiotClient to update...")
                 for _ in range(7200): # 2 hours
                     time.sleep(1)
-                    phase = self.get('/rnet-lifecycle/v1/product-context-phase').json()
+                    phase = self.get("/rnet-lifecycle/v1/product-context-phase").json()
                     if phase != "PatchStatus":
                         startTime = time.time()
                         logging.info("Update finished!")
                         break
             if time.time() - startTime >= timeout: # took too long for launching to be ready
-                raise SessionException(self, "League client launch timed out")
+                raise SessionException(self.__class__.__name__, "League client launch timed out")
             time.sleep(1)
 
-    # authenticates and prepares to launch league client
-    # raises AuthenticationException if it fails
-    # raises SessionException if launch preparation takes too long
-    def login(self, username, password):
+    def login(self, username: str, password: str) -> None:
+        """
+        Authenticates and prepares to launch the League client.
+
+        :param username: The username to authenticate with.
+        :param password: The password to authenticate with.
+        :raises AuthenticationException: If the authentication fails.
+        :raises SessionException: If the launch preparation takes too long.
+        """
         authSuccess = self.__authenticate(username, password)
         if not authSuccess == "OK": # something went wrong during login
-            raise AuthenticationException(self, authSuccess["error"].upper())
+            raise AuthenticationException(authSuccess["error"].upper())
 
         self.__waitForLaunch()

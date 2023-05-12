@@ -3,27 +3,41 @@ from client.connection.exceptions import ConnectionException
 from client.connection.exceptions import RequestException
 from client.connection.exceptions import SessionException
 from client.connection.exceptions import AccountBannedException
+from client.connection.RiotConnection import RiotConnection
 import time
 import logging
 import math
+from typing import Optional
+import requests
 
-# handles league client and it"s api
 class LeagueConnection(Connection):
-    def __init__(self, path, riotConnection, region, lock, allowPatching):
-        # start a league client and wait for connection to avoid port conflicts and api rate limits
+    def __init__(self, path: str, riotConnection: RiotConnection, region: str, port: int, allowPatching: bool) -> None:
+        """
+        Initializes a LeagueConnection instance.
+
+        :param path: The path to the League client executable.
+        :param riotConnection: The RiotConnection instance for interacting with the Riot client.
+        :param region: The region of the account logged in on the Riot client.
+        :param port: The port number to use for the League client connection.
+        :param allowPatching: Flag indicating whether to allow patching or not.
+        """
         self.__allowPatching = allowPatching
         self.__path = path
         self.__riotConnection = riotConnection
         self.__riotCredentials = self.__riotConnection.getCredentials()
         self.__region = region
 
-        with lock:
-            Connection.__init__(self)
-            self.__getClient()
-            self.__waitForConnection()
+        Connection.__init__(self, port)
+        self.__getClient()
+        self.__waitForConnection()
 
-    # launch league client with our own command line arguments
-    def __getClient(self):
+    def __getClient(self) -> None:
+        """
+        Launches the League client.
+        
+        Raises:
+            LaunchFailedException: If launching the client application process fails.
+        """
         processArgs = [
             self.__path,
             # specify riot client port and auth token that has an account logged in
@@ -43,14 +57,26 @@ class LeagueConnection(Connection):
 
         Connection.getClient(self, processArgs)
 
-    # used to wait for response before removing lock
-    def __waitForConnection(self):
+    def __waitForConnection(self) -> None:
+        """
+        Acts as a first request tester.
+        """
         self.get("/lol-login/v1/session")
 
-    # handles api requests to the client
-    # raises ConnectionException if the request fails
-    def request(self, method, url, *args, **kwargs):
-        # handle api request, make sure the request is successful - raise a ConnectionException if it isn"t
+    def request(self, method: str, url: str, *args, **kwargs) -> Optional[requests.Response]:
+        """
+        Sends an API request to the client.
+
+        :param method: The HTTP method of the request.
+        :param url: The API endpoint URL.
+        :param *args: Variable length argument list.
+        :param **kwargs: Arbitrary keyword arguments.
+
+        Raises:
+            ConnectionException: If the request fails.
+
+        :return: The response object if the request is successful, None otherwise.
+        """
         try:
             response = Connection.request(self, method, url, *args, **kwargs)
             if response.ok:
@@ -66,14 +92,20 @@ class LeagueConnection(Connection):
 
             raise RequestException(f"{method} : {url} : {response.status_code}")
         except RequestException as e:
-            raise ConnectionException(self, e.message)
+            raise ConnectionException(self.__class__.__name__, e.message)
         except Exception:
-            raise ConnectionException(self)
+            raise ConnectionException(self.__class__.__name__)
         
-    # waits until league client finishes loading a session (lcu api can"t be used until it"s done)
-    # raises AccountBannedException if the account is banned
-    # raises SessionException if it took too long or if login failed
-    def waitForSession(self, timeout=60):
+    def waitForSession(self, timeout: int = 60) -> None:
+        """
+        Waits until the client finishes loading a session.
+
+        :param timeout: The maximum time to wait for the session to load.
+
+        Raises:
+            AccountBannedException: If the account is banned.
+            SessionException: If the session loading takes too long or if login fails.
+        """
         startTime = time.time()
 
         while True:
@@ -82,20 +114,26 @@ class LeagueConnection(Connection):
 
             if session["state"] == "ERROR":
                 if session["error"]["messageId"] == "ACCOUNT_BANNED": # account is banned
-                    raise AccountBannedException(self, session["error"])
+                    raise AccountBannedException(session["error"])
                 if session["error"]["messageId"] == "FAILED_TO_COMMUNICATE_WITH_LOGIN_QUEUE": # something went wrong while loading the session
-                    raise SessionException(self, "Failed to communicate with login queue")
+                    raise SessionException(self.__class__.__name__, "Failed to communicate with login queue")
             elif session["state"] == "SUCCEEDED": # successfully loaded the session
                 time.sleep(2)
                 return
             
             if time.time() - startTime >= timeout: # session took too long to load
-                raise SessionException(self, "Session timed out")
+                raise SessionException(self.__class__.__name__, "Session timed out")
             time.sleep(1)
 
-    # waits for league client to finish patching
-    # raises SessionException if it took too long
-    def waitForUpdate(self, timeout=7200):
+    def waitForUpdate(self, timeout: int = 7200) -> None:
+        """
+        Waits for the client to finish patching.
+
+        :param timeout: The maximum time to wait for the patching process to complete.
+
+        Raises:
+            SessionException: If the patching process takes too long.
+        """
         if not self.__allowPatching:
             return
     
@@ -123,10 +161,12 @@ class LeagueConnection(Connection):
                 logging.info(f"{currentProgressPercent}% completed.")
 
             if time.time() - startTime >= timeout: # update took too long
-                raise SessionException(self, "Update timed out")
+                raise SessionException(self.__class__.__name__, "Update timed out")
             time.sleep(1)
 
-    # terminates league client and then riot client
-    def __del__(self):
+    def __del__(self) -> None:
+        """
+        Terminates the League client and Riot client processes.
+        """
         Connection.__del__(self)
         self.__riotConnection.__del__()
