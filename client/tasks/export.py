@@ -3,139 +3,240 @@ import os
 import copy
 import json
 import logging
-# erases all files in a given folder
-def eraseFiles(path):
-    try:
-        for file in os.listdir(path):
-            filePath = os.path.join(path, file)
-            try:
-                shutil.rmtree(filePath)
-            except OSError:
-                os.remove(filePath)
-    except:
-        pass
+import config
+from typing import Dict, List, Tuple, Optional, Any
 
-def exportRaw(account):
+def eraseFiles(path: str):
+    """
+    Erases all files in a given folder.
+
+    :param path: The path to the folder.
+    """
     try:
-        os.mkdir("data\\raw")
-    except:
-        pass
-    # riot usernames must be globaly unique
-    with open(f"data\\raw\\{account['username']}", "w") as fp:
+        files = os.listdir(path)
+    except FileNotFoundError:
+        return
+    
+    for file in files:
+        filePath = os.path.join(path, file)
+        try:
+            shutil.rmtree(filePath)
+        except OSError:
+            os.remove(filePath)
+
+def makeDirectory(path: str) -> None:
+    """
+    Creates a directory at the given path.
+
+    :param path: The path of the directory to create.
+    """
+    try:
+        os.mkdir(path)
+    except FileExistsError:
+        return
+
+def exportRaw(account: Dict[str, Any]) -> None:
+    """
+    Exports raw JSON data of an account.
+
+    :param account: The account data to export as JSON.
+    """
+    makeDirectory(config.RAW_DATA_PATH)
+    # usernames are globally unique
+    with open(f"{config.RAW_DATA_PATH}\\{account['username']}", "w", encoding="utf-8") as fp:
         fp.write(json.dumps(account, indent=4))
 
-class Export():
-    # sets up export by creating missing folders and reading the templates
-    def __init__(self, singleTemplatesPath, singleExportPath, allTemplatesPath, allExportPath, bannedTemplate, errorTemplate):
-        try:
-            os.mkdir("export")
-        except:
-            pass
+def readRawExports() -> List[Dict[str, Any]]:
+    """
+    Reads and returns the raw exported account data.
 
-        try:
-            os.mkdir("export\\single")
-        except:
-            pass
+    :return: A list of dictionaries containing the raw exported account data.
+    """
+    makeDirectory(config.RAW_DATA_PATH)
 
-        try:
-            os.mkdir("export\\all")
-        except:
-            pass
-
-        eraseFiles("export\\single")
-        eraseFiles("export\\all")
-        self.singleTemplatesPath = singleTemplatesPath
-        self.singleExportPath = singleExportPath
-        self.singleTemplates = []
-
-        for file in os.listdir(self.singleTemplatesPath):
-            if file.endswith(".txt"):
-                self.singleTemplates.append(file)
-
-        self.allTemplatesPath = allTemplatesPath
-        self.allExportPath = allExportPath
-        self.allTemplates = []
-
-        for file in os.listdir(self.allTemplatesPath):
-            if file.endswith(".txt"):
-                try:
-                    path = os.path.join(self.allExportPath, str(file).split(".")[0])
-                    os.mkdir(path)
-                except Exception:
-                    pass
-                self.allTemplates.append(file)
-        
-        self.bannedTemplate = bannedTemplate
-        self.errorTemplate = errorTemplate
-
-    # "single" type export for all templates (all accounts in one file)
-    def exportSingle(self, accounts):
-        for template in self.singleTemplates:
-            with open(f"{self.singleTemplatesPath}\{template}", "r", encoding="utf-8", newline="") as filePointer:
-                fileData = filePointer.read()
-                with open(f"{self.singleExportPath}\{template}", "a+", encoding="utf-8", newline="") as exportPointer:
-                    for account in accounts:
-                        if account["state"] == "OK":
-                            data = copy.copy(fileData)
-                        elif account["state"] == "BANNED":
-                            data = copy.copy(self.bannedTemplate)
-                        else:
-                            data = copy.copy(self.errorTemplate)
-
-                        for key, value in account.items():
-                            data = data.replace(f"{{{key}}}", str(value))
-
-                        if data:
-                            exportPointer.write(data + "\n")
-
-    # "all" type export for all templates (separate file for each account)
-    def exportAll(self, accounts):
-        for template in self.allTemplates:
-            with open(f"{self.allTemplatesPath}\{template}", "r", encoding="utf-8", newline="") as filePointer:
-                fileData = filePointer.read()
-                for account in accounts:
-                        if account["state"] == "OK":
-                            data = copy.copy(fileData)
-                        elif account["state"] == "BANNED":
-                            data = copy.copy(self.bannedTemplate)
-                        else:
-                            data = copy.copy(self.errorTemplate)
-
-                        for key, value in account.items():
-                            data = data.replace(f"{{{key}}}", str(value))
-
-                        if data:
-                            with open(f"{self.allExportPath}\{str(template).split('.')[0]}\{account['username']}.txt", "w", encoding="utf-8", newline="") as exportPointer:
-                                exportPointer.write(data + "\n")
-
-def readRawExports(folderPath):
-    try:
-        os.mkdir(folderPath)
-    except:
-        pass
-
-    fileList = os.listdir(folderPath)
+    fileList = os.listdir(config.RAW_DATA_PATH)
     accounts = []
 
     for filename in fileList:
-        with open(os.path.join(folderPath, filename), "r") as fp:
+        with open(os.path.join(config.RAW_DATA_PATH, filename), "r", encoding="utf-8") as fp:
             accounts.append(json.load(fp))
 
     return accounts
 
-def exportUnfinished(accounts, delimiter):
-    with open(f"uncheckedAccounts.txt", "w", encoding="utf-8", newline="") as exportPointer:
+class Export():
+    def __init__(self, bannedTemplate: str, errorTemplate: str, failedSeparately: bool):
+        """
+        Initializes the Export instance.
+
+        :param bannedTemplate: The template for banned accounts.
+        :param errorTemplate: The template for error accounts.
+        :param failedSeparately: Indicates whether failed accounts should be exported separately.
+        """
+        makeDirectory(config.EXPORT_PATH)
+
+        self.singleTemplatesPath = f"{config.TEMPLATE_PATH}\\single"
+        self.singleExportPath = f"{config.EXPORT_PATH}\\single"
+        makeDirectory(self.singleExportPath)
+        eraseFiles(self.singleExportPath)
+        self.singleTemplates = []
+        self.__initTemplatesSingle()
+
+        self.allTemplatesPath = f"{config.TEMPLATE_PATH}\\all"
+        self.allExportPath = f"{config.EXPORT_PATH}\\all"
+        makeDirectory(self.allExportPath)
+        eraseFiles(self.allExportPath)
+        self.allTemplates = []
+        self.__initTemplatesAll()
+        
+        self.bannedTemplate = bannedTemplate
+        self.errorTemplate = errorTemplate
+        self.__failedSeparately = failedSeparately
+        try:
+            os.remove(f"{config.EXPORT_PATH}\\{config.FAILED_ACCOUNT_PATH}")
+        except FileNotFoundError:
+            pass
+
+    def __initTemplatesSingle(self) -> None:
+        """
+        Initializes the list of single templates by reading the template files from the single templates path.
+        """
+        for file in os.listdir(self.singleTemplatesPath):
+            if file.endswith(".txt"):
+                self.singleTemplates.append(file)
+
+    def __initTemplatesAll(self) -> None:
+        """
+        Initializes the list of all templates by reading the template files from the all templates path.
+        """
+        for file in os.listdir(self.allTemplatesPath):
+            if file.endswith(".txt"):
+                path = os.path.join(self.allExportPath, str(file).split(".")[0])
+                makeDirectory(path)
+                self.allTemplates.append(file)
+    
+    def __splitFailed(self, accounts: List[Dict[str, Any]]) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
+        """
+        Splits the accounts into two lists: OK accounts and failed accounts.
+
+        :param accounts: The list of accounts to split.
+        :return: A tuple containing the lists of OK accounts and failed accounts.
+        """
+        okAccounts = []
+        failedAccounts = []
+
+        for account in accounts:
+            if account["state"] == "OK":
+                okAccounts.append(account)
+            else:
+                failedAccounts.append(account)
+
+        return okAccounts, failedAccounts
+    
+    def __replaceTemplatePlaceholders(self, account: Dict[str, Any], template: str) -> Optional[str]:
+        """
+        Replaces the placeholders in the template with the corresponding values from the account.
+
+        :param account: The account data.
+        :param template: The template string.
+        :return: The modified template string with replaced placeholders, or None if the template is empty.
+        """
+        data = ""
+
+        if account["state"] == "OK":
+            data = copy.copy(template)
+        elif account["state"] == "BANNED":
+            data = copy.copy(self.bannedTemplate)
+        else:
+            data = copy.copy(self.errorTemplate)
+        
+        if data:
+            for key, value in account.items():
+                data = data.replace(f"{{{key}}}", str(value))
+            return data
+        else:
+            return None
+        
+    def __exportSingle(self, accounts: List[Dict[str, Any]]) -> None:
+        """
+        Performs the "single" type export for all templates, where all accounts are written to a single file for each template.
+
+        :param accounts: The list of accounts to export.
+        """
+        for template in self.singleTemplates:
+            with open(f"{self.singleTemplatesPath}\\{template}", "r", encoding="utf-8", newline="") as filePointer:
+                templateData = filePointer.read()
+                with open(f"{self.singleExportPath}\\{template}", "a+", encoding="utf-8", newline="") as exportPointer:
+                    for account in accounts:
+                        data = self.__replaceTemplatePlaceholders(account, templateData)
+                        if data:
+                            exportPointer.write(data + "\n")
+
+    def __exportAll(self, accounts: List[Dict[str, Any]]) -> None:
+        """
+        Performs the "all" type export for all templates, where all accounts are written to separate files for each template.
+
+        :param accounts: The list of accounts to export.
+        """
+        for template in self.allTemplates:
+            with open(f"{self.allTemplatesPath}\\{template}", "r", encoding="utf-8", newline="") as filePointer:
+                templateData = filePointer.read()
+                for account in accounts:
+                        data = self.__replaceTemplatePlaceholders(account, templateData)
+                        if data:
+                            with open(f"{self.allExportPath}\\{str(template).split('.')[0]}\\{account['username']}.txt", "w", encoding="utf-8", newline="") as exportPointer:
+                                exportPointer.write(data + "\n")
+
+    def __exportFailed(self, accounts: List[Dict[str, Any]]) -> None:
+        """
+        Performs the "failed" type export for accounts that are not in the "OK" state.
+
+        :param accounts: The list of failed accounts to export.
+        """
+        with open(f"{config.EXPORT_PATH}\\{config.FAILED_ACCOUNT_PATH}", "a+", encoding="utf-8", newline="") as exportPointer:
+            for account in accounts:
+                data = self.__replaceTemplatePlaceholders(account, "")
+                if data:
+                    exportPointer.write(data + "\n")
+    
+    def exportNow(self, accounts: List[Dict[str, Any]]) -> None:
+        """
+        Performs the export of accounts based on the configured settings.
+
+        :param accounts: The list of accounts to export.
+        """
+        if self.__failedSeparately:
+            okAccounts, failedAccounts = self.__splitFailed(accounts)
+            self.__exportSingle(okAccounts)
+            self.__exportAll(okAccounts)
+            self.__exportFailed(failedAccounts)
+        else:
+            self.__exportSingle(accounts)
+            self.__exportAll(accounts)
+
+def exportUnfinished(accounts: List[Dict[str, Any]], delimiter: str) -> None:
+    """
+    Exports unfinished accounts to a file (ones that don't have a state)
+
+    :param accounts: The list of all accounts.
+    :param delimiter: The delimiter to use between the username and password in the export file.
+    """
+    with open(config.UNFINISHED_ACCOUNT_PATH, "w", encoding="utf-8", newline="") as exportPointer:
         for account in accounts:
             if account.get("state") is None:
                 exportPointer.write(f"{account['username']}{delimiter}{account['password']}\n")
 
-# handles account exporting
-def exportAccounts(bannedTemplate, errorTemplate):
-    logging.info("Exporting...")
-    export = Export("templates\\single", "export\\single", "templates\\all", "export\\all", bannedTemplate, errorTemplate)
 
-    accounts = readRawExports("data\\raw")
-    export.exportSingle(accounts)
-    export.exportAll(accounts)
+def exportAccounts(bannedTemplate: str, errorTemplate: str, failedSeparately: bool) -> None:
+    """
+    Handles the exporting of accounts.
+
+    :param bannedTemplate: The template to use for banned accounts.
+    :param errorTemplate: The template to use for accounts with errors.
+    :param failedSeparately: A flag indicating whether failed accounts should be exported separately.
+    """
+    logging.info("Exporting...")
+    export = Export(bannedTemplate, errorTemplate, failedSeparately)
+    accounts = readRawExports()
+    export.exportNow(accounts)
     logging.info("Exported!")
 

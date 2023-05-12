@@ -16,7 +16,7 @@ def getSettingsLayout(cwd):
         [sg.Text("Account file location")],
         [sg.Input(sg.user_settings_get_entry("accountsFile", cwd + "\\accounts.csv"), key="accountsFile"), sg.FileBrowse()],
         [sg.Text("Account file delimiter"), sg.InputCombo((",",":",";"), default_value=sg.user_settings_get_entry("accountsDelimiter", ":"), key="accountsDelimiter")],
-        [sg.Text("Thread count"), sg.Combo([x for x in range(1,11)], default_value=sg.user_settings_get_entry("threadCount", "2"), key="threadCount")],
+        [sg.Text("Thread count"), sg.Combo([x for x in range(1,17)], default_value=sg.user_settings_get_entry("threadCount", "2"), key="threadCount")],
         [sg.Button("Save", key="saveSettings")],
     ]
 
@@ -35,13 +35,12 @@ def getExportLayout():
         [sg.Input(sg.user_settings_get_entry("bannedTemplate", "{username};{password};{region};{banReason} {banExpiration}"), key="bannedTemplate", size=60)],
         [sg.Text("Error account template")],
         [sg.Input(sg.user_settings_get_entry("errorTemplate", "{username};{password};{state}"), key="errorTemplate", size=60)],
-        [sg.Text("Standard export type"), sg.Radio("Minimal", "export", default=sg.user_settings_get_entry("exportMin", False), key="exportMin"), 
-        sg.Radio("Full", "export", default=not sg.user_settings_get_entry("exportMin", False))],
+        [sg.Checkbox("Export failed (banned/error) accounts separately", default=sg.user_settings_get_entry("failedSeparately", False), key="failedSeparately", size=(70,1), font=("Helvetica", 9))],
+        [sg.Text("Raw export type"), sg.Radio("Minimal", "export", default=sg.user_settings_get_entry("exportMin", False), key="exportMin"), 
+            sg.Radio("Full", "export", default=not sg.user_settings_get_entry("exportMin", False))],
         [sg.Button("Delete raw data", key="deleteRaw")],
         [sg.Checkbox("Automatically delete raw data at the start of the checking process", default=sg.user_settings_get_entry("autoDeleteRaw", False), key="autoDeleteRaw", size=(70,1), font=("Helvetica", 9))],
         [sg.Button("Export now", key="exportNow")],
         [sg.Checkbox("Automatically export raw data at the end of the checking process", default=sg.user_settings_get_entry("autoExport", True), key="autoExport", size=(70,1), font=("Helvetica", 9))],
-        [sg.Button("Save", key="saveExport")],
-        [sg.VPush()],
-        [sg.Button("Update skin and champion information", key="updateInformation"), sg.Text("", key="updateStatus")],
+        [sg.Button("Save", key="saveExport"), sg.Push(), sg.Button("Update skin and champion information", key="updateInformation"), sg.Text("", key="updateStatus")],
     ]
