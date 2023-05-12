@@ -15,7 +15,7 @@ import logging
 import os
 
 # validates user input and launches tasks
-def execute(settings, lock, mainWindow, exitEvent):
+def execute(settings, mainWindow, exitEvent):
     try:
         checkForFileErrors(settings)
     except InvalidPathException as exception:
@@ -37,7 +37,7 @@ def execute(settings, lock, mainWindow, exitEvent):
     except: # GUI closed while running tasks
         return
     
-    executeAllAccounts(settings, accounts, lock, mainWindow["progress"], exitEvent)
+    executeAllAccounts(settings, accounts, mainWindow["progress"], exitEvent)
     
     try:
         mainWindow["start"].update(disabled=False)
@@ -65,7 +65,7 @@ def setupGUI(cwd):
 
     return mainWindow
 
-def runGUI(mainWindow, cwd, lock):
+def runGUI(mainWindow, cwd):
     exitEvent = Event()
 
     # event loop to process "events" and get the "values" of the inputs
@@ -76,7 +76,7 @@ def runGUI(mainWindow, cwd, lock):
             break
         elif event == "start":
             exitEvent.clear()
-            Thread(target=execute, args=(copy.deepcopy(values), lock, mainWindow, exitEvent)).start()
+            Thread(target=execute, args=(copy.deepcopy(values), mainWindow, exitEvent)).start()
         elif event == "stop":
             exitEvent.set()
         elif event == "saveSettings":
@@ -87,7 +87,7 @@ def runGUI(mainWindow, cwd, lock):
             eraseFiles("data\\raw")
             logging.info("Raw exports erased!")
         elif event == "exportNow":
-            exportAccounts(values["bannedTemplate"], values["errorTemplate"])
+            exportAccounts(values["bannedTemplate"], values["errorTemplate"], values["failedSeparately"])
         elif event == "openExports":
             try:
                 os.startfile(f"{cwd}\\export")
