@@ -4,30 +4,30 @@ class RequestException(Exception):
         Exception.__init__(self)
 
 class ConnectionException(Exception):
-    def __init__(self, connection, message=None):
-        self.connectionName = connection.__class__.__name__
+    def __init__(self, className, message=None):
         if message is None:
-            self.message = f"{self.connectionName} - Connection failure"
+            self.message = f"{className} - Connection failure"
         else:
-            self.message = f"{self.connectionName}:{message}"
-        connection.__del__()
+            self.message = f"{className}:{message}"
         Exception.__init__(self)
 
 class AuthenticationException(Exception):
-    def __init__(self, connection, error):
+    def __init__(self, error):
         self.error = error
-        connection.__del__()
         Exception.__init__(self)
 
 class SessionException(Exception):
-    def __init__(self, connection, message):
-        self.connectionName = connection.__class__.__name__
-        self.message = f"{self.connectionName}:SessionException - {message}"
-        connection.__del__()
+    def __init__(self, className, message):
+        self.message = f"{className}:SessionException - {message}"
         Exception.__init__(self)
 
 class AccountBannedException(Exception):
-    def __init__(self, connection, error):
+    def __init__(self, error):
         self.error = error
-        connection.__del__()
+        Exception.__init__(self)
+
+class LaunchFailedException(Exception):
+    def __init__(self, className, error):
+        self.className = className
+        self.error = error
         Exception.__init__(self)
