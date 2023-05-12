@@ -1,49 +1,41 @@
 import json
 from time import sleep
+from client.champions import Champions
+from client.skins import Skins
+from client.connection.LeagueConnection import LeagueConnection
+from typing import Dict, List, Any
+from client.loot import Loot
 
-# handles champion file for id to name conversion
-class Champions():
-    def __init__(self, path):
-        with open(path, "r", encoding="utf8") as filePointer:
-            self.championData = json.load(filePointer)
+def getSummoner(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
+    """
+    Obtains the account's in-game name and level (adds the data to account data dictionary)
 
-            self.championById = {}
-            for champion in self.championData:
-                self.championById[champion["id"]] = champion["name"]
-
-    def getChampionById(self, id):
-        try:
-            return self.championById[id]
-        except:
-            return None
-
-# handles skin file for id to name conversion
-class Skins():
-    def __init__(self, path):
-        with open(path, "r", encoding="utf8") as filePointer:
-            self.skinById = json.load(filePointer)
-
-    def getSkinById(self, id):
-        try:
-            return self.skinById[str(id)]["name"]
-        except:
-            return None
-
-# obtains account's in-game name and level
-def getSummoner(leagueConnection, account):
+    :param leagueConnection: An instance of LeagueConnection used for making API requests.
+    :param account: A dictionary containing account information.
+    """
     summoner = leagueConnection.get("/lol-summoner/v1/current-summoner")
     summoner = summoner.json()
 
     account["summonerLevel"] = summoner["summonerLevel"]
     account["ign"] = summoner["displayName"]
 
-# obtains account's honor level
-def getHonorLevel(leagueConnection, account):
+def getHonorLevel(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
+    """
+    Obtains the account's honor level (adds the data to account data dictionary)
+
+    :param leagueConnection: An instance of LeagueConnection used for making API requests.
+    :param account: A dictionary containing account information.
+    """
     honor = leagueConnection.get("/lol-honor-v2/v1/profile").json()
     account["honorLevel"] = honor["honorLevel"]
 
-# checks if account email is verified 
-def getEmailVerification(leagueConnection, account):
+def getEmailVerification(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
+    """
+    Obtains the account's email is verification status (adds the data to account data dictionary)
+
+    :param leagueConnection: An instance of LeagueConnection used for making API requests.
+    :param account: A dictionary containing account information.
+    """
     email = leagueConnection.get("/lol-email-verification/v1/email")
     email = email.json()
 
@@ -52,13 +44,18 @@ def getEmailVerification(leagueConnection, account):
     else:
         account["emailVerified"] = "Unverified"
 
-# obtains data on account's blue essence, orange essence and riot points
-def getCurrencies(lootJson, account):
+def getCurrencies(lootJsons: List[Dict[str, Any]], account: Dict[str, Any]) -> None:
+    """
+    Obtains the account's information on blue essence, orange essence, and riot points (adds the data to account data dictionary)
+
+    :param lootJsons: A list of loot data.
+    :param account: A dictionary containing account information.
+    """
     account["be"] = 0
     account["oe"] = 0
     account["rp"] = 0
 
-    for loot in lootJson:
+    for loot in lootJsons:
         if loot["lootId"] == "CURRENCY_champion":
             account["be"] = loot["count"]
         elif loot["lootId"] == "CURRENCY_cosmetic":
@@ -66,18 +63,24 @@ def getCurrencies(lootJson, account):
         elif loot["lootId"] == "CURRENCY_RP":
             account["rp"] = loot["count"]
 
-# obtains account's information on rental, permanent and owned skins
-def getSkins(leagueConnection, loot, skins, account):
+def getSkins(leagueConnection: LeagueConnection, loot: Loot, account: Dict[str, Any]) -> None:
+    """
+    Obtains the account's information on rental, permanent, and owned skins (adds the data to account data dictionary)
+
+    :param leagueConnection: An instance of LeagueConnection used for making API requests.
+    :param loot: An instance of Loot for accessing loot data.
+    :param account: A dictionary containing account information.
+    """
     skinShardsRental = loot.getShardIdsByPattern("CHAMPION_SKIN_RENTAL_(\d+)")
-    account["skinShardsRental"] = ", ".join(skins.getSkinById(id) for id in skinShardsRental if skins.getSkinById(id) is not None)
+    account["skinShardsRental"] = ", ".join(Skins.getSkinById(id) for id in skinShardsRental if Skins.getSkinById(id) is not None)
     account["skinShardsRentalCount"] = len(skinShardsRental)
 
     skinShardsPermanent = loot.getShardIdsByPattern("CHAMPION_SKIN_(\d+)")
-    account["skinShardsPermanent"] = ", ".join(skins.getSkinById(id) for id in skinShardsPermanent if skins.getSkinById(id) is not None)
+    account["skinShardsPermanent"] = ", ".join(Skins.getSkinById(id) for id in skinShardsPermanent if Skins.getSkinById(id) is not None)
     account["skinShardsPermanentCount"] = len(skinShardsPermanent)
 
     ownedSkins = leagueConnection.get("/lol-inventory/v2/inventory/CHAMPION_SKIN").json()
-    account["ownedSkins"] = ", ".join(skins.getSkinById(skin["itemId"]) for skin in ownedSkins if skins.getSkinById(skin["itemId"]) is not None and skin["ownershipType"] == "OWNED")
+    account["ownedSkins"] = ", ".join(Skins.getSkinById(skin["itemId"]) for skin in ownedSkins if Skins.getSkinById(skin["itemId"]) is not None and skin["ownershipType"] == "OWNED")
     # some skins in ownedSkins json might be rented so count owned skins manually
     seperatorCount = account["ownedSkins"].count(", ") 
     if seperatorCount > 0:
@@ -94,9 +97,15 @@ def getSkins(leagueConnection, loot, skins, account):
     account["allSkinsCount"] = account["skinShardsAllCount"] + account["ownedSkinsCount"]
 
 # obtains account's information on owned champions
-def getChampions(leagueConnection, champions, account):
+def getChampions(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
+    """
+    Obtains the account's information on owned champions (adds the data to account data dictionary)
+
+    :param leagueConnection: The session object for making API requests.
+    :param account: A dictionary containing account information.
+    """
     ownedChampions = leagueConnection.get("/lol-champions/v1/owned-champions-minimal").json()
-    account["ownedChampions"] = ", ".join(champions.getChampionById(champion["id"]) for champion in ownedChampions if champions.getChampionById(champion["id"]) is not None and champion["ownership"]["owned"])
+    account["ownedChampions"] = ", ".join(Champions.getChampionById(champion["id"]) for champion in ownedChampions if Champions.getChampionById(champion["id"]) is not None and champion["ownership"]["owned"])
     # owned champions endpoint includes free rotation champions so count owned champions manually
     seperatorCount = account["ownedChampions"].count(", ")
     if seperatorCount > 0:
@@ -106,8 +115,13 @@ def getChampions(leagueConnection, champions, account):
     else:
         account["ownedChampionsCount"] = 0
 
-# obtain account's ranked stats on soloq and flexq modes
-def getRank(leagueConnection, account):
+def getRank(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
+    """
+    Obtains the account's ranked stats on soloq and flexq modes (adds the data to account data dictionary)
+
+    :param leagueConnection: The session object for making API requests.
+    :param account: A dictionary containing account information.
+    """
     romanNumbers = {
         "IV": 4,
         "III": 3,
@@ -157,8 +171,14 @@ def getRank(leagueConnection, account):
         account["flexLosses"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["losses"]
         account["flexWinrate"] = round(account["flexWins"] / (account["flexWins"] + account["flexLosses"]) * 100)
 
-# try to queue up and check if there's a low priority queue penalty
-def getLowPriorityQueue(leagueConnection, account):
+def getLowPriorityQueue(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
+    """
+    Tries to queue up and checks if there's a low priority queue penalty (adds the data to account data dictionary)
+    
+
+    :param leagueConnection: The session object for making API requests.
+    :param account: The account object to store the retrieved data.
+    """
     leagueConnection.waitForUpdate()
     
     queueArgs = {
@@ -181,8 +201,14 @@ def getLowPriorityQueue(leagueConnection, account):
     elif queueState["searchState"] == "Found" or queueState["searchState"] == "Searching": # searching for game or found one (no penalties)
         account["lowPriorityQueue"] = "None"
 
-# uses all data functions to get information about the account
-def getData(leagueConnection, account, loot):
+def getData(leagueConnection: LeagueConnection, account: Dict[str, Any], loot: Loot) -> None:
+    """
+    Uses all data functions to get information about the account.
+
+    :param leagueConnection: The session object for making API requests.
+    :param account: The account data dictionary for storing the retrieved data.
+    :param loot: An instance of Loot for accessing loot data.
+    """
     loot.refreshLoot()
     lootJson = loot.getLoot()
     getCurrencies(lootJson, account)
@@ -191,11 +217,9 @@ def getData(leagueConnection, account, loot):
     getSummoner(leagueConnection, account)
     getEmailVerification(leagueConnection, account)
 
-    champions = Champions("data\\champions.json")
-    getChampions(leagueConnection, champions, account)
+    getChampions(leagueConnection, account)
 
-    skins = Skins("data\\skins.json")
-    getSkins(leagueConnection, loot, skins, account)
+    getSkins(leagueConnection, loot, account)
 
     getRank(leagueConnection, account)
     getLowPriorityQueue(leagueConnection, account)

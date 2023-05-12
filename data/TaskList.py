@@ -6,10 +6,12 @@ from client.tasks.crafting import openChests
 from client.tasks.crafting import openLoot
 from client.tasks.disenchanting import disenchantChampionShards
 from client.tasks.disenchanting import disenchantEternalsShards
+from typing import Dict, Any, List, Callable, Union
+from client.connection.LeagueConnection import LeagueConnection
+from client.loot import Loot
 
-# class for storing all tasks
-class TaskList():
-    _eventTasks = {
+class TaskList:
+    _eventTasks: Dict[str, Dict[str, Any]] = {
         "claimEventRewards" :
         {
             "text" : "Claim event rewards",
@@ -30,7 +32,7 @@ class TaskList():
         },
     }
 
-    _craftingTasks = {
+    _craftingTasks: Dict[str, Dict[str, Any]] = {
         "craftKeys" : 
         {
             "text" : "Craft hextech keys",
@@ -51,7 +53,7 @@ class TaskList():
         },
     }
 
-    _disenchantingTasks = {
+    _disenchantingTasks: Dict[str, Dict[str, Any]] = {
         "disenchantChampionShards" :
         {
             "text" : "Champion shards",
@@ -66,11 +68,15 @@ class TaskList():
         },
     }
 
-    _allTasks = {**_eventTasks, **_craftingTasks, **_disenchantingTasks}
+    _allTasks: Dict[str, Dict[str, Any]] = {**_eventTasks, **_craftingTasks, **_disenchantingTasks}
 
-    # builds and returns task dictionary for gui display
     @staticmethod
-    def getTaskDisplay():
+    def getTaskDisplay() -> Dict[str, Dict[str, str]]:
+        """
+        Builds and returns a dictionary of task categories with their respective task names and descriptions for GUI display.
+
+        :return: a dictionary of task categories with their respective task names and descriptions
+        """
         eventTasks = {key: {"text" : value["text"]} for (key, value) in TaskList._eventTasks.items()}
         craftingTasks = {key: {"text" : value["text"]} for (key, value) in TaskList._craftingTasks.items()}
         disenchantingTasks = {key: {"text" : value["text"]} for (key, value) in TaskList._disenchantingTasks.items()}
@@ -80,9 +86,32 @@ class TaskList():
             "Disenchanting" : disenchantingTasks,
         }
 
-    # builds and returns a task dictionary for a given client
     @staticmethod
-    def getTasks(leagueConnection, loot):
+    def getTasks(leagueConnection: LeagueConnection, loot: Loot) -> Dict[str, Dict[str, Union[Callable, List[Union[LeagueConnection, Loot]]]]]:
+        """
+        Builds and returns a task dictionary for a given client.
+
+        :param leagueConnection: An instance of LeagueConnection used for making API requests.
+        :param loot: An instance of Loot for accessing loot data.
+
+        Returns:
+        - tasks (Dict[str, Dict[str, Union[Callable, List[Union[LeagueConnection, Loot]]]]]): A dictionary of tasks with the following structure:
+            {
+                taskName1: {
+                    "function": function1,
+                    "args": [leagueConnection, loot] or [leagueConnection]
+                },
+                taskName2: {
+                    "function": function2,
+                    "args": [leagueConnection, loot] or [leagueConnection]
+                },
+                ...
+            }
+        - taskName (str): A name of the task to perform.
+        - function (Callable): A function to perform a task.
+        - args (List[Union[LeagueConnection, Loot]]): A list of arguments for the task function.
+
+        """
         tasks = {}
 
         for taskName, taskOptions in TaskList._allTasks.items():

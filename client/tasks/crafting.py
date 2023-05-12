@@ -1,12 +1,27 @@
 import re
 from time import sleep
+from client.loot import Loot
+from client.connection.LeagueConnection import LeagueConnection
+from typing import List
 
-# post a recipe with given name, materials and amount
-def postRecipe(leagueConnection, recipeName, materials, repeat=1):
+def postRecipe(leagueConnection: LeagueConnection, recipeName: str, materials: List[str], repeat: int = 1) -> None:
+    """
+    Posts a recipe with the given name, materials, and repeat count.
+
+    :param leagueConnection: An instance of LeagueConnection used for making API requests.
+    :param recipeName: The name of the recipe to post.
+    :param materials: A list of material names.
+    :param repeat: The number of times to repeat the recipe (default is 1).
+    """
     leagueConnection.post(f"/lol-loot/v1/recipes/{recipeName}/craft?repeat={repeat}", json=materials)
 
-# crafts hextech keys
-def craftKeys(leagueConnection, loot):
+def craftKeys(leagueConnection: LeagueConnection, loot: Loot) -> None:
+    """
+    Crafts Hextech keys using available key fragments.
+
+    :param leagueConnection: An instance of LeagueConnection used for making API requests.
+    :param loot: An instance of Loot for accessing loot data.
+    """
     loot.refreshLoot()
     keyFragmentCount = loot.getLootCountById("MATERIAL_key_fragment")
 
@@ -15,10 +30,13 @@ def craftKeys(leagueConnection, loot):
         craftableKeyCount = keyFragmentCount // 3
         postRecipe(leagueConnection, "MATERIAL_key_fragment_forge", ["MATERIAL_key_fragment"], repeat=craftableKeyCount)
 
-# opens all chests on an account
-def openChests(leagueConnection, loot):
+def openChests(leagueConnection: LeagueConnection, loot: Loot) -> None:
+    """
+    Opens all Hextech chests available on the account.
 
-    # keep opening just in case more chests dropped from chests
+    :param leagueConnection: An instance of LeagueConnection used for making API requests.
+    :param loot: An instance of Loot for accessing loot data.
+    """
     while True:
         loot.refreshLoot()
         masterworkChestCount = loot.getLootCountById("CHEST_224")
@@ -29,7 +47,7 @@ def openChests(leagueConnection, loot):
         if masterworkChestCount + standardChestCount + masteryChestCount == 0 or keyCount == 0:
             return
 
-        # open masterwork chests first because they are better
+        # Open masterwork chests first because they are better
         craftableChestCount = min(keyCount, masterworkChestCount)
         if craftableChestCount > 0:
             postRecipe(leagueConnection, "CHEST_224_OPEN", ["CHEST_224", "MATERIAL_key"], repeat=craftableChestCount)
@@ -47,8 +65,13 @@ def openChests(leagueConnection, loot):
             postRecipe(leagueConnection, "CHEST_champion_mastery_OPEN", ["CHEST_champion_mastery", "MATERIAL_key"], repeat=craftableChestCount)
             sleep(1)
 
-# opens all loot expect for chests
-def openLoot(leagueConnection, loot):
+def openLoot(leagueConnection: LeagueConnection, loot: Loot) -> None:
+    """
+    Opens all non-Hextech chest loot available on the account.
+
+    :param leagueConnection: An instance of LeagueConnection used for making API requests.
+    :param loot: An instance of Loot for accessing loot data.
+    """
     loot.refreshLoot()
     notHextechChest = "CHEST_((?!(224|generic|champion_mastery)).)*"
     allLoot = loot.getLoot()
