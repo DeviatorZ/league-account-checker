@@ -7,6 +7,7 @@ import time
 import logging
 from typing import Optional, Dict
 import requests
+import config
 
 class RiotConnection(Connection):
     def __init__(self, path: str, port: int, allowPatching: bool) -> None:
@@ -60,9 +61,17 @@ class RiotConnection(Connection):
 
     def __waitForConnection(self) -> None:
         """
-        Used to authorize and wait for a connection.
+        Used to authorize the connection.
         """
         data = {"clientId": "riot-client", "trustLevels": ["always_trusted"]}
+
+        for _ in range(2):
+            try:
+                self.post("/rso-auth/v2/authorizations", json=data)
+                return
+            except ConnectionException:
+                time.sleep(config.RIOT_CLIENT_LOADING_RETRY_COOLDOWN)
+
         self.post("/rso-auth/v2/authorizations", json=data)
 
     
