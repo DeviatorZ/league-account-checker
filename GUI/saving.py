@@ -1,10 +1,23 @@
 import PySimpleGUI as sg
-def save(values, keyList):
+from typing import List, Dict, Any
+
+def save(values: Dict[str, Any], keyList: List[str]) -> None:
+    """
+    Saves the specified keys to user setting file.
+
+    :param values: The dictionary of values.
+    :param keyList: The list of keys to save.
+    """
     for key in keyList:
         sg.user_settings_set_entry(key, values[key])
 
-# saves options in settings tab
-def saveSettings(values):
+
+def saveSettings(values: Dict[str, Any]) -> None:
+    """
+    Saves options from the Settings tab.
+
+    :param values: The dictionary of values.
+    """
     allSettings = [
         "riotClient", 
         "leagueClient",
@@ -14,8 +27,12 @@ def saveSettings(values):
     ]
     save(values, allSettings)
 
-# saves options in tasks tab
-def saveTasks(values):
+def saveTasks(values: Dict[str, Any]) -> None:
+    """
+    Saves options from the Tasks tab.
+
+    :param values: The dictionary of values.
+    """
     allTasks = [
         "claimEventRewards",
         "buyChampionShardsWithTokens",
@@ -29,8 +46,12 @@ def saveTasks(values):
 
     save(values, allTasks)
 
-# save options in export tab
-def saveExport(values):
+def saveExport(values: Dict[str, Any]) -> None:
+    """
+    Saves options from the Export tab.
+
+    :param values: The dictionary of values.
+    """
     allExports = [
         "bannedTemplate",
         "errorTemplate",

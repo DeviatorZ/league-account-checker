@@ -103,8 +103,9 @@ def runGUI(mainWindow: sg.Window) -> None:
         elif event == "saveTasks":
             saveTasks(values)
         elif event == "deleteRaw":
+            logging.info("Deleting raw data...")
             eraseFiles(config.RAW_DATA_PATH)
-            logging.info("Raw exports erased!")
+            logging.info("Raw data erased!")
         elif event == "exportNow":
             exportAccounts(values["bannedTemplate"], values["errorTemplate"], values["failedSeparately"])
         elif event == "openExports":
