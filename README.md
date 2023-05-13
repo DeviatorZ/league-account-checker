@@ -1,5 +1,5 @@
 # **DeviatorZ Account Checker**
-League of Legends Account Checker - Designed to extract account data and perform various tasks through the League client.
+Designed to obtain account data and perform various tasks through the League client.
 ## **Features**
 - Process multiple accounts simultaneously.
 - Check for bans and invalid credentials.
@@ -7,6 +7,8 @@ League of Legends Account Checker - Designed to extract account data and perform
 - Open and disenchant loot.
 - Export account information.
 - Template system for custom export formats.
+## **Disclaimer**
+DeviatorZ Account Checker is not endorsed by Riot Games and does not reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games and all associated properties are trademarks or registered trademarks of Riot Games, Inc
 
 ## **Installation**
 - Supported platform: 64-bit Windows (7 or higher).
