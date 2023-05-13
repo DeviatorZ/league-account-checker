@@ -2,9 +2,9 @@ from requests import Session
 from requests import adapters
 import urllib3
 import subprocess
-from time import sleep
 from client.connection.credentials import getAuthToken
 from client.connection.exceptions import LaunchFailedException
+from typing import List
 
 class Connection(Session):
     """
@@ -48,7 +48,7 @@ class Connection(Session):
         # Return API request
         return Session.request(self, method, url, *args, **kwargs)
     
-    def getClient(self, processArgs: list[str]) -> None:
+    def getClient(self, processArgs: List[str]) -> None:
         """
         Opens a process for the client application with the given arguments.
 
