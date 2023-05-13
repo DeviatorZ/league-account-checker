@@ -3,7 +3,7 @@ import PySimpleGUI as sg
 
 def getMainLayout():
     return [
-        [sg.Output(size=(110, 25), key="log", font=("Helvetica", 8))],
+        [sg.Multiline(size=(110, 25), key="log", font=("Helvetica", 8), write_only=True, autoscroll=True)],
         [sg.Button("Start", key="start"), sg.Button("Stop", key="stop"), sg.Button("Exports folder", key="openExports"), sg.Text("", key="progress")] 
     ]  
 

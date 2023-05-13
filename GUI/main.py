@@ -1,6 +1,6 @@
 from threading import Thread
 from threading import Event
-from accountProcessing.threadHandler import executeAllAccounts
+from accountProcessing.run import executeAllAccounts
 from client.tasks.export import eraseFiles
 from client.tasks.export import exportAccounts
 from GUI.layouts import *
@@ -13,9 +13,17 @@ import copy
 import PySimpleGUI as sg
 import logging
 import os
+import config
+from typing import Dict, Any
 
-# validates user input and launches tasks
-def execute(settings, mainWindow, exitEvent):
+def execute(settings: Dict[str, Any], mainWindow: sg.Window, exitEvent: Event) -> None:
+    """
+    Validates user input and launches tasks.
+
+    :param settings: The user settings dictionary.
+    :param mainWindow: The main window object.
+    :param exitEvent: The event used to gracefully exit all checker threads.
+    """
     try:
         checkForFileErrors(settings)
     except InvalidPathException as exception:
@@ -45,7 +53,13 @@ def execute(settings, mainWindow, exitEvent):
     except: # GUI closed while running tasks
         pass
 
-def setupGUI(cwd):
+def setupGUI(cwd: str) -> sg.Window:
+    """
+    Sets up the GUI window.
+
+    :param cwd: The current working directory.
+    :return: The main window object.
+    """
     sg.theme("Black")
     sg.user_settings_filename("settings.json", path=f"data")
 
@@ -61,11 +75,16 @@ def setupGUI(cwd):
     mainWindow = sg.Window("DeviatorZ Account Checker", layout, font=("Helvetica", 15), finalize=True) # create the window
     mainWindow["log"].update(disabled=True) # disable typing in logging console
 
-    setupConsoleLogging(mainWindow)
+    setupConsoleLogging(mainWindow["log"])
 
     return mainWindow
 
-def runGUI(mainWindow, cwd):
+def runGUI(mainWindow: sg.Window) -> None:
+    """
+    Runs the GUI event loop.
+
+    :param mainWindow: The main window object.
+    """
     exitEvent = Event()
 
     # event loop to process "events" and get the "values" of the inputs
@@ -84,13 +103,13 @@ def runGUI(mainWindow, cwd):
         elif event == "saveTasks":
             saveTasks(values)
         elif event == "deleteRaw":
-            eraseFiles("data\\raw")
+            eraseFiles(config.RAW_DATA_PATH)
             logging.info("Raw exports erased!")
         elif event == "exportNow":
             exportAccounts(values["bannedTemplate"], values["errorTemplate"], values["failedSeparately"])
         elif event == "openExports":
             try:
-                os.startfile(f"{cwd}\\export")
+                os.startfile(config.EXPORT_PATH)
             except:
                 pass
         elif event == "saveExport":
