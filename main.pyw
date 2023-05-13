@@ -3,9 +3,12 @@ from GUI.main import runGUI
 import os
 
 def main():
+    """
+    Main function to launch the account checker application.
+    """
     cwd = os.getcwd()
     mainWindow = setupGUI(cwd)
-    runGUI(mainWindow, cwd)
+    runGUI(mainWindow)
 
 if __name__ == "__main__":
     main()

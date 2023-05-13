@@ -1,5 +1,7 @@
 SKIN_FILE_PATH = "data\\skins.json"
+SKIN_DATA_URL = "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/skins.json"
 CHAMPION_FILE_PATH = "data\\champions.json"
+CHAMPION_DATA_URL = "https://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/default/v1/champion-summary.json"
 RAW_DATA_PATH = "data\\raw"
 EXPORT_PATH = "export"
 TEMPLATE_PATH = "templates"

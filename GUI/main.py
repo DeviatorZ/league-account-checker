@@ -116,6 +116,6 @@ def runGUI(mainWindow: sg.Window) -> None:
         elif event == "saveExport":
             saveExport(values)
         elif event == "updateInformation":
-            Thread(target=updateInformation, args=[mainWindow]).start()
+            Thread(target=updateInformation, args=[mainWindow["updateInformation"]]).start()
 
     mainWindow.close()
