@@ -1,22 +1,35 @@
 import logging
+import PySimpleGUI as sg
 
-# handles console logging
 class Handler(logging.StreamHandler):
-    def __init__(self, window):
-        logging.StreamHandler.__init__(self)
-        self.buffer = ""
-        self.window = window
+    def __init__(self, logTextBox: sg.Multiline) -> None:
+        """
+        Custom logging handler that updates a PySimpleGUI Multiline element with log messages.
 
-    def emit(self, record):
+        :param logTextBox: The Multiline element to update with log messages.
+        """
+        logging.StreamHandler.__init__(self)
+        self.__textBox = logTextBox
+
+    def emit(self, record: logging.LogRecord) -> None:
+        """
+        Updates the Text element with the log message.
+
+        :param record: The log record to emit.
+        """
         self.format(record)
         record = f"{record.asctime} [{record.levelname}] {record.message}"
-        self.buffer = f"{self.buffer}\n{record}".strip()
         try:
-            self.window["log"].update(value=self.buffer)
+            self.__textBox.update(value=record.strip() + "\n", append=True)
         except: # GUI closed while running tasks
             pass
         
-def setupConsoleLogging(mainWindow):
+def setupConsoleLogging(logTextBox: sg.Multiline) -> None:
+    """
+    Sets up console logging for the application.
+
+    :param logTextBox: The Multiline element to update with log messages.
+    """
     logging.getLogger("urllib3").setLevel(logging.ERROR)
     logging.basicConfig(
         level=logging.INFO,
@@ -25,6 +38,6 @@ def setupConsoleLogging(mainWindow):
         filename="log.txt",
         filemode="a"
     )
-    handler = Handler(mainWindow)
+    handler = Handler(logTextBox)
     logger = logging.getLogger("")
     logger.addHandler(handler)

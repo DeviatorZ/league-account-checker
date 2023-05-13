@@ -1,18 +1,34 @@
 from time import sleep
-import logging
-# claims event rewards
-def claimEventRewards(leagueConnection):
+from client.connection.LeagueConnection import LeagueConnection
+
+def claimEventRewards(leagueConnection: LeagueConnection):
+    """
+    Claims event rewards.
+
+    :param leagueConnection: An instance of LeagueConnection used for making API requests.
+    """
     leagueConnection.post("/lol-event-shop/v1/claim-select-all")
 
-# buys an event shop offer by offer id
-def buyOffer(leagueConnection, offerId):
+def buyOffer(leagueConnection: LeagueConnection, offerId: str) -> None:
+    """
+    Buys an event shop offer by offer ID.
+
+    :param leagueConnection: An instance of LeagueConnection used for making API requests.
+    :param offerId: The ID of the offer to buy.
+    """
     leagueConnection.post("/lol-event-shop/v1/purchase-offer", '{"offerId":"' + offerId + '"}')
 
-# finds an offer that matches the price and id and spends as many tokens as possible on the offer
-def buyOfferByPriceAndId(leagueConnection, price, id):
+def buyOfferByPriceAndId(leagueConnection: LeagueConnection, price: int, id: str) -> None:
+    """
+    Finds an offer that matches the price and provides an item with the given ID and spends as many tokens as possible on the offer.
+
+    :param leagueConnection: An instance of LeagueConnection used for making API requests.
+    :param price: The price of the offer in tokens.
+    :param id: The ID of the item to buy.
+    """
     tokenShop = leagueConnection.get("/lol-event-shop/v1/categories-offers").json()
     if tokenShop is None:
-        return
+        return # token shop unavailable
     
     offerId = ""
 
@@ -31,11 +47,19 @@ def buyOfferByPriceAndId(leagueConnection, price, id):
                 buyOffer(leagueConnection, offerId)
                 sleep(1)
 
-# spends tokens on champion shards
-def buyChampionShardsWithTokens(leagueConnection):
+def buyChampionShardsWithTokens(leagueConnection: LeagueConnection) -> None:
+    """
+    Spends as many event tokens as possible on champion shards.
+
+    :param leagueConnection: An instance of LeagueConnection used for making API requests.
+    """
     buyOfferByPriceAndId(leagueConnection, 50, "241")
 
-# spends tokens on blue essence
-def buyBlueEssenceWithTokens(leagueConnection):
+def buyBlueEssenceWithTokens(leagueConnection: LeagueConnection) -> None:
+    """
+    Spends as many event tokens as possible on blue essence.
+
+    :param leagueConnection: An instance of LeagueConnection used for making API requests.
+    """
     buyOfferByPriceAndId(leagueConnection, 1, "6")
 

@@ -1,13 +1,14 @@
-from threading import Lock
 from GUI.main import setupGUI
 from GUI.main import runGUI
 import os
 
 def main():
+    """
+    Main function to launch the account checker application.
+    """
     cwd = os.getcwd()
-    lock = Lock()
     mainWindow = setupGUI(cwd)
-    runGUI(mainWindow, cwd, lock)
+    runGUI(mainWindow)
 
 if __name__ == "__main__":
     main()

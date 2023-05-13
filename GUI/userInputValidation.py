@@ -1,9 +1,17 @@
 from GUI.exceptions import InvalidPathException
 import os
 import csv
+from typing import Dict, Any, List
 
-# make sure user input files exist
-def checkForFileErrors(settings):
+def checkForFileErrors(settings: Dict[str, Any]) -> None:
+    """
+    Checks if the required files specified in the settings exist.
+
+    :param settings: The dictionary of settings.
+
+    Raises: 
+        InvalidPathException: If any of the required files do not exist.
+    """
     if not os.path.exists(settings["riotClient"]):
         raise InvalidPathException("RiotClientServices.exe path doesn't exist!")
 
@@ -13,8 +21,18 @@ def checkForFileErrors(settings):
     if not os.path.exists(settings["accountsFile"]):
         raise InvalidPathException("Account file path doesn't exist!")
 
-# creates account list from a file
-def getAccounts(settings):
+
+def getAccounts(settings: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """
+    Creates a list of accounts from an account file.
+
+    :param settings: The dictionary of settings.
+
+    Raises: 
+        SyntaxError: If there is a syntax error in the account file.
+
+    :return: The list of accounts.
+    """
     accounts = []
 
     # read account file
