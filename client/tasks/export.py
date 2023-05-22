@@ -43,7 +43,7 @@ def exportRaw(account: Dict[str, Any]) -> None:
     """
     makeDirectory(config.RAW_DATA_PATH)
     # usernames are globally unique
-    with open(f"{config.RAW_DATA_PATH}\\{account['username']}", "w", encoding="utf-8") as fp:
+    with open(os.path.join(config.RAW_DATA_PATH, account["username"]), "w", encoding="utf-8") as fp:
         fp.write(json.dumps(account, indent=4))
 
 def readRawExports() -> List[Dict[str, Any]]:
@@ -74,15 +74,15 @@ class Export():
         """
         makeDirectory(config.EXPORT_PATH)
 
-        self.singleTemplatesPath = f"{config.TEMPLATE_PATH}\\single"
-        self.singleExportPath = f"{config.EXPORT_PATH}\\single"
+        self.singleTemplatesPath = os.path.join(config.TEMPLATE_PATH, "single")
+        self.singleExportPath = os.path.join(config.EXPORT_PATH, "single")
         makeDirectory(self.singleExportPath)
         eraseFiles(self.singleExportPath)
         self.singleTemplates = []
         self.__initTemplatesSingle()
 
-        self.allTemplatesPath = f"{config.TEMPLATE_PATH}\\all"
-        self.allExportPath = f"{config.EXPORT_PATH}\\all"
+        self.allTemplatesPath = os.path.join(config.TEMPLATE_PATH, "all")
+        self.allExportPath = os.path.join(config.EXPORT_PATH, "all")
         makeDirectory(self.allExportPath)
         eraseFiles(self.allExportPath)
         self.allTemplates = []
@@ -91,8 +91,9 @@ class Export():
         self.bannedTemplate = bannedTemplate
         self.errorTemplate = errorTemplate
         self.__failedSeparately = failedSeparately
+        self.__failedPath = os.path.join(config.EXPORT_PATH, config.FAILED_ACCOUNT_PATH)
         try:
-            os.remove(f"{config.EXPORT_PATH}\\{config.FAILED_ACCOUNT_PATH}")
+            os.remove(self.__failedPath)
         except FileNotFoundError:
             pass
 
@@ -163,9 +164,9 @@ class Export():
         :param accounts: The list of accounts to export.
         """
         for template in self.singleTemplates:
-            with open(f"{self.singleTemplatesPath}\\{template}", "r", encoding="utf-8", newline="") as filePointer:
+            with open(os.path.join(self.singleTemplatesPath, template), "r", encoding="utf-8", newline="") as filePointer:
                 templateData = filePointer.read()
-                with open(f"{self.singleExportPath}\\{template}", "a+", encoding="utf-8", newline="") as exportPointer:
+                with open(os.path.join(self.singleExportPath, template), "a+", encoding="utf-8", newline="") as exportPointer:
                     for account in accounts:
                         data = self.__replaceTemplatePlaceholders(account, templateData)
                         if data:
@@ -178,12 +179,12 @@ class Export():
         :param accounts: The list of accounts to export.
         """
         for template in self.allTemplates:
-            with open(f"{self.allTemplatesPath}\\{template}", "r", encoding="utf-8", newline="") as filePointer:
+            with open(os.path.join(self.allTemplatesPath, template), "r", encoding="utf-8", newline="") as filePointer:
                 templateData = filePointer.read()
                 for account in accounts:
                         data = self.__replaceTemplatePlaceholders(account, templateData)
                         if data:
-                            with open(f"{self.allExportPath}\\{str(template).split('.')[0]}\\{account['username']}.txt", "w", encoding="utf-8", newline="") as exportPointer:
+                            with open(os.path.join(self.allExportPath, str(template).split('.')[0], f"{account['username']}.txt"), "w", encoding="utf-8", newline="") as exportPointer:
                                 exportPointer.write(data + "\n")
 
     def __exportFailed(self, accounts: List[Dict[str, Any]]) -> None:
@@ -192,7 +193,7 @@ class Export():
 
         :param accounts: The list of failed accounts to export.
         """
-        with open(f"{config.EXPORT_PATH}\\{config.FAILED_ACCOUNT_PATH}", "a+", encoding="utf-8", newline="") as exportPointer:
+        with open(self.__failedPath, "a+", encoding="utf-8", newline="") as exportPointer:
             for account in accounts:
                 data = self.__replaceTemplatePlaceholders(account, "")
                 if data:
