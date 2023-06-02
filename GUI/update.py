@@ -23,7 +23,7 @@ def updateInformation(updateButton: sg.Button) -> None:
     updateButton.update(disabled=False, text=startingText)
 
 
-def downloadJson(URL: str) -> dict:
+def downloadJson(URL: str) -> Dict[str, Any]:
     """
     Downloads JSON data from the given URL.
 
