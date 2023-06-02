@@ -5,7 +5,6 @@ from client.skins import Skins
 from client.connection.LeagueConnection import LeagueConnection
 from typing import Dict, List, Any
 from client.loot import Loot
-import logging
 
 def getSummoner(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
     """
@@ -133,7 +132,7 @@ def getRank(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None
     rankedStats = leagueConnection.get("/lol-ranked/v1/current-ranked-stats").json()
 
     soloTier = ((rankedStats["queueMap"]["RANKED_SOLO_5x5"]["tier"]).lower()).capitalize()
-    if not soloTier:
+    if not soloTier or soloTier == "None":
         account["soloTier"] = "Unranked"
         account["soloTierStart"] = "U"
         account["soloDivision"] = ""
@@ -153,7 +152,7 @@ def getRank(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None
         account["soloWinrate"] = round(account["soloWins"] / (account["soloWins"] + account["soloLosses"]) * 100)
 
     flexTier = ((rankedStats["queueMap"]["RANKED_FLEX_SR"]["tier"]).lower()).capitalize()
-    if not flexTier:
+    if not flexTier or flexTier == "None":
         account["flexTier"] = "Unranked"
         account["flexTierStart"] = "U"
         account["flexDivision"] = ""
