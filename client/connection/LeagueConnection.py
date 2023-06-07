@@ -164,9 +164,9 @@ class LeagueConnection(Connection):
                 raise SessionException(self.__class__.__name__, "Update timed out")
             time.sleep(1)
 
-    def __del__(self) -> None:
+    def kill(self) -> None:
         """
         Terminates the League client and Riot client processes.
         """
-        Connection.__del__(self)
-        self.__riotConnection.__del__()
+        Connection.kill(self)
+        self.__riotConnection.kill()

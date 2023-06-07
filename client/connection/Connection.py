@@ -5,6 +5,7 @@ import subprocess
 from client.connection.credentials import getAuthToken
 from client.connection.exceptions import LaunchFailedException
 from typing import List
+import logging
 
 class Connection(Session):
     """
@@ -39,14 +40,25 @@ class Connection(Session):
         Sends an API request to the client.
 
         :return: The API response.
-        """
+        """      
+        try:
+            logging.debug(f"{method} : {url} : {args} {kwargs}")
+        except Exception as e:
+            logging.debug(e)
+            
         url = self._url + url
         # Setup Riot authentication
         kwargs["auth"] = "riot", self._authToken
         kwargs["verify"] = False
-        
-        # Return API request
-        return Session.request(self, method, url, *args, **kwargs)
+
+        response = Session.request(self, method, url, *args, **kwargs)
+
+        try:
+            logging.debug(f"{response.status_code} : {response.text}")
+        except Exception as e:
+            logging.debug(e)
+
+        return response
     
     def getClient(self, processArgs: List[str]) -> None:
         """
@@ -64,7 +76,7 @@ class Connection(Session):
             except OSError as error:
                 raise LaunchFailedException(self.__class__.__name__, error)
     
-    def __del__(self) -> None:
+    def kill(self) -> None:
         """
         Terminates the client process.
         """

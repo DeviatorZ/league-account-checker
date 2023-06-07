@@ -39,9 +39,9 @@ class LeagueOfLegendsWorker:
         Terminates league/riot client process on exit.
         """
         if self.__leagueConnection is not None:
-            self.__leagueConnection.__del__()
+            self.__leagueConnection.kill()
         elif self.__riotConnection is not None:
-            self.__riotConnection.__del__()
+            self.__riotConnection.kill()
 
     def handleRiotClient(self) -> str:
         """

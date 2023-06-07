@@ -157,6 +157,8 @@ class RiotConnection(Connection):
                 time.sleep(1)
                 return
             elif phase == "PatchStatus": # updating
+                if not self.__allowPatching:
+                    return
                 logging.info("Waiting for RiotClient to update...")
                 for _ in range(7200): # 2 hours
                     time.sleep(1)
