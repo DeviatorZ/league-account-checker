@@ -10,6 +10,7 @@ class Handler(logging.StreamHandler):
         """
         logging.StreamHandler.__init__(self)
         self.__textBox = logTextBox
+        self.setLevel(logging.INFO)
 
     def emit(self, record: logging.LogRecord) -> None:
         """
@@ -32,7 +33,7 @@ def setupConsoleLogging(logTextBox: sg.Multiline) -> None:
     """
     logging.getLogger("urllib3").setLevel(logging.ERROR)
     logging.basicConfig(
-        level=logging.INFO,
+        level=logging.DEBUG,
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S",
         filename="log.txt",
