@@ -201,6 +201,11 @@ def getLowPriorityQueue(leagueConnection: LeagueConnection, account: Dict[str, A
     elif queueState["searchState"] == "Found" or queueState["searchState"] == "Searching": # searching for game or found one (no penalties)
         account["lowPriorityQueue"] = "None"
 
+def getLastMatch(leagueConnection, account):
+    l = leagueConnection.get("/lol-match-history/v1/products/lol/current-summoner/matches").json()['games']['games'][0]['gameCreationDate']
+    lastMatchData = f"{l[8:10]}/{l[5:7]}/{l[2:4]} - {l[11:13]}h{l[14:16]}. (dd/mm/yy GMT)"
+    account["lastMatch"] = (lastMatchData)
+
 def getData(leagueConnection: LeagueConnection, account: Dict[str, Any], loot: Loot) -> None:
     """
     Uses all data functions to get information about the account.
@@ -223,3 +228,4 @@ def getData(leagueConnection: LeagueConnection, account: Dict[str, Any], loot: L
 
     getRank(leagueConnection, account)
     getLowPriorityQueue(leagueConnection, account)
+    getLastMatch(leagueConnection, account)
