@@ -1593,5 +1593,14 @@
         "roles": [
             "support"
         ]
+    },
+    {
+        "id": 950,
+        "name": "Naafiri",
+        "alias": "Naafiri",
+        "squarePortraitPath": "/lol-game-data/assets/v1/champion-icons/950.png",
+        "roles": [
+            "assassin"
+        ]
     }
 ]

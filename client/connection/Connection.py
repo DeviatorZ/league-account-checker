@@ -6,6 +6,7 @@ from client.connection.credentials import getAuthToken
 from client.connection.exceptions import LaunchFailedException
 from typing import List
 import logging
+import requests
 
 class Connection(Session):
     """
@@ -25,7 +26,7 @@ class Connection(Session):
         self._process = None
         Session.__init__(self)
         retry = urllib3.util.retry.Retry(
-            total = 5,
+            total = 4,
             respect_retry_after_header = True,
             status_forcelist = [429, 404, 500],
             backoff_factor = 1
@@ -51,7 +52,11 @@ class Connection(Session):
         kwargs["auth"] = "riot", self._authToken
         kwargs["verify"] = False
 
-        response = Session.request(self, method, url, *args, **kwargs)
+        try:
+            response = Session.request(self, method, url, *args, **kwargs)
+        except requests.exceptions.RetryError as e:
+            logging.debug(e)
+            return None
 
         try:
             logging.debug(f"{response.status_code} : {response.text}")

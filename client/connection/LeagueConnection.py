@@ -79,12 +79,16 @@ class LeagueConnection(Connection):
         """
         try:
             response = Connection.request(self, method, url, *args, **kwargs)
-            if response.ok:
-                return response
 
+            if response and response.ok:
+                return response
+            
             # no token event is currently running
-            if (url == "/lol-event-shop/v1/claim-select-all" or url == "/lol-event-shop/v1/categories-offers") and not response.ok:
+            if (url == "/lol-event-shop/v1/claim-select-all" or url == "/lol-event-shop/v1/categories-offers") and (response is None or not response.ok):
                 return None
+            
+            if response is None:
+                raise RequestException(f"{method} : {url} : Retry limit exceeded")
             
             # got a queue penalty
             if url == "/lol-lobby/v2/lobby/matchmaking/search" and response.status_code == 400:
@@ -93,7 +97,7 @@ class LeagueConnection(Connection):
             raise RequestException(f"{method} : {url} : {response.status_code}")
         except RequestException as e:
             raise ConnectionException(self.__class__.__name__, e.message)
-        except Exception:
+        except requests.exceptions.RequestException:
             raise ConnectionException(self.__class__.__name__)
         
     def waitForSession(self, timeout: int = 60) -> None:

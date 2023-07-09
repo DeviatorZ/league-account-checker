@@ -44,3 +44,12 @@ def getExportLayout():
         [sg.Checkbox("Automatically export raw data at the end of the checking process", default=sg.user_settings_get_entry("autoExport", True), key="autoExport", size=(70,1), font=("Helvetica", 9))],
         [sg.Button("Save", key="saveExport"), sg.Push(), sg.Button("Update skin and champion information", key="updateInformation")],
     ]
+
+def getRefundsLayout():
+    return [
+        [sg.Checkbox("Refund champions (FREE)", default=sg.user_settings_get_entry("freeChampionRefunds", False), key="freeChampionRefunds", size=(30,2)),
+         sg.Text("Minimum price"), sg.InputCombo((450, 1350, 3150, 4800, 6300), default_value=sg.user_settings_get_entry("freeChampionRefundsMinPrice", 1350), key="freeChampionRefundsMinPrice")],
+        [sg.Checkbox("Refund champions (TOKENS)", default=sg.user_settings_get_entry("tokenChampionRefunds", False), key="tokenChampionRefunds", size=(30,1)),
+         sg.Text("Minimum price"), sg.InputCombo((450, 1350, 3150, 4800, 6300), default_value=sg.user_settings_get_entry("tokenChampionRefundsMinPrice", 4800), key="tokenChampionRefundsMinPrice")],
+        [sg.Button("Save", key="saveRefunds")],
+    ]

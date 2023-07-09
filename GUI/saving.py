@@ -62,3 +62,18 @@ def saveExport(values: Dict[str, Any]) -> None:
     ]
 
     save(values, allExports)
+
+def saveRefunds(values: Dict[str, Any]) -> None:
+    """
+    Saves options from the Refunds tab.
+
+    :param values: The dictionary of values.
+    """
+    allRefunds = [
+        "freeChampionRefunds",
+        "freeChampionRefundsMinPrice",
+        "tokenChampionRefunds",
+        "tokenChampionRefundsMinPrice",
+    ]
+
+    save(values, allRefunds)

@@ -8,9 +8,13 @@ from data.TaskList import TaskList
 from accountProcessing.exceptions import RateLimitedException
 from datetime import datetime
 from time import sleep
-from typing import Dict, Optional, Any
+from typing import Dict, Any
 import logging
 import json
+from client.leagueStore.refunding import useFreeChampionRefunds
+from client.leagueStore.refunding import useRefundTokensOnChampions
+from client.leagueStore.store import LoLStore
+
 
 class LeagueOfLegendsWorker:
     def __init__(self, account: Dict[str, Any], settings: Dict[str, Any], allowPatching: bool, riotPort: int, leaguePort: int) -> None:
@@ -98,6 +102,14 @@ class LeagueOfLegendsWorker:
         Performs the tasks based on settings.
         """
         loot = Loot(self.__leagueConnection)
+        self.__runGeneralTasks(loot)
+        self.__runStoreTasks()
+
+        # obtain extra account information if it's not set to minimal type
+        if not self.__settings["exportMin"]:
+            getData(self.__leagueConnection, self.__account, loot)
+
+    def __runGeneralTasks(self, loot: Loot) -> None:
         tasks = TaskList.getTasks(self.__leagueConnection, loot)
 
         # run tasks
@@ -106,6 +118,18 @@ class LeagueOfLegendsWorker:
                 task["function"](*task["args"])
                 sleep(1) # allow loot to update between tasks
 
-        # obtain extra account information if it's not set to minimal type
-        if not self.__settings["exportMin"]:
-            getData(self.__leagueConnection, self.__account, loot)
+    def __runStoreTasks(self) -> None:
+        """
+        Performs tasks on the League store.
+        """
+        if not (self.__settings["freeChampionRefunds"] or self.__settings["tokenChampionRefunds"]):
+            return
+        
+        leagueStore = LoLStore(self.__leagueConnection)
+
+        if self.__settings["freeChampionRefunds"]:
+            useFreeChampionRefunds(leagueStore, int(self.__settings["freeChampionRefundsMinPrice"]))
+
+        if self.__settings["tokenChampionRefunds"]:
+            useRefundTokensOnChampions(leagueStore, int(self.__settings["tokenChampionRefundsMinPrice"]))
+            

@@ -69,6 +69,7 @@ def setupGUI(cwd: str) -> sg.Window:
             sg.Tab("Settings", getSettingsLayout(cwd)),
             sg.Tab("Tasks", getTasksLayout()),
             sg.Tab("Export", getExportLayout()),
+            sg.Tab("Refunds", getRefundsLayout()),
         ]])],
     ]
 
@@ -102,6 +103,8 @@ def runGUI(mainWindow: sg.Window) -> None:
             saveSettings(values)
         elif event == "saveTasks":
             saveTasks(values)
+        elif event == "saveRefunds":
+            saveRefunds(values)
         elif event == "deleteRaw":
             logging.info("Deleting raw data...")
             eraseFiles(config.RAW_DATA_PATH)
