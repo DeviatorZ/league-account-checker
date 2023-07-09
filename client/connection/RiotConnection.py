@@ -65,7 +65,7 @@ class RiotConnection(Connection):
         """
         data = {"clientId": "riot-client", "trustLevels": ["always_trusted"]}
 
-        for _ in range(2):
+        for _ in range(config.RIOT_CLIENT_LOADING_RETRY_COUNT):
             try:
                 self.post("/rso-auth/v2/authorizations", json=data)
                 return
@@ -91,18 +91,21 @@ class RiotConnection(Connection):
         """
         try:
             response = Connection.request(self, method, url, *args, **kwargs)
+
+            if response is None:
+                raise RequestException(f"{method} : {url} : Retry limit exceeded")
+            
+            if response.ok:
+                return response
             
             # RSO session failure
             if url == "/rso-auth/v1/session/credentials" and response.status_code == 400:
                 return None
-            
-            if response.ok:
-                return response
 
             raise RequestException(f"{method} : {url} : {response.status_code}")
         except RequestException as e:
             raise ConnectionException(self.__class__.__name__, e.message)
-        except Exception:
+        except requests.exceptions.RequestException:
             raise ConnectionException(self.__class__.__name__)
         
     def __acceptEULA(self) -> None:
