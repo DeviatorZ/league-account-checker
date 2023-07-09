@@ -70,3 +70,7 @@ Example templates can be found in the "templates" folder. Consider the following
 - **Delete raw data**: Deletes raw export data. Raw data includes all data of an account that's exported when the account is finished. This will delete raw data of all accounts.
 - **Export now**: Exports raw data using templates.
 - **Update skin and champion information**: Tries to update champion and skin information. Skins are released nearly every patch, and it might take multiple days until data files are updatable. IDs unrecognized by the checker will not be exported, so make sure to stay updated!
+### **Refunds Tab**
+![RefundsTab](https://i.imgur.com/9LscdJ9.png)
+- **Refund champions (FREE)**: When enabled, this option will use all available free champion refunds (limited to bought and unused champions) for champions that cost at least the selected minimum price.
+- **Refund champions (TOKENS)**: When enabled, this option will use refund tokens to refund champions that cost at least the selected minimum price, starting from the most expensive champions. The refund process will continue until there are no more refund tokens available or there are no more champions left to refund.
