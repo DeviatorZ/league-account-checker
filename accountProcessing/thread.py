@@ -8,6 +8,7 @@ from accountProcessing.LeagueOfLegendsWorker import LeagueOfLegendsWorker
 from multiprocessing import Queue, Value, Event, Lock
 from typing import Dict, Any
 from accountProcessing.Progress import Progress
+from client.leagueStore.exceptions import StoreException
 import time
 import logging
 import config
@@ -107,7 +108,7 @@ class Worker:
                 
                 logging.error(f"{self.__account['username']} {exception.message}. Waiting before retrying...")
                 self.__rateLimited(rateLimitCount)
-            except (ConnectionException, SessionException) as exception: # something went wrong with api
+            except (ConnectionException, SessionException, StoreException) as exception: # something went wrong with api
                 logging.error(f"{self.__account['username']} {exception.message}. Retrying...")
 
                 failCount += 1
@@ -141,7 +142,7 @@ class Worker:
                 sleepTime = self.__nextRiotLaunch.value - currentTime
 
                 if sleepTime <= 0:
-                    self.__nextRiotLaunch.value = time.time() + config.RIOT_CLIENT_LAUNCH_COOLDOWN
+                    self.__nextRiotLaunch.value = currentTime + config.RIOT_CLIENT_LAUNCH_COOLDOWN
                     return
                 
             self.__sleep(sleepTime)
@@ -161,7 +162,7 @@ class Worker:
                 sleepTime = self.__nextLeagueLaunch.value - currentTime
 
                 if sleepTime <= 0:
-                    self.__nextLeagueLaunch.value = time.time() + config.LEAGUE_CLIENT_LAUNCH_COOLDOWN
+                    self.__nextLeagueLaunch.value = currentTime + config.LEAGUE_CLIENT_LAUNCH_COOLDOWN
                     return
                 
             self.__sleep(sleepTime)
