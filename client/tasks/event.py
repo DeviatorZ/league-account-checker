@@ -26,10 +26,11 @@ def buyOfferByPriceAndId(leagueConnection: LeagueConnection, price: int, id: str
     :param price: The price of the offer in tokens.
     :param id: The ID of the item to buy.
     """
-    tokenShop = leagueConnection.get("/lol-event-shop/v1/categories-offers").json()
+    tokenShop = leagueConnection.get("/lol-event-shop/v1/categories-offers")
     if tokenShop is None:
         return # token shop unavailable
     
+    tokenShop = tokenShop.json()
     offerId = ""
 
     for offerCategory in tokenShop:
