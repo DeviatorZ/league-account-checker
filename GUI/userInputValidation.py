@@ -1,7 +1,8 @@
-from GUI.exceptions import InvalidPathException
+from GUI.exceptions import InvalidPathException, InvalidInputException
 import os
 import csv
 from typing import Dict, Any, List
+from client.champions import Champions
 
 def checkForFileErrors(settings: Dict[str, Any]) -> None:
     """
@@ -49,3 +50,22 @@ def getAccounts(settings: Dict[str, Any]) -> List[Dict[str, Any]]:
             })
     
     return accounts
+
+
+def validateChampionShop(settings: Dict[str, Any]) -> None:
+    try:
+        settings["championShopList"] = eval(settings["championShopList"])
+        if not type(settings["championShopList"]) is list:
+            raise Exception
+    except Exception:
+        raise InvalidInputException("Invalid champion shop list!")
+    
+    for championName in settings["championShopList"]:
+        championId = Champions.getChampionIdByName(championName)
+        if championId is None:
+            raise InvalidInputException(f"Invalid champion in champion shop list: {championName}")
+        
+    try:
+        settings["maxOwnedChampions"] = int(settings["maxOwnedChampions"])
+    except:
+        raise InvalidInputException("Maximum owned champion count should be an integer!")   

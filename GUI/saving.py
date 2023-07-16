@@ -77,3 +77,17 @@ def saveRefunds(values: Dict[str, Any]) -> None:
     ]
 
     save(values, allRefunds)
+
+def saveChampionShop(values: Dict[str, Any]) -> None:
+    """
+    Saves options from the Champion Shop tab.
+
+    :param values: The dictionary of values.
+    """
+    allChampionShop = [
+        "buyChampions",
+        "championShopList",
+        "maxOwnedChampions",
+    ]
+
+    save(values, allChampionShop)

@@ -38,6 +38,7 @@ def getEmailVerification(leagueConnection: LeagueConnection, account: Dict[str, 
     """
     email = leagueConnection.get("/lol-email-verification/v1/email")
     email = email.json()
+    account["email"] = email["email"]
 
     if email["emailVerified"]:
         account["emailVerified"] = "Verified"
