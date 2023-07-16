@@ -8,7 +8,8 @@ from GUI.logging import setupConsoleLogging
 from GUI.saving import *
 from GUI.update import updateInformation
 from GUI.userInputValidation import *
-from GUI.exceptions import InvalidPathException
+from GUI.exceptions import InvalidPathException, InvalidInputException
+from GUI.championShop import *
 import copy
 import PySimpleGUI as sg
 import logging
@@ -38,6 +39,12 @@ def execute(settings: Dict[str, Any], mainWindow: sg.Window, exitEvent: Event) -
     except SyntaxError as error:
         logging.error(error.msg)
         return 
+
+    try:
+        validateChampionShop(settings)
+    except InvalidInputException as exception:
+        logging.error(exception.message)
+        return
 
     try:
         mainWindow["start"].update(disabled=True)
@@ -70,6 +77,7 @@ def setupGUI(cwd: str) -> sg.Window:
             sg.Tab("Tasks", getTasksLayout()),
             sg.Tab("Export", getExportLayout()),
             sg.Tab("Refunds", getRefundsLayout()),
+            sg.Tab("ChampionShop", getChampionShopLayout()),
         ]])],
     ]
 
@@ -105,6 +113,8 @@ def runGUI(mainWindow: sg.Window) -> None:
             saveTasks(values)
         elif event == "saveRefunds":
             saveRefunds(values)
+        elif event == "saveChampionShop":
+            saveChampionShop(values)
         elif event == "deleteRaw":
             logging.info("Deleting raw data...")
             eraseFiles(config.RAW_DATA_PATH)
@@ -120,5 +130,10 @@ def runGUI(mainWindow: sg.Window) -> None:
             saveExport(values)
         elif event == "updateInformation":
             Thread(target=updateInformation, args=[mainWindow["updateInformation"]]).start()
+        elif event == "addChampion":
+            addChampion(values, mainWindow["championShopList"], mainWindow["championShopResponse"])
+        elif event == "removeChampion":
+            removeChampion(values, mainWindow["championShopList"], mainWindow["championShopResponse"])
+
 
     mainWindow.close()

@@ -86,5 +86,5 @@ class Loot:
         This method should be used before performing a task with the loot to ensure up to date loot data.
         """
         self.__leagueConnection.post("/lol-loot/v1/refresh")
-        sleep(1)
+        sleep(2)
         self.__allLoot = self.__leagueConnection.get("/lol-loot/v1/player-loot").json()

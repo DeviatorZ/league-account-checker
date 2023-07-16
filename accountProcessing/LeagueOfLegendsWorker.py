@@ -4,6 +4,7 @@ from client.connection.RiotConnection import RiotConnection
 from client.connection.LeagueConnection import LeagueConnection
 from client.loot import Loot
 from client.tasks.data import getData
+from client.tasks.buyChampions import buyChampions
 from data.TaskList import TaskList
 from accountProcessing.exceptions import RateLimitedException
 from datetime import datetime
@@ -104,6 +105,10 @@ class LeagueOfLegendsWorker:
         loot = Loot(self.__leagueConnection)
         self.__runGeneralTasks(loot)
         self.__runStoreTasks()
+        sleep(2)
+
+        if self.__settings["buyChampions"]:
+            buyChampions(self.__leagueConnection, loot, self.__settings["championShopList"], self.__settings["maxOwnedChampions"])
 
         # obtain extra account information if it's not set to minimal type
         if not self.__settings["exportMin"]:
@@ -116,7 +121,7 @@ class LeagueOfLegendsWorker:
         for taskName, task in tasks.items():
             if self.__settings[taskName]:
                 task["function"](*task["args"])
-                sleep(1) # allow loot to update between tasks
+                sleep(2) # allow loot to update between tasks
 
     def __runStoreTasks(self) -> None:
         """

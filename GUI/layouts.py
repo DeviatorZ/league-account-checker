@@ -1,5 +1,7 @@
 from data.TaskList import TaskList
 import PySimpleGUI as sg
+import config
+from client.champions import Champions
 
 def getMainLayout():
     return [
@@ -52,4 +54,14 @@ def getRefundsLayout():
         [sg.Checkbox("Refund champions (TOKENS)", default=sg.user_settings_get_entry("tokenChampionRefunds", False), key="tokenChampionRefunds", size=(30,1)),
          sg.Text("Minimum price"), sg.InputCombo((450, 1350, 3150, 4800, 6300), default_value=sg.user_settings_get_entry("tokenChampionRefundsMinPrice", 4800), key="tokenChampionRefundsMinPrice")],
         [sg.Button("Save", key="saveRefunds")],
+    ]
+
+def getChampionShopLayout():
+    Champions.refreshData(config.CHAMPION_FILE_PATH)
+    return [
+        [sg.Checkbox("Buy Champions", default=sg.user_settings_get_entry("buyChampions", False), key="buyChampions", size=(30,1))],
+        [sg.Multiline(sg.user_settings_get_entry("championShopList", ["Amumu", "Annie", "Ashe", "Brand", "Caitlyn", "Darius", "Diana", "Dr. Mundo", "Garen", "Leona", "Lux", "Malphite", "Master Yi", "Miss Fortune", "Nunu & Willump", "Poppy", "Sejuani", "Sivir", "Sona", "Soraka", "Teemo", "Warwick", "Yuumi"]), key="championShopList", size=(60,8))],
+        [sg.InputCombo(sorted(Champions.getAllChampions()), default_value="Annie", key="championChoice", size=20), sg.Button("Add", key="addChampion"), sg.Button("Remove", key="removeChampion"), sg.Text("", key="championShopResponse", font=("Helvetica", 9))],
+        [sg.Text("Maximum owned champions"), sg.Input(sg.user_settings_get_entry("maxOwnedChampions", 20), key="maxOwnedChampions", size=3)],
+        [sg.Button("Save", key="saveChampionShop")],
     ]
