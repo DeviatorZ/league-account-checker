@@ -74,3 +74,7 @@ Example templates can be found in the "templates" folder. Consider the following
 ![RefundsTab](https://i.imgur.com/9LscdJ9.png)
 - **Refund champions (FREE)**: When enabled, this option will use all available free champion refunds (limited to bought and unused champions) for champions that cost at least the selected minimum price.
 - **Refund champions (TOKENS)**: When enabled, this option will use refund tokens to refund champions that cost at least the selected minimum price, starting from the most expensive champions. The refund process will continue until there are no more refund tokens available or there are no more champions left to refund.
+### **ChampionShop Tab**
+![ChampionShopTab](https://i.imgur.com/rr3YXrk.png)
+- **Buy Champions**: When enabled, this option allows purchasing champions using the list below. Champions can be added to the list manually or by using the GUI buttons below the list.
+- **Maximum owned champions**: This specifies the maximum number of champions an account can own. The process of buying champions will stop once this limit is reached.
