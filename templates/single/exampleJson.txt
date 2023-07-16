@@ -8,6 +8,7 @@
     "rp": {rp},
     "summonerLevel": {summonerLevel},
     "ign": "{ign}",
+    "email": {email},
     "emailVerified": "{emailVerified}",
     "ownedChampions": "{ownedChampions}",
     "ownedChampionsCount": {ownedChampionsCount},
