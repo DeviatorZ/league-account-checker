@@ -5,6 +5,7 @@ from client.skins import Skins
 from client.connection.LeagueConnection import LeagueConnection
 from typing import Dict, List, Any
 from client.loot import Loot
+from datetime import datetime
 
 def getSummoner(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
     """
@@ -152,6 +153,16 @@ def getRank(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None
         account["soloLosses"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["losses"]
         account["soloWinrate"] = round(account["soloWins"] / (account["soloWins"] + account["soloLosses"]) * 100)
 
+    previousSoloTier = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["previousSeasonEndTier"]
+    if previousSoloTier:
+        account["previousSeasonSoloTier"] = previousSoloTier.lower().capitalize()
+        account["previousSeasonSoloDivision"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["previousSeasonEndDivision"]
+        account["previousSeasonSoloDivisionDigit"] = romanNumbers.get(account["previousSeasonSoloDivision"], "")
+    else:
+        account["previousSeasonSoloTier"] = ""
+        account["previousSeasonSoloDivision"] = ""
+        account["previousSeasonSoloDivisionDigit"] = ""
+
     flexTier = ((rankedStats["queueMap"]["RANKED_FLEX_SR"]["tier"]).lower()).capitalize()
     if not flexTier or flexTier == "None":
         account["flexTier"] = "Unranked"
@@ -172,6 +183,16 @@ def getRank(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None
         account["flexLosses"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["losses"]
         account["flexWinrate"] = round(account["flexWins"] / (account["flexWins"] + account["flexLosses"]) * 100)
 
+    previousFlexTier = rankedStats["queueMap"]["RANKED_FLEX_SR"]["previousSeasonEndTier"]
+    if previousFlexTier:
+        account["previousSeasonFlexTier"] = previousFlexTier.lower().capitalize()
+        account["previousSeasonFlexDivision"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["previousSeasonEndDivision"]
+        account["previousSeasonFlexDivisionDigit"] = romanNumbers.get(account["previousSeasonFlexDivision"], "")
+    else:
+        account["previousSeasonFlexTier"] = ""
+        account["previousSeasonFlexDivision"] = ""
+        account["previousSeasonFlexDivisionDigit"] = ""
+
 def getLowPriorityQueue(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
     """
     Tries to queue up and checks if there's a low priority queue penalty (adds the data to account data dictionary)
@@ -188,10 +209,10 @@ def getLowPriorityQueue(leagueConnection: LeagueConnection, account: Dict[str, A
     queueArgs = json.dumps(queueArgs, indent = 4)
     
     leagueConnection.post("/lol-lobby/v2/lobby", queueArgs)
-    sleep(1)
+    sleep(2)
 
     leagueConnection.post("/lol-lobby/v2/lobby/matchmaking/search")
-    sleep(1)
+    sleep(2)
 
     queueState = leagueConnection.get("/lol-matchmaking/v1/search").json()
 
@@ -203,13 +224,14 @@ def getLowPriorityQueue(leagueConnection: LeagueConnection, account: Dict[str, A
         account["lowPriorityQueue"] = "None"
 
 def getLastMatch(leagueConnection, account):
-    a = leagueConnection.get("/lol-match-history/v1/products/lol/current-summoner/matches").json()['games']['games']
-    if(len(a)) == 0:
+    matchHistory = leagueConnection.get("/lol-match-history/v1/products/lol/current-summoner/matches").json()["games"]["games"]
+    if len(matchHistory) == 0:
         lastMatchData = "None"
     else:
-        l = a[0]['gameCreationDate']
-        lastMatchData = f"{l[8:10]}/{l[5:7]}/{l[2:4]} - {l[11:13]}h{l[14:16]}. (dd/mm/yy GMT)"
-    account["lastMatch"] = (lastMatchData)
+        timestamp = matchHistory[0]["gameCreation"]
+        lastMatchData = datetime.utcfromtimestamp(timestamp / 1000).strftime('%Y-%m-%d %Hh%Mm%Ss')
+
+    account["lastMatch"] = lastMatchData
 
 def getData(leagueConnection: LeagueConnection, account: Dict[str, Any], loot: Loot) -> None:
     """
