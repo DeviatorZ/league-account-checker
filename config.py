@@ -5,6 +5,8 @@ SKIN_FILE_PATH = os.path.join("data", "skins.json")
 SKIN_DATA_URL = "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/skins.json"
 CHAMPION_FILE_PATH = os.path.join("data", "champions.json")
 CHAMPION_DATA_URL = "https://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/default/v1/champion-summary.json"
+LOOT_DATA_FILE_PATH = os.path.join("data", "loot.json")
+LOOT_DATA_URL = "https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-loot/global/default/trans.json"
 
 # exporting
 RAW_DATA_PATH = os.path.join("data", "raw")

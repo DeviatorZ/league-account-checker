@@ -6,6 +6,7 @@ import PySimpleGUI as sg
 import logging
 from client.champions import Champions
 from client.skins import Skins
+from client.lootdata import LootData
 import config
 from typing import Any, Dict, List
 from threading import Event
@@ -21,6 +22,7 @@ def preExecutionWork(settings: Dict[str, Any]) -> None:
             eraseFiles(config.RAW_DATA_PATH)
     Champions.refreshData(config.CHAMPION_FILE_PATH)
     Skins.refreshData(config.SKIN_FILE_PATH)
+    LootData.refreshData(config.LOOT_DATA_FILE_PATH)
 
 def postExecutionWork(settings: Dict[str, Any], accounts: List[Dict[str, Any]]) -> None:
     """

@@ -44,7 +44,7 @@ def getExportLayout():
         [sg.Checkbox("Automatically delete raw data at the start of the checking process", default=sg.user_settings_get_entry("autoDeleteRaw", False), key="autoDeleteRaw", size=(70,1), font=("Helvetica", 9))],
         [sg.Button("Export now", key="exportNow")],
         [sg.Checkbox("Automatically export raw data at the end of the checking process", default=sg.user_settings_get_entry("autoExport", True), key="autoExport", size=(70,1), font=("Helvetica", 9))],
-        [sg.Button("Save", key="saveExport"), sg.Push(), sg.Button("Update skin and champion information", key="updateInformation")],
+        [sg.Button("Save", key="saveExport"), sg.Push(), sg.Button("Update data", key="updateInformation")],
     ]
 
 def getRefundsLayout():

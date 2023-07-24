@@ -2,9 +2,11 @@ import json
 from time import sleep
 from client.champions import Champions
 from client.skins import Skins
+from client.lootdata import LootData
 from client.connection.LeagueConnection import LeagueConnection
 from typing import Dict, List, Any
 from client.loot import Loot
+from datetime import datetime
 
 def getSummoner(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
     """
@@ -44,25 +46,6 @@ def getEmailVerification(leagueConnection: LeagueConnection, account: Dict[str, 
         account["emailVerified"] = "Verified"
     else:
         account["emailVerified"] = "Unverified"
-
-def getCurrencies(lootJsons: List[Dict[str, Any]], account: Dict[str, Any]) -> None:
-    """
-    Obtains the account's information on blue essence, orange essence, and riot points (adds the data to account data dictionary)
-
-    :param lootJsons: A list of loot data.
-    :param account: A dictionary containing account information.
-    """
-    account["be"] = 0
-    account["oe"] = 0
-    account["rp"] = 0
-
-    for loot in lootJsons:
-        if loot["lootId"] == "CURRENCY_champion":
-            account["be"] = loot["count"]
-        elif loot["lootId"] == "CURRENCY_cosmetic":
-            account["oe"] = loot["count"]
-        elif loot["lootId"] == "CURRENCY_RP":
-            account["rp"] = loot["count"]
 
 def getSkins(leagueConnection: LeagueConnection, loot: Loot, account: Dict[str, Any]) -> None:
     """
@@ -152,6 +135,16 @@ def getRank(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None
         account["soloLosses"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["losses"]
         account["soloWinrate"] = round(account["soloWins"] / (account["soloWins"] + account["soloLosses"]) * 100)
 
+    previousSoloTier = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["previousSeasonEndTier"]
+    if previousSoloTier:
+        account["previousSeasonSoloTier"] = previousSoloTier.lower().capitalize()
+        account["previousSeasonSoloDivision"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["previousSeasonEndDivision"]
+        account["previousSeasonSoloDivisionDigit"] = romanNumbers.get(account["previousSeasonSoloDivision"], "")
+    else:
+        account["previousSeasonSoloTier"] = ""
+        account["previousSeasonSoloDivision"] = ""
+        account["previousSeasonSoloDivisionDigit"] = ""
+
     flexTier = ((rankedStats["queueMap"]["RANKED_FLEX_SR"]["tier"]).lower()).capitalize()
     if not flexTier or flexTier == "None":
         account["flexTier"] = "Unranked"
@@ -172,6 +165,16 @@ def getRank(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None
         account["flexLosses"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["losses"]
         account["flexWinrate"] = round(account["flexWins"] / (account["flexWins"] + account["flexLosses"]) * 100)
 
+    previousFlexTier = rankedStats["queueMap"]["RANKED_FLEX_SR"]["previousSeasonEndTier"]
+    if previousFlexTier:
+        account["previousSeasonFlexTier"] = previousFlexTier.lower().capitalize()
+        account["previousSeasonFlexDivision"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["previousSeasonEndDivision"]
+        account["previousSeasonFlexDivisionDigit"] = romanNumbers.get(account["previousSeasonFlexDivision"], "")
+    else:
+        account["previousSeasonFlexTier"] = ""
+        account["previousSeasonFlexDivision"] = ""
+        account["previousSeasonFlexDivisionDigit"] = ""
+
 def getLowPriorityQueue(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
     """
     Tries to queue up and checks if there's a low priority queue penalty (adds the data to account data dictionary)
@@ -188,10 +191,10 @@ def getLowPriorityQueue(leagueConnection: LeagueConnection, account: Dict[str, A
     queueArgs = json.dumps(queueArgs, indent = 4)
     
     leagueConnection.post("/lol-lobby/v2/lobby", queueArgs)
-    sleep(1)
+    sleep(2)
 
     leagueConnection.post("/lol-lobby/v2/lobby/matchmaking/search")
-    sleep(1)
+    sleep(2)
 
     queueState = leagueConnection.get("/lol-matchmaking/v1/search").json()
 
@@ -203,13 +206,42 @@ def getLowPriorityQueue(leagueConnection: LeagueConnection, account: Dict[str, A
         account["lowPriorityQueue"] = "None"
 
 def getLastMatch(leagueConnection, account):
-    a = leagueConnection.get("/lol-match-history/v1/products/lol/current-summoner/matches").json()['games']['games']
-    if(len(a)) == 0:
+    matchHistory = leagueConnection.get("/lol-match-history/v1/products/lol/current-summoner/matches").json()["games"]["games"]
+    if len(matchHistory) == 0:
         lastMatchData = "None"
     else:
-        l = a[0]['gameCreationDate']
-        lastMatchData = f"{l[8:10]}/{l[5:7]}/{l[2:4]} - {l[11:13]}h{l[14:16]}. (dd/mm/yy GMT)"
-    account["lastMatch"] = (lastMatchData)
+        timestamp = matchHistory[0]["gameCreation"]
+        lastMatchData = datetime.utcfromtimestamp(timestamp / 1000).strftime('%Y-%m-%d %Hh%Mm%Ss')
+
+    account["lastMatch"] = lastMatchData
+
+def getLoot(lootJson: Dict[str, Any], account: List[Dict[str, Any]]) -> None:
+    otherLoot = []
+    skipLootList = ("CHAMPION_SKIN", "CHAMPION", "CURRENCY_champion", "CURRENCY_cosmetic", "CURRENCY_RP")
+
+    for loot in lootJson:
+        id = loot["lootId"]
+        count = loot["count"]
+        if id == "CURRENCY_champion":
+            account["be"] = loot["count"]
+        elif id == "CURRENCY_cosmetic":
+            account["oe"] = loot["count"]
+        elif id == "CURRENCY_RP":
+            account["rp"] = loot["count"]
+        elif id == "CURRENCY_mythic":
+            otherLoot.append(f"{count}x Mythic Essence")
+        elif id == "MATERIAL_key_fragment":
+            otherLoot.append(f"{count}x Key fragments")
+        elif id.startswith(skipLootList) or id == "":
+            continue
+        else:
+            name = LootData.getLootById(loot["lootId"])
+            if not name:
+                name = "Unknown"
+
+            otherLoot.append(f"{count}x {name}")
+    
+    account["otherLoot"] = ", ".join(otherLoot)
 
 def getData(leagueConnection: LeagueConnection, account: Dict[str, Any], loot: Loot) -> None:
     """
@@ -221,15 +253,14 @@ def getData(leagueConnection: LeagueConnection, account: Dict[str, Any], loot: L
     """
     loot.refreshLoot()
     lootJson = loot.getLoot()
-    getCurrencies(lootJson, account)
     
     getHonorLevel(leagueConnection, account)
     getSummoner(leagueConnection, account)
     getEmailVerification(leagueConnection, account)
 
     getChampions(leagueConnection, account)
-
     getSkins(leagueConnection, loot, account)
+    getLoot(lootJson, account)
 
     getRank(leagueConnection, account)
     getLowPriorityQueue(leagueConnection, account)
