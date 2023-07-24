@@ -65,7 +65,12 @@ def updateData() -> bool:
     if skinData is None:
         return False
     
+    lootData = downloadJson(config.LOOT_DATA_URL)
+    if lootData is None:
+        return False
+    
     dumpJson(config.CHAMPION_FILE_PATH, championData)
     dumpJson(config.SKIN_FILE_PATH, skinData)
+    dumpJson(config.LOOT_DATA_FILE_PATH, lootData)
 
     return True

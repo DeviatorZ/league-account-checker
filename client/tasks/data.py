@@ -2,6 +2,7 @@ import json
 from time import sleep
 from client.champions import Champions
 from client.skins import Skins
+from client.lootdata import LootData
 from client.connection.LeagueConnection import LeagueConnection
 from typing import Dict, List, Any
 from client.loot import Loot
@@ -45,25 +46,6 @@ def getEmailVerification(leagueConnection: LeagueConnection, account: Dict[str, 
         account["emailVerified"] = "Verified"
     else:
         account["emailVerified"] = "Unverified"
-
-def getCurrencies(lootJsons: List[Dict[str, Any]], account: Dict[str, Any]) -> None:
-    """
-    Obtains the account's information on blue essence, orange essence, and riot points (adds the data to account data dictionary)
-
-    :param lootJsons: A list of loot data.
-    :param account: A dictionary containing account information.
-    """
-    account["be"] = 0
-    account["oe"] = 0
-    account["rp"] = 0
-
-    for loot in lootJsons:
-        if loot["lootId"] == "CURRENCY_champion":
-            account["be"] = loot["count"]
-        elif loot["lootId"] == "CURRENCY_cosmetic":
-            account["oe"] = loot["count"]
-        elif loot["lootId"] == "CURRENCY_RP":
-            account["rp"] = loot["count"]
 
 def getSkins(leagueConnection: LeagueConnection, loot: Loot, account: Dict[str, Any]) -> None:
     """
@@ -233,6 +215,34 @@ def getLastMatch(leagueConnection, account):
 
     account["lastMatch"] = lastMatchData
 
+def getLoot(lootJson: Dict[str, Any], account: List[Dict[str, Any]]) -> None:
+    otherLoot = []
+    skipLootList = ("CHAMPION_SKIN", "CHAMPION", "CURRENCY_champion", "CURRENCY_cosmetic", "CURRENCY_RP")
+
+    for loot in lootJson:
+        id = loot["lootId"]
+        count = loot["count"]
+        if id == "CURRENCY_champion":
+            account["be"] = loot["count"]
+        elif id == "CURRENCY_cosmetic":
+            account["oe"] = loot["count"]
+        elif id == "CURRENCY_RP":
+            account["rp"] = loot["count"]
+        elif id == "CURRENCY_mythic":
+            otherLoot.append(f"{count}x Mythic Essence")
+        elif id == "MATERIAL_key_fragment":
+            otherLoot.append(f"{count}x Key fragments")
+        elif id.startswith(skipLootList) or id == "":
+            continue
+        else:
+            name = LootData.getLootById(loot["lootId"])
+            if not name:
+                name = "Unknown"
+
+            otherLoot.append(f"{count}x {name}")
+    
+    account["otherLoot"] = ", ".join(otherLoot)
+
 def getData(leagueConnection: LeagueConnection, account: Dict[str, Any], loot: Loot) -> None:
     """
     Uses all data functions to get information about the account.
@@ -243,15 +253,14 @@ def getData(leagueConnection: LeagueConnection, account: Dict[str, Any], loot: L
     """
     loot.refreshLoot()
     lootJson = loot.getLoot()
-    getCurrencies(lootJson, account)
     
     getHonorLevel(leagueConnection, account)
     getSummoner(leagueConnection, account)
     getEmailVerification(leagueConnection, account)
 
     getChampions(leagueConnection, account)
-
     getSkins(leagueConnection, loot, account)
+    getLoot(lootJson, account)
 
     getRank(leagueConnection, account)
     getLowPriorityQueue(leagueConnection, account)
