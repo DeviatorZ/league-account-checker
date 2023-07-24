@@ -217,7 +217,7 @@ def getLastMatch(leagueConnection, account):
 
 def getLoot(lootJson: Dict[str, Any], account: List[Dict[str, Any]]) -> None:
     otherLoot = []
-    skipLootList = ("CHAMPION_SKIN", "CHAMPION", "CURRENCY_champion", "CURRENCY_cosmetic", "CURRENCY_RP")
+    skipLootList = ("CHAMPION_SKIN", "CHAMPION", "CURRENCY_champion", "CURRENCY_cosmetic", "CURRENCY_RP", "WARD_SKIN")
 
     for loot in lootJson:
         id = loot["lootId"]
@@ -231,7 +231,7 @@ def getLoot(lootJson: Dict[str, Any], account: List[Dict[str, Any]]) -> None:
         elif id == "CURRENCY_mythic":
             otherLoot.append(f"{count}x Mythic Essence")
         elif id == "MATERIAL_key_fragment":
-            otherLoot.append(f"{count}x Key fragments")
+            otherLoot.append(f"{count}x Key Fragments")
         elif id.startswith(skipLootList) or id == "":
             continue
         else:
