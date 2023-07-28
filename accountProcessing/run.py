@@ -22,7 +22,7 @@ def preExecutionWork(settings: Dict[str, Any]) -> None:
             eraseFiles(config.RAW_DATA_PATH)
     Champions.refreshData(config.CHAMPION_FILE_PATH)
     Skins.refreshData(config.SKIN_FILE_PATH)
-    LootData.refreshData(config.LOOT_DATA_FILE_PATH)
+    LootData.refreshData(config.LOOT_DATA_FILE_PATH, config.LOOT_ITEMS_FILE_PATH)
 
 def postExecutionWork(settings: Dict[str, Any], accounts: List[Dict[str, Any]]) -> None:
     """

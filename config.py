@@ -7,7 +7,8 @@ CHAMPION_FILE_PATH = os.path.join("data", "champions.json")
 CHAMPION_DATA_URL = "https://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/default/v1/champion-summary.json"
 LOOT_DATA_FILE_PATH = os.path.join("data", "loot.json")
 LOOT_DATA_URL = "https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-loot/global/default/trans.json"
-
+LOOT_ITEMS_FILE_PATH = os.path.join("data", "lootItems.json")
+LOOT_ITEMS_URL = "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/loot.json"
 # exporting
 RAW_DATA_PATH = os.path.join("data", "raw")
 EXPORT_PATH = "export"
