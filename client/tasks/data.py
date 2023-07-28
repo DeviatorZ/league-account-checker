@@ -240,7 +240,7 @@ def getLoot(lootJson: Dict[str, Any], account: List[Dict[str, Any]]) -> None:
         else:
             name = LootData.getLootById(loot["lootId"])
             if not name:
-                name = "Unknown"
+                name = f"ID={id}"
 
             otherLoot.append(f"{count}x {name}")
     
