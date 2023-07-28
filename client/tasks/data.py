@@ -218,6 +218,9 @@ def getLastMatch(leagueConnection, account):
 def getLoot(lootJson: Dict[str, Any], account: List[Dict[str, Any]]) -> None:
     otherLoot = []
     skipLootList = ("CHAMPION_SKIN", "CHAMPION", "CURRENCY_champion", "CURRENCY_cosmetic", "CURRENCY_RP", "WARD_SKIN")
+    account["be"] = 0
+    account["oe"] = 0
+    account["rp"] = 0
 
     for loot in lootJson:
         id = loot["lootId"]
