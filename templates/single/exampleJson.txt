@@ -22,6 +22,8 @@
     "ownedSkinsCount": {ownedSkinsCount},
     "allSkins": "{allSkins}",
     "allSkinsCount": {allSkinsCount},
+    "ownedSkinChromas": "{ownedSkinChromas}",
+    "ownedSkinChromasCount": {ownedSkinChromasCount},
     "otherLoot": "{otherLoot}",
     "soloTier": "{soloTier}",
     "soloTierStart": "{soloTierStart}",
