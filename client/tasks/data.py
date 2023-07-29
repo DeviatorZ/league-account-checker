@@ -7,6 +7,7 @@ from client.connection.LeagueConnection import LeagueConnection
 from typing import Dict, List, Any
 from client.loot import Loot
 from datetime import datetime
+import logging
 
 def getSummoner(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
     """
@@ -75,13 +76,12 @@ def getSkins(leagueConnection: LeagueConnection, loot: Loot, account: Dict[str, 
         name = Skins.getSkinById(id)
         if name:
             ownedSkins.append(name)
-        else:
+        elif Skins.isChroma(id):
             shopInfo = leagueConnection.get(f"/lol-purchase-widget/v1/purchasable-item?inventoryType=CHAMPION_SKIN&itemId={id}").json()
             name = shopInfo["item"]["name"]
-            if shopInfo["item"]["subInventoryType"] == "RECOLOR":
-                ownedChromas.append(name)
-            else:
-                ownedSkins.append(name)
+            ownedChromas.append(name)
+        else:
+            logging.error(f"Couldn't obtain skin name - ID={id}. Is the skin data up to date?")
 
     account["ownedSkins"] = ", ".join(ownedSkins)
     account["ownedSkinsCount"] = len(ownedSkins)
@@ -255,6 +255,7 @@ def getLoot(lootJson: Dict[str, Any], account: List[Dict[str, Any]]) -> None:
         else:
             name = LootData.getLootById(loot["lootId"])
             if not name:
+                logging.error(f"Couldn't obtain loot name - ID={id}. Is the loot data up to date?")
                 name = f"ID={id}"
 
             otherLoot.append(f"{count}x {name}")
