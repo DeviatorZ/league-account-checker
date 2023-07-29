@@ -63,22 +63,37 @@ def getSkins(leagueConnection: LeagueConnection, loot: Loot, account: Dict[str, 
     account["skinShardsPermanent"] = ", ".join(Skins.getSkinById(id) for id in skinShardsPermanent if Skins.getSkinById(id) is not None)
     account["skinShardsPermanentCount"] = len(skinShardsPermanent)
 
-    ownedSkins = leagueConnection.get("/lol-inventory/v2/inventory/CHAMPION_SKIN").json()
-    account["ownedSkins"] = ", ".join(Skins.getSkinById(skin["itemId"]) for skin in ownedSkins if Skins.getSkinById(skin["itemId"]) is not None and skin["ownershipType"] == "OWNED")
-    # some skins in ownedSkins json might be rented so count owned skins manually
-    seperatorCount = account["ownedSkins"].count(", ") 
-    if seperatorCount > 0:
-        account["ownedSkinsCount"] = seperatorCount + 1
-    elif account["ownedSkins"]:
-        account["ownedSkinsCount"] = 1
-    else:
-        account["ownedSkinsCount"] = 0
-    
+    allOwnedSkins = leagueConnection.get("/lol-inventory/v2/inventory/CHAMPION_SKIN").json()
+    ownedChromas = []
+    ownedSkins = []
+
+    for skin in allOwnedSkins:
+        if not skin["ownershipType"] == "OWNED":
+            continue
+
+        id = skin["itemId"]
+        name = Skins.getSkinById(id)
+        if name:
+            ownedSkins.append(name)
+        else:
+            shopInfo = leagueConnection.get(f"/lol-purchase-widget/v1/purchasable-item?inventoryType=CHAMPION_SKIN&itemId={id}").json()
+            name = shopInfo["item"]["name"]
+            if shopInfo["item"]["subInventoryType"] == "RECOLOR":
+                ownedChromas.append(name)
+            else:
+                ownedSkins.append(name)
+
+    account["ownedSkins"] = ", ".join(ownedSkins)
+    account["ownedSkinsCount"] = len(ownedSkins)
+
     account["skinShardsAll"] = ', '.join(filter(None, (account["skinShardsRental"], account["skinShardsPermanent"])))
     account["skinShardsAllCount"] = account["skinShardsRentalCount"] + account["skinShardsPermanentCount"]
 
     account["allSkins"] = ', '.join(filter(None, (account["skinShardsAll"], account["ownedSkins"])))
     account["allSkinsCount"] = account["skinShardsAllCount"] + account["ownedSkinsCount"]
+
+    account["ownedSkinChromas"] = ", ".join(ownedChromas)
+    account["ownedSkinChromasCount"] = len(ownedChromas)
 
 # obtains account's information on owned champions
 def getChampions(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
