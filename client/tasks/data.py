@@ -143,8 +143,8 @@ def getRank(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None
     else:
         account["soloTier"] = soloTier
         account["soloTierStart"] = soloTier[0]
-        account["soloDivision"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["division"]
-        account["soloDivisionDigit"] = romanNumbers[account["soloDivision"]]
+        account["soloDivision"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"].get("division", "")
+        account["soloDivisionDigit"] = romanNumbers.get(account["soloDivision"], "")
         account["soloLP"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["leaguePoints"]
         account["soloWins"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["wins"]
         account["soloLosses"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["losses"]
@@ -153,7 +153,7 @@ def getRank(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None
     previousSoloTier = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["previousSeasonEndTier"]
     if previousSoloTier:
         account["previousSeasonSoloTier"] = previousSoloTier.lower().capitalize()
-        account["previousSeasonSoloDivision"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["previousSeasonEndDivision"]
+        account["previousSeasonSoloDivision"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"].get("previousSeasonEndDivision", "")
         account["previousSeasonSoloDivisionDigit"] = romanNumbers.get(account["previousSeasonSoloDivision"], "")
     else:
         account["previousSeasonSoloTier"] = ""
@@ -173,8 +173,8 @@ def getRank(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None
     else:
         account["flexTier"] = flexTier
         account["flexTierStart"] = flexTier[0]
-        account["flexDivision"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["division"]
-        account["flexDivisionDigit"] = romanNumbers[account["flexDivision"]]
+        account["flexDivision"] = rankedStats["queueMap"]["RANKED_FLEX_SR"].get("division", "")
+        account["flexDivisionDigit"] = romanNumbers.get(account["flexDivision"], "")
         account["flexLP"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["leaguePoints"]
         account["flexWins"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["wins"]
         account["flexLosses"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["losses"]
@@ -183,7 +183,7 @@ def getRank(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None
     previousFlexTier = rankedStats["queueMap"]["RANKED_FLEX_SR"]["previousSeasonEndTier"]
     if previousFlexTier:
         account["previousSeasonFlexTier"] = previousFlexTier.lower().capitalize()
-        account["previousSeasonFlexDivision"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["previousSeasonEndDivision"]
+        account["previousSeasonFlexDivision"] = rankedStats["queueMap"]["RANKED_FLEX_SR"].get("previousSeasonEndDivision", "")
         account["previousSeasonFlexDivisionDigit"] = romanNumbers.get(account["previousSeasonFlexDivision"], "")
     else:
         account["previousSeasonFlexTier"] = ""
