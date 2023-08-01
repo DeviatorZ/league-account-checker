@@ -7,6 +7,7 @@ from client.connection.LeagueConnection import LeagueConnection
 from typing import Dict, List, Any
 from client.loot import Loot
 from datetime import datetime
+import logging
 
 def getSummoner(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
     """
@@ -63,22 +64,36 @@ def getSkins(leagueConnection: LeagueConnection, loot: Loot, account: Dict[str, 
     account["skinShardsPermanent"] = ", ".join(Skins.getSkinById(id) for id in skinShardsPermanent if Skins.getSkinById(id) is not None)
     account["skinShardsPermanentCount"] = len(skinShardsPermanent)
 
-    ownedSkins = leagueConnection.get("/lol-inventory/v2/inventory/CHAMPION_SKIN").json()
-    account["ownedSkins"] = ", ".join(Skins.getSkinById(skin["itemId"]) for skin in ownedSkins if Skins.getSkinById(skin["itemId"]) is not None and skin["ownershipType"] == "OWNED")
-    # some skins in ownedSkins json might be rented so count owned skins manually
-    seperatorCount = account["ownedSkins"].count(", ") 
-    if seperatorCount > 0:
-        account["ownedSkinsCount"] = seperatorCount + 1
-    elif account["ownedSkins"]:
-        account["ownedSkinsCount"] = 1
-    else:
-        account["ownedSkinsCount"] = 0
-    
+    allOwnedSkins = leagueConnection.get("/lol-inventory/v2/inventory/CHAMPION_SKIN").json()
+    ownedChromas = []
+    ownedSkins = []
+
+    for skin in allOwnedSkins:
+        if not skin["ownershipType"] == "OWNED":
+            continue
+
+        id = skin["itemId"]
+        name = Skins.getSkinById(id)
+        if name:
+            ownedSkins.append(name)
+        elif Skins.isChroma(id):
+            shopInfo = leagueConnection.get(f"/lol-purchase-widget/v1/purchasable-item?inventoryType=CHAMPION_SKIN&itemId={id}").json()
+            name = shopInfo["item"]["name"]
+            ownedChromas.append(name)
+        else:
+            logging.error(f"Couldn't obtain skin name - ID={id}. Is the skin data up to date?")
+
+    account["ownedSkins"] = ", ".join(ownedSkins)
+    account["ownedSkinsCount"] = len(ownedSkins)
+
     account["skinShardsAll"] = ', '.join(filter(None, (account["skinShardsRental"], account["skinShardsPermanent"])))
     account["skinShardsAllCount"] = account["skinShardsRentalCount"] + account["skinShardsPermanentCount"]
 
     account["allSkins"] = ', '.join(filter(None, (account["skinShardsAll"], account["ownedSkins"])))
     account["allSkinsCount"] = account["skinShardsAllCount"] + account["ownedSkinsCount"]
+
+    account["ownedSkinChromas"] = ", ".join(ownedChromas)
+    account["ownedSkinChromasCount"] = len(ownedChromas)
 
 # obtains account's information on owned champions
 def getChampions(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
@@ -128,8 +143,8 @@ def getRank(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None
     else:
         account["soloTier"] = soloTier
         account["soloTierStart"] = soloTier[0]
-        account["soloDivision"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["division"]
-        account["soloDivisionDigit"] = romanNumbers[account["soloDivision"]]
+        account["soloDivision"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"].get("division", "")
+        account["soloDivisionDigit"] = romanNumbers.get(account["soloDivision"], "")
         account["soloLP"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["leaguePoints"]
         account["soloWins"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["wins"]
         account["soloLosses"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["losses"]
@@ -138,7 +153,7 @@ def getRank(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None
     previousSoloTier = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["previousSeasonEndTier"]
     if previousSoloTier:
         account["previousSeasonSoloTier"] = previousSoloTier.lower().capitalize()
-        account["previousSeasonSoloDivision"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"]["previousSeasonEndDivision"]
+        account["previousSeasonSoloDivision"] = rankedStats["queueMap"]["RANKED_SOLO_5x5"].get("previousSeasonEndDivision", "")
         account["previousSeasonSoloDivisionDigit"] = romanNumbers.get(account["previousSeasonSoloDivision"], "")
     else:
         account["previousSeasonSoloTier"] = ""
@@ -158,8 +173,8 @@ def getRank(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None
     else:
         account["flexTier"] = flexTier
         account["flexTierStart"] = flexTier[0]
-        account["flexDivision"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["division"]
-        account["flexDivisionDigit"] = romanNumbers[account["flexDivision"]]
+        account["flexDivision"] = rankedStats["queueMap"]["RANKED_FLEX_SR"].get("division", "")
+        account["flexDivisionDigit"] = romanNumbers.get(account["flexDivision"], "")
         account["flexLP"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["leaguePoints"]
         account["flexWins"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["wins"]
         account["flexLosses"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["losses"]
@@ -168,7 +183,7 @@ def getRank(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None
     previousFlexTier = rankedStats["queueMap"]["RANKED_FLEX_SR"]["previousSeasonEndTier"]
     if previousFlexTier:
         account["previousSeasonFlexTier"] = previousFlexTier.lower().capitalize()
-        account["previousSeasonFlexDivision"] = rankedStats["queueMap"]["RANKED_FLEX_SR"]["previousSeasonEndDivision"]
+        account["previousSeasonFlexDivision"] = rankedStats["queueMap"]["RANKED_FLEX_SR"].get("previousSeasonEndDivision", "")
         account["previousSeasonFlexDivisionDigit"] = romanNumbers.get(account["previousSeasonFlexDivision"], "")
     else:
         account["previousSeasonFlexTier"] = ""
@@ -240,6 +255,7 @@ def getLoot(lootJson: Dict[str, Any], account: List[Dict[str, Any]]) -> None:
         else:
             name = LootData.getLootById(loot["lootId"])
             if not name:
+                logging.error(f"Couldn't obtain loot name - ID={id}. Is the loot data up to date?")
                 name = f"ID={id}"
 
             otherLoot.append(f"{count}x {name}")
