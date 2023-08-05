@@ -107,6 +107,9 @@ def getChampions(leagueConnection: LeagueConnection, account: Dict[str, Any]) ->
     ownedChampions = leagueConnection.get("/lol-champions/v1/owned-champions-minimal").json()
     ownedChampionList = []
     for champion in ownedChampions:
+        if not champion["ownership"]["owned"]:
+            continue
+        
         id = champion["id"]
         name = Champions.getChampionById(id)
         if not name:
