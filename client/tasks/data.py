@@ -82,6 +82,7 @@ def getSkins(leagueConnection: LeagueConnection, loot: Loot, account: Dict[str, 
             ownedChromas.append(name)
         else:
             logging.error(f"Couldn't obtain skin name - ID={id}. Is the skin data up to date?")
+            ownedSkins.append(f"ID={id}")
 
     account["ownedSkins"] = ", ".join(ownedSkins)
     account["ownedSkinsCount"] = len(ownedSkins)
@@ -104,15 +105,17 @@ def getChampions(leagueConnection: LeagueConnection, account: Dict[str, Any]) ->
     :param account: A dictionary containing account information.
     """
     ownedChampions = leagueConnection.get("/lol-champions/v1/owned-champions-minimal").json()
-    account["ownedChampions"] = ", ".join(Champions.getChampionById(champion["id"]) for champion in ownedChampions if Champions.getChampionById(champion["id"]) is not None and champion["ownership"]["owned"])
-    # owned champions endpoint includes free rotation champions so count owned champions manually
-    seperatorCount = account["ownedChampions"].count(", ")
-    if seperatorCount > 0:
-        account["ownedChampionsCount"] = seperatorCount + 1
-    elif account["ownedChampions"]:
-        account["ownedChampionsCount"] = 1
-    else:
-        account["ownedChampionsCount"] = 0
+    ownedChampionList = []
+    for champion in ownedChampions:
+        id = champion["id"]
+        name = Champions.getChampionById(id)
+        if not name:
+            logging.error(f"Couldn't obtain champion name - ID={id}. Is the champion data up to date?")
+            name = f"ID={id}"
+        ownedChampionList.append(name)
+
+    account["ownedChampions"] = ", ".join(ownedChampionList)
+    account["ownedChampionsCount"] = len(ownedChampionList)
 
 def getRank(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
     """
