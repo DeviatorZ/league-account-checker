@@ -1,6 +1,7 @@
 from typing import Dict
 import PySimpleGUI as sg
 from client.champions import Champions
+import GUI.keys as guiKeys
 
 def addChampion(values: Dict, championShopList: sg.Multiline, championShopResponse: sg.Text):
     """
@@ -18,7 +19,7 @@ def addChampion(values: Dict, championShopList: sg.Multiline, championShopRespon
             return
         
         try:
-            championPurchaseList = eval(values["championShopList"])
+            championPurchaseList = eval(values[guiKeys.CHAMPION_SHOP_PURCHASE_LIST])
         except Exception:
             championShopResponse.update(value="Invalid list format!")
             return
@@ -47,7 +48,7 @@ def removeChampion(values: Dict, championShopList: sg.Multiline, championShopRes
             return
         
         try:
-            championPurchaseList = eval(values["championShopList"])
+            championPurchaseList = eval(values[guiKeys.CHAMPION_SHOP_PURCHASE_LIST])
         except Exception:
             championShopResponse.update(value="Invalid list format!")
             return

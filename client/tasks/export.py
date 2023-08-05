@@ -5,6 +5,7 @@ import json
 import logging
 import config
 from typing import Dict, List, Tuple, Optional, Any
+from client.tasks.exceptions import NoAccountDataException
 
 def eraseFiles(path: str):
     """
@@ -45,6 +46,26 @@ def exportRaw(account: Dict[str, Any]) -> None:
     # usernames are globally unique
     with open(os.path.join(config.RAW_DATA_PATH, account["username"]), "w", encoding="utf-8") as fp:
         fp.write(json.dumps(account, indent=4))
+
+
+def readRawExport(username: str) -> Dict[str, Any]:
+    """
+    Reads and returns the raw exported account data.
+
+    :return: A tuple with a dictionary containing the raw exported account data and timestamp of last edit.
+    """
+    makeDirectory(config.RAW_DATA_PATH)
+    
+    rawData = {}
+    filePath = os.path.join(config.RAW_DATA_PATH, username)
+    try:
+        with open(filePath, "r", encoding="utf-8") as fp:
+            rawData = json.load(fp)
+
+        timestamp = os.path.getmtime(filePath)
+        return rawData, timestamp
+    except FileNotFoundError:
+        raise NoAccountDataException(f"No data found for account: {username}")
 
 def readRawExports() -> List[Dict[str, Any]]:
     """
@@ -241,3 +262,23 @@ def exportAccounts(bannedTemplate: str, errorTemplate: str, failedSeparately: bo
     export.exportNow(accounts)
     logging.info("Exported!")
 
+
+def exportCustomAccountList(bannedTemplate: str, errorTemplate: str, failedSeparately: bool, accounts: List[Dict[str, Any]]) -> None:
+    """
+    Handles the exporting of accounts.
+
+    :param accounts: The list of accounts to export.
+    :param bannedTemplate: The template to use for banned accounts.
+    :param errorTemplate: The template to use for accounts with errors.
+    :param failedSeparately: A flag indicating whether failed accounts should be exported separately.
+    """
+    logging.info("Exporting...")
+    export = Export(bannedTemplate, errorTemplate, failedSeparately)
+    try:
+        accounts = [readRawExport(account["username"])[0] for account in accounts]
+    except NoAccountDataException as exception:
+        logging.error(f"Exporting failed! {exception.message}")
+        return
+    
+    export.exportNow(accounts)
+    logging.info("Exported!")

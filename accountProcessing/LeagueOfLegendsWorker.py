@@ -15,7 +15,7 @@ import json
 from client.leagueStore.refunding import useFreeChampionRefunds
 from client.leagueStore.refunding import useRefundTokensOnChampions
 from client.leagueStore.store import LoLStore
-
+import GUI.keys as guiKeys
 
 class LeagueOfLegendsWorker:
     def __init__(self, account: Dict[str, Any], settings: Dict[str, Any], allowPatching: bool, riotPort: int, leaguePort: int) -> None:
@@ -54,7 +54,7 @@ class LeagueOfLegendsWorker:
 
         :return: The state of the account after handling the Riot client.
         """
-        self.__riotConnection = RiotConnection(self.__settings["riotClient"], self.__riotPort, self.__allowPatching)
+        self.__riotConnection = RiotConnection(self.__settings[guiKeys.RIOT_CLIENT], self.__riotPort, self.__allowPatching)
 
         try:
             self.__riotConnection.login(self.__account["username"], self.__account["password"])
@@ -79,7 +79,7 @@ class LeagueOfLegendsWorker:
         :return: The state of the account after handling the League client.
         """
         try:
-            self.__leagueConnection = LeagueConnection(self.__settings["leagueClient"], self.__riotConnection, self.__account["region"], self.__leaguePort, self.__allowPatching)
+            self.__leagueConnection = LeagueConnection(self.__settings[guiKeys.LEAGUE_CLIENT], self.__riotConnection, self.__account["region"], self.__leaguePort, self.__allowPatching)
             self.__leagueConnection.waitForSession()
         except AccountBannedException as ban:
             # add ban information to the account for export
@@ -107,11 +107,11 @@ class LeagueOfLegendsWorker:
         self.__runStoreTasks()
         sleep(2)
 
-        if self.__settings["buyChampions"]:
-            buyChampions(self.__leagueConnection, loot, self.__settings["championShopList"], self.__settings["maxOwnedChampions"])
+        if self.__settings[guiKeys.BUY_CHAMPIONS]:
+            buyChampions(self.__leagueConnection, loot, self.__settings[guiKeys.CHAMPION_SHOP_PURCHASE_LIST], self.__settings[guiKeys.MAXIMUM_OWNED_CHAMPIONS])
 
         # obtain extra account information if it's not set to minimal type
-        if not self.__settings["exportMin"]:
+        if not self.__settings[guiKeys.EXPORT_MINIMAL]:
             getData(self.__leagueConnection, self.__account, loot)
 
     def __runGeneralTasks(self, loot: Loot) -> None:
@@ -127,14 +127,14 @@ class LeagueOfLegendsWorker:
         """
         Performs tasks on the League store.
         """
-        if not (self.__settings["freeChampionRefunds"] or self.__settings["tokenChampionRefunds"]):
+        if not (self.__settings[guiKeys.USE_FREE_CHAMPION_REFUNDS] or self.__settings[guiKeys.USE_TOKEN_CHAMPION_REFUNDS]):
             return
         
         leagueStore = LoLStore(self.__leagueConnection)
 
-        if self.__settings["freeChampionRefunds"]:
-            useFreeChampionRefunds(leagueStore, int(self.__settings["freeChampionRefundsMinPrice"]))
+        if self.__settings[guiKeys.USE_FREE_CHAMPION_REFUNDS]:
+            useFreeChampionRefunds(leagueStore, int(self.__settings[guiKeys.USE_FREE_CHAMPION_REFUNDS_MIN_PRICE_BE]))
 
-        if self.__settings["tokenChampionRefunds"]:
-            useRefundTokensOnChampions(leagueStore, int(self.__settings["tokenChampionRefundsMinPrice"]))
+        if self.__settings[guiKeys.USE_TOKEN_CHAMPION_REFUNDS]:
+            useRefundTokensOnChampions(leagueStore, int(self.__settings[guiKeys.USE_TOKEN_CHAMPION_REFUNDS_MIN_PRICE_BE]))
             

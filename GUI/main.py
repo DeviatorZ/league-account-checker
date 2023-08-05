@@ -1,64 +1,17 @@
 from threading import Thread
 from threading import Event
-from accountProcessing.run import executeAllAccounts
-from client.tasks.export import eraseFiles
 from client.tasks.export import exportAccounts
 from GUI.layouts import *
 from GUI.logging import setupConsoleLogging
 from GUI.saving import *
 from GUI.update import updateInformation
-from GUI.userInputValidation import *
-from GUI.exceptions import InvalidPathException, InvalidInputException
 from GUI.championShop import *
+from GUI.checker import execute
+from GUI.export import exportInputAccounts, deleteRawData
 import copy
 import PySimpleGUI as sg
-import logging
 import os
 import config
-from typing import Dict, Any
-
-def execute(settings: Dict[str, Any], mainWindow: sg.Window, exitEvent: Event) -> None:
-    """
-    Validates user input and launches tasks.
-
-    :param settings: The user settings dictionary.
-    :param mainWindow: The main window object.
-    :param exitEvent: The event used to gracefully exit all checker threads.
-    """
-    try:
-        checkForFileErrors(settings)
-    except InvalidPathException as exception:
-        logging.error(exception.message)
-        return
-    
-    try:
-        accounts = getAccounts(settings)
-    except IndexError:
-        logging.error(f"Account file format error. Expected line format: username{settings['accountsDelimiter']}password")
-        return 
-    except SyntaxError as error:
-        logging.error(error.msg)
-        return 
-
-    try:
-        validateChampionShop(settings)
-    except InvalidInputException as exception:
-        logging.error(exception.message)
-        return
-
-    try:
-        mainWindow["start"].update(disabled=True)
-        mainWindow["deleteRaw"].update(disabled=True)
-    except: # GUI closed while running tasks
-        return
-    
-    executeAllAccounts(settings, accounts, mainWindow["progress"], exitEvent)
-    
-    try:
-        mainWindow["start"].update(disabled=False)
-        mainWindow["deleteRaw"].update(disabled=False)
-    except: # GUI closed while running tasks
-        pass
 
 def setupGUI(cwd: str) -> sg.Window:
     """
@@ -74,10 +27,10 @@ def setupGUI(cwd: str) -> sg.Window:
         [sg.TabGroup([[
             sg.Tab("Main", getMainLayout()), 
             sg.Tab("Settings", getSettingsLayout(cwd)),
+            sg.Tab("Data", getDatatLayout()),
             sg.Tab("Tasks", getTasksLayout()),
-            sg.Tab("Export", getExportLayout()),
-            sg.Tab("Refunds", getRefundsLayout()),
             sg.Tab("ChampionShop", getChampionShopLayout()),
+            sg.Tab("Export", getExportLayout()),
         ]])],
     ]
 
@@ -95,7 +48,6 @@ def runGUI(mainWindow: sg.Window) -> None:
     :param mainWindow: The main window object.
     """
     exitEvent = Event()
-
     # event loop to process "events" and get the "values" of the inputs
     while True:
         event, values = mainWindow.read()
@@ -111,29 +63,31 @@ def runGUI(mainWindow: sg.Window) -> None:
             saveSettings(values)
         elif event == "saveTasks":
             saveTasks(values)
-        elif event == "saveRefunds":
-            saveRefunds(values)
         elif event == "saveChampionShop":
             saveChampionShop(values)
+        elif event == "saveDataTab":
+            saveData(values)
+        elif event == "saveExport":
+            saveExport(values)
         elif event == "deleteRaw":
-            logging.info("Deleting raw data...")
-            eraseFiles(config.RAW_DATA_PATH)
-            logging.info("Raw data erased!")
+            response = sg.popup_yes_no("Are you sure?")
+            if response and response == "Yes":
+                Thread(target=deleteRawData).start()
         elif event == "exportNow":
-            exportAccounts(values["bannedTemplate"], values["errorTemplate"], values["failedSeparately"])
+            Thread(target=exportAccounts, args=(values[guiKeys.BANNED_ACCOUNT_STATE_TEMPLATE], values[guiKeys.ERROR_ACCOUNT_STATE_TEMPLATE], values[guiKeys.EXPORT_FAILED_SEPARATELY])).start()
+        elif event == "exportNowOnlyInput":    
+            Thread(target=exportInputAccounts, args=(copy.deepcopy(values),)).start()
         elif event == "openExports":
             try:
                 os.startfile(config.EXPORT_PATH)
             except:
                 pass
-        elif event == "saveExport":
-            saveExport(values)
         elif event == "updateInformation":
-            Thread(target=updateInformation, args=[mainWindow["updateInformation"]]).start()
+            Thread(target=updateInformation, args=(mainWindow["updateInformation"],)).start()
         elif event == "addChampion":
-            addChampion(values, mainWindow["championShopList"], mainWindow["championShopResponse"])
+            addChampion(values, mainWindow[guiKeys.CHAMPION_SHOP_PURCHASE_LIST], mainWindow["championShopResponse"])
         elif event == "removeChampion":
-            removeChampion(values, mainWindow["championShopList"], mainWindow["championShopResponse"])
+            removeChampion(values, mainWindow[guiKeys.CHAMPION_SHOP_PURCHASE_LIST], mainWindow["championShopResponse"])
 
 
     mainWindow.close()

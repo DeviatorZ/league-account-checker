@@ -1,6 +1,7 @@
 from client.connection.exceptions import ConnectionException
 from client.connection.exceptions import SessionException
 from client.tasks.export import exportRaw
+from accountProcessing.skipping import checkCanSkip
 from accountProcessing.exceptions import RateLimitedException
 from accountProcessing.exceptions import GracefulExit
 from client.connection.exceptions import LaunchFailedException
@@ -73,7 +74,10 @@ class Worker:
         """
         Executes tasks on a given account.
         """
-        self.__earlyExitCheck()   
+        self.__earlyExitCheck()  
+        if checkCanSkip(self.__settings, self.__account):
+            self.__exit(True, export=False)
+
         failCount = 0
         rateLimitCount = 0
 
@@ -193,16 +197,18 @@ class Worker:
         self.__account["state"] = "RETRY_LIMIT_EXCEEDED"
         self.__exit(True)
 
-    def __exit(self, finished: bool) -> None:
+    def __exit(self, finished: bool, export: bool = True) -> None:
         """
         Exit the worker.
 
         :param finished: Indicates whether the execution has finished.
+        :param export: Indicates whether to export the account datas.
         """
         self.__portQueue.put(self.__riotPort)
         self.__portQueue.put(self.__leaguePort)
         if finished:
-            exportRaw(self.__account)
+            if export:
+                exportRaw(self.__account)
             self.__progress.add()
         raise GracefulExit
 

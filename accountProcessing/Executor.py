@@ -9,6 +9,7 @@ from collections import deque
 from accountProcessing.Progress import Progress
 import PySimpleGUI as sg
 from typing import Any, Dict
+from accountProcessing.skipping import checkCanSkip
 
 class Executor:
     def __init__(self, settings: Dict[str, Any], progressBar: sg.Text, exitEvent: Event) -> None:
@@ -47,7 +48,11 @@ class Executor:
             for port in getFreePorts(self.__threadCount * 100):
                 portQueue.put(port)
 
-            self.__argQueue.extend((account, self.__settings, self.__progress, exitFlag, self.__allowPatching, portQueue, nextRiotLaunch, riotLock, nextLeagueLaunch, leagueLock) for account in accounts)
+            for account in accounts:
+                if checkCanSkip(self.__settings, account):
+                    self.__progress.add()
+                else:
+                    self.__argQueue.append((account, self.__settings, self.__progress, exitFlag, self.__allowPatching, portQueue, nextRiotLaunch, riotLock, nextLeagueLaunch, leagueLock))
 
             with ThreadPool(processes=self.__threadCount) as pool:
                 self.__addWork(pool)
@@ -64,7 +69,6 @@ class Executor:
                         self.__removeFinishedThreads()
                         self.__addWork(pool)
                     sleep(0.1)
-
 
     def __addWork(self, pool: ThreadPool) -> None:
         """
