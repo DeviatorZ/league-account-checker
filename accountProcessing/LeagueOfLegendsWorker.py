@@ -18,13 +18,14 @@ from client.leagueStore.store import LoLStore
 import GUI.keys as guiKeys
 
 class LeagueOfLegendsWorker:
-    def __init__(self, account: Dict[str, Any], settings: Dict[str, Any], allowPatching: bool, riotPort: int, leaguePort: int) -> None:
+    def __init__(self, account: Dict[str, Any], settings: Dict[str, Any], allowPatching: bool, headless: bool, riotPort: int, leaguePort: int) -> None:
         """
         Initializes a LeagueOfLegendsWorker instance.
 
         :param account: A dictionary containing account information such as username, password, region, and state.
         :param settings: A dictionary containing worker settings such as tasks to run and export type.
         :param allowPatching: A boolean that determines whether patching is allowed.
+        :param headless: Flag indicating whether to run the client headless or not.
         :param riotPort: An integer representing the port for RiotConnection.
         :param leaguePort: An integer representing the port for LeagueConnection.
         """
@@ -33,6 +34,7 @@ class LeagueOfLegendsWorker:
         self.__account = account
         self.__riotPort = riotPort
         self.__leaguePort = leaguePort
+        self.__headless = headless
 
     def __enter__(self):
         self.__riotConnection = None
@@ -79,7 +81,7 @@ class LeagueOfLegendsWorker:
         :return: The state of the account after handling the League client.
         """
         try:
-            self.__leagueConnection = LeagueConnection(self.__settings[guiKeys.LEAGUE_CLIENT], self.__riotConnection, self.__account["region"], self.__leaguePort, self.__allowPatching)
+            self.__leagueConnection = LeagueConnection(self.__settings[guiKeys.LEAGUE_CLIENT], self.__riotConnection, self.__account["region"], self.__leaguePort, self.__allowPatching, self.__headless)
             self.__leagueConnection.waitForSession()
         except AccountBannedException as ban:
             # add ban information to the account for export

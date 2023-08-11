@@ -4,6 +4,7 @@ LEAGUE_CLIENT = "leagueClient"
 ACCOUNT_FILE_PATH = "accountsFile"
 ACCOUNT_FILE_DELIMITER = "accountsDelimiter"
 THREAD_COUNT = "threadCount"
+HEADLESS = "headless"
 
 
 # Tasks Tab

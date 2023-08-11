@@ -24,7 +24,8 @@ def saveSettings(values: Dict[str, Any]) -> None:
         guiKeys.LEAGUE_CLIENT,
         guiKeys.ACCOUNT_FILE_PATH,
         guiKeys.ACCOUNT_FILE_DELIMITER,
-        guiKeys.THREAD_COUNT
+        guiKeys.THREAD_COUNT,
+        guiKeys.HEADLESS,
     ]
     save(values, allSettings)
 

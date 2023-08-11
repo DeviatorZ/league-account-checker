@@ -15,7 +15,7 @@ import logging
 import config
 
 class Worker:
-    def __init__(self, account: Dict[str, Any], settings: Dict[str, Any], progress: Progress, exitFlag: Event, allowPatching: bool, portQueue: Queue, nextRiotLaunch: Value, riotLock: Lock, nextLeagueLaunch: Value, leagueLock: Lock) -> None:
+    def __init__(self, account: Dict[str, Any], settings: Dict[str, Any], progress: Progress, exitFlag: Event, allowPatching: bool, headless: bool, portQueue: Queue, nextRiotLaunch: Value, riotLock: Lock, nextLeagueLaunch: Value, leagueLock: Lock) -> None:
         """
         Initializes a Worker instance.
 
@@ -24,6 +24,7 @@ class Worker:
         :param progress: Progress object for tracking completed tasks.
         :param exitFlag: Event flag for graceful exit.
         :param allowPatching: Flag indicating whether patching is allowed.
+        :param headless: Flag indicating whether to run the client headless or not.
         :param portQueue: Queue for managing ports.
         :param nextRiotLaunch: Shared value for tracking next Riot client launch time.
         :param riotLock: Lock for accessing/modifying nextRiotLaunch.
@@ -42,6 +43,7 @@ class Worker:
         self.__leagueLock = leagueLock
         self.__riotPort = self.__portQueue.get()
         self.__leaguePort = self.__portQueue.get()
+        self.__headless = headless
 
     def __earlyExitCheck(self) -> None:
         """
@@ -86,7 +88,7 @@ class Worker:
             try:
                 self.__earlyExitCheck()
                 self.__getNewPorts()
-                with LeagueOfLegendsWorker(self.__account, self.__settings, self.__allowPatching, self.__riotPort, self.__leaguePort) as leagueWorker:
+                with LeagueOfLegendsWorker(self.__account, self.__settings, self.__allowPatching, self.__headless, self.__riotPort, self.__leaguePort) as leagueWorker:
                     self.__obtainRiotClientPermission()
                     status = leagueWorker.handleRiotClient()
                     if status != "OK":
@@ -212,12 +214,12 @@ class Worker:
             self.__progress.add()
         raise GracefulExit
 
-def runWorker(account: Dict[str, Any], settings: Dict[str, Any], progress: Progress, exitFlag: Event, allowPatching: bool, portQueue: Queue, nextRiotLaunch: Value, riotLock: Lock, nextLeagueLaunch: Value, leagueLock: Lock) -> None:
+def runWorker(account: Dict[str, Any], settings: Dict[str, Any], progress: Progress, exitFlag: Event, allowPatching: bool, headless: bool, portQueue: Queue, nextRiotLaunch: Value, riotLock: Lock, nextLeagueLaunch: Value, leagueLock: Lock) -> None:
     """
     Initializes a Worker instance and runs it.
     """
     try:
-        worker = Worker(account, settings, progress, exitFlag, allowPatching, portQueue, nextRiotLaunch, riotLock, nextLeagueLaunch, leagueLock)
+        worker = Worker(account, settings, progress, exitFlag, allowPatching, headless, portQueue, nextRiotLaunch, riotLock, nextLeagueLaunch, leagueLock)
         worker.run()
     except GracefulExit:
         return
