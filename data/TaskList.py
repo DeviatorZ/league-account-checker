@@ -9,22 +9,23 @@ from client.tasks.disenchanting import disenchantEternalsShards
 from typing import Dict, Any, List, Callable, Union
 from client.connection.LeagueConnection import LeagueConnection
 from client.loot import Loot
+import GUI.keys as guiKeys
 
 class TaskList:
     _eventTasks: Dict[str, Dict[str, Any]] = {
-        "claimEventRewards" :
+        guiKeys.CLAIM_EVENT_REWARDS :
         {
-            "text" : "Claim event rewards",
+            "text" : "Claim Event Rewards",
             "requiresLoot" : False,
             "function" : claimEventRewards,
         },
-        "buyChampionShardsWithTokens" :
+        guiKeys.BUY_CHAMPION_SHARDS_WITH_EVENT_TOKENS :
         {
-            "text" : "Buy champion shards",
+            "text" : "Buy Champion Shards",
             "requiresLoot" : False,
             "function" : buyChampionShardsWithTokens,
         },
-        "buyBlueEssenceWithTokens" :
+        guiKeys.BUY_BE_WITH_TOKENS :
         {
             "text" : "Buy BE",
             "requiresLoot" : False,
@@ -33,36 +34,36 @@ class TaskList:
     }
 
     _craftingTasks: Dict[str, Dict[str, Any]] = {
-        "craftKeys" : 
+        guiKeys.CRAFT_KEYS : 
         {
-            "text" : "Craft hextech keys",
+            "text" : "Craft Hextech Keys",
             "requiresLoot" : True,
             "function" : craftKeys,
         },
-        "openChests" :
+        guiKeys.OPEN_CHESTS :
         {
-            "text" : "Open hextech chests",
+            "text" : "Open Hextech Chests",
             "requiresLoot" : True,
             "function" : openChests,
         },
-        "openLoot" :
+        guiKeys.OPEN_LOOT :
         {
-            "text" : "Open capsules, orbs, random shards",
+            "text" : "Open Capsules, Orbs, Random shards",
             "requiresLoot" : True,
             "function" : openLoot,
         },
     }
 
     _disenchantingTasks: Dict[str, Dict[str, Any]] = {
-        "disenchantChampionShards" :
+        guiKeys.DISENCHANT_CHAMPION_SHARDS :
         {
-            "text" : "Champion shards",
+            "text" : "Champion Shards",
             "requiresLoot" : True,
             "function" : disenchantChampionShards,
         },
-        "disenchantEternalsShards" :
+        guiKeys.DISENCHANT_ETERNALS_SHARDS :
         {
-            "text" : "Eternals shards",
+            "text" : "Eternals Shards",
             "requiresLoot" : True,
             "function" : disenchantEternalsShards,
         },

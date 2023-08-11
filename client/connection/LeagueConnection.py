@@ -11,7 +11,7 @@ from typing import Optional
 import requests
 
 class LeagueConnection(Connection):
-    def __init__(self, path: str, riotConnection: RiotConnection, region: str, port: int, allowPatching: bool) -> None:
+    def __init__(self, path: str, riotConnection: RiotConnection, region: str, port: int, allowPatching: bool, headless: bool) -> None:
         """
         Initializes a LeagueConnection instance.
 
@@ -20,12 +20,14 @@ class LeagueConnection(Connection):
         :param region: The region of the account logged in on the Riot client.
         :param port: The port number to use for the League client connection.
         :param allowPatching: Flag indicating whether to allow patching or not.
+        :param headless: Flag indicating whether to run the client headless or not.
         """
         self.__allowPatching = allowPatching
         self.__path = path
         self.__riotConnection = riotConnection
         self.__riotCredentials = self.__riotConnection.getCredentials()
         self.__region = region
+        self.__headless = headless
 
         Connection.__init__(self, port)
         self.__getClient()
@@ -48,8 +50,9 @@ class LeagueConnection(Connection):
             "--remoting-auth-token=" + self._authToken,
             "--locale=en_GB",
             "--region=" + self.__region, # region of the account logged in on riot client (league client session fails without this)
-            "--headless"
         ]
+        if self.__headless:
+            processArgs.append("--headless")
 
         if not self.__allowPatching:
             processArgs.append("--allow-multiple-clients")
