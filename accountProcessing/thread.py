@@ -10,6 +10,7 @@ from multiprocessing import Queue, Value, Event, Lock
 from typing import Dict, Any
 from accountProcessing.Progress import Progress
 from client.leagueStore.exceptions import StoreException
+from captcha.exceptions import CaptchaException
 import time
 import logging
 import config
@@ -127,6 +128,9 @@ class Worker:
             except LaunchFailedException as exception:
                 logging.error(f"Failed to launch {exception.className}. Make sure the path is correct.")
                 logging.error(exception.error)
+                self.__sleep(1)
+            except CaptchaException as exception:
+                logging.info("Failed to get Captcha token. Retrying...")
                 self.__sleep(1)
             except Exception as exception:
                 logging.error("Unhandled exception. Contact developer! Retrying...")

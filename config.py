@@ -17,12 +17,12 @@ FAILED_ACCOUNT_PATH = "failedAccounts.txt" # in export folder
 UNFINISHED_ACCOUNT_PATH = "uncheckedAccounts.txt"
 
 # riot client
-RIOT_CLIENT_LAUNCH_COOLDOWN = 5
-RIOT_CLIENT_LOADING_RETRY_COUNT = 4
+RIOT_CLIENT_LAUNCH_COOLDOWN = 10
+RIOT_CLIENT_LOADING_RETRY_COUNT = 3
 RIOT_CLIENT_LOADING_RETRY_COOLDOWN = 3
 
 # league client
-LEAGUE_CLIENT_LAUNCH_COOLDOWN = 5
+LEAGUE_CLIENT_LAUNCH_COOLDOWN = 10
 
 # failure handling
 LAUNCH_COOLDOWN_ON_INVALID_CREDENTIALS = 30
@@ -32,3 +32,10 @@ MAX_FAILED_ATTEMPTS = 5
 
 # lol store (refunds)
 LOL_STORE_REQUEST_COOLDOWN = 30
+
+# login captcha
+LOGIN_URL = "https://auth.riotgames.com"
+LOGIN_USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) RiotClient/70.0.0 (CEF 74) Safari/537.36"
+
+
+CAP_MONSTER_CLOUD_API_KEY = "your_api_key_here"
