@@ -1958,9 +1958,14 @@
     "loot_shard_category_WARDSKIN": "Ward Skins",
     "loot_shard_category_EMOTE": "Emote",
     "loot_shard_category_ETERNALS": "Eternal",
-    "loot_mass_disenchant_auto_select_description$html": "<b>Owned and Duplicated shards</b> have been auto selected for disenchantment",
+    "loot_mass_disenchant_auto_select_description$html": "<b>Owned and duplicate shards</b> will be disenchanted",
     "loot_mass_disenchant_summary_title": "You will receive",
-    "loot_mass_disenchant_limit$html": "You can only disenchant <b>{{disenchantLimit}} shards</b> at a time",
-    "loot_mass_disenchant_disenchant_error_title": "Multi Disenchant failed!",
-    "loot_mass_disenchant_disenchant_error_description": "The service is inting right now so we couldn't disenchant your shards. Please try again later and if the inting continues please report to player support."
+    "loot_mass_disenchant_limit$html": "You may only disenchant <b>{{disenchantLimit}} shards</b> at a time",
+    "loot_mass_disenchant_error_title": "Multi-Disenchant failed!",
+    "loot_mass_disenchant_empty_state_description": "You don't have any owned or duplicate shards for us to convert into essence.",
+    "loot_mass_disenchant_empty_state_hint": "Try opening some chests or capsules to get more!",
+    "loot_mass_disenchant_attention_tooltip_title": "Shards Multi-Disenchant",
+    "loot_mass_disenchant_attention_tooltip_description": "Click the icon to multi-disenchant owned and duplicate shards in one go.",
+    "loot_mass_disenchant_nothing_to_disenchant": "Nothing to disenchant",
+    "loot_mass_disenchant_title": "Multi-Disenchant"
 }
