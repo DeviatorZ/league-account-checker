@@ -74,6 +74,7 @@ class Connection(Session):
         Raises:
             LaunchFailedException: If launching the client application process fails.
         """
+
         while True:
             try:
                 self._process = subprocess.Popen(processArgs)
@@ -86,6 +87,12 @@ class Connection(Session):
         Terminates the client process.
         """
         if self._process is not None:
-            self._process.terminate()
+            while True:
+                try:
+                    self._process.terminate()
+                    self._process.wait(timeout=10)
+                    return
+                except Exception as exception:
+                    logging.debug(f"RiotClient: Failed to terminate. Retrying... {exception}")
     
     
