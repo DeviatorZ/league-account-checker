@@ -4,8 +4,12 @@ import copy
 import json
 import logging
 import config
+import re
 from typing import Dict, List, Tuple, Optional, Any
 from client.tasks.exceptions import NoAccountDataException
+from functools import partial
+import math
+
 
 def eraseFiles(path: str):
     """
@@ -93,6 +97,7 @@ class Export():
         :param errorTemplate: The template for error accounts.
         :param failedSeparately: Indicates whether failed accounts should be exported separately.
         """
+        self.__evalPattern = r'\{eval\((.+?)\)\}\}'
         makeDirectory(config.EXPORT_PATH)
 
         self.singleTemplatesPath = os.path.join(config.TEMPLATE_PATH, "single")
@@ -154,6 +159,25 @@ class Export():
 
         return okAccounts, failedAccounts
     
+    def __replaceEval(self, account: Dict[str, Any], match: re.Match) -> str:
+        """
+        Replace the evaluated content within {eval()} with the result of evaluation.
+
+        :param account: The account data used for evaluation.
+        :param match: The match object from regular expression.
+
+        :return: The replacement string.
+
+        If the evaluation of evalContent succeeds, returns the string representation of the result.
+        If the evaluation fails or data doesn't exist for the account, returns the original evalContent.
+        """
+        evalContent = match.group(1)
+        try:
+            replacement = str(eval(evalContent, {'account': account, 'math': math}))
+            return replacement
+        except: # Bad eval string or data doesn't exist for the account
+            return evalContent
+    
     def __replaceTemplatePlaceholders(self, account: Dict[str, Any], template: str) -> Optional[str]:
         """
         Replaces the placeholders in the template with the corresponding values from the account.
@@ -174,6 +198,10 @@ class Export():
         if data:
             for key, value in account.items():
                 data = data.replace(f"{{{key}}}", str(value))
+
+            replaceFunction = partial(self.__replaceEval, account)
+            data = re.sub(self.__evalPattern, replaceFunction, data)
+
             return data
         else:
             return None
