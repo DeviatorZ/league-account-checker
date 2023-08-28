@@ -74,6 +74,7 @@ class Connection(Session):
         Raises:
             LaunchFailedException: If launching the client application process fails.
         """
+
         while True:
             try:
                 self._process = subprocess.Popen(processArgs)
@@ -86,6 +87,12 @@ class Connection(Session):
         Terminates the client process.
         """
         if self._process is not None:
-            self._process.terminate()
+            while True:
+                try:
+                    self._process.terminate()
+                    self._process.wait(timeout=15)
+                    return
+                except Exception:
+                    logging.error(f"{self.__class__.__name__}: Failed to terminate. Retrying...")
     
     

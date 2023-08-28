@@ -3,11 +3,13 @@ from client.connection.exceptions import ConnectionException
 from client.connection.exceptions import RequestException
 from client.connection.exceptions import AuthenticationException
 from client.connection.exceptions import SessionException
+from captcha.CaptchaProxy import CaptchaProxy, CAP_MONSTER_CLOUD
 import time
 import logging
 from typing import Optional, Dict
 import requests
 import config
+
 
 class RiotConnection(Connection):
     def __init__(self, path: str, port: int, allowPatching: bool) -> None:
@@ -20,7 +22,7 @@ class RiotConnection(Connection):
         """
         self.__allowPatching = allowPatching
         self.__path = path
-        
+
         Connection.__init__(self, port)
         self.__getClient()
         self.__waitForConnection()
@@ -114,28 +116,42 @@ class RiotConnection(Connection):
         """
         self.put("/eula/v1/agreement/acceptance")
 
-    def __authenticate(self, username: str, password: str) -> str:
+    def __authenticate(self, username: str, password: str, solver: str, apiKey: str) -> str:
         """
         Authenticates with the client.
 
         :param username: The username to authenticate with.
         :param password: The password to authenticate with.
+        :param solver: Name of the solver service to use.
+        :param apiKey: API key for the solver service.
 
         Raises:
             AuthenticationException: If there is an issue with the authentication request.
 
         :return: "OK" if authentication succeeded, otherwise an error message.
         """
-        data = {"username": username, "password": password, 'persistLogin': False}
-        response = self.put("/rso-auth/v1/session/credentials", json=data)
+        self.delete("/rso-authenticator/v1/authentication") # Make sure to log out if already logged in
 
-        if response is None:
-            raise AuthenticationException("CREDENTIALS_400")
+        startAuth = self.post("/rso-authenticator/v1/authentication/riot-identity/start", json={"language":"en_GB","productId":"riot-client","state":"auth"}).json()
+        captchaToken = CaptchaProxy.solve(solver, apiKey, startAuth["captcha"]["hcaptcha"]["key"], startAuth["captcha"]["hcaptcha"]["data"])
 
-        responseJson = response.json()
-            
-        if responseJson["error"]: # something went wrong during login
-            return responseJson
+        authJson = {
+            "username": username,
+            "password": password,
+            'persistLogin': False,
+            "remember": False,
+            "language": "en_GB",
+            "captcha": f'hcaptcha {captchaToken}',
+        }
+
+        finishAuth = self.post("/rso-authenticator/v1/authentication/riot-identity/complete", json=authJson).json()
+        if finishAuth["type"] != "success": # something went wrong
+            return finishAuth["error"].upper()
+
+        loginJson = {"authentication_type":"RiotAuth","login_token":finishAuth["success"]["login_token"], 'persistLogin': False,}
+        self.put("/rso-auth/v1/session/login-token", json=loginJson)
+        self.__waitForConnection() # TODO: Use to see if logged in successfully
+
         return "OK"
     
     def __waitForLaunch(self, timeout: int = 30) -> None:
@@ -157,7 +173,7 @@ class RiotConnection(Connection):
             elif phase == "VngAccountRequired":
                 raise AuthenticationException(phase)
             elif phase == "WaitForLaunch": # league client is ready for launch
-                time.sleep(1)
+                time.sleep(2)
                 return
             elif phase == "PatchStatus": # updating
                 if not self.__allowPatching:
@@ -170,21 +186,27 @@ class RiotConnection(Connection):
                         startTime = time.time()
                         logging.info("Update finished!")
                         break
+
             if time.time() - startTime >= timeout: # took too long for launching to be ready
                 raise SessionException(self.__class__.__name__, "League client launch timed out")
             time.sleep(1)
 
-    def login(self, username: str, password: str) -> None:
+    def login(self, username: str, password: str, solver: str, apiKey: str) -> None:
         """
         Authenticates and prepares to launch the League client.
 
         :param username: The username to authenticate with.
         :param password: The password to authenticate with.
+        :param solver: Name of the solver service to use.
+        :param apiKey: API key for the solver service.
+
         :raises AuthenticationException: If the authentication fails.
         :raises SessionException: If the launch preparation takes too long.
         """
-        authSuccess = self.__authenticate(username, password)
-        if not authSuccess == "OK": # something went wrong during login
-            raise AuthenticationException(authSuccess["error"].upper())
+        authSuccess = self.__authenticate(username, password, solver, apiKey)
+        if authSuccess == "CAPTCHA_NOT_ALLOWED":
+            raise SessionException(self.__class__.__name__, "Invalid captcha solution")
+        elif not authSuccess == "OK": # something went wrong during login
+            raise AuthenticationException(authSuccess)
 
         self.__waitForLaunch()

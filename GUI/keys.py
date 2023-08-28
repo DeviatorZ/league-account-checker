@@ -54,3 +54,7 @@ EXPORT_FAILED_SEPARATELY = "failedSeparately"
 BUY_CHAMPIONS = "buyChampions"
 CHAMPION_SHOP_PURCHASE_LIST = "championShopList"
 MAXIMUM_OWNED_CHAMPIONS = "maxOwnedChampions"
+
+# CAPTCHA
+CAPTCHA_SOLVER = "captchaSolver"
+CAPTCHA_API_KEY = "captchaAPIKey"
