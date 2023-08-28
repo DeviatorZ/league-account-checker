@@ -14,6 +14,7 @@ from captcha.exceptions import CaptchaException
 import time
 import logging
 import config
+import traceback
 
 class Worker:
     def __init__(self, account: Dict[str, Any], settings: Dict[str, Any], progress: Progress, exitFlag: Event, allowPatching: bool, headless: bool, portQueue: Queue, nextRiotLaunch: Value, riotLock: Lock, nextLeagueLaunch: Value, leagueLock: Lock) -> None:
@@ -132,9 +133,9 @@ class Worker:
             except CaptchaException as exception:
                 logging.error("Failed to get Captcha token. Retrying...")
                 self.__sleep(1)
-            except Exception as exception:
+            except Exception:
+                logging.error(traceback.format_exc())
                 logging.error("Unhandled exception. Contact developer! Retrying...")
-                logging.error(exception)
                 self.__sleep(5)
 
     def __obtainRiotClientPermission(self) -> None:
