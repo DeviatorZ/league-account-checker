@@ -1,0 +1,4 @@
+{eval("CODE")}} < Template for running eval()
+{eval(f"{account['be'] // 10000 * 10}K" if account["be"] >= 10000 else account["be"])}} < Will export 54250 BE as 50K, 49999 as 40K, 10000 as 10K, 9999 as 9999, and so on.
+{eval(f"{account['soloTier']} {account['soloDivision']} {account['soloLP']} LP" if account['soloDivision'] else (f"{account['soloTier']} {account['soloLP']} LP" if account['soloLP'] else account["soloTier"]))}} < Will export the rank without division/LP if they don't exist: 'Silver IV 56 LP', 'Master 234 LP', 'Unranked'
+{eval(math.pi)}} < Math module is supported.
