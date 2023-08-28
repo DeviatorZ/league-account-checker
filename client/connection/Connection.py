@@ -90,9 +90,9 @@ class Connection(Session):
             while True:
                 try:
                     self._process.terminate()
-                    self._process.wait(timeout=10)
+                    self._process.wait(timeout=15)
                     return
-                except Exception as exception:
-                    logging.debug(f"RiotClient: Failed to terminate. Retrying... {exception}")
+                except Exception:
+                    logging.error(f"{self.__class__.__name__}: Failed to terminate. Retrying...")
     
     

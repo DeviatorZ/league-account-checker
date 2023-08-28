@@ -104,3 +104,16 @@ def saveChampionShop(values: Dict[str, Any]) -> None:
     ]
 
     save(values, allChampionShop)
+
+def saveCaptcha(values: Dict[str, Any]) -> None:
+    """
+    Saves options from the Captcha tab.
+
+    :param values: The dictionary of values.
+    """
+    allCaptcha = [
+        guiKeys.CAPTCHA_SOLVER,
+        guiKeys.CAPTCHA_API_KEY,
+    ]
+
+    save(values, allCaptcha)

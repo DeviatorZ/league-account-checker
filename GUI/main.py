@@ -12,6 +12,7 @@ import copy
 import PySimpleGUI as sg
 import os
 import config
+import webbrowser
 
 def setupGUI(cwd: str) -> sg.Window:
     """
@@ -27,6 +28,7 @@ def setupGUI(cwd: str) -> sg.Window:
         [sg.TabGroup([[
             sg.Tab("Main", getMainLayout()), 
             sg.Tab("Settings", getSettingsLayout(cwd)),
+            sg.Tab("Captcha", getCaptchaLayout()),
             sg.Tab("Data", getDatatLayout()),
             sg.Tab("Tasks", getTasksLayout()),
             sg.Tab("ChampionShop", getChampionShopLayout()),
@@ -88,6 +90,7 @@ def runGUI(mainWindow: sg.Window) -> None:
             addChampion(values, mainWindow[guiKeys.CHAMPION_SHOP_PURCHASE_LIST], mainWindow["championShopResponse"])
         elif event == "removeChampion":
             removeChampion(values, mainWindow[guiKeys.CHAMPION_SHOP_PURCHASE_LIST], mainWindow["championShopResponse"])
-
+        elif event == "saveCaptcha":
+            saveCaptcha(values)
 
     mainWindow.close()

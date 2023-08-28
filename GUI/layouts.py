@@ -3,6 +3,7 @@ import PySimpleGUI as sg
 import config
 from client.champions import Champions
 import GUI.keys as guiKeys
+from captcha.constants import DEFAULT_SOLVER, ALL_SOLVERS
 
 def getMainLayout():
     return [
@@ -10,6 +11,16 @@ def getMainLayout():
         [sg.VPush()],
         [sg.Button("Start", key="start"), sg.Button("Stop", key="stop"), sg.Button("Export Folder", key="openExports"), sg.Text("", key="progress")] 
     ]  
+
+def getCaptchaLayout():
+    return [
+        [sg.Text("Captcha Solver Site:"), 
+         sg.InputCombo(ALL_SOLVERS, default_value=sg.user_settings_get_entry(guiKeys.CAPTCHA_SOLVER, DEFAULT_SOLVER), key=guiKeys.CAPTCHA_SOLVER, readonly=True)],
+        [sg.Text("API Key:"),
+         sg.Input(sg.user_settings_get_entry(guiKeys.CAPTCHA_API_KEY, "YOUR_API_KEY_HERE"), key=guiKeys.CAPTCHA_API_KEY, size=40)],
+        [sg.Text("The login system has undergone changes and now necessitates the resolution of an invisible hCaptcha.\nIf you wish me to add a new solver, kindly lend me your API key.\nFor further details, please reach out on Discord: _deviator_", font=("Helvetica", 9))],
+        [sg.Button("Save", key="saveCaptcha")],
+    ]
 
 def getSettingsLayout(cwd):
     return [
