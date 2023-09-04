@@ -114,7 +114,7 @@ class LeagueOfLegendsWorker:
 
         # obtain extra account information if it's not set to minimal type
         if not self.__settings[guiKeys.EXPORT_MINIMAL]:
-            getData(self.__leagueConnection, self.__account, loot)
+            getData(self.__leagueConnection, self.__account, loot, self.__settings[guiKeys.SKIP_LOW_PRIO_CHECK])
 
     def __runGeneralTasks(self, loot: Loot) -> None:
         tasks = TaskList.getTasks(self.__leagueConnection, loot)

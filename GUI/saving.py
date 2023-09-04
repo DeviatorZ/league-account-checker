@@ -26,6 +26,7 @@ def saveSettings(values: Dict[str, Any]) -> None:
         guiKeys.ACCOUNT_FILE_DELIMITER,
         guiKeys.THREAD_COUNT,
         guiKeys.HEADLESS,
+        guiKeys.SKIP_LOW_PRIO_CHECK,
     ]
     save(values, allSettings)
 
