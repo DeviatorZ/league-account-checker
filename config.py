@@ -35,4 +35,3 @@ LOL_STORE_REQUEST_COOLDOWN = 30
 
 # login captcha
 LOGIN_URL = "https://auth.riotgames.com"
-LOGIN_USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) RiotClient/70.0.0 (CEF 74) Safari/537.36"

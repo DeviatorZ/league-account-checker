@@ -10,13 +10,13 @@ from captcha.constants import CAP_MONSTER_CLOUD
 class CapMonsterCloud(SolvingService):
 
     @staticmethod
-    def solve(apiKey: str, key: str, data: str) -> Optional[str]:
+    def solve(apiKey: str, key: str, data: str, userAgent: str) -> Optional[str]:
         clientOptions = ClientOptions(api_key=apiKey)
         capMonsterClient = CapMonsterClient(options=clientOptions)
         hCaptchaRequest = HcaptchaProxylessRequest(
             websiteUrl=config.LOGIN_URL,
             websiteKey=key,
-            user_agent=config.LOGIN_USER_AGENT,
+            user_agent=userAgent,
             data=data,
         )
 

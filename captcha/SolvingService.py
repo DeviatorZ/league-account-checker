@@ -6,5 +6,5 @@ class SolvingService(ABC):
 
     @staticmethod
     @abstractmethod
-    def solve(apiKey: str, key: str, data: str) -> Optional[str]:
+    def solve(apiKey: str, key: str, data: str, userAgent: str) -> Optional[str]:
         raise NotImplementedError
