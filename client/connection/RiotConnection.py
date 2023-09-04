@@ -3,7 +3,9 @@ from client.connection.exceptions import ConnectionException
 from client.connection.exceptions import RequestException
 from client.connection.exceptions import AuthenticationException
 from client.connection.exceptions import SessionException
-from captcha.CaptchaProxy import CaptchaProxy, CAP_MONSTER_CLOUD
+from client.connection.exceptions import LaunchFailedException
+from client.version import getFileVersion
+from captcha.CaptchaProxy import CaptchaProxy
 import time
 import logging
 from typing import Optional, Dict
@@ -22,6 +24,11 @@ class RiotConnection(Connection):
         """
         self.__allowPatching = allowPatching
         self.__path = path
+
+        version, success = getFileVersion(self.__path)
+        if not success:
+            raise LaunchFailedException(self.__class__.__name__, version)
+        self.__userAgent = f"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) RiotClient/{version} (CEF 74) Safari/537.36"
 
         Connection.__init__(self, port)
         self.__getClient()
@@ -132,8 +139,15 @@ class RiotConnection(Connection):
         """
         self.delete("/rso-authenticator/v1/authentication") # Make sure to log out if already logged in
 
-        startAuth = self.post("/rso-authenticator/v1/authentication/riot-identity/start", json={"language":"en_GB","productId":"riot-client","state":"auth"}).json()
-        captchaToken = CaptchaProxy.solve(solver, apiKey, startAuth["captcha"]["hcaptcha"]["key"], startAuth["captcha"]["hcaptcha"]["data"])
+        startAuthJson = self.post("/rso-authenticator/v1/authentication/riot-identity/start", json={"language":"en_GB","productId":"riot-client","state":"auth"}).json()
+
+        captchaToken = CaptchaProxy.solve(
+            solver,
+            apiKey,
+            startAuthJson["captcha"]["hcaptcha"]["key"],
+            startAuthJson["captcha"]["hcaptcha"]["data"],
+            self.__userAgent,
+        )
 
         authJson = {
             "username": username,

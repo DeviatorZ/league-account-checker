@@ -32,7 +32,8 @@ def getSettingsLayout(cwd):
         [sg.Input(sg.user_settings_get_entry(guiKeys.ACCOUNT_FILE_PATH, cwd + "\\accounts.csv"), key=guiKeys.ACCOUNT_FILE_PATH), sg.FileBrowse()],
         [sg.Text("Account File Delimiter"), sg.InputCombo((",",":",";"), default_value=sg.user_settings_get_entry(guiKeys.ACCOUNT_FILE_DELIMITER, ":"), key=guiKeys.ACCOUNT_FILE_DELIMITER)],
         [sg.Text("Thread Count"), sg.Combo([x for x in range(1,17)], default_value=sg.user_settings_get_entry(guiKeys.THREAD_COUNT, 2), key=guiKeys.THREAD_COUNT)],
-        [sg.Checkbox("Run League Client Headless", default=sg.user_settings_get_entry(guiKeys.HEADLESS, True), key=guiKeys.HEADLESS, size=(70,1), font=("Helvetica", 9))], 
+        [sg.Checkbox("Run League Client Headless", default=sg.user_settings_get_entry(guiKeys.HEADLESS, True), key=guiKeys.HEADLESS, size=(70,1), font=("Helvetica", 9))],
+        [sg.Checkbox("Skip Low Priority Queue Check", default=sg.user_settings_get_entry(guiKeys.SKIP_LOW_PRIO_CHECK, False), key=guiKeys.SKIP_LOW_PRIO_CHECK, size=(70,1), font=("Helvetica", 9))],
         [sg.VPush()],
         [sg.Button("Save", key="saveSettings")],
     ]

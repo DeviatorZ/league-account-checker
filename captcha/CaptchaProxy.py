@@ -9,8 +9,8 @@ class CaptchaProxy:
     }
 
     @classmethod
-    def solve(cls, providerName: str, apiKey: str, key: str, data: str) -> str:
-        token = cls.__solveByName[providerName](apiKey, key, data)
+    def solve(cls, providerName: str, apiKey: str, key: str, data: str, userAgent: str) -> str:
+        token = cls.__solveByName[providerName](apiKey, key, data, userAgent)
 
         if token is None:
             raise CaptchaException()

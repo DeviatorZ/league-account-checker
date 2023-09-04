@@ -5,7 +5,7 @@ ACCOUNT_FILE_PATH = "accountsFile"
 ACCOUNT_FILE_DELIMITER = "accountsDelimiter"
 THREAD_COUNT = "threadCount"
 HEADLESS = "headless"
-
+SKIP_LOW_PRIO_CHECK = "skipLowPrioCheck"
 
 # Tasks Tab
 CLAIM_EVENT_REWARDS = "claimEventRewards"

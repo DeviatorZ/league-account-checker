@@ -268,13 +268,14 @@ def getLoot(lootJson: Dict[str, Any], account: List[Dict[str, Any]]) -> None:
     
     account["otherLoot"] = ", ".join(otherLoot)
 
-def getData(leagueConnection: LeagueConnection, account: Dict[str, Any], loot: Loot) -> None:
+def getData(leagueConnection: LeagueConnection, account: Dict[str, Any], loot: Loot, skipLowPrioCheck: bool) -> None:
     """
     Uses all data functions to get information about the account.
 
     :param leagueConnection: The session object for making API requests.
     :param account: The account data dictionary for storing the retrieved data.
     :param loot: An instance of Loot for accessing loot data.
+    :param skipLowPrioCheck: Whether to skip the low-priority check or not.
     """
     loot.refreshLoot()
     lootJson = loot.getLoot()
@@ -288,5 +289,6 @@ def getData(leagueConnection: LeagueConnection, account: Dict[str, Any], loot: L
     getLoot(lootJson, account)
 
     getRank(leagueConnection, account)
-    getLowPriorityQueue(leagueConnection, account)
+    if not skipLowPrioCheck:
+        getLowPriorityQueue(leagueConnection, account)
     getLastMatch(leagueConnection, account)
