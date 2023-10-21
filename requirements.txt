@@ -1,4 +1,5 @@
 pysimplegui==4.60.4
 requests==2.31.0
 capmonstercloudclient==1.3.2
+capsolver==1.0.7
 pywin32==306

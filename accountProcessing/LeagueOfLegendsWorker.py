@@ -59,7 +59,7 @@ class LeagueOfLegendsWorker:
         self.__riotConnection = RiotConnection(self.__settings[guiKeys.RIOT_CLIENT], self.__riotPort, self.__allowPatching)
 
         try:
-            self.__riotConnection.login(self.__account["username"], self.__account["password"], self.__settings[guiKeys.CAPTCHA_SOLVER], self.__settings[guiKeys.CAPTCHA_API_KEY])
+            self.__riotConnection.login(self.__account["username"], self.__account["password"], self.__settings)
             region = self.__riotConnection.get("/riotclient/region-locale").json()
             self.__account["region"] = region["region"] # region needed for league client
         except AuthenticationException as exception:

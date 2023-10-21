@@ -34,4 +34,4 @@ MAX_FAILED_ATTEMPTS = 5
 LOL_STORE_REQUEST_COOLDOWN = 30
 
 # login captcha
-LOGIN_URL = "https://auth.riotgames.com"
+LOGIN_URL = "https://authenticate.riotgames.com/api/v1/login"

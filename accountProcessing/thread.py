@@ -131,9 +131,9 @@ class Worker:
                 logging.error(exception.error)
                 self.__sleep(1)
             except CaptchaException as exception:
-                logging.error("Failed to get Captcha token. Retrying...")
+                logging.error(f"{self.__account['username']} {exception.message} Retrying...")
                 self.__sleep(1)
-            except Exception:
+            except Exception:                                  
                 logging.error(traceback.format_exc())
                 logging.error("Unhandled exception. Contact developer! Retrying...")
                 self.__sleep(5)
