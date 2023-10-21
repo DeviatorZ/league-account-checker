@@ -115,6 +115,12 @@ def saveCaptcha(values: Dict[str, Any]) -> None:
     allCaptcha = [
         guiKeys.CAPTCHA_SOLVER,
         guiKeys.CAPTCHA_API_KEY,
+        guiKeys.USE_PROXY,
+        guiKeys.PROXY_TYPE,
+        guiKeys.PROXY_ADDRESS,
+        guiKeys.PROXY_PORT,
+        guiKeys.PROXY_LOGIN,
+        guiKeys.PROXY_PASSWORD,
     ]
 
     save(values, allCaptcha)

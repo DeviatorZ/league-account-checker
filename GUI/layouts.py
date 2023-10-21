@@ -3,7 +3,7 @@ import PySimpleGUI as sg
 import config
 from client.champions import Champions
 import GUI.keys as guiKeys
-from captcha.constants import DEFAULT_SOLVER, ALL_SOLVERS
+from captcha.constants import DEFAULT_SOLVER, ALL_SOLVERS, PROTOCOLS
 
 def getMainLayout():
     return [
@@ -18,7 +18,13 @@ def getCaptchaLayout():
          sg.InputCombo(ALL_SOLVERS, default_value=sg.user_settings_get_entry(guiKeys.CAPTCHA_SOLVER, DEFAULT_SOLVER), key=guiKeys.CAPTCHA_SOLVER, readonly=True)],
         [sg.Text("API Key:"),
          sg.Input(sg.user_settings_get_entry(guiKeys.CAPTCHA_API_KEY, "YOUR_API_KEY_HERE"), key=guiKeys.CAPTCHA_API_KEY, size=40)],
-        [sg.Text("The login system has undergone changes and now necessitates the resolution of an invisible hCaptcha.\nIf you wish me to add a new solver, kindly lend me your API key.\nFor further details, please reach out on Discord: _deviator_", font=("Helvetica", 9))],
+        [sg.Text("capsolver.com needs proxy or it fails 99% of the time. 1 IP is enough. Can be obtained for free at webshare.io", font=("Helvetica", 9))],
+        [sg.Checkbox("Use Proxy For Captcha", default=sg.user_settings_get_entry(guiKeys.USE_PROXY, False), key=guiKeys.USE_PROXY, size=(70,1), font=("Helvetica", 9))],
+        [sg.Text("Protocol", size=10), sg.InputCombo((PROTOCOLS), default_value=sg.user_settings_get_entry(guiKeys.PROXY_TYPE, PROTOCOLS[0]), key=guiKeys.PROXY_TYPE)],
+        [sg.Text("Address", size=10), sg.Input(sg.user_settings_get_entry(guiKeys.PROXY_ADDRESS, ""), key=guiKeys.PROXY_ADDRESS, size=20)],
+        [sg.Text("Port", size=10), sg.Input(sg.user_settings_get_entry(guiKeys.PROXY_PORT, ""), key=guiKeys.PROXY_PORT, size=20)],
+        [sg.Text("Login", size=10), sg.Input(sg.user_settings_get_entry(guiKeys.PROXY_LOGIN, ""), key=guiKeys.PROXY_LOGIN, size=20)],
+        [sg.Text("Password", size=10), sg.Input(sg.user_settings_get_entry(guiKeys.PROXY_PASSWORD, ""), key=guiKeys.PROXY_PASSWORD, size=20)],
         [sg.Button("Save", key="saveCaptcha")],
     ]
 
