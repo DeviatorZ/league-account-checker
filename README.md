@@ -13,7 +13,7 @@ DeviatorZ Account Checker is not endorsed by Riot Games and does not reflect the
 ## **Installation**
 - Supported platform: 64-bit Windows (7 or higher).
 - Download and install League of Legends.
-- Download and install [Python 3.8 or higher](https://www.python.org/downloads/)
+- Download and install [Python 3.8 or 3.11 (3.12 doesn't work at the moment)](https://www.python.org/downloads/)
     - During installation, select "Add Python to PATH" and "pip" package manager (included by default). <br /> ![PythonExample](https://i.imgur.com/y1k3rmd.png)
 - Download and extract the account checker. <br /> ![Download](https://i.imgur.com/jafvk8i.png)
 - Open the command line (Windows key + "cmd" + Enter).
