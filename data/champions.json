@@ -1245,6 +1245,16 @@
         ]
     },
     {
+        "id": 233,
+        "name": "Briar",
+        "alias": "Briar",
+        "squarePortraitPath": "/lol-game-data/assets/v1/champion-icons/233.png",
+        "roles": [
+            "fighter",
+            "assassin"
+        ]
+    },
+    {
         "id": 234,
         "name": "Viego",
         "alias": "Viego",
