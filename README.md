@@ -61,7 +61,8 @@ Example templates can be found in the "templates" folder. Consider the following
 - **Banned account template**: Export template replacement for banned accounts.
 - **Error account template**: Export template replacement for accounts that couldn't be checked. <br /> 
     - State "AUTH_FAILURE" if credentials are invalid.
-    - State "VngAccountRequired" if the account needs updating (email and phone number need to be added).
+    - State "VNG_ACCOUNT_REQUIRED" if the account needs updating (email and phone number need to be added).
+    - State "NAME_CHANGE_REQUIRED" if the account needs a name change.
     - State "RETRY_LIMIT_EXCEEDED" if there have been too many failed attempts at performing tasks on the account. Most likely, the server is down or the client is outdated. Try updating manually or running the account in single-threaded mode.
 - To skip exporting banned or error accounts, leave the Banned/Error template empty. Alternatively, you can select "Export failed accounts separately" to export them in a separate file.
 - **Raw export type**: determines the type of data obtained during account checking:

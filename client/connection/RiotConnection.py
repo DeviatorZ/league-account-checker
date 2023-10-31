@@ -161,12 +161,6 @@ class RiotConnection(Connection):
     def __waitForLaunch(self, timeout: int = 30) -> None:
         """
         Waits until the client is ready to launch the League client.
-
-        :param timeout: The maximum time in seconds to wait for the launch.
-
-        Raises:
-            AuthenticationException: If the account requires email/phone number update.
-            SessionException: If the launch preparation takes too long.
         """
         startTime = time.time()
 
@@ -175,7 +169,9 @@ class RiotConnection(Connection):
             if phase == "Eula" or phase == "WaitingForEula":
                 self.__acceptEULA()
             elif phase == "VngAccountRequired":
-                raise AuthenticationException(phase)
+                raise AuthenticationException("VNG_ACCOUNT_REQUIRED")
+            elif phase == "AccountAlias":
+                raise AuthenticationException("NAME_CHANGE_REQUIRED")
             elif phase == "WaitForLaunch": # league client is ready for launch
                 time.sleep(2)
                 return
