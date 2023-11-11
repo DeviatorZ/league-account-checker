@@ -205,20 +205,25 @@ def getLowPriorityQueue(leagueConnection: LeagueConnection, account: Dict[str, A
     :param account: The account object to store the retrieved data.
     """
     leagueConnection.waitForUpdate()
-    
+
     queueArgs = {
-        "queueId": 430, # Blind pick
+        "queueId": 400, # Draft pick
     }
-    queueArgs = json.dumps(queueArgs, indent = 4)
-    
-    leagueConnection.post("/lol-lobby/v2/lobby", queueArgs)
+
+    leagueConnection.post("/lol-lobby/v2/lobby", json=queueArgs)
     sleep(2)
+
+    roleChoice = {
+        "firstPreference":"MIDDLE",
+        "secondPreference":"BOTTOM"
+    }
+    leagueConnection.put("/lol-lobby/v1/lobby/members/localMember/position-preferences", json=roleChoice)
+    sleep(1)
 
     leagueConnection.post("/lol-lobby/v2/lobby/matchmaking/search")
     sleep(2)
 
     queueState = leagueConnection.get("/lol-matchmaking/v1/search").json()
-
     account["lowPriorityQueue"] = "OtherPenalty"
 
     if queueState["lowPriorityData"]["reason"] == "LEAVER_BUSTED":
@@ -268,6 +273,19 @@ def getLoot(lootJson: Dict[str, Any], account: List[Dict[str, Any]]) -> None:
     
     account["otherLoot"] = ", ".join(otherLoot)
 
+def getRankedRestriction(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
+    rankedRestriction = leagueConnection.get("/lol-leaver-buster/v1/ranked-restriction").json()
+    punishedGamesRemaining = rankedRestriction["punishedGamesRemaining"]
+    if punishedGamesRemaining > 0:
+        account["rankedRestriction"] = f"{punishedGamesRemaining} games"
+    else:
+        account["rankedRestriction"] = "None"
+
+def removeLeaverBusterNotifications(leagueConnection: LeagueConnection) -> None:
+    notifications = leagueConnection.get("/lol-leaver-buster/v1/notifications").json()
+    for notification in notifications:
+        leagueConnection.delete(f"/lol-leaver-buster/v1/notifications/{notification['id']}")
+
 def getData(leagueConnection: LeagueConnection, account: Dict[str, Any], loot: Loot, skipLowPrioCheck: bool) -> None:
     """
     Uses all data functions to get information about the account.
@@ -288,7 +306,9 @@ def getData(leagueConnection: LeagueConnection, account: Dict[str, Any], loot: L
     getSkins(leagueConnection, loot, account)
     getLoot(lootJson, account)
 
+    getRankedRestriction(leagueConnection, account)
     getRank(leagueConnection, account)
-    if not skipLowPrioCheck:
-        getLowPriorityQueue(leagueConnection, account)
     getLastMatch(leagueConnection, account)
+    if not skipLowPrioCheck:
+        removeLeaverBusterNotifications(leagueConnection)
+        getLowPriorityQueue(leagueConnection, account)
