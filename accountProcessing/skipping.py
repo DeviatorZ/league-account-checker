@@ -18,7 +18,9 @@ def checkCanSkip(settings: Dict[str, Any], account: Dict[str, Any]) -> bool:
         
         try:
             accountData, timestamp = readRawExport(account["username"])
-            accountState = accountData["state"]
+            accountState = accountData.get("state")
+            if accountState is None:
+                return False
             age = time.time() - timestamp
 
             if settings[guiKeys.DONT_SKIP_ACCOUNTS_WITH_DATA_ONE_DAY_OLD] and age > 86400:
