@@ -1,13 +1,14 @@
-import json
+from typing import Dict, List, Any
+from datetime import datetime
+import logging
 from time import sleep
 from client.champions import Champions
 from client.skins import Skins
 from client.lootdata import LootData
 from client.connection.LeagueConnection import LeagueConnection
-from typing import Dict, List, Any
+from client.tasks.utils import canQueueUp, removeLeaverBusterNotifications
 from client.loot import Loot
-from datetime import datetime
-import logging
+
 
 def getSummoner(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
     """
@@ -197,17 +198,16 @@ def getRank(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None
         account["previousSeasonFlexDivisionDigit"] = ""
 
 def getLowPriorityQueue(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
-    """
-    Tries to queue up and checks if there's a low priority queue penalty (adds the data to account data dictionary)
-    
-
-    :param leagueConnection: The session object for making API requests.
-    :param account: The account object to store the retrieved data.
-    """
+    removeLeaverBusterNotifications(leagueConnection)
     leagueConnection.waitForUpdate()
+    queueId = 400
+
+    if not canQueueUp(leagueConnection, queueId):
+        account["lowPriorityQueue"] = "Ineligible"
+        return
 
     queueArgs = {
-        "queueId": 400, # Draft pick
+        "queueId": queueId,
     }
 
     leagueConnection.post("/lol-lobby/v2/lobby", json=queueArgs)
@@ -281,11 +281,6 @@ def getRankedRestriction(leagueConnection: LeagueConnection, account: Dict[str, 
     else:
         account["rankedRestriction"] = "None"
 
-def removeLeaverBusterNotifications(leagueConnection: LeagueConnection) -> None:
-    notifications = leagueConnection.get("/lol-leaver-buster/v1/notifications").json()
-    for notification in notifications:
-        leagueConnection.delete(f"/lol-leaver-buster/v1/notifications/{notification['id']}")
-
 def getData(leagueConnection: LeagueConnection, account: Dict[str, Any], loot: Loot, skipLowPrioCheck: bool) -> None:
     """
     Uses all data functions to get information about the account.
@@ -310,5 +305,4 @@ def getData(leagueConnection: LeagueConnection, account: Dict[str, Any], loot: L
     getRank(leagueConnection, account)
     getLastMatch(leagueConnection, account)
     if not skipLowPrioCheck:
-        removeLeaverBusterNotifications(leagueConnection)
         getLowPriorityQueue(leagueConnection, account)
