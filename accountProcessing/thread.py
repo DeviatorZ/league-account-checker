@@ -1,6 +1,7 @@
 from client.connection.exceptions import ConnectionException
 from client.connection.exceptions import SessionException
 from client.tasks.export import exportRaw
+from client.tasks.exceptions import LobbyException
 from accountProcessing.skipping import checkCanSkip
 from accountProcessing.exceptions import RateLimitedException
 from accountProcessing.exceptions import GracefulExit
@@ -116,7 +117,7 @@ class Worker:
                 
                 logging.error(f"{self.__account['username']} {exception.message}. Waiting before retrying...")
                 self.__rateLimited(rateLimitCount)
-            except (ConnectionException, SessionException, StoreException) as exception: # something went wrong with api
+            except (ConnectionException, SessionException, StoreException, LobbyException) as exception: # something went wrong with api
                 logging.error(f"{self.__account['username']} {exception.message}. Retrying...")
 
                 failCount += 1

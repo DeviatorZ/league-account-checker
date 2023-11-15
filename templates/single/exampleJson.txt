@@ -48,5 +48,6 @@
     "previousSeasonFlexDivision": "{previousSeasonFlexDivision}",
     "previousSeasonFlexDivisionDigit": "{previousSeasonFlexDivisionDigit}",
     "lowPriorityQueue": "{lowPriorityQueue}",
-    "lastMatch": "{lastMatch}"
+    "lastMatch": "{lastMatch}",
+    "rankedRestriction": "{rankedRestriction}"
 },

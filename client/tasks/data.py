@@ -1,13 +1,14 @@
-import json
+from typing import Dict, List, Any
+from datetime import datetime
+import logging
 from time import sleep
 from client.champions import Champions
 from client.skins import Skins
 from client.lootdata import LootData
 from client.connection.LeagueConnection import LeagueConnection
-from typing import Dict, List, Any
+from client.tasks.utils import canQueueUp, removeLeaverBusterNotifications
 from client.loot import Loot
-from datetime import datetime
-import logging
+
 
 def getSummoner(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
     """
@@ -197,28 +198,31 @@ def getRank(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None
         account["previousSeasonFlexDivisionDigit"] = ""
 
 def getLowPriorityQueue(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
-    """
-    Tries to queue up and checks if there's a low priority queue penalty (adds the data to account data dictionary)
-    
+    removeLeaverBusterNotifications(leagueConnection)
+    queueId = 400
 
-    :param leagueConnection: The session object for making API requests.
-    :param account: The account object to store the retrieved data.
-    """
-    leagueConnection.waitForUpdate()
-    
+    if not canQueueUp(leagueConnection, queueId):
+        account["lowPriorityQueue"] = "Ineligible"
+        return
+
     queueArgs = {
-        "queueId": 430, # Blind pick
+        "queueId": queueId,
     }
-    queueArgs = json.dumps(queueArgs, indent = 4)
-    
-    leagueConnection.post("/lol-lobby/v2/lobby", queueArgs)
+
+    leagueConnection.post("/lol-lobby/v2/lobby", json=queueArgs)
     sleep(2)
+
+    roleChoice = {
+        "firstPreference":"MIDDLE",
+        "secondPreference":"BOTTOM"
+    }
+    leagueConnection.put("/lol-lobby/v1/lobby/members/localMember/position-preferences", json=roleChoice)
+    sleep(1)
 
     leagueConnection.post("/lol-lobby/v2/lobby/matchmaking/search")
     sleep(2)
 
     queueState = leagueConnection.get("/lol-matchmaking/v1/search").json()
-
     account["lowPriorityQueue"] = "OtherPenalty"
 
     if queueState["lowPriorityData"]["reason"] == "LEAVER_BUSTED":
@@ -268,6 +272,14 @@ def getLoot(lootJson: Dict[str, Any], account: List[Dict[str, Any]]) -> None:
     
     account["otherLoot"] = ", ".join(otherLoot)
 
+def getRankedRestriction(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
+    rankedRestriction = leagueConnection.get("/lol-leaver-buster/v1/ranked-restriction").json()
+    punishedGamesRemaining = rankedRestriction["punishedGamesRemaining"]
+    if punishedGamesRemaining > 0:
+        account["rankedRestriction"] = f"{punishedGamesRemaining} games"
+    else:
+        account["rankedRestriction"] = "None"
+
 def getData(leagueConnection: LeagueConnection, account: Dict[str, Any], loot: Loot, skipLowPrioCheck: bool) -> None:
     """
     Uses all data functions to get information about the account.
@@ -288,7 +300,8 @@ def getData(leagueConnection: LeagueConnection, account: Dict[str, Any], loot: L
     getSkins(leagueConnection, loot, account)
     getLoot(lootJson, account)
 
+    getRankedRestriction(leagueConnection, account)
     getRank(leagueConnection, account)
+    getLastMatch(leagueConnection, account)
     if not skipLowPrioCheck:
         getLowPriorityQueue(leagueConnection, account)
-    getLastMatch(leagueConnection, account)
