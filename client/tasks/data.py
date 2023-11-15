@@ -199,7 +199,6 @@ def getRank(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None
 
 def getLowPriorityQueue(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
     removeLeaverBusterNotifications(leagueConnection)
-    leagueConnection.waitForUpdate()
     queueId = 400
 
     if not canQueueUp(leagueConnection, queueId):
