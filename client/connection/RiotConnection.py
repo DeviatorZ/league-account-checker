@@ -172,6 +172,8 @@ class RiotConnection(Connection):
                 raise AuthenticationException("VNG_ACCOUNT_REQUIRED")
             elif phase == "AccountAlias":
                 raise AuthenticationException("NAME_CHANGE_REQUIRED")
+            elif phase == "RiotIdRequired":
+                raise AuthenticationException("RIOT_ID_REQUIRED")
             elif phase == "WaitForLaunch": # league client is ready for launch
                 time.sleep(2)
                 return
