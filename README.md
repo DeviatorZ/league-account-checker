@@ -30,12 +30,15 @@ The main tab displays the console and tracks the progress. It offers the followi
 - **Exports folder**: Opens the export directory if it exists.
 
 ## **Settings Tab**
-![SettingsTab](https://i.imgur.com/gAFycWL.png)
+![SettingsTab](https://i.imgur.com/2YEppzh.png)
 - **RiotClientServices.exe location**: Path to RiotClientServices.exe on your device. No need to change if using the default installation location.
 - **LeagueClient.exe location**: Path to LeagueClient.exe on your device. No need to change if using the default installation location.
 - **Account file location**: Path to your account file. The account file should contain one account per line, with the username and password separated by the specified delimiter: <br /> ![ExampleAccountFile](https://i.imgur.com/k9A8R4H.png)
 - **Account file delimiter**: Select the delimiter used in your account file.
 - **Thread count**: Number of threads to use for account checking. When using 1 thread, the Riot/League client will be able to update, while in other cases, patching is disabled.
+- **Run League Client Headless**: When enabled League clients will be ran without UI.
+- **Skip Low Priority Queue Check**: When enabled skips check for low priority penalty information
+- **Always Run Client Watcher**: Enables Riot/League client process cleanup when running with more than 1 thread (it is always enabled when running with 1 thread and cannot be disabled). Will terminate all client processes that are not used by the checker periodically.
 
 ## **Tasks Tab**
 ![TasksTab](https://i.imgur.com/xAymURs.png)

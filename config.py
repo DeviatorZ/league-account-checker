@@ -17,12 +17,12 @@ FAILED_ACCOUNT_PATH = "failedAccounts.txt" # in export folder
 UNFINISHED_ACCOUNT_PATH = "uncheckedAccounts.txt"
 
 # riot client
-RIOT_CLIENT_LAUNCH_COOLDOWN = 10
+RIOT_CLIENT_LAUNCH_COOLDOWN = 12
 RIOT_CLIENT_LOADING_RETRY_COUNT = 3
 RIOT_CLIENT_LOADING_RETRY_COOLDOWN = 3
 
 # league client
-LEAGUE_CLIENT_LAUNCH_COOLDOWN = 10
+LEAGUE_CLIENT_LAUNCH_COOLDOWN = 12
 
 # failure handling
 LAUNCH_COOLDOWN_ON_INVALID_CREDENTIALS = 30
@@ -35,3 +35,6 @@ LOL_STORE_REQUEST_COOLDOWN = 30
 
 # login captcha
 LOGIN_URL = "https://authenticate.riotgames.com/api/v1/login"
+
+# client watcher
+CLIENT_WATCHER_CHECK_COOLDOWN = 1
