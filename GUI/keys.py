@@ -6,6 +6,7 @@ ACCOUNT_FILE_DELIMITER = "accountsDelimiter"
 THREAD_COUNT = "threadCount"
 HEADLESS = "headless"
 SKIP_LOW_PRIO_CHECK = "skipLowPrioCheck"
+CLIENT_WATCHER_ENABLED = "clientWatcherEnabled"
 
 # Tasks Tab
 CLAIM_EVENT_REWARDS = "claimEventRewards"

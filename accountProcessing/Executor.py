@@ -7,12 +7,16 @@ from time import sleep
 import logging
 from collections import deque
 from accountProcessing.Progress import Progress
+from accountProcessing.utils.PortHandler import PortHandler
+from accountProcessing.utils.utils import conditionalClientWatcher
 import PySimpleGUI as sg
 from typing import Any, Dict
 from accountProcessing.skipping import checkCanSkip
 import GUI.keys as guiKeys
 
+
 class Executor:
+
     def __init__(self, settings: Dict[str, Any], progressBar: sg.Text, exitEvent: Event) -> None:
         """
         Initializes a Executor instance.
@@ -29,7 +33,7 @@ class Executor:
         self.__headless = self.__settings[guiKeys.HEADLESS]
         self.__argQueue = deque()
         self.__threadResults = []
-    
+
     def run(self, accounts: Dict[str, Any]) -> None:
         """
         Executes tasks on given accounts.
@@ -46,31 +50,37 @@ class Executor:
             riotLock = manager.Lock()
             nextLeagueLaunch = manager.Value("d", 0.0)
             leagueLock = manager.Lock()
-            portQueue = manager.Queue()
-            for port in getFreePorts(self.__threadCount * 100):
-                portQueue.put(port)
+
+            portsInUse = manager.list()
+            portLock = manager.Lock()
+            portHandler = PortHandler(
+                deque(getFreePorts(self.__threadCount * 4)),
+                portsInUse,
+                portLock,
+            )
 
             for account in accounts:
                 if checkCanSkip(self.__settings, account):
                     self.__progress.add()
                 else:
-                    self.__argQueue.append((account, self.__settings, self.__progress, exitFlag, self.__allowPatching, self.__headless, portQueue, nextRiotLaunch, riotLock, nextLeagueLaunch, leagueLock))
+                    self.__argQueue.append((account, self.__settings, self.__progress, exitFlag, self.__allowPatching, self.__headless, portHandler, nextRiotLaunch, riotLock, nextLeagueLaunch, leagueLock))
 
-            with ThreadPool(processes=self.__threadCount) as pool:
-                self.__addWork(pool)
+            with conditionalClientWatcher(portsInUse, portLock, self.__threadCount == 1 or self.__settings[guiKeys.CLIENT_WATCHER_ENABLED]):
+                with ThreadPool(processes=self.__threadCount) as pool:
+                    self.__addWork(pool)
 
-                while len(self.__threadResults) > 0:
-                    if self.__exitEvent.is_set():
-                        logging.info("Stopping execution...")
-                        exitFlag.set()
-                        pool.close()
-                        pool.join()
-                        logging.info("Execution stopped!")
-                        break
-                    else:
-                        self.__removeFinishedThreads()
-                        self.__addWork(pool)
-                    sleep(0.1)
+                    while len(self.__threadResults) > 0:
+                        if self.__exitEvent.is_set():
+                            logging.info("Stopping execution...")
+                            exitFlag.set()
+                            pool.close()
+                            pool.join()
+                            logging.info("Execution stopped!")
+                            break
+                        else:
+                            self.__removeFinishedThreads()
+                            self.__addWork(pool)
+                        sleep(0.1)
 
     def __addWork(self, pool: ThreadPool) -> None:
         """

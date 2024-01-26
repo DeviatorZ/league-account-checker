@@ -7,7 +7,8 @@ from accountProcessing.exceptions import RateLimitedException
 from accountProcessing.exceptions import GracefulExit
 from client.connection.exceptions import LaunchFailedException
 from accountProcessing.LeagueOfLegendsWorker import LeagueOfLegendsWorker
-from multiprocessing import Queue, Value, Event, Lock
+from accountProcessing.utils.PortHandler import PortHandler
+from multiprocessing import Value, Event, Lock
 from typing import Dict, Any
 from accountProcessing.Progress import Progress
 from client.leagueStore.exceptions import StoreException
@@ -18,34 +19,22 @@ import config
 import traceback
 
 class Worker:
-    def __init__(self, account: Dict[str, Any], settings: Dict[str, Any], progress: Progress, exitFlag: Event, allowPatching: bool, headless: bool, portQueue: Queue, nextRiotLaunch: Value, riotLock: Lock, nextLeagueLaunch: Value, leagueLock: Lock) -> None:
+    def __init__(self, account: Dict[str, Any], settings: Dict[str, Any], progress: Progress, exitFlag: Event, allowPatching: bool, headless: bool, portHandler: PortHandler, nextRiotLaunch: Value, riotLock: Lock, nextLeagueLaunch: Value, leagueLock: Lock) -> None:
         """
         Initializes a Worker instance.
-
-        :param account: Account information.
-        :param setting: Worker settings.
-        :param progress: Progress object for tracking completed tasks.
-        :param exitFlag: Event flag for graceful exit.
-        :param allowPatching: Flag indicating whether patching is allowed.
-        :param headless: Flag indicating whether to run the client headless or not.
-        :param portQueue: Queue for managing ports.
-        :param nextRiotLaunch: Shared value for tracking next Riot client launch time.
-        :param riotLock: Lock for accessing/modifying nextRiotLaunch.
-        :param nextLeagueLaunch: Shared value for tracking next League client launch time.
-        :param leagueLock: Lock for accessing/modifying nextLeagueLaunch.
         """
         self.__account = account
         self.__settings = settings
         self.__progress = progress
         self.__exitFlag = exitFlag
         self.__allowPatching = allowPatching
-        self.__portQueue = portQueue
+        self.__portHandler = portHandler
         self.__nextRiotLaunch = nextRiotLaunch
         self.__riotLock = riotLock
         self.__nextLeagueLaunch = nextLeagueLaunch
         self.__leagueLock = leagueLock
-        self.__riotPort = self.__portQueue.get()
-        self.__leaguePort = self.__portQueue.get()
+        self.__riotPort = self.__portHandler.getFreePort()
+        self.__leaguePort = self.__portHandler.getFreePort()
         self.__headless = headless
 
     def __earlyExitCheck(self) -> None:
@@ -70,10 +59,10 @@ class Worker:
         """
         Replaces riot and league ports with new ones.
         """
-        self.__portQueue.put(self.__riotPort)
-        self.__portQueue.put(self.__leaguePort)
-        self.__riotPort = self.__portQueue.get()
-        self.__leaguePort = self.__portQueue.get()
+        self.__portHandler.returnPort(self.__riotPort)
+        self.__portHandler.returnPort(self.__leaguePort)
+        self.__riotPort = self.__portHandler.getFreePort()
+        self.__leaguePort = self.__portHandler.getFreePort()
 
     def run(self) -> None:
         """
@@ -90,7 +79,6 @@ class Worker:
         while True:
             try:
                 self.__earlyExitCheck()
-                self.__getNewPorts()
                 with LeagueOfLegendsWorker(self.__account, self.__settings, self.__allowPatching, self.__headless, self.__riotPort, self.__leaguePort) as leagueWorker:
                     self.__obtainRiotClientPermission()
                     status = leagueWorker.handleRiotClient()
@@ -138,6 +126,8 @@ class Worker:
                 logging.error(traceback.format_exc())
                 logging.error("Unhandled exception. Contact developer! Retrying...")
                 self.__sleep(5)
+
+            self.__getNewPorts()
 
     def __obtainRiotClientPermission(self) -> None:
         """
@@ -212,21 +202,21 @@ class Worker:
         :param finished: Indicates whether the execution has finished.
         :param export: Indicates whether to export the account datas.
         """
-        self.__portQueue.put(self.__riotPort)
-        self.__portQueue.put(self.__leaguePort)
+        self.__portHandler.returnPort(self.__riotPort)
+        self.__portHandler.returnPort(self.__leaguePort)
         if finished:
             if export:
                 exportRaw(self.__account)
             self.__progress.add()
         raise GracefulExit
 
-def runWorker(account: Dict[str, Any], settings: Dict[str, Any], progress: Progress, exitFlag: Event, allowPatching: bool, headless: bool, portQueue: Queue, nextRiotLaunch: Value, riotLock: Lock, nextLeagueLaunch: Value, leagueLock: Lock) -> None:
+
+def runWorker(account: Dict[str, Any], settings: Dict[str, Any], progress: Progress, exitFlag: Event, allowPatching: bool, headless: bool, portHandler: PortHandler, nextRiotLaunch: Value, riotLock: Lock, nextLeagueLaunch: Value, leagueLock: Lock) -> None:
     """
     Initializes a Worker instance and runs it.
     """
     try:
-        worker = Worker(account, settings, progress, exitFlag, allowPatching, headless, portQueue, nextRiotLaunch, riotLock, nextLeagueLaunch, leagueLock)
+        worker = Worker(account, settings, progress, exitFlag, allowPatching, headless, portHandler, nextRiotLaunch, riotLock, nextLeagueLaunch, leagueLock)
         worker.run()
     except GracefulExit:
         return
- 
