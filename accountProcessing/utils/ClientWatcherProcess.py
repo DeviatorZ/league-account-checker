@@ -7,6 +7,7 @@ import config
 
 
 class ClientWatcherProcess(Process):
+    __PROCESSES_TO_KILL = {"RiotClientServices.exe", "LeagueClient.exe"}
 
     def __init__(self, portsInUse: List, lock: Lock):
         super().__init__()
@@ -15,13 +16,13 @@ class ClientWatcherProcess(Process):
 
     def run(self):
         while True:
-            for process in psutil.process_iter(['pid', 'name', 'cmdline']):
-                if process.info['name'] == 'RiotClientServices.exe' or process.info['name'] == 'LeagueClient.exe':
+            for process in psutil.process_iter(["pid", "name", "cmdline"]):
+                if process.info["name"] in self.__PROCESSES_TO_KILL:
                     try:
-                        cmdLineArgs = process.info['cmdline']
+                        cmdLineArgs = process.info["cmdline"]
                         if self.__canTerminate(cmdLineArgs):
                             logging.debug(f"Terminating process {process.info['pid']} ({cmdLineArgs[0]})")
-                            psutil.Process(process.info['pid']).terminate()
+                            psutil.Process(process.info["pid"]).terminate()
                     except Exception as e:
                         logging.debug(f"Error terminating a process: {e}")
 
