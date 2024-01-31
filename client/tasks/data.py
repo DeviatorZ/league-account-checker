@@ -200,9 +200,10 @@ def getRank(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None
 def getLowPriorityQueue(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
     removeLeaverBusterNotifications(leagueConnection)
     queueId = 400
-
-    if not canQueueUp(leagueConnection, queueId):
-        account["lowPriorityQueue"] = "Ineligible"
+    
+    canQueue, error = canQueueUp(leagueConnection, queueId)
+    if not canQueue:
+        account["lowPriorityQueue"] = error
         return
 
     queueArgs = {

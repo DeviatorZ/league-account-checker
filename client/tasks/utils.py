@@ -1,6 +1,6 @@
 from time import sleep
 from client.connection.LeagueConnection import LeagueConnection
-from client.tasks.exceptions import LobbyException
+from typing import Optional, Tuple
 
 
 def removeLeaverBusterNotifications(leagueConnection: LeagueConnection) -> None:
@@ -9,16 +9,28 @@ def removeLeaverBusterNotifications(leagueConnection: LeagueConnection) -> None:
         leagueConnection.delete(f"/lol-leaver-buster/v1/notifications/{notification['id']}")
 
 
-def canQueueUp(leagueConnection: LeagueConnection, queueId: int):
-    leagueConnection.waitForUpdate()
+def __getCanQueueState(leagueConnection: LeagueConnection, queueId: int) -> Tuple[bool, Optional[str]]:
     eligibility = leagueConnection.post("/lol-lobby/v2/eligibility/party").json()
     for queueType in eligibility:
         if queueType["queueId"] == queueId:
             if queueType["eligible"]:
-                return True
-            elif queueType["restrictions"][0]["restrictionCode"] == "GameVersionMissing":
-                raise LobbyException("canQueueUp check failed: GameVersionMissing")
+                return True, None
+            elif queueType["restrictions"]:
+                return False, queueType["restrictions"][0]["restrictionCode"]
             else:
-                return False
+                return False, "Unknown error"
 
-    raise LobbyException(f"canQueueUp check failed: queueId-{queueId} not found")
+    return False, f"queueId-{queueId} not found"
+
+
+def canQueueUp(leagueConnection: LeagueConnection, queueId: int, retryLimit: int = 15, retryCooldown: int = 2) -> Tuple[bool, Optional[str]]:
+    leagueConnection.waitForUpdate()
+
+    for retryIndex in range(1, retryLimit + 1):
+        canQueue, error = __getCanQueueState(leagueConnection, queueId)
+        if canQueue or error == "QueueDisabled":
+            return canQueue, error
+
+        sleep(retryCooldown if retryIndex < retryLimit else 0)
+
+    return canQueue, error
