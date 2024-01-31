@@ -17,5 +17,5 @@ class PortHandler:
 
     def returnPort(self, port: int) -> None:
         with self.__lock:
-            self.__ports.append(port)
+            self.__ports.appendleft(port)
             self.__portsInUse.remove(port)
