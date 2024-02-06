@@ -69,7 +69,7 @@ class RiotConnection(Connection):
         """
         return {"riotPort" : self._port, "riotAuthToken" : self._authToken}
 
-    def __waitForConnection(self) -> None:
+    def __waitForConnection(self) -> Dict[str, Any]:
         """
         Used to authorize the connection.
         """
@@ -77,14 +77,13 @@ class RiotConnection(Connection):
 
         for _ in range(config.RIOT_CLIENT_LOADING_RETRY_COUNT):
             try:
-                self.post("/rso-auth/v2/authorizations", json=data)
-                return
+                return self.post("/rso-auth/v2/authorizations", json=data).json()
             except ConnectionException:
                 time.sleep(config.RIOT_CLIENT_LOADING_RETRY_COOLDOWN)
 
-        self.post("/rso-auth/v2/authorizations", json=data)
+        return self.post("/rso-auth/v2/authorizations", json=data).json()
 
-    
+
     def request(self, method: str, url: str, *args, **kwargs) -> Optional[requests.Response]:
         """
         Sends an API request to the client.
@@ -154,10 +153,12 @@ class RiotConnection(Connection):
 
         loginJson = {"authentication_type":"RiotAuth","login_token":finishAuth["success"]["login_token"], 'persistLogin': False,}
         self.put("/rso-auth/v1/session/login-token", json=loginJson)
-        self.__waitForConnection() # TODO: Use to see if logged in successfully
+        loginStatus = self.__waitForConnection()
+        if loginStatus["type"] == "needs_authentication":
+            raise AuthenticationException("RATE_LIMITED")
 
         return "OK"
-    
+
     def __waitForLaunch(self, timeout: int = 30) -> None:
         """
         Waits until the client is ready to launch the League client.

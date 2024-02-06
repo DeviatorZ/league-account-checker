@@ -17,8 +17,9 @@ class AuthenticationException(Exception):
         Exception.__init__(self)
 
 class SessionException(Exception):
-    def __init__(self, className, message):
-        self.message = f"{className}:SessionException - {message}"
+    def __init__(self, className, error):
+        self.error = error
+        self.message = f"{className}:SessionException - {error}"
         Exception.__init__(self)
 
 class AccountBannedException(Exception):

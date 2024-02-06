@@ -1596,12 +1596,30 @@
         ]
     },
     {
+        "id": 901,
+        "name": "Smolder",
+        "alias": "Smolder",
+        "squarePortraitPath": "/lol-game-data/assets/v1/champion-icons/901.png",
+        "roles": [
+            "marksman"
+        ]
+    },
+    {
         "id": 902,
         "name": "Milio",
         "alias": "Milio",
         "squarePortraitPath": "/lol-game-data/assets/v1/champion-icons/902.png",
         "roles": [
             "support"
+        ]
+    },
+    {
+        "id": 910,
+        "name": "Hwei",
+        "alias": "Hwei",
+        "squarePortraitPath": "/lol-game-data/assets/v1/champion-icons/910.png",
+        "roles": [
+            "mage"
         ]
     },
     {
