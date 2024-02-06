@@ -16,8 +16,11 @@ from client.leagueStore.refunding import useFreeChampionRefunds
 from client.leagueStore.refunding import useRefundTokensOnChampions
 from client.leagueStore.store import LoLStore
 import GUI.keys as guiKeys
+import config
+
 
 class LeagueOfLegendsWorker:
+
     def __init__(self, account: Dict[str, Any], settings: Dict[str, Any], allowPatching: bool, headless: bool, riotPort: int, leaguePort: int) -> None:
         """
         Initializes a LeagueOfLegendsWorker instance.
@@ -60,8 +63,7 @@ class LeagueOfLegendsWorker:
 
         try:
             self.__riotConnection.login(self.__account["username"], self.__account["password"], self.__settings)
-            region = self.__riotConnection.get("/riotclient/region-locale").json()
-            self.__account["region"] = region["region"] # region needed for league client
+            self.__account["region"] = self.__riotConnection.get("/riotclient/region-locale").json()["region"]
         except AuthenticationException as exception:
             if exception.error == "RATE_LIMITED": # rate limited due too many accounts with incorrect credentials
                 raise RateLimitedException("Too many login attempts")
@@ -69,9 +71,8 @@ class LeagueOfLegendsWorker:
                 raise RateLimitedException("Too many login attempts or 'Stay signed in' is enabled")
             else: # wrong credentials / account needs updating
                 logging.error(f"{self.__account['username']} AuthenticationException: {exception.error}")
-                self.__account["state"] = exception.error
                 return exception.error
-            
+
         return "OK"
 
     def handleLeagueClient(self) -> str:
@@ -86,12 +87,11 @@ class LeagueOfLegendsWorker:
         except AccountBannedException as ban:
             # add ban information to the account for export
             banDescription = json.loads(ban.error["description"])
-            self.__account["state"] = "BANNED"
             self.__account["banReason"] = banDescription["restrictions"][0]["reason"]
 
             if banDescription["restrictions"][0]["type"] != "PERMANENT_BAN":
                 banExpiration = banDescription["restrictions"][0]["dat"]["expirationMillis"]
-                self.__account["banExpiration"] = datetime.utcfromtimestamp(banExpiration / 1000).strftime('%Y-%m-%d %Hh%Mm%Ss') # banExpiration is unix timestamp in miliseconds
+                self.__account["banExpiration"] = datetime.utcfromtimestamp(banExpiration / 1000).strftime(config.DATE_FORMAT) # banExpiration is unix timestamp in miliseconds
             else:
                 self.__account["banExpiration"] = "PERMANENT"
 

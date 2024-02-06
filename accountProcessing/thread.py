@@ -7,6 +7,7 @@ from accountProcessing.exceptions import GracefulExit
 from client.connection.exceptions import LaunchFailedException
 from accountProcessing.LeagueOfLegendsWorker import LeagueOfLegendsWorker
 from accountProcessing.utils.PortHandler import PortHandler
+from accountProcessing.utils.PortManager import PortManager
 from multiprocessing import Value, Event, Lock
 from typing import Dict, Any
 from accountProcessing.Progress import Progress
@@ -29,14 +30,14 @@ class Worker:
         self.__progress = progress
         self.__exitFlag = exitFlag
         self.__allowPatching = allowPatching
-        self.__portHandler = portHandler
+        self.__portManager = PortManager(portHandler)
         self.__nextRiotLaunch = nextRiotLaunch
         self.__riotLock = riotLock
         self.__nextLeagueLaunch = nextLeagueLaunch
         self.__leagueLock = leagueLock
-        self.__riotPort = self.__portHandler.getFreePort()
-        self.__leaguePort = self.__portHandler.getFreePort()
         self.__headless = headless
+        self.__failCount = 0
+        self.__rateLimitCount = 0
 
     def __earlyExitCheck(self) -> None:
         """
@@ -55,15 +56,6 @@ class Worker:
             time.sleep(0.1)
             duration -= 0.1
             self.__earlyExitCheck()
-    
-    def __getNewPorts(self) -> None:
-        """
-        Replaces riot and league ports with new ones.
-        """
-        self.__portHandler.returnPort(self.__riotPort)
-        self.__portHandler.returnPort(self.__leaguePort)
-        self.__riotPort = self.__portHandler.getFreePort()
-        self.__leaguePort = self.__portHandler.getFreePort()
 
     def run(self) -> None:
         """
@@ -73,47 +65,49 @@ class Worker:
         if checkCanSkip(self.__settings, self.__account):
             self.__exit(True, export=False)
 
-        failCount = 0
-        rateLimitCount = 0
+        self.__failCount = 0
+        self.__rateLimitCount = 0
 
         logging.info("Executing tasks on account: " + self.__account["username"])
         while True:
             try:
                 self.__earlyExitCheck()
-                with LeagueOfLegendsWorker(self.__account, self.__settings, self.__allowPatching, self.__headless, self.__riotPort, self.__leaguePort) as leagueWorker:
-                    self.__obtainRiotClientPermission()
-                    status = leagueWorker.handleRiotClient()
-                    if status != "OK":
-                        if status == "AUTH_FAILURE":
-                            self.__authFailure()
-                        self.__exit(True)
-                    self.__earlyExitCheck()
+                with self.__portManager as ports:
+                    with LeagueOfLegendsWorker(
+                        self.__account,
+                        self.__settings,
+                        self.__allowPatching,
+                        self.__headless,
+                        ports.getRiotPort(),
+                        ports.getLeaguePort(),
+                    ) as leagueWorker:
+                        self.__obtainRiotClientPermission()
+                        status = leagueWorker.handleRiotClient()
+                        if status != "OK":
+                            if status == "AUTH_FAILURE":
+                                self.__authFailure()
+                            self.__exit(True, status)
+                        self.__earlyExitCheck()
 
-                    self.__obtainLeagueClientPermission()
-                    status = leagueWorker.handleLeagueClient()
-                    if status != "OK":
-                        self.__exit(True)
-                    self.__earlyExitCheck()
+                        self.__obtainLeagueClientPermission()
+                        status = leagueWorker.handleLeagueClient()
+                        if status != "OK":
+                            self.__exit(True, status)
+                        self.__earlyExitCheck()
 
-                    leagueWorker.performTasks()
+                        leagueWorker.performTasks()
 
-                self.__account["state"] = "OK"
                 self.__exit(True)
             except RateLimitedException as exception: # rate limited, wait before trying again
-                rateLimitCount += 1
-                if rateLimitCount >= config.MAX_RATE_LIMITED_ATTEMPTS:
-                    self.__handleFailure()
-                
-                logging.error(f"{self.__account['username']} {exception.message}. Waiting before retrying...")
-                self.__rateLimited(rateLimitCount)
-            except (ConnectionException, SessionException, StoreException) as exception: # something went wrong with api
-                logging.error(f"{self.__account['username']} {exception.message}. Retrying...")
-
-                failCount += 1
-                if failCount >= config.MAX_FAILED_ATTEMPTS:
-                    self.__handleFailure()
-                
-                self.__sleep(1)
+                self.__handleRateLimited(exception)
+            except (ConnectionException, StoreException) as exception: # something went wrong with api
+                self.__handleGeneralException(exception)
+            except SessionException as exception:
+                if exception.error == "Failed to communicate with login queue":
+                    region = self.__account["region"]
+                    logging.info(f"{self.__account['username']} {region} region account can't be ran on current client patch or the server is down. Skipping...")
+                    self.__exit(True, "CLIENT_PATCHING_REQUIRED")
+                self.__handleGeneralException(exception)
             except GracefulExit:
                 self.__exit(False)
             except LaunchFailedException as exception:
@@ -128,7 +122,6 @@ class Worker:
                 logging.error("Unhandled exception. Contact developer! Retrying...")
                 self.__sleep(5)
 
-            self.__getNewPorts()
 
     def __obtainRiotClientPermission(self) -> None:
         """
@@ -170,14 +163,24 @@ class Worker:
                 
             self.__sleep(sleepTime)
 
-    def __rateLimited(self, rateLimitCount) -> None:
-        """
-        Handles getting rate limited.
-
-        This method updates the nextRiotLaunch based on the launch cooldown specified for rate limited in the configuration.
-        """
+    def __handleRateLimited(self, exception: RateLimitedException) -> None:
+        self.__rateLimitCount += 1
         with self.__riotLock:
-            self.__nextRiotLaunch.value = time.time() + config.RATE_LIMITED_COOLDOWN * rateLimitCount
+            self.__nextRiotLaunch.value = time.time() + config.RATE_LIMITED_COOLDOWN * self.__rateLimitCount
+
+        if self.__rateLimitCount >= config.MAX_RATE_LIMITED_ATTEMPTS:
+            logging.error(f"{self.__account['username']} {exception.message}.")
+            self.__handleFailure()
+        else:
+            logging.error(f"{self.__account['username']} {exception.message}. Waiting before retrying...")
+
+    def __handleGeneralException(self, exception: Exception) -> None:
+        self.__failCount += 1
+        if self.__failCount >= config.MAX_FAILED_ATTEMPTS:
+            logging.error(f"{self.__account['username']} {exception.message}.")
+            self.__handleFailure()
+        else:
+            logging.error(f"{self.__account['username']} {exception.message}. Retrying...")
 
     def __authFailure(self) -> None:
         """
@@ -193,20 +196,15 @@ class Worker:
         Handles failure when too many attempts have been made.
         """
         logging.error(f"Too many failed attempts on account: {self.__account['username']}. Skipping...")
-        self.__account["state"] = "RETRY_LIMIT_EXCEEDED"
-        self.__exit(True)
+        self.__exit(True, "RETRY_LIMIT_EXCEEDED")
 
-    def __exit(self, finished: bool, export: bool = True) -> None:
+    def __exit(self, finished: bool, state: str = "OK", export: bool = True,) -> None:
         """
         Exit the worker.
-
-        :param finished: Indicates whether the execution has finished.
-        :param export: Indicates whether to export the account datas.
         """
-        self.__portHandler.returnPort(self.__riotPort)
-        self.__portHandler.returnPort(self.__leaguePort)
         if finished:
             if export:
+                self.__account["state"] = state
                 exportRaw(self.__account)
             self.__progress.add()
         raise GracefulExit

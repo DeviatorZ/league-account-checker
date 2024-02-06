@@ -8,6 +8,7 @@ from client.lootdata import LootData
 from client.connection.LeagueConnection import LeagueConnection
 from client.tasks.utils import canQueueUp, removeLeaverBusterNotifications
 from client.loot import Loot
+import config
 
 
 def getSummoner(leagueConnection: LeagueConnection, account: Dict[str, Any]) -> None:
@@ -237,7 +238,7 @@ def getLastMatch(leagueConnection, account):
         lastMatchData = "None"
     else:
         timestamp = matchHistory[0]["gameCreation"]
-        lastMatchData = datetime.utcfromtimestamp(timestamp / 1000).strftime('%Y-%m-%d %Hh%Mm%Ss')
+        lastMatchData = datetime.utcfromtimestamp(timestamp / 1000).strftime(config.DATE_FORMAT)
 
     account["lastMatch"] = lastMatchData
 

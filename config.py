@@ -38,3 +38,6 @@ LOGIN_URL = "https://authenticate.riotgames.com/api/v1/login"
 
 # client watcher
 CLIENT_WATCHER_CHECK_COOLDOWN = 1
+
+# date format used for dates in export (banned until, last game time and so on)
+DATE_FORMAT = "%Y-%m-%d %Hh%Mm%Ss"
