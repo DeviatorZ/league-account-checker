@@ -4,7 +4,7 @@ from client.connection.exceptions import RequestException
 from client.connection.exceptions import AuthenticationException
 from client.connection.exceptions import SessionException
 from client.connection.exceptions import LaunchFailedException
-from client.version import getFileVersion
+from client.utils import getRiotClientVersion
 from captcha.exceptions import CaptchaException
 from captcha.CaptchaProxy import CaptchaProxy
 import time
@@ -15,6 +15,8 @@ import config
 
 
 class RiotConnection(Connection):
+    _PROCESS_NAME = config.RIOT_CLIENT_PROCESS_NAME
+
     def __init__(self, path: str, port: int, allowPatching: bool) -> None:
         """
         Initializes a RiotConnection instance.
@@ -26,7 +28,7 @@ class RiotConnection(Connection):
         self.__allowPatching = allowPatching
         self.__path = path
 
-        version, success = getFileVersion(self.__path)
+        version, success = getRiotClientVersion(self.__path)
         if not success:
             raise LaunchFailedException(self.__class__.__name__, version)
         self.__userAgent = f"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) RiotClient/{version} (CEF 74) Safari/537.36"
@@ -46,6 +48,7 @@ class RiotConnection(Connection):
         """
         processArgs = [
             self.__path,
+            "--args",
             # specify our own port and token so we can connect to api
             "--app-port=" + self._port,
             "--remoting-auth-token=" + self._authToken,

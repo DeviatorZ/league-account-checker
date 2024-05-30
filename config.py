@@ -17,11 +17,13 @@ FAILED_ACCOUNT_PATH = "failedAccounts.txt" # in export folder
 UNFINISHED_ACCOUNT_PATH = "uncheckedAccounts.txt"
 
 # riot client
+RIOT_CLIENT_PROCESS_NAME = "RiotClientServices"
 RIOT_CLIENT_LAUNCH_COOLDOWN = 15
 RIOT_CLIENT_LOADING_RETRY_COUNT = 3
 RIOT_CLIENT_LOADING_RETRY_COOLDOWN = 3
 
 # league client
+LEAGUE_CLIENT_PROCESS_NAME = "LeagueClient"
 LEAGUE_CLIENT_LAUNCH_COOLDOWN = 15
 
 # failure handling

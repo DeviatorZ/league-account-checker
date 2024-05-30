@@ -1,3 +1,4 @@
+import os
 from data.TaskList import TaskList
 import PySimpleGUI as sg
 import config
@@ -30,12 +31,12 @@ def getCaptchaLayout():
 
 def getSettingsLayout(cwd):
     return [
-        [sg.Text("RiotClientServices.exe Location")],
-        [sg.Input(sg.user_settings_get_entry(guiKeys.RIOT_CLIENT, "C:\\Riot Games\\Riot Client\\RiotClientServices.exe"), key=guiKeys.RIOT_CLIENT), sg.FileBrowse()],
-        [sg.Text("LeagueClient.exe Location")],
-        [sg.Input(sg.user_settings_get_entry(guiKeys.LEAGUE_CLIENT, "C:\\Riot Games\\League of Legends\\LeagueClient.exe"), key=guiKeys.LEAGUE_CLIENT), sg.FileBrowse()],
+        [sg.Text("RiotClientServices Location")],
+        [sg.Input(sg.user_settings_get_entry(guiKeys.RIOT_CLIENT, "/Users/Shared/Riot Games/Riot Client.app/Contents/MacOS/RiotClientServices"), key=guiKeys.RIOT_CLIENT), sg.FileBrowse()],
+        [sg.Text("LeagueClient Location")],
+        [sg.Input(sg.user_settings_get_entry(guiKeys.LEAGUE_CLIENT, "/Applications/League of Legends.app"), key=guiKeys.LEAGUE_CLIENT), sg.FileBrowse()],
         [sg.Text("Account File Location")],
-        [sg.Input(sg.user_settings_get_entry(guiKeys.ACCOUNT_FILE_PATH, cwd + "\\accounts.csv"), key=guiKeys.ACCOUNT_FILE_PATH), sg.FileBrowse()],
+        [sg.Input(sg.user_settings_get_entry(guiKeys.ACCOUNT_FILE_PATH, os.path.join(cwd, "accounts.csv")), key=guiKeys.ACCOUNT_FILE_PATH), sg.FileBrowse()],
         [sg.Text("Account File Delimiter"), sg.InputCombo((",",":",";"), default_value=sg.user_settings_get_entry(guiKeys.ACCOUNT_FILE_DELIMITER, ":"), key=guiKeys.ACCOUNT_FILE_DELIMITER)],
         [sg.Text("Thread Count"), sg.Combo([x for x in range(1,17)], default_value=sg.user_settings_get_entry(guiKeys.THREAD_COUNT, 2), key=guiKeys.THREAD_COUNT)],
         [sg.Checkbox("Run League Client Headless", default=sg.user_settings_get_entry(guiKeys.HEADLESS, True), key=guiKeys.HEADLESS, size=(70,1), font=("Helvetica", 9))],

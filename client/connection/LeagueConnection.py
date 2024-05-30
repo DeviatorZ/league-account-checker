@@ -9,8 +9,12 @@ import logging
 import math
 from typing import Optional
 import requests
+import config
+
 
 class LeagueConnection(Connection):
+    _PROCESS_NAME = config.LEAGUE_CLIENT_PROCESS_NAME
+
     def __init__(self, path: str, riotConnection: RiotConnection, region: str, port: int, allowPatching: bool, headless: bool) -> None:
         """
         Initializes a LeagueConnection instance.
@@ -42,6 +46,7 @@ class LeagueConnection(Connection):
         """
         processArgs = [
             self.__path,
+            "--args",
             # specify riot client port and auth token that has an account logged in
             "--riotclient-app-port=" + self.__riotCredentials["riotPort"],
             "--riotclient-auth-token=" + self.__riotCredentials["riotAuthToken"],

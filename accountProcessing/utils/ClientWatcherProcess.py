@@ -7,7 +7,7 @@ import config
 
 
 class ClientWatcherProcess(Process):
-    __PROCESSES_TO_KILL = {"RiotClientServices.exe", "LeagueClient.exe"}
+    __PROCESSES_TO_KILL = {config.RIOT_CLIENT_PROCESS_NAME, config.LEAGUE_CLIENT_PROCESS_NAME}
 
     def __init__(self, portsInUse: List, lock: Lock):
         super().__init__()
