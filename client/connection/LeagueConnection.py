@@ -69,6 +69,13 @@ class LeagueConnection(Connection):
         """
         Acts as a first request tester.
         """
+        for _ in range(config.LEAGUE_CLIENT_LOADING_RETRY_COUNT):
+            try:
+                self.get("/lol-login/v1/session")
+                return
+            except ConnectionException:
+                time.sleep(config.LEAGUE_CLIENT_LOADING_RETRY_COOLDOWN)
+
         self.get("/lol-login/v1/session")
 
     def request(self, method: str, url: str, *args, **kwargs) -> Optional[requests.Response]:
