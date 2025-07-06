@@ -1,3 +1,5 @@
+**UPDATE (2025.07.06):** This checker is no longer maintained. I'm working on a new version for windows. For more information join the discord server: https://discord.gg/b4rK3SxTNS
+
 # **DeviatorZ Account Checker**
 Designed to obtain account data and perform various tasks through the League client.
 ## **Features**
